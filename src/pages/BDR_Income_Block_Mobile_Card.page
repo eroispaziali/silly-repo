@@ -1,0 +1,53 @@
+<apex:page standardController="BDR__c" extensions="BDRThinControllerExtension">
+  
+ <apex:pageBlock title="BDR Income">
+        
+  <apex:pageBlockSection columns="1" showheader="false">
+   
+    <apex:pageBlockSectionItem >
+     <apex:outputlabel >Income Source</apex:outputlabel>
+     <apex:outputField value="{!bdrWrapper.incBlock.Income_Source__c}"/>       
+    </apex:pageBlockSectionItem> 
+    
+    <apex:pageBlockSectionItem >
+     <apex:outputlabel >Full Amount</apex:outputlabel>
+     <apex:outputField value="{!bdrWrapper.incBlock.Total_Amount__c}"/>       
+    </apex:pageBlockSectionItem> 
+
+    <apex:pageBlockTable value="{!bdrWrapper.incomeData}" var="row">
+    
+        <apex:column >
+           <apex:facet name="header">Year</apex:facet>
+           <apex:outputText value="{!row.Fiscal_Year__c}" label=""/>
+        </apex:column>
+
+        <apex:column >
+           <apex:facet name="header">Amount</apex:facet>
+           <apex:outputField value="{!row.Total_Amount__c}" label="" />
+        </apex:column>
+
+        <apex:column >
+           <apex:facet name="header">Ess.Sppt</apex:facet>
+           <apex:outputField value="{!row.Essential_Support_Amount__c}" label=""/>
+        </apex:column>
+        
+        <apex:column >
+           <apex:facet name="header">Lcl.Sppt </apex:facet>
+           <apex:outputField value="{!row.Local_Support_Amount__c}" label=""/>
+        </apex:column>
+        
+        <apex:column >
+           <apex:facet name="header">Comments</apex:facet>
+           <apex:outputText value="{!row.Risk_Description__c}" style="width:100%"/>
+        </apex:column>
+
+    </apex:pageBlockTable>
+
+   </apex:pageBlockSection>                
+           
+ </apex:pageBlock>    
+ <apex:form >
+     <apex:inputHidden value="{!BDR__c.Fiscal_Years__c}"/>
+ </apex:form>
+  
+</apex:page>

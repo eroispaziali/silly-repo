@@ -1,0 +1,110 @@
+<apex:page standardController="Service_Usage__c" showHeader="false" sidebar="false" extensions="ServiceUsageOutcomeHistoryList" renderAs="PDF">
+    <head>
+        <style>
+            @page {
+                size:landscape;
+                @bottom-center {  content:"Confidential";  }
+            }
+        </style>  
+    </head> 
+    <apex:form >
+        <h1>Support Plan Audit History for:&nbsp;<apex:outputText value="{!su.Name}"/></h1>
+        <h1>Person ID:&nbsp;<apex:outputText value="{!person.Client_reference_number__c}"/></h1>
+        <br/>
+        <apex:pageBlock > 
+            <apex:pageMessages />
+            <apex:pageBlockButtons > 
+                <apex:commandButton value="Return" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <!-- <apex:pageBlockSection columns="1">
+                <apex:outputtext value="Service Usage Name:{!su.Name}"/>
+                <br/>
+            </apex:pageBlockSection> -->
+            <!-- <apex:pageBlockTable value="{!suo}" var="rs" id="table" border="1" cellpadding="5" title="List of Service Usage Outcomes" >
+                <apex:column width="50px" headerValue="Outcome No.">
+                    <apex:outputfield value="{!rs.Outcome_No__c}"/>
+                </apex:column>
+                 <apex:column width="200px" headerValue="Person Identified Outcome">
+                    <apex:outputfield value="{!rs.Person_Identified_Outcome__c}"/>
+                </apex:column>
+                <apex:column width="200px" headerValue="Action">
+                    <apex:outputfield value="{!rs.Action__c}" />
+                </apex:column>
+                <apex:column width="50px" headerValue="Status">
+                    <apex:outputtext value="{!rs.Outcome_Status__c}"/>
+                </apex:column>                
+                <apex:column width="50px" headerValue="Date Outcome Met">
+                    <apex:outputtext value="{!rs.Date_Outcome_Met__c}"/>
+                </apex:column>               
+            </apex:pageBlockTable>-->
+        </apex:pageBlock> 
+        <h1>Audit History</h1>
+        <apex:pageBlock >
+        <apex:pageBlockTable value="{!suoh}" var="rhs" id="table" border="1" cellpadding="5" title="Service Usage Outcomes Audit History" >
+         <apex:column width="50px" headerValue="Outcome No.">
+                    <apex:outputfield value="{!rhs.Outcome_No__c}"/>
+         </apex:column>
+         <apex:column width="50px" headerValue="Version">
+                    <apex:outputfield value="{!rhs.Version__c}"/>
+         </apex:column>
+         <apex:column width="50px" headerValue="User">
+                    <apex:outputfield value="{!rhs.User__c}"/>
+         </apex:column>
+         <apex:column width="50px" headerValue="Date">
+                    <apex:outputfield value="{!rhs.Date__c}"/>
+         </apex:column>
+         
+         <apex:column width="200px" headerValue="Person Identified Outcome">
+                     <apex:outputText rendered="{!rhs.Changed_Person_Identified_Outcome__c==false}"><i>No change</i><br/></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Person_Identified_Outcome__c==true}"><b>Changed From:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.OldPerson_Identified_Outcome__c}"/>
+                     <apex:outputText rendered="{!(rhs.OldPerson_Identified_Outcome__c='')&&(rhs.Changed_Person_Identified_Outcome__c==true)}"><i>Nothing</i></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Person_Identified_Outcome__c==true}"><br/><b>Changed To:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.NewPerson_Identified_Outcome__c}"/>
+         </apex:column>
+         <apex:column width="200px" headerValue="Action">
+                     <apex:outputText rendered="{!rhs.Changed_Action__c==false}"><i>No change</i><br/></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Action__c==true}"><b>Changed From:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.OldAction__c}"/>
+                     <apex:outputText rendered="{!(rhs.OldAction__c='') && (rhs.Changed_Action__c==true)}"><i>Nothing</i></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Action__c==true}"><br/><b>Changed To:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.NewAction__c}"/>
+         </apex:column>
+         <apex:column width="50px" headerValue="Date Identified">
+                     <apex:outputText rendered="{!rhs.Changed_Date_Identified__c==false}"><i>No change</i><br/></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Date_Identified__c==true}"><b>Changed From:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.OldDate_Identified__c}"/>
+                     <apex:outputText rendered="{!(rhs.OldDate_Identified__c==null) && (rhs.Changed_Date_Identified__c==true) }"><i>Nothing</i></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Date_Identified__c==true}"><br/><b>Changed To:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.NewDate_Identified__c}"/>
+         </apex:column>
+         <apex:column width="50px" headerValue="Status">
+                     <apex:outputText rendered="{!rhs.Changed_Outcome_Status__c==false}"><i>No change</i><br/></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Outcome_Status__c==true}"><b>Changed From:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.OldOutcome_Status__c}"/>
+                     <apex:outputText rendered="{!(rhs.OldOutcome_Status__c='') && (rhs.Changed_Outcome_Status__c==true)}"><i>Nothing</i></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Outcome_Status__c==true}"><br/><b>Changed To:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.NewOutcome_Status__c}"/>
+         </apex:column>
+         <apex:column width="50px" headerValue="Date Outcome Met">
+                     <apex:outputText rendered="{!rhs.Changed_Date_Outcome_Met__c==false}"><i>No change</i><br/></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Date_Outcome_Met__c==true}"><b>Changed From:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.OldDate_Outcome_Met__c}"/>
+                     <apex:outputText rendered="{!(rhs.OldDate_Outcome_Met__c==null) && (rhs.Changed_Date_Outcome_Met__c==true) }"><i>Nothing</i></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Date_Outcome_Met__c==true}"><br/><b>Changed To:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.NewDate_Outcome_Met__c}"/>
+         </apex:column>
+         <apex:column width="200px" headerValue="Outcome Category">
+                     <apex:outputText rendered="{!rhs.Changed_Outcome_Category__c==false}"><i>No change</i><br/></apex:outputText>
+                     <apex:outputText rendered="{!rhs.Changed_Outcome_Category__c==true}"><b>Changed From:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.OldOutcome_Category__c}"/>
+                     <apex:outputText rendered="{!(rhs.OldOutcome_Category__c='')&&(rhs.Changed_Outcome_Category__c==true)}"><i>Nothing</i></apex:outputText>
+                     <apex:outputText id="who" rendered="{!rhs.Changed_Outcome_Category__c==true}"><br/><b>Changed To:</b><br/></apex:outputText>
+                     <apex:outputfield value="{!rhs.NewOutcome_Category__c}"/>
+                     
+         </apex:column>
+
+        </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

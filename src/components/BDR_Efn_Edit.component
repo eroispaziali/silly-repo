@@ -1,0 +1,36 @@
+<apex:component >
+        <apex:attribute name="evidence" description="The contract Section." type="Evidence_for_Need__c" required="true"/>
+        <apex:attribute name="evid" description="The evidence id." type="String" required="false"/>
+        
+	<h2 class="efnTitle">Evidence of Need</h2>    
+        
+     <apex:outputPanel id="evidence_panel" layout="block">
+
+        <apex:pageBlockSection id="EfN" columns="1" showHeader="false" collapsible="false"> 
+                  
+            <apex:pageBlockSectionItem helpText="{!$ObjectType.Evidence_for_Need__c.fields.Evidence_Overview__c.inlineHelpText}">
+                <apex:outputLabel >Evidence Overview</apex:outputLabel>
+                <apex:inputTextArea value="{!evidence.Evidence_Overview__c}" id="overview" rows="5" style="width:92%"  />   
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem helpText="{!$ObjectType.Evidence_for_Need__c.fields.Consequences_of_Closure__c.inlineHelpText}">
+                <apex:outputLabel >Exit Strategy</apex:outputLabel>
+                <apex:inputTextArea value="{!evidence.Consequences_of_Closure__c}" rows="5" id="consequences" style="width:92%"  />              
+            </apex:pageBlockSectionItem>
+            
+           <apex:pageBlockSectionItem helpText="{!$ObjectType.Evidence_for_Need__c.fields.Usage_Profile__c.inlineHelpText}">
+                <apex:outputLabel >Service Data</apex:outputLabel>
+                <apex:inputField value="{!evidence.Usage_Profile__c}" id="capacity" style="width:92%"  />              
+            </apex:pageBlockSectionItem>
+            
+            
+            <apex:pageBlockSectionItem helpText="{!$ObjectType.Evidence_for_Need__c.fields.Demography_Comments__c.inlineHelpText}">
+                <apex:outputLabel >Demography Comments</apex:outputLabel>
+                <apex:inputTextArea value="{!evidence.Demography_Comments__c}" id="demography" rows="3" style="width:92%"  />              
+            </apex:pageBlockSectionItem>
+
+        </apex:pageBlockSection> 
+       
+      </apex:outputPanel> 
+      
+</apex:component>

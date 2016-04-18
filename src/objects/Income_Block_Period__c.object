@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>An amount from an income block for a specified Financial Year</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Essential_Support_Amount__c</fullName>
+        <description>Amount of the total allocated to cover Essential Support Costs</description>
+        <externalId>false</externalId>
+        <label>Essential Support Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Fiscal_Year__c</fullName>
+        <externalId>false</externalId>
+        <label>Financial Year</label>
+        <picklist>
+            <picklistValues>
+                <fullName>2010/11</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2011/12</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2012/13</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2013/14</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2014/15</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2015/16</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Income_Block__c</fullName>
+        <externalId>false</externalId>
+        <label>Income Block</label>
+        <referenceTo>Income_Block__c</referenceTo>
+        <relationshipName>Income_Block_Periods</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Local_Support_Amount__c</fullName>
+        <description>The amount allocated to cover local support costs</description>
+        <externalId>false</externalId>
+        <label>Local Support Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Risk_Description__c</fullName>
+        <description>Description of risk, is any is applicable</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Give specific information relating to the funding; e.g. %s of efficiency savings, CQUIN conditions etc</inlineHelpText>
+        <label>Funding Status Comment</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Risk_Factor__c</fullName>
+        <description>The certainty of this income being available, assuming the entire income block is available.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Choose  -standard if there are no conditions attached to the potential income;  -conditional if the funding is only available under certain circumstances (e.g. CQUIN, efficiency savings);  -optional if the commissioner has an option to extend on funding.</inlineHelpText>
+        <label>Funding Conditions</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Standard</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Conditional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Optional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Total_Allocated_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Allocated Amount</label>
+        <summarizedField>Fund_Allocation__c.Allocation_Amount__c</summarizedField>
+        <summaryForeignKey>Fund_Allocation__c.Income_Block_Period__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Allocated_Percent__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(BLANKVALUE(Total_Allocated_Amount__c,0) ==0,0,   
+    if(BLANKVALUE(Total_Amount__c,0)==0,0,
+        Total_Allocated_Amount__c  /  Total_Amount__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Allocated Percent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Total_Amount__c</fullName>
+        <description>The amount of funds available in this period</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total income per financial year that you expect to receive, including full costs.</inlineHelpText>
+        <label>Total Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Unallocated_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Total_Amount__c -( Total_Allocated_Amount__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Unallocated Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Year_Sequence__c</fullName>
+        <description>The Sequence number of the Financial Year within the contract, e.g. Year 1, Year 2 etc</description>
+        <externalId>false</externalId>
+        <label>Year</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>uniqueFiscalPeriod__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A validation field to ensure that no two records are linked to the same income block for a given fiscal year. See the workflow rule with the same name</description>
+        <externalId>false</externalId>
+        <label>uniqueFiscalIncomeBlock</label>
+        <length>26</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>BDR Income Block Period</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>IBP-{0000}</displayFormat>
+        <label>Income Block Period Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>BDR Income Blocks Periods</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Allocation_Exceeds_Funds</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) &amp;&amp; 
+Total_Allocated_Percent__c  &gt; 1</errorConditionFormula>
+        <errorMessage>The allocation exceeds the funds available</errorMessage>
+    </validationRules>
+</CustomObject>

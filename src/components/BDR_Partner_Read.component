@@ -1,0 +1,25 @@
+<apex:component >
+    <apex:attribute name="bdr" description="The BDR" type="BDR__c" required="true"/>           
+
+	<apex:pageBlock title="BDR Partnership Details">
+
+    <apex:outputPanel id="partner_panel">
+    
+    <apex:pageBlockSection id="Partner" 
+                                           title="Please remember to attach your Partnership checklist before sending for approval" 
+                                          
+                                            collapsible="false"
+                                           columns="1">
+
+       <apex:outputField value="{!bdr.Partnership_Status__c}"/>  
+       <apex:outputField value="{!bdr.PartnerType__c}" />  
+
+       <apex:outputText value="{!bdr.Partnership_Detail__c}" style="width:82%" />              
+
+    </apex:pageBlockSection>
+    
+    </apex:outputPanel> 
+
+	</apex:pageBlock>
+    
+</apex:component>

@@ -1,0 +1,14 @@
+<apex:page standardController="Services__c" extensions="ServiceActivityExtension">
+<apex:form >
+	<apex:pageBlock > 
+		<apex:pageMessages />
+			<apex:pageBlockSection columns="1">
+				<apex:outputtext value="Event cannot be created for this service type!"/>
+				<br/>
+			</apex:pageBlockSection> 
+			<apex:pageBlockButtons > 
+				<apex:commandButton action="{!cancel}" value="Return" id="theButton"/>
+			</apex:pageBlockButtons>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

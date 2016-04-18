@@ -1,0 +1,45 @@
+<apex:component >
+
+    <apex:attribute name="bdr" description="The BDR" type="BDR__c" required="true"/>
+
+    <h4><apex:outputlabel value="Tender Details"/></h4>
+
+     <apex:panelGrid columns="4" columnClasses="pdfLabelCell,pdfDataCell,pdfLabelCell,pdfDataCell" styleClass="table table-bordered table-condensed">
+
+       <apex:outputLabel value="Status"/>
+       <apex:outputField value="{!bdr.Bid_Status__c}"/>   
+       
+       <apex:outputLabel value="Sign off deadline"/>
+       <apex:outputField value="{!bdr.Bid_Sign_Off_Deadline__c}"/>   
+
+       <apex:outputLabel value="Submission deadline"/>
+       <apex:outputField value="{!bdr.Bid_Submission_Deadline__c}"/>   
+
+       <apex:outputLabel value="Fixed tender amount"/>
+       <apex:outputText value="{!IF(bdr.Fixed_Tender_Amount__c,'Yes','No')}"/>   
+
+    </apex:panelGrid>
+    <apex:panelGrid columns="2" columnClasses="pdfLabelCell,pdfDataCell" styleClass="table table-bordered table-condensed">
+        
+       <apex:outputLabel value="Questions deadline"/>
+       <apex:outputField value="{!bdr.Clarification_Questions_Deadline__c}"/>   
+
+
+    </apex:panelGrid> 
+    <h4><apex:outputText value="TUPE: {!BDR.Tupe__c}"/></h4>        
+    <apex:panelGrid columns="2" columnClasses="pdfLabelCell,pdfDataCell" styleClass="table table-bordered table-condensed">
+
+       <apex:outputText value="Comments about TUPE: "/>
+       <apex:outputText value="{!BDR.Tupe_Detail__c}"/>
+   
+       <apex:outputText >Will this proposal require any recruitment?</apex:outputText>
+       <apex:outputText value="{!BDR.Recruitment_Required__c}"/>
+   
+       <apex:outputText >Will this proposal require any redundancies?</apex:outputText>
+       <apex:outputText value="{!BDR.Any_redundancies__c}"/>
+
+       <apex:outputText >Will this proposal require any volunteer recruitment?</apex:outputText>
+       <apex:outputText value="{!BDR.Volunteer_Recruitment__c}"/>
+   
+    </apex:panelGrid> 
+</apex:component>

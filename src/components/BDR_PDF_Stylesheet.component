@@ -1,0 +1,123 @@
+<apex:component access="global">
+
+   @page {
+      size: A4;
+      margin-top:1.5cm;
+      margin-left:1.5cm;
+      margin-right:1.5cm;
+      margin-bottom:1.5cm;
+    }
+
+body
+{
+  font-family:sans-serif;
+  font-size: 11pt;
+}
+
+h1 {
+  color: #7E0308;
+  margin-bottom: 0;
+}
+
+h2 {
+  color: #11807F;
+  margin-top: 24pt;
+  margin-bottom: 8pt;
+  page-break-after:avoid;
+}
+
+h2.first { 
+  margin-top:10pt;
+  margin-bottom:12pt;
+}
+
+h4 {
+  color: #7F0F7E;
+  margin-bottom: 2pt;
+  page-break-after:avoid;
+}
+
+.label, label, th {
+  font-weight: bold;
+  font-size: 90%;
+}
+
+td, th {
+  vertical-align: top;
+  padding: 4pt ;
+}
+
+table.attribute-table {
+    width:100%;
+    border-collapse: collapse;
+}
+
+table.attribute-table th, table.attribute-table td {
+    border: 1px solid #d8d8d8;
+}
+
+.service-table td.first {
+   background-color:#e8e8e8;
+}
+
+.cost-table {
+   width:100%; 
+}
+
+.cost-table th, .cost-table td {
+  text-align: right;
+}
+
+.cost-table th:first-child, .cost-table td:first-child {
+  text-align: left;
+}
+
+.attribute-table .cost-table  {
+   border:0;
+}
+
+.attribute-table .cost-table th {
+  font-size:90%;
+  color: #404040;
+  border:0;
+}
+
+.attribute-table .cost-table td {
+  font-size:90%;
+  border:0;
+}
+
+.w6 {
+   width: 6em;
+}
+
+.w7 {
+   width: 7em;
+}
+
+.w8 {
+   width: 8em;
+}
+
+.w10 {
+   width: 10em;
+}
+
+.align-right {
+   text-align: right;
+}
+
+.align-center {
+   text-align: center;
+}
+
+.page-break {
+  page-break-after:always;
+}
+
+.keep-together {
+  page-break-inside: avoid;
+}
+
+
+</apex:component>

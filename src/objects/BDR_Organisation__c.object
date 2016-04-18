@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Allows BDCS application to manage A2D Organisations</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Area__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the Area</inlineHelpText>
+        <label>Area</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>BDR_Organisation__c.RecordType.DeveloperName</field>
+                <operation>equals</operation>
+                <value>Area</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>BDR_Organisation__c</referenceTo>
+        <relationshipLabel>Localities for this Area</relationshipLabel>
+        <relationshipName>BDR_Org_Area</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BDM__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Business Development Manager</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the Business Development Manager for the Region</inlineHelpText>
+        <label>BDM</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>User.Title</field>
+                <operation>contains</operation>
+                <value>Business Development Manager</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BDR_Org_BDM</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Cost_Centre__c</fullName>
+        <externalId>false</externalId>
+        <label>Cost Centre</label>
+        <length>5</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HR_Advisor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>HR Advisor to alert</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name the HR Advisor to Alert</inlineHelpText>
+        <label>HR Advisor</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BDR_Org_HR_Advisor</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>HR_Manager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The HR Manager for the Region</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the HR Manager for the Region</inlineHelpText>
+        <label>HR Manager</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BDR_Org_HR_Manager</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Old_Localities__c</fullName>
+        <description>Old pre-A2D Locality Names.</description>
+        <externalId>false</externalId>
+        <label>Old Localities</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Operations_Director__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>There is one Operations Director for each Region</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the Operations Director for the region</inlineHelpText>
+        <label>Operations Director</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BDR_Org_Ops_Director</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Operations_Manager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Locality Operations Manager</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the Locality Operations manager</inlineHelpText>
+        <label>Operations Manager</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BDR_Org_OM</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ROM__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the Regional Operations Manager for the Area</inlineHelpText>
+        <label>Regional Operations Manager</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BDR_Org_ROM</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Region</description>
+        <externalId>false</externalId>
+        <label>Region</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>BDR_Organisation__c.RecordType.DeveloperName</field>
+                <operation>equals</operation>
+                <value>Region</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>BDR_Organisation__c</referenceTo>
+        <relationshipLabel>Areas for this Region</relationshipLabel>
+        <relationshipName>BDR_Org_Region</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Regional_Accountant__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The name of the Regional Accountant</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the regional accountant</inlineHelpText>
+        <label>Regional Accountant</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BDR_Org_Reg_Accountant</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SIM__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Service Improvement Manager</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the Service Improvement Manager for the Region</inlineHelpText>
+        <label>SIM</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BDR_Org_SIM</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>BDR Organisation</label>
+    <listViews>
+        <fullName>A2D_Localities</fullName>
+        <columns>NAME</columns>
+        <columns>Operations_Manager__c</columns>
+        <columns>Area__c</columns>
+        <columns>Region__c</columns>
+        <columns>Old_Localities__c</columns>
+        <columns>Cost_Centre__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>BDR_Organisation__c.Locality</value>
+        </filters>
+        <label>All A2D Localities</label>
+    </listViews>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Areas</fullName>
+        <columns>NAME</columns>
+        <columns>ROM__c</columns>
+        <columns>HR_Advisor__c</columns>
+        <columns>Region__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>BDR_Organisation__c.Area</value>
+        </filters>
+        <label>Areas</label>
+    </listViews>
+    <listViews>
+        <fullName>Regions</fullName>
+        <columns>RECORDTYPE</columns>
+        <columns>NAME</columns>
+        <columns>BDM__c</columns>
+        <columns>Operations_Director__c</columns>
+        <columns>Regional_Accountant__c</columns>
+        <columns>SIM__c</columns>
+        <columns>OWNER.FIRST_NAME</columns>
+        <columns>OWNER.LAST_NAME</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>BDR_Organisation__c.Region</value>
+        </filters>
+        <label>Regions</label>
+    </listViews>
+    <nameField>
+        <label>Organisation Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>BDR Organisations</pluralLabel>
+    <recordTypes>
+        <fullName>Area</fullName>
+        <active>true</active>
+        <description>Localities are grouped into Area</description>
+        <label>Area</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Locality</fullName>
+        <active>true</active>
+        <description>Locality</description>
+        <label>Locality</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Region</fullName>
+        <active>true</active>
+        <description>Areas are grouped into Regions</description>
+        <label>Region</label>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

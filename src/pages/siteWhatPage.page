@@ -1,0 +1,38 @@
+<apex:page sidebar="false" showheader="false">
+<head><title>What is this? - Dementia Friends</title></head>
+       
+<apex:include pageName="temp_css"/>
+    <div class="container-fluid" id="mainContent">
+          <div class="row-fluid">
+              <h1>
+                  What is this?
+              </h1>
+          </div>
+          <hr class="divider"/>
+                 
+          <div class="row-fluid" style="margin-bottom:20px; margin-top:20px">
+            <div class="span8">
+                
+                 <div class="span3">
+                     <a href="https://twitter.com/DementiaFriends" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @DementiaFriends</a>
+                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                 </div>
+                 
+                 <div >
+                      <div class="fb-like" data-href="http://www.dementiafriends.org.uk" data-send="false" data-layout="button_count" data-width="250" data-show-faces="true"></div>
+                 </div>
+             </div>
+        </div>
+           <div>
+                    <h2>Could you be a Dementia Friend?</h2>
+                    <p>Being a Dementia Friend is about turning understanding into action.</p>
+                    <p>From giving a helping hand to someone struggling to get on the right bus, to volunteering, to encouraging someone else to become a Dementia Friend, no action is too big or too small.</p>  
+                    <p>We’ll equip you with an understanding of dementia and how you can help, and the rest is down to you. We want Dementia Friends in every community – in every hospital ward, post office, place of worship, and on every street. Our target is to reach a million people by 2015, and we're confident we'll not only meet this target but will beat it.</p>  
+                    <h2>Shape this exciting initiative</h2>
+                    <p>To get us started, we need people to volunteer to build a network of Dementia Friends within their local community. We’ll keep you up to date with all the exciting developments as Dementia Friends sweeps the country. You’ll also have a unique opportunity to help shape this exciting and innovative initiative. </p> 
+                    <p>So why wait? Take your first step to becoming a Dementia Friend and <a href="http://www.dementiafriends.org.uk/siteRegisterPage">register your interest</a> today. </p> 
+                   
+             </div>
+      </div>
+      <c:SiteFooter ></c:SiteFooter>
+</apex:page>

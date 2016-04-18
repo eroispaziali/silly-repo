@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Read</contactAccessLevel>
+    <description>E&amp;D Programme Development Manager</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>E&amp;D Programme Development Manager</name>
+    <opportunityAccessLevel>Read</opportunityAccessLevel>
+    <parentRole>Head_of_Education_Development</parentRole>
+</Role>

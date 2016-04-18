@@ -1,0 +1,95 @@
+<apex:page standardcontroller="Event" extensions="EventAttendeeController" tabStyle="User">
+<script type="text/javascript">
+    var buttonClicks=[]; 
+    function isDoubleClick(dialogId) {
+        
+        /*The button has already been pressed */
+        if (buttonClicks[dialogId]=='Y') { //alert('Save has already been pressed.');
+                                            return true; }
+
+        /* Set the value to prevent the button being pressed again */ 
+        buttonClicks[dialogId]='Y';         
+        return false;
+     }
+ 
+</script>
+<apex:form >
+<script type="text/javascript">
+
+     function stopDoubleClick() {
+       return isDoubleClick('request-status-active-form')
+     }
+     
+</script>
+<apex:variable value="/{!URLENCODE(IF($CurrentPage.Parameters.full==null,$CurrentPage.Parameters.id,'apex/'+$CurrentPage.Name+'?id='+$CurrentPage.Parameters.id+'%26full=true'))}" var="returnURL"/>
+
+<!-- //////////////// Show the block if Event is not scheduled against Service \\\\\\\\\\\\\\\\\\-->
+<apex:pageBlock rendered="{!!isServiceEvent}"> 
+<apex:pageBlockButtons > 
+    <apex:commandButton value="Back" action="/{!$CurrentPage.Parameters.id}"/> 
+</apex:pageBlockButtons> 
+The Event is not of Service type.
+</apex:pageBlock>
+
+<!-- //////////////// Block to List all Inviteed Users. \\\\\\\\\\\\\\\\\\-->
+<apex:pageBlock rendered="{!isServiceEvent}"> 
+<apex:pageblocksection columns="1">
+    <apex:pageMessages />
+</apex:pageblocksection>
+<img title="User" class="pageTitleIcon" alt="User" src="/s.gif"/>
+
+<h1 style="font-size: 100%; font-weight: bold;">
+    Worker Attendances for :  
+</h1>
+<br/>
+<h1 style="font-size: 150%; font-weight: bold;">{!strServiceName}</h1>
+
+<br/><br/>
+
+    <apex:pageBlockSection columns="2" collapsible="false">
+    <apex:outputField value="{!Event.Subject}"/>
+    <apex:outputField label="Date & Time" value="{!Event.StartDateTime}"/>
+    <apex:outputText label="Total Attendees (P/C/W/V)" value="{!Total_Attendees_ByType}"/>
+    <apex:outputField value="{!Event.Location}"/>
+    </apex:pageBlockSection>
+</apex:pageBlock>
+
+    
+<apex:pageBlock rendered="{!isServiceEvent}">  
+    <apex:pageBlockButtons > 
+        
+        <input type="button" class="btn" value=" Cancel " onclick="window.location.href='/{!$CurrentPage.Parameters.id}';"/> 
+        <apex:commandButton value=" Done " action="{!saveUsersNReturn}" onclick="return !stopDoubleClick();"/> 
+        <apex:commandButton value=" Save & Service User Attendences " action="{!saveUsersNServiceUsers}" onclick="return !stopDoubleClick();"/> 
+    </apex:pageBlockButtons> 
+   
+   <apex:pageBlockSection columns="1" title="Worker Attendances" collapsible="false" >
+        <apex:pageBlockTable value="{!lstWorkerAttendance}" var="rec3">
+        <!-- apex:column headerValue="Type"><apex:outputText value="{!rec3.recEAT.Type__c}" /> </apex:column>  -->
+        <apex:column > 
+        <apex:facet name="header">Full Name</apex:facet>
+        
+            <a href="javascript:window.parent.location='/{!rec3.workerId}?retURL={!returnURL}'" 
+onmouseover="LookupHoverDetail.getHover('lookup{!rec3.workerId}', '/{!rec3.workerId}/m?retURL=%2F{!rec3.workerId}&isAjaxRequest=1').show();" 
+onmouseout="LookupHoverDetail.getHover('lookup{!rec3.workerId}').hide();" 
+onfocus="LookupHoverDetail.getHover('lookup{!rec3.workerId}', '/{!rec3.workerId}/m?retURL=%2F{!rec3.workerId}&isAjaxRequest=1').show();" 
+onblur="LookupHoverDetail.getHover('lookup{!rec3.workerId}').hide();" id="lookup{!rec3.workerId}">
+                {!rec3.workerName} 
+        </a>                 
+        </apex:column>apex:column > 
+        <apex:column headerValue="Staff/Volunteer"><apex:outputText value="{!rec3.StaffVolunteerType}" /></apex:column>
+        <apex:column headerValue="Attendance Status"> <apex:inputfield value="{!rec3.recEAT.Attendance_Status__c}"/> </apex:column>
+        <apex:column headerValue="PreparationTime (Minutes)"> <apex:inputfield value="{!rec3.recEAT.Preparation_Time_Minutes__c}"/> </apex:column>
+        <apex:column headerValue="Travel Time (Minutes)"><apex:inputField value="{!rec3.recEAT.Travel_Time_Minutes__c}"/>  </apex:column>
+        <apex:column headerValue="Attendance Time (Minutes)"> <apex:inputfield value="{!rec3.recEAT.Attendance_Duration_Minutes__c}" /> </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlockSection>
+    
+
+</apex:pageBlock>
+<apex:outputText value="{!Event.RecurrenceActivityId}" rendered="false"></apex:outputText> 
+<apex:outputText value="{!Event.IsRecurrence}" rendered="false"></apex:outputText> 
+<apex:outputText value="{!Log}" escape="false" id="debug" rendered="{!if($Profile.Name !='System Administrator',FALSE,TRUE)}"/>
+
+</apex:form>
+</apex:page>

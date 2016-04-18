@@ -1,0 +1,26 @@
+<apex:page standardController="Service_Usage__c" >
+<script type="text/javascript"> 
+var __sfdcSessionId = '{!GETSESSIONID()}';
+</script>
+<script src="../../soap/ajax/23.0/connection.js" type="text/javascript"></script>
+
+<script>
+try
+{
+if ("{!Service_Usage__c.service_type__c}"=="Advocacy")
+  {
+    var result =sforce.connection.query("Select Id, Name from RecordType where IsActive=true and SobjectType='Task' and DeveloperName ='CRS_Advocacy_Task'");
+    var recs = result.getArray("records" );
+    alert(recs[0].Id);
+
+    window.location.href='_ui/core/email/author/EmailAuthor?p3_lkid={!Service_Usage__c.Id}&retURL=%2F{!Service_Usage__c.Id}&RecordType='+recs[0].Id+'&ent=Task';
+}
+else {
+    var result =sforce.connection.query("Select Id, Name from RecordType where IsActive=true and SobjectType='Task' and DeveloperName ='CRS_Task'");
+    var recs = result.getArray("records" );
+    alert(recs[0].Id);
+    window.location.href='_ui/core/email/author/EmailAuthor?p3_lkid={!Service_Usage__c.Id}&retURL=%2F{!Service_Usage__c.Id}&RecordType='+recs[0].Id+'&ent=Task';
+}
+}catch(ex){alert(ex);}
+</script> 
+</apex:page>

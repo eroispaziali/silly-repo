@@ -1,0 +1,149 @@
+<apex:component >
+
+       <apex:attribute name="BDR" description="The bdr" type="BDR__c" required="true"/>
+       <apex:attribute name="services" description="The list of services" type="BdrServiceWrapperList"/>
+
+        <apex:pageBlock title="BDR Proposal Summary">
+
+       <apex:pageBlockSection columns="2">
+    
+               <apex:outputField value="{!BDR.BDR_Name__c}" />       
+               <apex:outputField value="{!BDR.OwnerId}"/>                                    <!--  Owner -->         
+                       
+                <apex:outputField value="{!BDR.A2D_Locality__c}"/>    
+                
+                <apex:outputField value="{!BDR.Area__c}"/>
+                <apex:outputField value="{!BDR.Region__c}"/>    
+                
+                 <apex:outputField value="{!BDR.Development_Type__c}"/>                            
+                                 
+            
+        </apex:pageBlockSection>
+        
+        
+        
+        <apex:pageBlockSection columns="2">
+                <apex:outputField value="{!BDR.Income_Source__c}" id="incsource"  />  <!--  Income Source -->
+                <apex:outputField value="{!BDR.Total_Value__c}"/>      
+           
+               <apex:pageBlockSectionItem rendered="{!(!ISNULL(BDR.Linked_BDRs__r))}"> 
+                                    
+                   <apex:outputlabel value="Extended By"/>       
+                   <apex:repeat value="{!BDR.Linked_BDRs__r}" var="link_bdr">
+                        <apex:outputLink value="/{!link_bdr.id}">[{!link_bdr.name}]</apex:outputLink>&nbsp;&nbsp;&nbsp;                    
+                   </apex:repeat>    
+               
+               </apex:pageBlockSectionItem>
+           
+           <apex:pageBlockSectionItem rendered="{!BDR.Linked_BDR__c!=null}"> 
+                                 
+                  <apex:outputlabel value="Extends"/>       
+                  <apex:outputLink value="/{!BDR.Linked_BDR__c}">[{!BDR.linked_bdr__r.name}]</apex:outputLink>                    
+               
+           </apex:pageBlockSectionItem>
+             
+
+        </apex:pageBlockSection>
+    
+        <apex:pageBlockSection showHeader="false" collapsible="false" columns="2">            
+             <apex:outputField value="{!BDR.Intended_Start_Date__c}"  />      
+             <apex:outputField value="{!BDR.Estimated_Duration__c}"  />
+
+        </apex:pageblockSection>
+    
+       <apex:pageBlockSection columns="2">
+ 
+           <apex:outputField value="{!BDR.Required_Approval_Level__c}"/>        
+           <apex:outputField value="{!BDR.Tender__c}"/>
+           
+       </apex:pageBlockSection>
+    
+       <apex:pageBlockSection columns="1">
+
+       <apex:pageBlockSectionItem helptext="{!$ObjectType.BDR__c.fields.Summary__c.inlineHelpText}" >
+       <apex:outputlabel >Proposal Summary</apex:outputlabel>
+           <apex:outputText value="{!BDR.Summary__c}" id="pdescription" style="width:82%" escape="false" />              
+       </apex:pageBlockSectionItem>
+
+       <apex:pageBlockSectionItem helptext="{!$ObjectType.BDR__c.fields.Delivery_Risks__c.inlineHelpText}">
+       <apex:outputlabel >Infrastructure/Capacity to deliver</apex:outputlabel>
+           <apex:outputText value="{!BDR.Delivery_Risks__c}" id="pdescription" style="width:82%" escape="false" />              
+       </apex:pageBlockSectionItem>
+
+       <apex:pageBlockSectionItem helptext="{!$ObjectType.BDR__c.fields.Sustainability__c.inlineHelpText}">
+       <apex:outputlabel >Sustainability</apex:outputlabel>
+           <apex:outputText value="{!BDR.Sustainability__c}" style="width:82%" />                     
+       </apex:pageBlockSectionItem>
+
+       <apex:pageBlockSectionItem helptext="{!$ObjectType.BDR__c.fields.Recruitment_Required__c.inlineHelpText}" >
+        <apex:outputLabel >Staff/Volunteer recruitment required</apex:outputLabel>
+        <apex:outputText value="{!BDR.Recruitment_Required__c}" style="width:82%"/>
+       </apex:pageBlockSectionItem>
+   
+       <apex:pageBlockSectionItem helptext="{!$ObjectType.BDR__c.fields.Any_redundancies__c.inlineHelpText}" >
+        <apex:outputLabel >Redundancy implications</apex:outputLabel>
+        <apex:outputText value="{!BDR.Any_redundancies__c}" style="width:82%"/>
+       </apex:pageBlockSectionItem>
+
+       <apex:pageBlockSectionItem helptext="{!$ObjectType.BDR__c.fields.Exit_Strategy__c.inlineHelpText}" >
+       <apex:outputlabel >Impact if proposal is declined</apex:outputlabel>
+           <apex:outputText value="{!BDR.Exit_Strategy__c}" style="width:82%" />                     
+       </apex:pageBlockSectionItem>
+      
+       <!-- tupe moved to Tender /Bid-->
+       
+       <apex:pageBlockSectionItem >
+       <apex:outputlabel >Service Specifications</apex:outputlabel>
+          <apex:outputText value="{!bdr.Service_Specifications__c}" style="width:82%" />                     
+       </apex:pageBlockSectionItem>
+       
+       <!-- 
+       <apex:outputlabel >Service Types (temp)</apex:outputlabel>
+          <apex:outputText  value="{!bdr.Service_Types__c}" style="width:82%" />                     
+       </apex:pageBlockSectionItem>    
+        -->
+
+       </apex:pageBlockSection>       
+
+       <apex:pageBlockSection columns="2">    
+   
+           <apex:outputField value="{!BDR.Strategic_objectives_met__c}" />  
+          
+           <apex:outputField value="{!BDR.HR_Implications__c}"/>
+           <apex:outputField value="{!BDR.IT_Implications__c}"  /> 
+           <apex:outputField value="{!BDR.Reporting_Implications__c}"  />  
+           <apex:outputField value="{!BDR.Please_specify__c}" rendered="{!(BDR.Please_specify__c!=null)}" />
+           <apex:outputField value="{!BDR.Post_Approval_Changes__c}" rendered="{!BDR.Status__c=='Proposed'}" />               
+           <apex:inputHidden value="{!BDR.Post_Approval_Changes__c}" id="Post_Approval_Changes"/> 
+
+       </apex:pageBlockSection>
+
+    </apex:pageBlock>
+
+    <apex:pageBlock title="Workflow / Approvals">
+    
+    
+       <apex:pageBlockSection columns="2">    
+       
+           
+            <apex:outputField value="{!BDR.Operations_Manager__c}"/>                <!--  Operations Manager (Locality Manager)   One per Locality -->
+             <apex:outputField value="{!BDR.HR_Advisor__c}"/>                               <!--  HR Advisor  One per Regon   -->
+            <apex:outputField value="{!BDR.Area_Manager__c}"/>                          <!--  Regional Operations Manager  One per Area  -->
+                   
+            <apex:outputField value="{!BDR.SIM__c}"/>                                           <!--  SIM  One per Region  -->
+            <apex:outputField value="{!BDR.Operations_Director__c}"/>                      <!--  Operations Director One per Region   -->
+            
+            <apex:outputField value="{!BDR.Regional_Accountant__c}"/>                   <!--  Regional Accountant One per Region   -->
+             <apex:outputField value="{!BDR.BDM__c}"/>                                        <!--  Business Development Manager -->              
+        
+            
+            
+            <apex:inputHidden value="{!BDR.HR_Advisor__r.Name}"/>                       <!--  HR -->
+            <apex:inputHidden value="{!BDR.Fiscal_Years__c}"/>
+
+    </apex:pageBlockSection>               
+
+</apex:pageBlock>
+
+
+</apex:component>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Used to log requests for moves between sites</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Actual_Cost__c</fullName>
+        <externalId>false</externalId>
+        <label>Actual Cost</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Actual_Move_date__c</fullName>
+        <externalId>false</externalId>
+        <label>Actual Move date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>BCR_Approved__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>BCR Approved</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BCR_Raised__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>BCR Raised</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <length>32000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Date_Logged__c</fullName>
+        <defaultValue>TODAY()</defaultValue>
+        <externalId>false</externalId>
+        <label>Date Logged</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Lease_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Lease Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Local_contact__c</fullName>
+        <externalId>false</externalId>
+        <label>Local contact</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Local_contact_email__c</fullName>
+        <externalId>false</externalId>
+        <label>Local contact email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Location the move is from</description>
+        <externalId>false</externalId>
+        <label>From Location</label>
+        <referenceTo>Location__c</referenceTo>
+        <relationshipLabel>Move requests</relationshipLabel>
+        <relationshipName>Move_requests</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Move_Budget__c</fullName>
+        <externalId>false</externalId>
+        <label>Move Budget</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Move_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Move Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Additional Desks / Space in current location</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Office move ( closure and opening )</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Location</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>NUmber_of_staff__c</fullName>
+        <description>Number of staff moving as an indication of size</description>
+        <externalId>false</externalId>
+        <label>NUmber of staff</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reason_for_Moving__c</fullName>
+        <externalId>false</externalId>
+        <label>Reason for Moving</label>
+        <length>2000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Proposed</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Property inspection &amp; approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Negotiate &amp; approve Heads of Terms</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Negotiate &amp; approve tenancy agreement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tenancy agreement to be signed &amp; completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Fit-out of property &amp; move</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Existing Space adapted to meet requirements</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Postponed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Target_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Target Date for move</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Tentative_to_location__c</fullName>
+        <description>To location description prior to confirmed address</description>
+        <externalId>false</externalId>
+        <label>Tentative to location</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>To_Location__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Location the site is moving to</description>
+        <externalId>false</externalId>
+        <label>To Location</label>
+        <referenceTo>Location__c</referenceTo>
+        <relationshipLabel>Move requests (To Location)</relationshipLabel>
+        <relationshipName>Move_requests1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Move request</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Tentative_to_location__c</columns>
+        <columns>Target_Date__c</columns>
+        <columns>NUmber_of_staff__c</columns>
+        <columns>BCR_Approved__c</columns>
+        <columns>BCR_Raised__c</columns>
+        <columns>Lease_Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_with_detail</fullName>
+        <columns>NAME</columns>
+        <columns>Location__c</columns>
+        <columns>To_Location__c</columns>
+        <columns>Reason_for_Moving__c</columns>
+        <columns>Actual_Cost__c</columns>
+        <columns>Actual_Move_date__c</columns>
+        <columns>BCR_Approved__c</columns>
+        <columns>BCR_Raised__c</columns>
+        <columns>Comments__c</columns>
+        <columns>Date_Logged__c</columns>
+        <columns>Lease_Status__c</columns>
+        <columns>Local_contact__c</columns>
+        <columns>Local_contact_email__c</columns>
+        <columns>Status__c</columns>
+        <columns>Target_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All with detail</label>
+    </listViews>
+    <listViews>
+        <fullName>Pending_Moves</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Target_Date__c</columns>
+        <columns>Actual_Move_date__c</columns>
+        <columns>Actual_Cost__c</columns>
+        <columns>Move_Budget__c</columns>
+        <columns>NUmber_of_staff__c</columns>
+        <columns>Reason_for_Moving__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Confirmed</value>
+        </filters>
+        <label>Pending Moves</label>
+    </listViews>
+    <nameField>
+        <label>Move request Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Move requests</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

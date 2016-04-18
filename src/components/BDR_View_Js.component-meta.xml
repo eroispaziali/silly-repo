@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>15.0</apiVersion>
+    <description>BDR: View form Javascript fuinctions. Separated out only to make the form more readable. Not for re-use elsewhere without adjustment</description>
+    <label>BDR_View_Js</label>
+</ApexComponent>

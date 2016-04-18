@@ -1,0 +1,263 @@
+<apex:page standardcontroller="Event" extensions="EventAttendeeController" tabStyle="Contact">
+<script type="text/javascript">
+
+//function to apply attendance status to all datatable rows.
+function applyToAll(cb)
+  {
+            var inputElem = document.getElementsByTagName("select"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("attendStatus")!=-1)                          
+                inputElem[i].selectedIndex = cb.selectedIndex;
+            }
+  }
+  
+//function to select all datatable rows.
+function selectAll(cb)
+  {
+            var inputElem = document.getElementsByTagName("input"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("contactSelect")!=-1)                          
+                inputElem[i].checked = cb.checked;
+            }
+  } 
+  
+
+//function to select all datatable rows.
+function selectAllSUA(cb)
+  {
+            var inputElem = document.getElementsByTagName("input"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("SUASelect")!=-1)                          
+                inputElem[i].checked = cb.checked;
+            }
+  } 
+
+
+
+//function to apply attendance status to all datatable rows.
+function validateStatusSelected()
+  {
+            var inputElem = document.getElementsByTagName("select"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("attnStatus")!=-1)
+                 {
+                     if(inputElem[i].selectedIndex==0)
+                     {
+                         alert('Select \'Status\' to be assigned.');
+                         return false;
+                     }
+                 }                          
+            }
+            return stopDoubleClick(); 
+  }   
+
+
+//function to apply same value to all datatable rows.
+function populateAttnStatus(cb)
+  {
+            var inputElem = document.getElementsByTagName("select"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("attnStatus")!=-1 && document.getElementById(inputElem[i].id.replace('attnStatus','SUASelect')).checked) 
+                 {                         
+                    //alert(inputElem[i].id);
+                    inputElem[i].selectedIndex = cb.selectedIndex;
+                  }
+            }
+  }  
+
+    var buttonClicks=[]; 
+    function isDoubleClick(dialogId) {
+        
+        /*The button has already been pressed */
+        if (buttonClicks[dialogId]=='Y') { //alert('Save has already been pressed.');
+                                            return true; }
+
+        /* Set the value to prevent the button being pressed again */ 
+        buttonClicks[dialogId]='Y';         
+        return false;
+     }
+ 
+</script>
+
+
+<apex:form >
+<script type="text/javascript">
+
+     function stopDoubleClick() {
+       return !isDoubleClick('request-status-active-form')
+     }
+     
+</script>
+<!-- //////////////// Show the block if Event is not scheduled against Service \\\\\\\\\\\\\\\\\\-->
+<apex:pageBlock rendered="{!!isServiceEvent}"> 
+<apex:pageBlockButtons > 
+    <apex:commandButton value="Back" action="/{!$CurrentPage.Parameters.id}" /> 
+</apex:pageBlockButtons> 
+The Event is not of Service type.
+</apex:pageBlock>
+
+
+<!-- //////////////// Block to List all Available Service Contacts from Service Usage, but not already added to Event. \\\\\\\\\\\\\\\\\\-->
+<apex:pageBlock tabStyle="Contact"  rendered="{!isServiceEvent}" > 
+<apex:pageblocksection columns="1">
+    <apex:pageMessages />
+</apex:pageblocksection>
+<img title="Organisation" class="pageTitleIcon" alt="Organisation" src="/s.gif"/>
+<h1 style="font-size: 100%; font-weight: bold;">
+    Service User Attendances for :  
+</h1>
+<br/>
+<h1 style="font-size: 150%; font-weight: bold;">{!strServiceName}</h1>
+
+<br/><br/>
+
+
+    <apex:pageBlockSection columns="2" collapsible="false">
+    <apex:outputField value="{!Event.Subject}"/>
+    <apex:outputField label="Date & Time" value="{!Event.StartDateTime}"/>
+    <apex:outputText label="Total Attendees (P/C/W/V)" value="{!Total_Attendees_ByType}" rendered="{!!Event.IsRecurrence}"/>
+    <apex:outputText label="Total Attendees (P/C/W/V)" value="No applicable for a series" rendered="{!Event.IsRecurrence}"/>
+    <apex:outputField value="{!Event.Location}"/>
+    </apex:pageBlockSection>
+
+<apex:outputpanel rendered="{!(Event.RecurrenceActivityId!=null && !Event.IsRecurrence)}">
+<a href="/apex/{!$CurrentPage.Name}?id={!Event.RecurrenceActivityId}&retURL={!Event.id}&fromInd=1" class="btn"  style="text-decoration : none" > 
+Edit Series
+</a>
+<!-- 
+<a href="/apex/{!$CurrentPage.Name}?id={!Event.Id}&retURL={!Event.id}&fromInd=1" class="btn"  style="text-decoration : none" > 
+Edit Series
+</a>
+ -->
+</apex:outputpanel>
+
+<apex:outputPanel rendered="{!Event.IsRecurrence}">
+<div id="" class="message warningM4">
+<table cellspacing="0" cellpadding="0" border="0" class="messageTable">
+<tbody><tr><td><img title="Warning" class="msgIcon" alt="Warning" src="/s.gif"/></td>
+<td class="messageCell"><div class="messageText">
+Changes made to the series will affect all occurrences on or after &nbsp;
+    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> 
+    <apex:param value="{!Today()}" /> 
+    </apex:outputText>     
+.</div>
+</td></tr>
+</tbody></table></div>
+<apex:outputPanel rendered="{!($CurrentPage.Parameters.fromInd)!=null}">
+<a Class="btn" style="text-decoration : none"  href="/apex/{!$CurrentPage.Name}?id={!returnID}&retURL={!Event.id}?&eventRecu=0">
+Back
+</a> 
+</apex:outputPanel>
+</apex:outputPanel>    
+    <apex:pageblockSection title="Service Users" columns="1" collapsible="false">
+        <apex:pageBlockTable value="{!lstAvailableCons}" var="rec" id="pbtAvailableCons" >
+                
+            <apex:column headerValue="Select" width="5%">
+                <apex:facet name="header">
+                <apex:inputCheckbox onclick="selectAll(this)"/>  
+                </apex:facet>
+                <apex:inputCheckbox id="contactSelect" value="{!rec.isSelected}"/>
+            </apex:column> 
+            <apex:column headerValue="Person Name"> 
+                <!-- <apex:outputField  value="{!rec.recEAT.Contact__c}" />  -->
+                <apex:outputText value="{!rec.contactName}" escape="false"/>
+            </apex:column>
+            <apex:column headerValue="Phone Number"> {!rec.Phone} </apex:column>
+            <apex:column headerValue="Postcode"> {!rec.postCode} </apex:column>
+            <apex:column headerValue="Date of birth"> 
+                <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> 
+                <apex:param value="{!rec.birthDate}" /> 
+                </apex:outputText>              
+            </apex:column>
+            <apex:column headerValue="Record Type"> {!rec.contactRecTypeName} </apex:column>
+
+        </apex:pageBlockTable>
+    </apex:pageblockSection>
+
+<table border='0' width='100%'>
+<tr>
+<td>&nbsp;
+</td>
+<td width='40%' align='right'>
+        <apex:outputLabel style="color:maroon">Attendance Status&nbsp;&nbsp;&nbsp;</apex:outputLabel>
+        <apex:selectList id="statusSelectList" size="1" value="{!strInsertWithStatus}"> 
+        <apex:selectOptions value="{!lstAttendanceStatus}"/>
+        </apex:selectList>
+        &nbsp;&nbsp;
+        <apex:commandButton value=" Insert Selected " action="{!AddToList}" onclick="if(document.getElementById('{!$Component.statusSelectList}').selectedIndex==0){alert('Select value for Attendance Status.'); return false;}" />
+</td>
+</tr>
+</table>
+    
+
+</apex:pageBlock> 
+
+<apex:actionFunction action="{!RemoveContact}" name="RemoveContact" reRender="pbtAvailableCons,pbtSelctedCons" >   
+<apex:param name="conId" value="" assignTo="{!removeConId}"/>
+</apex:actionFunction>
+
+<!-- //////////////// Block to List all added Contacts from Service Usage. \\\\\\\\\\\\\\\\\\-->
+<apex:pageBlock rendered="{!isServiceEvent}"  >
+    <apex:pageBlockButtons > 
+        <input type="button" class="btn" value=" Cancel " onclick="window.location.href='/{!$CurrentPage.Parameters.id}';"/>
+        <!-- <apex:commandButton value=" Cancel " action="{!saveContactsNReturn}" onclick="return validateStatusSelected();"/>  -->
+        <apex:commandButton value=" Done " action="{!saveContactsNReturn}" onclick="return validateStatusSelected();"/> 
+        <apex:commandButton value=" Save & Worker Attendences " rendered="{!!Event.IsRecurrence}" action="{!saveContactsNWorkers}" onclick="return validateStatusSelected();"/> 
+
+    </apex:pageBlockButtons> 
+    
+    <apex:pageBlockSection columns="1"  title="Service User Attendances"  collapsible="false">
+        <apex:pageBlockTable value="{!lstAddedCons}" var="rec" id="pbtSelctedCons">
+            <apex:column width="3%">
+                <apex:facet name="header">
+                     <apex:inputCheckbox onclick="selectAllSUA(this)" />
+                </apex:facet>
+                <apex:inputCheckbox id="SUASelect" />
+            </apex:column> 
+                
+            <apex:column headerValue="Action" width="5%">
+                <apex:outputPanel rendered="{!rec.recEAT.EventAttendeeId__c==null}">
+                    <a href="javascript:if (window.confirm('Are you sure?')) RemoveContact('{!rec.recEAT.Contact__c}');">Del</a>                
+                 </apex:outputPanel>   
+            </apex:column>
+            <apex:column headerValue="Person Name">
+                <!--<apex:outputField value="{!rec.recEAT.Contact__c}" /> -->
+                <apex:outputText value="{!rec.contactName}" escape="false"/>
+            </apex:column>
+            <apex:column headerValue="Record Type"> {!rec.contactRecTypeName} </apex:column>
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:outputPanel >
+                        <apex:outputLabel >Attendance Status &nbsp;&nbsp; </apex:outputLabel>  
+                        <br/>              
+                        <apex:selectList id="statusSelectList" size="1"  onchange="populateAttnStatus(this)"> 
+                        <apex:selectOptions value="{!lstAttendanceStatus}"/>
+                        </apex:selectList>                    
+                    </apex:outputPanel> 
+                </apex:facet>                 
+                <apex:inputField value="{!rec.recEAT.Attendance_Status__c}" id="attnStatus"/>
+            </apex:column>            
+            <apex:column headerValue="Attendance Type">
+                <apex:inputField value="{!rec.recEAT.Attendance_Type__c}" id="attnType" rendered="{!rec.contactRecTypeName=='Professional / Stakeholder'}"/>
+            </apex:column>      
+            <apex:column headerValue="Notes"> <apex:inputfield style="width: 300px; height: 15px;" value="{!rec.recEAT.Notes__c}" /> </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlockSection>
+</apex:pageBlock>
+<br/>
+<br/>
+
+<apex:outputText value="{!Log}" escape="false" id="debug" rendered="{!if($Profile.Name !='System Administrator',FALSE,TRUE)}"/>
+
+</apex:form>
+</apex:page>

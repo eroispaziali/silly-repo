@@ -1,0 +1,1063 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A contract for delivery of services with a fund source</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>A2D_Locality__c</fullName>
+        <externalId>false</externalId>
+        <formula>BDR__r.A2D_Locality__r.Name</formula>
+        <label>Locality</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Area__c</fullName>
+        <externalId>false</externalId>
+        <formula>BDR__r.A2D_Locality__r.Area__r.Name</formula>
+        <inlineHelpText>Locality specified on the Business Development Record</inlineHelpText>
+        <label>Area</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Area_or_Locality__c</fullName>
+        <externalId>false</externalId>
+        <formula>BDR__r.Locality__r.Name</formula>
+        <inlineHelpText>Locality specified on the Business Development Record</inlineHelpText>
+        <label>Area or Locality</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BDR_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>BDR__r.BDR_Name__c</formula>
+        <label>BDR Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BDR__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Business Development Record</label>
+        <referenceTo>BDR__c</referenceTo>
+        <relationshipName>BD_Linked_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Billing_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Billing Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Billing_Frequency__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>How frequently will we need to invoice the funder?</inlineHelpText>
+        <label>Billing Frequency</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Month</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Quarter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bi-Annual</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Annual</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Commissioner</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipName>BD_Contact_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contract_Paperwork_Attached__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Tick when you have attached the contract paperwork to this BDR.</inlineHelpText>
+        <label>Contract paperwork attached</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contract_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Block contract</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spot contract</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Combination</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Charity of the year</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Commercial participator</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sponsorship</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Personal Budgets</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Self Funders</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client Contribution</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Contract_administrator_internal__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>This staff member will receive reminder emails regarding contract renewal dates</inlineHelpText>
+        <label>Contract administrator (internal)</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BD_Admin_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contract_paperwork_checked_by__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the BDM or BDO who has confirmed that the contract has been fully signed and filed</inlineHelpText>
+        <label>Contract paperwork checked by</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>BDR_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contract_paperwork_received__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Tick once contract paperwork has been fully signed and a copy returned to us</inlineHelpText>
+        <label>Signed paperwork attached</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Cost_Centre__c</fullName>
+        <externalId>false</externalId>
+        <formula>BDR__r.A2D_Locality__r.Cost_Centre__c</formula>
+        <label>Cost Centre</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Details_of_funding_conditions__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Provide details of any contract requirements which affect funding, eg. CQUIN, Payment by Results, efficiency savings.</inlineHelpText>
+        <label>Details of funding conditions</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>End_date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Contract / Grant / SLA end date</inlineHelpText>
+        <label>End date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Extension_Terms__c</fullName>
+        <externalId>false</externalId>
+        <label>Extension Terms</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Mutual</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Commissioner Only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Fiscal_Years__c</fullName>
+        <externalId>false</externalId>
+        <label>Financial Years</label>
+        <picklist>
+            <picklistValues>
+                <fullName>2010/11</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2011/12</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2012/13</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2013/14</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2014/15</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2015/16</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2016/17</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2017/18</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2018/19</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Funder_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>Income_Source__r.Funding_Source__c</formula>
+        <label>Funder Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Funding_Conditions__c</fullName>
+        <description>Change 411 - moved from Income Block Period</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Choose - standard if there are no conditions attached to the potential income; - conditional if the funding is only available under certain circumstances (e.g. CQUIN, efficiency savings)</inlineHelpText>
+        <label>Funding Conditions</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Standard</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Conditional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Highlighted_Contract_Items__c</fullName>
+        <description>Renamed from Highlighted Contract Items to Specific terms for reporting</description>
+        <externalId>false</externalId>
+        <label>Specific terms for reporting</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Uncapped Indemnity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Data Sharing Agreement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PCI DSS Requirement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Standard NHS Contract Terms</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Income_Block__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Income Block</label>
+        <referenceTo>Income_Block__c</referenceTo>
+        <relationshipName>BD_Income_Contract</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Income_Source__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Income Source</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipName>BD_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Invoice_Address__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Invoice address for the Income Source if different to the usual organisation address</inlineHelpText>
+        <label>Invoice Address</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Invoicing_information_complete__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>change 411</description>
+        <externalId>false</externalId>
+        <label>Invoicing information complete?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_a_data_sharing_agreement_required__c</fullName>
+        <description>Information Governance - change 411</description>
+        <externalId>false</externalId>
+        <label>Is a data sharing agreement required?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Is_data_sharing_required__c</fullName>
+        <description>Information Governance - change 411</description>
+        <externalId>false</externalId>
+        <label>Is a data sharing agreement required?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Is_there_a_PCI_DSS_requirement__c</fullName>
+        <description>Change 411Text added as part of 446.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>PCI-DSS is the set of requirements that must be followed when taking payments by credit, debit or prepaid/gift cards. It applies to all card payments, whether in person, over the phone or online.</inlineHelpText>
+        <label>Is there a PCI DSS requirement?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Is_this_contract_the_standard_NHS__c</fullName>
+        <externalId>false</externalId>
+        <label>Is this contract the standard NHS</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Linked_BDR_Contract__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>If this contract is a contract extension, link to the new Contract that has extended or replace this one. The id of the old Contract is stored on the new Contract object</description>
+        <externalId>false</externalId>
+        <label>Extends</label>
+        <referenceTo>BD_Contract__c</referenceTo>
+        <relationshipLabel>Contract Extensions</relationshipLabel>
+        <relationshipName>Linked_BDR_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Locality__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Locality or Office</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>BDR Contracts (Locality or Office)</relationshipLabel>
+        <relationshipName>BD_Locality_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Location_of_Original_Signed_Contract__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Include the name of the office where the original contract is stored.  This will usually be an area or regional office</inlineHelpText>
+        <label>Location of Original Signed Contract</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Most_Senior_Signature_Job_Title__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Identify if this contract was signed by a trustee, SLT member, OLT member or regional staff member (select the most senior if more than one).</inlineHelpText>
+        <label>Contract signed by</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Trustee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SLT Member</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>OLT Member</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Regional Operations Manager</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Operations Manager</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Services Manager</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Most_Senior_Signature_Name__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The name of the most senior person who signed the contract</inlineHelpText>
+        <label>Contract signatory</label>
+        <length>128</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nominal_Code2__c</fullName>
+        <description>Change-00464 to picklist.</description>
+        <externalId>false</externalId>
+        <label>Nominal Code</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1215</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1301</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1305</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1320</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1531</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Nominal_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Nominal CodeOLD</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Option_to_extend_to__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>If there is potential to extend the contract, add the date when the fully extended contract would finish</inlineHelpText>
+        <label>Option to extend to</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <description>Computed on A2D Locality
+
+FOR REFERENCE:
+IF( CONTAINS(Locality__r.Name, &quot;Locality&quot;) , Locality__r.Parent.Parent.Name , 
+IF(CONTAINS(Locality__r.Name,&quot;Area&quot;), Locality__r.Parent.Name, 
+IF(CONTAINS(Locality__r.Name, &quot;Region&quot;), Locality__r.Parent.Name, 
+IF(CONTAINS(Locality__r.Name, &quot;Local Service Office&quot;), Locality__r.Parent.Parent.Parent.Name, 
+&quot;&quot;))))</description>
+        <externalId>false</externalId>
+        <formula>BDR__r.A2D_Locality__r.Region__r.Name</formula>
+        <label>Region/Country</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Regional_Accountant_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Regional Accountant Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Regional_Accountant__c</fullName>
+        <description>Regional Account from BDR</description>
+        <externalId>false</externalId>
+        <formula>BDR__r.Regional_Accountant__c</formula>
+        <label>Regional Accountant</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Renewal_Risk__c</fullName>
+        <externalId>false</externalId>
+        <label>Renewal Risk</label>
+        <picklist>
+            <picklistValues>
+                <fullName>N/A</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medium</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Reporting_requirements__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>List any special reporting requirements specified in the contract terms.</inlineHelpText>
+        <label>Reporting Requirements</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Required_Signatures__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Tick the title of the person who is required to sign the contract.  If the funder does not specify, select in accordance with our delegated authorities</inlineHelpText>
+        <label>Required Signatures</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Operations Manager</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Regional Operations Manager</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Operations Director</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Director of Operations</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CEO</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Trustee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Company Secretary</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Restriction_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Restriction Code</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Review_date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>In the form dd/mm/yyyy (if no other date agreed set this for six months before end of contract )</inlineHelpText>
+        <label>Review date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Risk_Index_Applies__c</fullName>
+        <description>renamed from Highlighted Contract Terms to Potential contract risks and then to Significant contract risks</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Do any of the items in the risk index apply to this contract?</inlineHelpText>
+        <label>Significant contract risks</label>
+        <picklist>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Risk_Index_Detail__c</fullName>
+        <description>Changed from Highlighted Contract Terms Detail to Details about potential contract risks</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For completion by BDM and/or Legal Services only</inlineHelpText>
+        <label>Contract comments and risks</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>6</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Risk_Index_Version__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The risk index version text. This is extracted from a ConfigText item</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The version of the Risk Index that was used to verify this contract</inlineHelpText>
+        <label>Risk Index Version</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>ConfigText__c.Type__c</field>
+                <operation>equals</operation>
+                <value>BDR: Contract Risk Index</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>ConfigText__c</referenceTo>
+        <relationshipLabel>BDR Contracts</relationshipLabel>
+        <relationshipName>BD_Contract_Risks</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Start_date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Contract / Grant / SLA start date</inlineHelpText>
+        <label>Start date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Draft</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accepted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Proposed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expired (but replaced)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Declined</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unsuccessful</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Live</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Term__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Overall length of the agreement in months (as a number)</inlineHelpText>
+        <label>Term</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Income_Block__r.Total_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Written_Confirmation_Received__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Has the funder provided written confirmation of an intention to proceed with the Contract</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Has the Income Source provided written confirmation of their intention to proceed with the Contract.</inlineHelpText>
+        <label>Written Confirmation of Funding Received</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>BDR Contract</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Contract_Type__c</columns>
+        <columns>Fiscal_Years__c</columns>
+        <columns>Start_date__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Contracts_All</fullName>
+        <columns>NAME</columns>
+        <columns>BDR_Name__c</columns>
+        <columns>Start_date__c</columns>
+        <columns>End_date__c</columns>
+        <columns>Risk_Index_Applies__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Contracts - All</label>
+    </listViews>
+    <listViews>
+        <fullName>Contracts_Current</fullName>
+        <columns>NAME</columns>
+        <columns>BDR_Name__c</columns>
+        <columns>Start_date__c</columns>
+        <columns>End_date__c</columns>
+        <columns>Highlighted_Contract_Items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>End_date__c</field>
+            <operation>greaterThan</operation>
+            <value>LAST_N_DAYS:5</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Current</value>
+        </filters>
+        <label>Contracts - Current</label>
+    </listViews>
+    <listViews>
+        <fullName>Contracts_Live</fullName>
+        <columns>NAME</columns>
+        <columns>BDR_Name__c</columns>
+        <columns>Start_date__c</columns>
+        <columns>End_date__c</columns>
+        <columns>Highlighted_Contract_Items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>End_date__c</field>
+            <operation>greaterThan</operation>
+            <value>LAST_N_DAYS:5</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Live</value>
+        </filters>
+        <label>Contracts - Live</label>
+    </listViews>
+    <nameField>
+        <displayFormat>BDC-{0000}</displayFormat>
+        <label>Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>BDR Contracts</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>BDR_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Contract_Type__c</customTabListAdditionalFields>
+        <searchResultsAdditionalFields>BDR_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Contract_Type__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+</CustomObject>

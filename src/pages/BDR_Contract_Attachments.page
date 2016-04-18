@@ -1,0 +1,32 @@
+<apex:page standardController="BD_Contract__c" showHeader="false" sidebar="false" tabStyle="BDR__c" >
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+    //Ensure correct version of jQuery
+    var j$ =jQuery.noConflict(true);        
+
+    j$(document).ready(function() {                            
+        /* Hide the attachment and note actions - no use inside an iFrame. They won't execute because
+           the standard Related Lists are rendered from a different host to the parent VF page
+           These buttons are instead computed and inserted on the parent form.
+        */                    
+        j$('td.pbButton').find('input').hide();                
+
+        /* This page will display in an iFrame. Modify the links to open in a new window
+           otherwise users other than the editor of the note will not be able to open the notes
+           (Chrome shows an iFrame execution security error message).
+        */
+        j$('td.datacell a').attr('target','_top');
+
+    });
+
+
+
+
+    </script>
+    
+    <apex:relatedList list="NotesAndAttachments"/>
+
+</apex:page>

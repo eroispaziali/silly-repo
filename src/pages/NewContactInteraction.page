@@ -1,0 +1,38 @@
+<apex:page standardController="Contact_Event__c" extensions="ContactEventWizardController" tabStyle="Contact_Event__c">
+
+    <apex:sectionHeader title="New Contact Interaction"/>
+    <apex:messages />
+    
+    <apex:form >
+        <apex:pageBlock title="Contact Interaction Edit" id="thePageBlock" mode="edit">
+            <apex:pageMessages />
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                <apex:commandButton action="{!saveAdd}" value="Save & Add More People" styleClass="btn"/>
+                <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection title="Information">
+                <!-- Information fields -->
+                <apex:inputField id="name" value="{!contactEvent.Name}" required="true"/>
+                <apex:inputField id="person" value="{!person.Contact__c}" required="true"/>
+                <apex:inputField id="date" value="{!contactEvent.Contact_Date_Time__c}" required="true"/>
+                <apex:inputField id="assignedTo" value="{!contactEvent.User__c}"/>
+                <apex:inputField id="duration" value="{!contactEvent.Duration__c}" required="true"/>
+                <apex:inputField id="format" value="{!contactEvent.Format__c}" required="true"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Actions Taken" columns="1">
+                <!-- Actions fields -->
+                <apex:inputField id="actions" value="{!contactEvent.Actions_taken__c}" style="width: 500px"/>
+                <apex:inputField id="infotool" value="{!contactEvent.Signposting_information_given__c}"/>
+                <apex:inputField id="infoother" value="{!contactEvent.Other_Signposting_Info__c}" style="width: 500px"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Follow-up Details" columns="1">
+                <!-- Follow-up fields -->
+                <apex:inputField id="followup" value="{!contactEvent.Follow_up_action_required__c}" style="width: 500px"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

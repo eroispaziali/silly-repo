@@ -1,0 +1,100 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section One: Compliance"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="Premises" id="location">
+            <apex:outputLabel value="Location" for="loc"/>
+            <apex:inputField id="loc" value="{!survey.Location__c}"/>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="Fire" id="compliance">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!section2}" value="Next" styleClass="btn"/>
+                    <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+
+            <apex:pageBlockSection title="Fire">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="* Date of Last Fire Risk Assessment" for="fire1"/>
+                  <apex:inputField id="fire1" value="{!survey.a_Fire_Last_Assessment__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Fire Escapes">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Does the building have fire escapes?" for="fireesc1"/>
+                  <apex:inputField id="fireesc1" value="{!survey.a_Fire_Has_Escapes__c}"/>
+                  <apex:outputLabel value="Overall condition of fire escapes" for="fireesc2"/>
+                  <apex:inputField id="fireesc2" value="{!survey.a_Fire_Condition_of_Fire_Escapes__c}"/>
+                  <apex:outputLabel value="Adequate safety features" for="fireesc3"/>
+                  <apex:inputField id="fireesc3" value="{!survey.a_Fire_Adequate_Safety_Features__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+          
+            <apex:pageBlockSection title="Fire Extinguisher">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Has fire extinguishers?" for="ext1"/>
+                  <apex:inputField id="ext1" value="{!survey.a_Fire_Extinguishers__c}"/>
+                  <apex:outputLabel value="Maintenace contract?" for="ext2"/>
+                  <apex:inputField id="ext2" value="{!survey.a_Fire_Maintenance_Contract__c}"/>
+                  <apex:outputLabel value="* If no contract, when last checked?" for="ext3"/>
+                  <apex:inputField id="ext3" value="{!survey.a_Fire_When_Last_Checked__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Fire Alarm/Safety Systems">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Is there a fire alarm" for="Alarm1"/>
+                  <apex:inputField id="Alarm1" value="{!survey.Is_there_a_fire_alarm__c}"/>
+                  <apex:outputLabel value="Is the fire alarm monitored?" for="Alarm2"/>
+                  <apex:inputField id="Alarm2" value="{!survey.Is_the_fire_alarm_monitored__c}"/>
+                  <apex:outputLabel value="Overall condition of fire alarms" for="alrm1"/>
+                  <apex:inputField id="alrm1" value="{!survey.a_Fire_Alarm_Condition__c}"/>
+                  <apex:outputLabel value="How often tested?" for="alrm2"/>
+                  <apex:inputField id="alrm2" value="{!survey.a_Fire_How_Often_Tested__c}"/>
+                  <apex:outputLabel value="Is there a record/log?" for="alrm3"/>
+                  <apex:inputField id="alrm3" value="{!survey.a_Fire_Log__c}"/>
+                  <apex:outputLabel value="Smoke detection" for="Alarm3"/>
+                  <apex:inputField id="Alarm3" value="{!survey.Smoke_detection__c}"/>
+                  <apex:outputLabel value="Is this checked" for="Alarm4"/>
+                  <apex:inputField id="Alarm4" value="{!survey.Is_this_checked__c}"/>
+                  <apex:outputLabel value="Is this recoreded" for="Alarm5"/>
+                  <apex:inputField id="Alarm5" value="{!survey.Is_this_recorded__c}"/>
+                  <apex:outputLabel value="Overall condition" for="Alarm6"/>
+                  <apex:inputField id="Alarm6" value="{!survey.Overall_condition__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+          <apex:pageBlockSection title="Fire Suppression Systems">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Condition/appearance of fire suppression systems" for="supp1"/>
+                  <apex:inputField id="supp1" value="{!survey.a_FireSuppression_Condition__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Emergency/Exit Lighting Systems">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Are there emergency lights" for="Exit3"/>
+                  <apex:inputField id="Exit3" value="{!survey.Are_there_emergency_lights__c}"/>
+                  <apex:outputLabel value="Condition of emergency/exit lighting systems" for="exit1"/>
+                  <apex:inputField id="exit1" value="{!survey.a_Exit_Condition__c}"/>
+                  <apex:outputLabel value="Is there directional fire signage" for="Exit4"/>
+                  <apex:inputField id="Exit4" value="{!survey.Is_there_directional_fire_signage__c}"/>
+                  <apex:outputLabel value="Is the fire signage illuminated" for="Exit5"/>
+                  <apex:inputField id="Exit5" value="{!survey.Is_the_fire_signage_illuminated__c}"/>            
+            </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Comments">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Comments" for="Comments"/>
+                  <apex:inputField id="Comments" value="{!survey.Comments_page_1__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+
+</apex:pageBlock>
+    </apex:form>
+</apex:page>

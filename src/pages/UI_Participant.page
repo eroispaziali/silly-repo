@@ -1,0 +1,249 @@
+<apex:page tabStyle="UI_Participant__c"  
+           standardController="UI_Participant__c" 
+           extensions="UIParticipantControllerExtension">
+
+<head>
+     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/redmond/jquery-ui.css" />
+</head>
+
+<apex:sectionHeader title="User Involvement Participant" 
+                               subtitle="{!UI_Participant__c.Name}" 
+                               />
+
+<apex:outputPanel id="messages">
+      <apex:pageMessages id="errors" />
+  </apex:outputPanel>
+
+<topics:widget entity="{!UI_Participant__c.id}" renderStyle="enhanced"/>
+
+<apex:form >
+<apex:actionFunction name="submitForApproval" action="{!saveAndRequestApproval}"/>
+
+<apex:pageBlock mode="mainDetail">
+
+    <apex:pageblockButtons >
+        <apex:commandButton action="{!saveAndClose}" title="Save" value="Save" onclick="return validateSave();"/>
+        <apex:commandButton action="{!cancel}" title="cancel" value="Cancel"/>
+        
+    </apex:pageblockButtons>
+
+
+    <apex:pageBlockSection title="Participant">
+        <apex:inputField value="{!UI_Participant__c.Participant_Reference__c}"/>
+        <apex:inputField value="{!UI_Participant__c.Status__c}" id="status"/>    
+        <apex:outputField value="{!UI_Participant__c.Name}"/>
+        <apex:outputField value="{!UI_Participant__c.Contact__c}"/>
+        <apex:inputField value="{!UI_Participant__c.OwnerId}"/>
+        <apex:inputField value="{!UI_Participant__c.Participation_Count__c}"/>    
+    </apex:pageBlockSection>
+
+    <apex:pageBlockSection title="Society Contacts">
+        <apex:inputField value="{!UI_Participant__c.Society_Contact__c}"/>
+        <apex:outputField value="{!UI_Participant__c.SU_SSM__c}"/>    
+        <apex:outputField value="{!UI_Participant__c.Requires_Approval__c}"/>
+    </apex:pageBlockSection>
+
+    <apex:pageBlockSection title="Consent" id="consentDetail">
+        <apex:inputField value="{!UI_Participant__c.Valid_From_Date__c}" id="date_from"/>
+        <apex:outputField value="{!UI_Participant__c.Valid_To_Date__c}"/>    
+        <apex:inputField value="{!UI_Participant__c.Consent_Type__c}" id="consent_type"/>
+        <apex:inputField value="{!UI_Participant__c.Location_of_Consent_Form__c}"/>
+    </apex:pageBlockSection>
+
+    <apex:pageBlockSection title="Comments" columns="1">
+        <apex:inputField value="{!UI_Participant__c.Comments__c}" style="width:73%"/>
+    </apex:pageBlockSection>
+
+    <apex:pageBlockSection title="Consent and Participant Profile">
+    <apex:pageblocksectionitem >                       
+      <apex:outputLabel value="Activity Types"/>  
+      <apex:selectcheckboxes layout="pageDirection" value="{!activity_types_selection}">                   
+                             <apex:selectoptions value="{!activity_types_options}" />          
+                       </apex:selectcheckboxes> 
+     </apex:pageblocksectionitem>                         
+    
+    <apex:pageblocksectionitem >                       
+      <apex:outputLabel value="Methods of Involvement"/>  
+      <apex:selectcheckboxes layout="pageDirection" value="{!methods_of_involvement_selection}">                   
+                             <apex:selectoptions value="{!methods_of_involvement_options}" />          
+                       </apex:selectcheckboxes> 
+    </apex:pageblocksectionitem>
+    
+     <apex:pageblocksectionitem >                       
+      <apex:outputLabel value="Areas of Expertise"/>  
+      <apex:selectcheckboxes layout="pageDirection" value="{!areas_of_expertise_selection}">                   
+                             <apex:selectoptions value="{!areas_of_expertise_options}" />          
+                       </apex:selectcheckboxes> 
+    </apex:pageblocksectionitem>                         
+                       
+    </apex:pageBlockSection>    
+
+    <apex:pageBlockSection title="System Information">
+        <apex:inputField value="{!UI_Participant__c.CreatedById}"/>
+        <apex:inputField value="{!UI_Participant__c.CreatedDate}"/>
+    </apex:pageBlockSection>    
+
+
+</apex:pageBlock>
+
+<apex:inputHidden value="{!UI_Participant__c.Activity_Types__c}"/>
+<apex:inputHidden value="{!UI_Participant__c.Methods_of_Involvement__c}"/>
+<apex:inputHidden value="{!UI_Participant__c.Areas_Of_Expertise__c}"/>
+
+</apex:form>
+
+<!-- JAVASCRIPT -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<apex:outputPanel id="saveResult" layout="none">
+<script>
+    
+    var j$=jQuery.noConflict();
+    var statusOnLoad = '{!UI_Participant__c.Status__c}';
+    var activeRequiresApproval = {!activeRequiresApproval};
+
+    /* Check that the user can set Active Status
+       Also validate the correct data is set for active Status
+    */    
+    function validateSave()
+    {   
+        var bReturnValue= true;
+        
+        /* Only check things if setting active status */
+        var status = j$('[id$=status] :selected').val();
+        
+        /* The validation formulas and trigger will take care of general validation */
+        if ( status !='Active' ) { 
+            return bReturnValue; 
+        }
+        
+        /* Check if this is a change of status */
+        if (statusOnLoad== 'Active' && status == 'Active') {
+            return bReturnValue; 
+        }   
+
+
+        /* 
+        +++++++++++++++++++++++++++++++++++++++++++++++++       
+        Checking where there has ben a change of status
+        +++++++++++++++++++++++++++++++++++++++++++++++++ 
+        */  
+        var date_from = j$('[id$=date_from]').val();
+        if ( date_from.length > 0 ) {
+             
+             //Note : this only works for UK date format !!
+             var parts = date_from.split('/');
+             var dateSelected = new Date(parts[2], parts[1]-1, parts[0]); // Note: months are 0-based
+
+             var dateCheck = new Date();             
+             dateCheck.setDate(dateCheck.getDate()-180); 
+    
+             if (dateSelected < dateCheck) { 
+                bReturnValue= false; 
+             }
+             
+        } else {
+        
+            bReturnValue= false;
+            
+        }
+        
+        var consent_type = j$('[id$=consent_type]').val();
+        if ( consent_type.length==0 ) { bReturnValue = false; }
+        
+        if (!bReturnValue) {
+            alert ('Please select Consent Type and check that the Valid From date is less than six months ago before setting active status.')    
+            return false;
+        }
+        
+        
+        if ( activeRequiresApproval ) {
+               bReturnValue = false;        
+               doRequestActiveDialog();                 
+            }       
+        
+        return bReturnValue;
+        
+    }
+    
+    function doRequestActiveDialog() {
+    
+       j$( "#dialog-set-active" ).dialog({
+               height:300,
+               width:450,
+               modal: true
+            });                                  
+    }
+    
+    var buttonClicks=[]; 
+    function isDoubleClick(dialogId) {
+        
+        /*The button has already been pressed */
+        if (buttonClicks[dialogId]=='Y') { return true; }
+
+        /* Set the value to prevent the button being pressed again */ 
+        buttonClicks[dialogId]='Y';         
+        return false;
+     }
+     
+     function closeDialog(dialogId)
+     {
+        buttonClicks[dialogId]='N';
+        j$('#' + dialogId).dialog('close');
+        return false;       
+     }  
+        
+
+</script>
+
+</apex:outputPanel>
+
+<!-- ============================================================================================== 
+     
+     This dialog is displayed when the user does not have permission to set Active Status and is 
+     required to submit for approval
+     ============================================================================================== -->
+
+  <div id="dialog-set-active" title="Request Approval to set Participant to Active" style="display:none">
+  
+  <apex:form id="request-status-active-form">
+  
+  <script type="text/javascript">
+
+     function stopDoubleClick() {
+       return isDoubleClick('request-status-active-form')
+     }
+     
+    </script>
+  
+  <apex:pageBlock >
+      
+  <p>This Person is an Active Service User of <strong>{!su.Service_Field__r.Name}</strong>. You do not have sufficient system access to view or update the person records for current Service Users.</p>
+  
+  <p>The Services Manager must review and approve the request before Active status is set. </p>
+
+  <P>Hit OK to send a request for approval to the Services Manager, <strong>{!su.Service_Field__r.SSM__r.Name}</strong>. Once approved you will get access to the Participant and Person record.</p>
+    
+  <p><!-- spacer --></p>
+ 
+  <apex:pageBlockButtons location="bottom">
+      <apex:commandButton action="{!saveAndRequestApproval}" 
+                          value="OK" 
+                          id="btnRequestActiveStatus" 
+                          rerender="hiddenBlock"
+                          onclick="if(stopDoubleClick()){ return false; }"/>                                          
+      
+      <apex:commandButton action="{!clicked}" 
+                          value="Cancel" 
+                          id="btnRquestActiveStatusCancel"
+                          onclick="closeDialog('dialog-set-active');return false;" />
+  
+  </apex:pageBlockButtons>
+  
+  </apex:pageBlock>
+  </apex:form>        
+  
+  </div>
+        
+</apex:page>

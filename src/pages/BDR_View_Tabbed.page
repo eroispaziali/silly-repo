@@ -1,0 +1,1384 @@
+<apex:page tabStyle="BDR__c" 
+                    StandardController="BDR__c" 
+                    extensions="BDRControllerExtension" 
+                    sidebar="false">
+
+<!-- ======================================================================
+            gary.grant@conseq.co.uk  
+            June 2014.   
+            Combined page for viewing all the components of a Business Development Record. Using JQuery Tabs
+     ==================================================================== -->
+
+<head>
+
+ <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/redmond/jquery-ui.css" />
+ <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+
+<style type="text/css">
+   
+   a.linkBtn {padding : 4px ; text-decoration : none;}
+   a.linkBtn:hover {color : black; text-decoration : none;}
+   
+   h1.pageType {margin-bottom:5px; font-size: 1.1em !important; }
+   h3 {font-weight: normal; font-family: "HelveticaNeue-Light", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;}
+        
+   body .bPageTitle .ptBody .pageType, body .bPageTitle .ptBody .pageDescription { margin-left: 10px; }
+   table td.data2Col span {white-space: pre-line;}
+    
+  
+    h2.pageDescription {float: left;}
+    .statusDiv { float:right;   font-size: 1.8em;}
+    .headerStatus { color:#E17009; padding-left: 20px;}
+    .table-bordered td.align-right { text-align: right; }
+    .configLinks { font-size: 1.4em;}
+    .header-right {text-align:right;padding-right:10px !important;}
+    
+    body .bPageTitle .ptBody .links {
+                padding-top: 0px;
+                margin-top:0px;
+                margin-right: 25px;
+    }
+
+    .Custom64Tab .secondaryPalette, .individualPalette .Custom64Block .secondaryPalette {
+            background-color: #00305E;
+            border-color: #AEB3B8;
+    }
+    
+    .bPageTitle .ptBody .content {
+            float: left;
+            width: 85%;
+    }
+
+    /*Make sure the Salesforce helpText popups appear above dialogs */
+    div.helpText { z-index : 100; }
+
+
+</style>
+
+</head>
+
+
+<apex:form >
+
+                            
+<apex:sectionHeader title="Business Development Record" 
+                               subtitle="{!BDR__c.name}: {!BDR__c.BDR_Name__c}" 
+                               printUrl="bdr_print?id={!BDR__c.id}"     />
+                                 
+<apex:pageMessages />
+
+<apex:pageBlock id="Detail" >  
+
+    <!--  Display a message if the BDR is Pending Approval  -->
+    <apex:outputPanel rendered="{!inApprovalWorkflow}" style="width:100%; margin-left:28%; width:35%;"  layout="none" >
+
+         <apex:pageMessage title="{!'Status: Draft - Pending Initial Acceptance approval by the BDM, '  + BDR__c.BDM__r.Name}"
+                                        rendered="{!BDR__c.Status__c=='Draft' && BDR__c.BDM__r.Name==currentApproverName}" severity="info" strength="1" />
+
+        <apex:pageMessage title="{!'Status: Draft - Pending Initial Acceptance by ' + currentApproverName + ' (re-assigned from ' + BDR__c.BDM__r.Name+ ')'}"
+                                        rendered="{!BDR__c.Status__c=='Draft' && BDR__c.BDM__r.Name!=currentApproverName}"  severity="info" strength="1" />
+                
+        <apex:pageMessage title="{!'Status: ' + BDR__c.Status__c + ' - Pending approval by ' + currentApproverName}" 
+                                          rendered="{!BDR__c.Status__c!='Draft'}"  strength="1"  severity="info"/>
+
+    </apex:outputPanel>
+    
+    <apex:outputPanel rendered="{!(!inApprovalWorkflow)}" style="width:100%; margin-left:28%; margin-bottom: 10px; width:35%;"  layout="none" >
+    
+                <apex:pageMessage title="{!'Status: Draft - The BDR proposal is currently being prepared.'}"
+                                        rendered="{!BDR__c.Status__c=='Draft'}"  severity="info"   strength="1" />
+    
+                <apex:pageMessage title="{!'Status: Accepted : The BDR proposal has been accepted by the BDM and is being worked on pending submission for Approval.'}"
+                                        rendered="{!BDR__c.Status__c=='Accepted'}"  severity="info"   strength="1" />
+    
+                <apex:pageMessage title="{!'Status: Proposed: The BDR proposal has been Approved and is ready for the Bid / Tender information to be released to third parties. '}"
+                                      
+                                      summary="Once negotiations are complete the BDR status can be set to Live, Unsuccesful or Declined. "
+                                      detail="If there have been significant change since the last approval, the BDR will need to be re-approved prior to being set to Successful."                            
+                                        rendered="{!BDR__c.Status__c=='Proposed'}" 
+                                         severity="info"   strength="1" />    
+    
+                <apex:pageMessage title="{!'Status: Live - This BDR has completed all approvals and is now Live.'}"
+                                        rendered="{!BDR__c.Status__c=='Live'}"  severity="info"   strength="1" />
+    
+    </apex:outputPanel>
+    
+    
+    <apex:outputPanel style="width:100%; text-align:center" 
+                                layout="block" 
+                                rendered="{!(!inApprovalWorkflow) && (!canCurrentUserEdit)}">
+                                [ You do not have access to edit this BDR ]
+    </apex:outputPanel>
+    
+    
+    <!--  Action  Buttons Start Here -->
+
+    <apex:pageBlockButtons style="text-align:center" location="top">  
+            
+                <apex:commandButton value="Create Contract Extension" 
+                                            action="{!clicked}" 
+                                            onclick="doContractExtensionDialog();return false;" 
+                                            rendered="{!showCreateExtensionAction==true}"/> 
+     
+                <!--  This action opens to the active tab via the onclick -->
+                <apex:commandButton value="Edit BDR"  
+                                            action="{!URLFOR($Action.BDR__c.Edit, bdr__c.id)}"
+                                            rendered="{!canCurrentUserEdit}"
+                                            onclick="getEditUrl();return false;">    
+                 </apex:commandButton>                          
+                                            
+
+                <apex:commandButton value="Delete" 
+                                            action="{!doDelete}"  
+                                            onclick="if(!confirm('Are you sure you want to remove this BDR and all associated Income Allocations?')) {  return false; }" 
+                                           rendered="{!showDeleteAction}"/>          
+  
+                <apex:commandButton value="Clone BDR" 
+                                            action="{!clicked}" 
+                                            onclick="doCloneBdrDialog();return false;"
+                                            style="margin-right:100px;"
+                                            rendered="{!showCloneAction}"/>
+                                            
+                <apex:outputPanel id="ApprovalButtonContainer"></apex:outputPanel>                            
+        
+                <!--  The next two actions here are internal approvals before the Proposal goes out to 3rd parties -->
+
+                <apex:commandButton value="Request Initial Acceptance " 
+                                    action="{!clicked}" 
+                                    rendered="{!show_Initial_Acceptance_Action}" 
+                                    onclick="doInitialAcceptance();return false;"/> 
+
+                <apex:commandButton value="Request Approval of Final Proposal" 
+                                    action="{!clicked}"
+                                    rendered="{!show_Request_Approval_Final_Proposal_Action}" 
+                                    onclick="doApprovalDialog();return false;"/>                                                                         
+                                    
+                <apex:commandButton value="Successful - Set to Live" 
+                                    action="{!clicked}" 
+                                    rendered="{!showSuccessActions}" 
+                                    onclick="doSetSuccessfulDialog(); return false;"/>   
+                                    
+                <apex:commandButton value="Set Unsuccessful" 
+                                    action="{!clicked}" 
+                                    rendered="{!showSuccessActions}" 
+                                    onclick="doSetUnsuccessfulDialog();return false;"/> 
+                                 
+                <apex:commandButton value="Admin Only - Set to Live" 
+                                    action="{!clicked}" 
+                                    rendered="{!showAdminSuccessfulAction}" 
+                                    onclick="doAdminSetSuccessfulDialog(); return false;"/>
+                
+                <apex:commandButton value="Decline this Proposal"  
+                                    action="{!clicked}"
+                                    rendered="{!showDeclinedAction}" 
+                                    onclick="doSetDeclinedDialog();return false;"/>                            
+                                    
+                <apex:commandButton value="Update Contract"  
+                                    action="{!clicked}"
+                                    rendered="{!showUpdateContractAction}"
+                                    onclick="doUpdateContractDialog();return false;"/>
+                                    
+                <apex:commandButton value="Release Services for Edit"  
+                                    action="{!clicked}"
+                                    rendered="{!showReleaseServicesForEditAction}"
+                                    onclick="doReleaseServicesForEditDialog();return false;"/>
+                                    
+
+    </apex:pageBlockButtons>   
+  
+    <!-- Show the Salesforce page that displays sharing status for the BDR 
+    <apex:pageBlockButtons rendered="{!$Profile.Name=='System Administrator'}" style="text-align:center">
+        <apex:outputlink value="{!'/p/share/CustomObjectSharingDetail?parentId=' + BDR__c.Id}">Show Sharing Status (admin only)</apex:outputlink>
+    </apex:pageBlockButtons>
+    -->
+    <div id="tabs-nohdr" style="display:none">
+
+        <ul class="nav nav-tabs">
+            <li id="_tabProposal"><a href="#tabProposal" data-toggle="tab">Proposal</a></li>
+            <li id="_tabServices"><a href="#tabServices">Services ({!servicesCount})</a></li>
+            <li id="_tabPartner"><a href="#tabPartner">Partnership</a></li>
+            <li id="_tabIncome"><a href="#tabIncome">Income</a></li>
+            <li id="_tabBid"><a href="#tabBid">Bid / Tender</a></li>
+            <li id="_tabContract"><a href="#tabContract">Contract</a></li>
+            <li id="_tabAllocate"><a href="#tabAllocate">Income Allocation</a></li>
+            <li id="_tabFeedback"><a href="#tabFeedback">Feedback</a></li>
+        </ul>
+  
+    <div id="tabProposal" >
+        <c:BDR_Summary_Read BDR="{!BDR__c}" />         
+    </div>
+
+    <div id="tabPartner" >
+    
+        <c:BDR_Partner_Read BDR="{!BDR__c}"/>
+        
+    </div>
+    
+    <div id="tabBid" >
+    
+        <c:BDR_Bid_Read BDR="{!BDR__c}" rendered="{!BDR__c.Bid_Status__c!='None'}"/>
+        
+    </div>
+
+    <div id="tabIncome" >     
+      <c:BDR_Income_Read incBlock="{!bdrWrapper.incBlock}" incomeData="{!bdrWrapper.incomeData}" BDR="{!BDR__c}"/>
+    </div>
+
+
+    <!-- ============================== SERVICES ============================================ -->
+    
+    <!--  The Services tab is not a component because commandButtons in components cannot call main extension controller methods -->
+    <div id="tabServices" >
+    <apex:pageBlock title="Services Linked to this BDR">
+    
+        <apex:outputPanel rendered="{!BDR__c.id!=null}" layout="none" >                      
+                              
+       <apex:pageblockSection columns="2" >         
+    
+            <!--
+            <apex:commandButton value="Add Existing Services" action="{!addExistingServices}"></apex:commandButton> 
+            <apex:commandButton value="Add New Service" action="{!addNewService}"></apex:commandButton>
+            -->    
+    
+       </apex:pageblockSection>
+       
+       </apex:outputPanel>
+    
+         <!--  Loop through the Services linked to this BDR -->                                                            
+        <apex:repeat value="{!bdrWrapper.services.svcWrappers}" var="rep" id="svcRepeat">
+    
+                 <apex:pageBlockSection id="Services" columns="1">
+                      <apex:facet name="header">                      
+                            <apex:outputPanel layout="inline">{!rep.svc.name} - Status: {!rep.svc.service_status__c}
+                            <apex:outputPanel layout="inline" style="float:right">
+                                Open Date: 
+                                <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                    <apex:param value="{!rep.svc.service_opendate__c}" /> 
+                                </apex:outputText>
+                            </apex:outputPanel>
+                            </apex:outputPanel>
+                      </apex:facet>     
+               
+                         <apex:pageBlockSection showheader="false" columns="2">
+                    
+                                        <apex:pageBlockSectionItem labelStyleClass="labelCol"> 
+                                                 <apex:outputlabel >Service Name</apex:outputlabel>
+                                                 <apex:outputpanel layout="none">   
+                                                     <apex:outputLink value="/{!rep.svc.id}" id="name_link"
+                                                      >
+                                                       <apex:outputText value="{!rep.svc.name}"/>                                                  
+                                                     </apex:outputLink>
+                                                     &nbsp;&nbsp;
+                                                     <apex:outputLink value="{!'/apex/BDR_Service_Add_Update?id=' + rep.svc.id + '&bdrid='+bdrWrapper.bdr.id}" 
+                                                            id="service_edit_link" 
+                                                            >
+                                                       <apex:outputText value="[Edit]"/>                                                   
+                                                     </apex:outputLink>
+                                                 </apex:outputpanel>
+                                        </apex:pageBlockSectionItem>     
+                                   
+                                        <!--  This is the data from the "Dementia Connect - Service" record -->
+                                 <!--    <apex:outputText value="{!rep.svc.service_status__c}" />  -->  
+                                 
+                                        <apex:outputField value="{!rep.svc.service_opendate__c}" />             
+                                        <apex:outputText value="{!rep.svc.service_type__c}"/>
+                                        <apex:outputText value="{!rep.svc.Sub_Type_Internal__c}"/>
+                                        <apex:outputField value="{!rep.svc.Locality__c}"/>
+                                        <apex:outputField value="{!rep.svc.Default_Location__c}"/>
+                                        
+                                        <apex:outputText value="{!rep.svc.Internal_Evaluation_Methods__c}" />
+                                        <apex:outputText value="{!rep.svc.External_Evaluation__c}" /> 
+                                        <apex:outputField value="{!rep.svc.Services_Framework_Principle__c}" />       
+                                        
+                                
+                        </apex:pageBlockSection>  
+                                                 
+         <apex:outputText value="{!rep.svc.Property_Notes__c}" />
+     
+         <c:BDR_Efn_Read evidence="{!rep.evidence}"/>
+               
+         <apex:outputText value="{!rep.svc.Estimated_Break_Even__c}"/>
+         
+         <apex:pageBlockSectionItem >
+         <apex:outputlabel >Service Costs</apex:outputlabel>
+         
+            <apex:pageBlockTable value="{!rep.fundReqWrappers}" var="row" id="servicTable" 
+                                    styleClass="table table-bordered table-condensed" style="width:96%;">
+            
+             
+                    <apex:column >
+                        <apex:facet name="header">Financial Year</apex:facet>
+                        <apex:outputText id="year" value="{!row.freq.Fiscal_Year__c}" />
+                      
+                    </apex:column>
+                    
+                    <apex:column style="text-align:right" headerClass="header-right">
+                        <apex:facet name="header">Cost</apex:facet>
+                        <apex:outputText value="{0,number,#,###,###}">
+                            <apex:param value="{!row.freq.Total_Amount__c}" />
+                        </apex:outputText>
+                    </apex:column>
+                    
+                    <apex:column title="{!$ObjectType.Funding_Requirement__c.fields.Funding_In_Budget__c.inlineHelpText}" >
+                       <apex:facet name="header">In Budget</apex:facet>
+                       <apex:outputField id="ib" value="{!row.freq.Funding_In_Budget__c}"/>
+                    </apex:column>
+
+                   <apex:column title="{!$ObjectType.Funding_Requirement__c.fields.Comments__c.inlineHelpText}" style="width:65%">
+                       <apex:facet name="header">Comments</apex:facet>
+                       <apex:outputText id="comm" value="{!row.freq.Comments__c}" style="width:96%" />
+                   </apex:column>
+                   
+              </apex:pageBlockTable>
+          </apex:pageBlockSectionItem>                      
+               
+
+    
+        </apex:pageBlockSection>                           
+           
+        </apex:repeat> 
+   
+    </apex:pageBlock>        
+    </div> <!-- End Services Tab -->
+
+
+    <div id="tabContract" >    
+        <apex:outputPanel layout="none" id="tabContract">   
+           <c:BDR_Contract_Read contract="{!bdrWrapper.contract}"/>
+        </apex:outputPanel>          
+    </div>
+
+    <div id="tabFeedback" >
+    
+        <c:BDR_Feedback_Read BDR="{!BDR__c}"/>
+        
+    </div>
+    
+    <div id="tabAllocate" >
+    <apex:pageBlock title="BDR Income Allocation"> 
+         <c:BDR_Income_Allocation_Read IncomeData="{!bdrWrapper.incomeData}" 
+                fundReqWrappers="{!bdrWrapper.services.frWrappers}"
+                dependentBDRs="{!bdrWrapper.dependentBDRs}"  
+                rendered="{!hasIncomeBlock=='Yes' && hasServices=='Yes'}"
+                />    
+    </apex:pageBlock>
+    </div>
+    
+    </div><!--  End divs -->
+
+</apex:pageBlock> <!--  Close the pageBlock that wraps the whole page -->
+
+<!-- hidden fields, to ensure they are retrieved from the database but not required for display -->
+<apex:inputHidden value="{!BDR__c.Actual_Value__c}"/>
+<apex:inputHidden value="{!BDR__c.Service_Specifications__c}"/>
+<apex:inputHidden value="{!BDR__c.Service_Types__c}"/>
+<apex:inputHidden value="{!BDR__c.Notifications_Pending__c}"/>
+
+<!--  This is used on the Approval Dialog to identify the HR recipient of notification emails -->
+<apex:inputHidden value="{!BDR__c.HR_Advisor__r.Name}"/>
+<apex:inputHidden value="{!BDR__c.Regional_Accountant__r.Name}"/>
+
+</apex:form>
+
+<!-- <apex:relatedList list="OpenActivities" title="Open Activities"/> -->
+<!--  Note that this related list used to be called NotesAndAttachments. Changed as of API 29.0 -->
+<apex:relatedList list="CombinedAttachments" title="BDR/BID Notes & Attachments"/>
+<apex:relatedList list="ProcessSteps" id="approvalRelatedList"></apex:relatedList>
+
+<!-- ============================================================================= 
+     Approval dialog. The main approval dialog used to submit items into approval
+     This dialog is displayed whent the user clicks 'Request Approval of Final Proposal'
+
+     ============================================================================= -->
+<div id="approval-dialog" title="Request Approval of Business Development Record" style="display:none">
+            <br/>  
+              
+              <apex:outputPanel >   
+                <h2>Your BDR will now be sent to the Operations Manager, {!BDR__c.Operations_Manager__r.Name}, for approval of the proposal. </h2>
+                <p> This approval confirms that you can proceed with Bid / Tender negotiations.</p>                  
+              </apex:outputPanel>
+               
+        
+             <apex:outputPanel rendered="{!BDR__c.Required_Approval_Level__c!='Operations Manager'}"> 
+              <p>Multiple approvals may be required according to Delegated Authorities, the Income amount and Contract terms
+              specified. The highest approval required for this BDR is {!BDR__c.Required_Approval_Level__c}</p>
+             </apex:outputPanel>
+             
+              <apex:outputPanel rendered="{!hasPartner=='Yes'}">
+                        <p><strong style="color:red">This BDR involves partnership</strong>. Ensure the Partnership Risk Assessment is attached before submitting for approval.</p>
+              </apex:outputPanel>
+              
+              <apex:outputPanel rendered="{!BDR__c.Tender__c!='Yes' && BDR__c.Tupe__c !='' }">
+                <p><strong style="color:red">This BDR involves TUPE but is not a Tender</strong>.<br/> 
+                    Is that correct ?</p>
+              </apex:outputPanel>
+                
+              <hr/>
+            
+                Please check that :
+              <ul>
+                 <li>Contract details, where known, are complete</li>
+                 <li>Highlighted contract terms are clearly described</li>
+                 <li>All services have relevant and up to date Evidence of Need</li>
+                 <li>The Manager is not on holiday</li>
+                 <li>The summary and detail information are clear and comprehensive</li>
+             </ul>
+            
+            
+              Notifications will also be sent to:   
+              <ul> 
+                      <li>Regional Operations Manager ({!BDR__c.Area_Manager__r.Name})</li> 
+                      <li>Service Improvement Manager ({!BDR__c.SIM__r.Name})</li> 
+              </ul>
+                  
+               <p>   
+                 Additional notifications based on the data you have entered are checked in the list below. 
+                 Check the boxes to add to the list of default notifications.  
+              </p>  
+            
+            
+                  <hr/>
+              <apex:form >
+                        <label>Select additional people to notify</label>
+                         <apex:selectcheckboxes layout="pageDirection" value="{!notifications_Selection}">                   
+                              <apex:selectoptions value="{!notificationOptions}" />          
+                          </apex:selectcheckboxes> 
+               
+              
+                  <apex:commandButton value="Submit for approval" 
+                                      action="{!submitForApproval}" 
+                                      style="margin-right:5px"
+                                      onclick="return !isDoubleClick('approval-dialog');"
+                                      />
+                  
+                  <apex:commandButton value="Cancel" 
+                                      onclick="return closeDialog('approval-dialog')" 
+                                      action="{!clicked}" 
+                                      style="width: 70px" />
+              </apex:form>        
+  
+</div>
+
+<!-- ============================================================================================== 
+     
+     This dialog is displayed when the user click 'Request Initial Acceptance ' from the BDRView page
+     Only needed in the page when the BDR Status id Draft
+     ============================================================================================== -->
+<div id="initial-acceptance-dialog"  title ="Request Initial Acceptance"  style="display:none" >
+              <br/>
+            
+              <h2>Your BDR will now be sent to the BDM, {!SUBSTITUTE(BDR__c.BDM__r.Name, ' (BDM)', '')}, for Initial Acceptance.</h2> 
+              
+              <apex:outputPanel rendered="{!BDR__c.Tender__c!='Yes' && BDR__c.Tupe__c !='' }">
+                <p><strong style="color:red">This BDR involves TUPE but is not a Tender</strong>.<br/> 
+                    Is that correct ? If so, select the option to notify POD.</p>
+              </apex:outputPanel>
+                
+              <hr/>
+            
+            
+              <div>Notifications will also be sent to: </div>
+              <ul>
+                  <li>Operations Manager  ({!BDR__c.Operations_Manager__r.name})</li>
+                  <li>Regional Operations Manager ({!BDR__c.Area_Manager__r.name})</li> 
+                  <li>Service Improvement Manager ({!BDR__c.SIM__r.name})</li>
+              </ul>
+              
+              
+              <p>Before you submit, please check that</p>
+              <ul>
+                  <li>The proposal is clear and comprehensive</li>
+                  <li>Contract details, where known, are clearly complete</li> 
+                  <li>Highlighted contract terms are clearly described</li>
+                  <li>Services have relevant and up to date evidence of need</li>
+              </ul>
+              
+                <apex:outputPanel rendered="{!hasPartner=='Yes'}">
+                  <p><strong style="color:red">This BDR involves partnership</strong>. Ensure the Partnership Risk Assessment is attached before submitting for approval.</p>
+              </apex:outputPanel>
+              
+                <p><i>(If the BDM is on leave, their nominated delegate may approve. The BDM can set up a delegated approver in Salesforce under My Settings / Personal / Approver Settings)</i></p>
+                
+              <apex:form >
+              
+            
+              <apex:pageBlock >
+                <p>Select additional people to notify if the BDM approves Initial Acceptance:</p>
+                  <apex:pageBlockSection columns="1">
+                     <apex:pageblocksectionitem >          
+                      
+                         <apex:selectcheckboxes layout="pageDirection" value="{!notifications_Selection}">                   
+                              <apex:selectoptions value="{!notificationOptions}" />          
+                          </apex:selectcheckboxes> 
+                     </apex:pageblocksectionitem>
+                 </apex:pageBlockSection>
+             </apex:pageBlock>
+                 
+            
+                  <apex:commandButton value="Submit" 
+                                                      action="{!submitForApproval}" 
+                                                      style="padding-right: 10px; padding-left: 10px; margin-right:5px; "                                                                                                     
+                                                      onclick="return !isDoubleClick('initial-acceptance-dialog');"
+                                                      />
+                                                      
+                  <apex:commandButton value="Cancel" 
+                                                      onclick="return closeDialog('initial-acceptance-dialog');" 
+                                                      action="{!clicked}" 
+                                                      style="width: 70px" />
+              </apex:form>        
+  
+</div>
+
+<!-- ========================================================================================================= 
+     Set the BDR to Live. This is an Admin function to set a BDR to live to enable migration of contracts
+     from the old system.
+     ========================================================================================================= -->
+
+<div id="admin-set-live-dialog" title="Set this Business Development Record to Live" style="display:none">
+
+  <br/> 
+  <h2>Administrator Action : Set BDR Status to "Live"</h2>
+  <hr/>
+  
+  <apex:form id="form_admin_set_live">  
+
+    <apex:pageBlock >  
+    <apex:pageBlockSection columns="1">
+
+     <p><strong>This feature is only available to System Administators </strong></p> 
+     <p><strong>Select confirm to set the BDR status to "Live" immediately</strong></p>
+     <p>The BDR will not be approved or reviewed by any other users. Status will be set to "Live" immediately.
+        This action should only be used to update the status of BDRs and Contracts that have been approved outside the
+        system or migrated from the old BDC application.  
+     </p> 
+     
+     <p>Please ensure there is comment in the summary of the BDR noting that the BDR was set to Live without 
+         approval.</p>
+
+    <br/>
+    <strong>Summary Proposal</strong>         
+    <apex:inputTextArea value="{!BDR__c.Summary__c}" 
+                               id="dialog_pdescription" style="width:100%" rows="10" label=""/>              
+         
+   </apex:pageBlockSection>
+   </apex:pageBlock>
+  
+   <apex:commandButton value="Confirm" 
+                       action="{!setSuccessfulAdmin}" 
+                       style="padding-right: 10px; padding-left: 10px; margin-right:5px; "
+                       onclick="return !isDoubleClick('admin-set-live-dialog');"
+                       />
+   
+   <apex:commandButton value="Cancel" 
+                       onclick="return closeDialog('admin-set-live-dialog');" 
+                       action="{!clicked}"/>
+  </apex:form>        
+  
+</div>
+
+<!-- ========================================================================================================= 
+     Set Final Status Approval Dialog. Used to request approval for setting status to Live where
+     significant changes have been applied to the BDR since original approval was granted
+     ========================================================================================================= -->
+
+<div id="final-approval-dialog" title="Set this Business Development Record to Live" style="display:none">
+   
+  <br/> 
+  <h2>Set the BDR Status to "Live"</h2>
+
+  <apex:form id="form_set_successful_approval">
+
+  <apex:pageBlock >  
+  <apex:pageBlockSection columns="1">
+
+     <p><strong>Please confirm if there has been significant change since last approval</strong></p> 
+     <p>If there has been significant change to the BDR since it was originally approved, 
+        selecting 'Yes' below will re-send the BDR for approval.</p>
+     <p>The status of the BDR will be set to "Live" automatically if all approvals are granted. </p>
+  
+     <p>If there has <i>not</i> been significant change the BDR since the last approval,
+        selecting 'None' below will set the BDR to "Live" immediately. </p>
+  
+     <apex:pageblocksectionitem >                               
+          <apex:inputField value="{!BDR__c.Post_Approval_Changes__c}" id="post_approval_changes_d" onchange="showHideSuccessfulText()"/> 
+    </apex:pageblocksectionitem>
+
+   </apex:pageBlockSection>
+   </apex:pageBlock>
+   
+  <apex:pageBlock id="successfulNowText">  
+  <apex:pageBlockSection columns="1">
+    <p> You are choosing to set the BDR "Live" without further approval, confirming that the income has been successfully agreed 
+     with the funder and all linked services now have sufficient funding to continue running, or to open.</p>
+ 
+    <!--  Only show this message if there are dependant BDRs  -->
+    <apex:outputPanel rendered="{!bdrWrapper.dependentBDRs.size>0}">
+     <p> <strong>Note:</strong> This BDR is linked to {!servicesCount} Services. There are {!bdrWrapper.dependentBDRs.size} BDRs co-funding these services.
+        The Services should not be set to Open until all BDRs to which they are linked have been set to status "Live"".</p> 
+    </apex:outputPanel>
+    
+ </apex:pageBlockSection> 
+ 
+ <apex:commandButton value="Set BDR status to Live" 
+                     action="{!setSuccessful}" 
+                     style="padding-right: 10px; padding-left: 10px; margin-right:5px; "
+                     onclick="return checkDoubleClick('admin-set-live-dialog');"
+                     />
+ <apex:commandButton value="Cancel" onclick="j$('#final-approval-dialog').dialog('close');return false;" action="{!clicked}"/>
+ 
+ </apex:pageBlock>
+ 
+ <apex:pageBlock id="successfulApprovalTextBlock">  
+ <apex:pageBlockSection columns="1"> 
+        
+        <p>You are choosing to send the BDR to the BDM, {!BDR__c.operations_manager__r.name} for approval. Multiple approvals 
+           may be requested according to Delegated Authorities, the Income amount and Contract terms
+           specified. The maximum approval required for this BDR is {!BDR__c.Required_Approval_Level__c}</p>
+        <p>     
+         Based on the data you have entered, notifications of the requested approval are selected in the list below. 
+         Check the boxes to add to the list of default notifications.  
+        </p>  
+    
+         <apex:pageblocksectionitem id="successfulApprovalTextBlock">          
+           <apex:outputlabel value="Notifications" />
+            <apex:selectcheckboxes layout="pageDirection" value="{!notifications_Selection}">                   
+                 <apex:selectoptions value="{!notificationOptions}" />          
+             </apex:selectcheckboxes> 
+        </apex:pageblocksectionitem>
+    
+  </apex:pageBlockSection>
+  
+  <apex:commandButton value="Submit for approval" 
+                      action="{!setSuccessful}" 
+                      style="padding-right: 10px; padding-left: 10px; margin-right:5px; "
+                      onclick="return !isDoubleClick('final-approval-dialog');"
+                      />
+  <apex:commandButton value="Cancel" 
+                      onclick="return closeDialog('final-approval-dialog');" action="{!clicked}"/>
+  
+  </apex:pageBlock> 
+  
+      
+  </apex:form>        
+  
+</div>
+
+<!-- ========================================================================================================= 
+     BDR Not ready to submit for approval. 
+     If the user sends the BDR for approval but there are validation errors, this dialog is shown
+     Submit for Approval is currently only supported in READ mode, because error messages are read into the page as it opens. 
+     If this were available in EDIT mode, error messages would not reflect data updates made since the page was opened. 
+     ========================================================================================================= -->
+
+<apex:outputPanel id="error_approval_denied">
+                <div id="not-ready-to-submit"  title="Business Development Record not ready for submission" style="display:none">
+                
+                  <apex:pageMessage severity="error" 
+                                                strength="1"
+                                                summary="This BDR is not ready to be Submitted for Approval" />    
+                  
+                  <apex:outputPanel rendered="{!BDR__c.Tender__c!='Yes' && BDR__c.Tupe__c !='' }">
+                  
+                            <p><strong style="color:red">
+                                This BDR involves TUPE but not a Tender</strong>.<br/> 
+                                Is that correct ? If so, please email POD to alert them when the BDR is submitted for approval.</p>
+                                
+                  </apex:outputPanel>
+                  
+                  <p> Please correct these items and resubmit. </p>
+                  
+                  <apex:repeat value="{!bdrWrapper.validationMessages}" var="msg">
+                                <ul>
+                                  <li>{!msg}</li>
+                                </ul>
+                  </apex:repeat>
+                    
+                  <apex:form >
+                                  <apex:commandButton value="OK" 
+                                                      action="{!clicked}"
+                                                      onclick="j$('#not-ready-to-submit').dialog('close');return false;" 
+                                  />
+                  </apex:form>        
+                    
+                </div>
+</apex:outputPanel>
+
+<apex:outputPanel id="error_successful_denied">
+                <div id="not-ready-to-be-live"  title="Business Development Record status cannot be set to Live" style="display:none">
+                
+                  <apex:pageMessage severity="error" 
+                                                strength="1"
+                                                summary="The status of the BDR cannot be set to Live" />    
+                                    
+                  <p> Please correct these items and try again. </p>
+                  
+                  <apex:repeat value="{!bdrWrapper.validationMessages}" var="msg">
+                                <ul>
+                                  <li>{!msg}</li>
+                                </ul>
+                  </apex:repeat>
+                    
+                  <apex:form >
+                                  <apex:commandButton value="OK" 
+                                                      action="{!clicked}"
+                                                      onclick="j$('#not-ready-to-be-live').dialog('close');return false;" 
+                                  />
+                  </apex:form>        
+                    
+                </div>
+</apex:outputPanel>
+
+
+<!--- ids in this pattern
+
+ _x__required
+ 
+ are an easy way to identify the inputs that are required using JQuery's "end-with" syntax (id$)
+ -->
+
+<!-- ========================================================================================================= 
+     Set Unsuccessful Dialog. Used to confirm the BDR should be set to status Unsuccesful.     
+     This dialog also captures comments from the user as to why the BDR has been unsuccessful
+     ========================================================================================================= -->
+<apex:outputPanel id="set_unsuccessful">
+<div id="dialog_set_unsuccessful" title="Set BDR Status to Unsuccessful" style="display:none">
+
+    <script type="text/javascript">
+
+     function validateSubmitForUnsuccessful() {
+
+       if (isDoubleClick('dialog_set_unsuccessful')) { return false; }  
+
+       var i = 0; 
+       j$('[id$=form_set_unsuccessful]').find('[id$=__required]').each(function() {               
+            var s = j$.trim(j$(this).val());   
+            if(s.length == 0) i++;
+        });       
+
+        if(i>0) { 
+            alert('Please specify the primary reason and give detail for setting the status of the BDR to Unsuccessful');
+            buttonClicks['dialog_set_unsuccessful']='N';
+            return false;
+        }
+
+        return true;
+     }
+
+    </script>
+
+    <apex:form id="form_set_unsuccessful">
+    <apex:pageBlock >
+    
+    <h3>Set Unsuccessful</h3>
+    <p>You are about to set the status of this BDR to Unsuccessful.</p>
+    <p>Please enter a reason the BDR proposal was not successful.</p>
+    
+     <apex:pageblockSection columns="1">
+               <apex:inputField label="Primary Reason" required="true" value="{!BDR__c.Bid_Feedback__c}" id="_u1__required"/>   
+               <apex:inputTextArea label="Detail" required="true" value="{!BDR__c.Bid_Feedback_Detail__c}" id="_u2__required" style="width:82%" rows="6"/>  
+      </apex:pageblockSection>     
+       
+     <apex:commandButton action="{!setUnsuccessful}" 
+                         value="Save" styleClass="btn"  
+                         style="margin-right:10px;" id="btnSave" 
+                         onclick="return validateSubmitForUnsuccessful();"/>                                          
+     
+     <apex:commandButton action="{!cancel}" 
+                         value="Cancel" 
+                         styleClass="btn" id="btnCancel" 
+                         onclick="return closeDialog('dialog_set_unsuccessful');" />                                        
+    
+    </apex:pageBlock>                       
+
+    </apex:form>
+</div>
+</apex:outputPanel>
+
+<!-- ========================================================================================================= 
+                 Set declined Dialog. Used to confirm the BDR should be set to status Declined.     
+                 This dialog also captures comments from the user as to why the BDR has been declined
+     ========================================================================================================= -->
+
+<apex:outputPanel id="set_declined">
+<div id="dialog_set_declined" title="Decline this Proposal" style="display:none">
+
+    <script type="text/javascript">
+
+     function validateSubmitForDeclined() {
+
+       if (isDoubleClick('dialog_set_declined')) { return false; }  
+
+       var i = 0; 
+       j$('[id$=form_set_declined]').find('[id$=__required]').each(function() {               
+            var s = j$.trim(j$(this).val());   
+            if (s.length == 0) i++;
+        });       
+
+        if (i>0) { 
+            alert('Please specify a reason for setting the BDR status to Declined');
+            buttonClicks['dialog_set_declined']='N';
+            return false;
+        }
+        
+        if(j$('[id$=form_set_declined]').find('input[type=checkbox]:checked').length ==0) {           
+           alert('Please specify a reason for setting the BDR status to Declined');
+           buttonClicks['dialog_set_declined']='N';
+           return false;        
+        }
+
+        return true;
+     }
+
+    </script>
+
+    <apex:form id="form_set_declined">
+    <apex:pageBlock >
+    
+  <!--   <h3>Set Declined</h3>   -->
+    <p>You are about to set the status of this BDR to Declined.</p>
+    <p>Select the reason(s) the Society has decided not to pursue this business/services any further.</p>
+       
+      <apex:inputHidden value="{!BDR__c.Reasons_Declined__c}"/>
+    
+     <!-- <apex:inputField label="Reasons Declined" required="true" value="{!BDR__c.Reasons_Declined__c}" id="_u3__required"/>    -->
+ 
+      <apex:selectCheckboxes value="{!reasons_declined_selection}" layout="pageDirection">
+          <apex:selectOptions value="{!reasons_declined_options}"/> 
+      </apex:selectCheckboxes>
+    
+     <p>Please describe the reason(s) you are declining this proposal in more detail.</p>
+     <apex:pageblockSection columns="1">        
+
+     <apex:inputTextArea label="" required="true"  value="{!BDR__c.Bid_Feedback_Detail__c}"  style="width:100%" rows="10" id="_t1__required"/>  
+     </apex:pageblockSection>
+     
+     <p>The information above will be available in the Feedback section of the BDR. The BDR owner, {!SUBSTITUTE(BDR__c.Owner.Name, ' (BDM)', '')}, and the BDM, {!SUBSTITUTE(BDR__c.BDM__r.Name, ' (BDM)', '')}, will be emailed to notify them that the proposal has been declined</p>      
+       
+     <apex:pageBlockButtons location="bottom">
+         <apex:commandButton action="{!setDeclined}"  value="Save"  id="btnDecline"   onclick="return validateSubmitForDeclined();"/>                                                    
+         <apex:commandButton action="{!cancel}"      value="Cancel"      id="btnCancel"      onclick="return closeDialog('dialog_set_declined');" />                                            
+     </apex:pageBlockButtons>
+    
+    </apex:pageBlock>                       
+
+    </apex:form>
+</div>
+</apex:outputPanel>
+
+ 
+<!-- ============================================================================================== 
+     
+     This dialog is displayed when the user clicks 'Create Contract Extension'
+     This is only needed in the page when the status is Live
+     ============================================================================================== -->
+
+  <div id="create-extension-dialog" title="Extend this Contract" style="display:none">
+  <h2>Create a new BDR that extends the existing contract term</h2>
+  
+  <apex:form id="form_create_extension">
+  
+  <script type="text/javascript">
+
+     function validateSubmitForExtension() {
+
+       if (isDoubleClick('create-extension-dialog')) { return false; }  
+
+       var i = 0; 
+       j$('[id$=form_create_extension]').find('[id$=__required]').each(function() {               
+            var s = j$.trim(j$(this).val());   
+            if(s.length == 0) i++;
+        });       
+
+        if  (i>0) { 
+            alert('Please enter both the new contract end date and value.');
+            buttonClicks['create-extension-dialog']='N';
+            return false;
+        }
+
+        return true;
+     }
+
+    </script>
+  
+  <apex:pageBlock >
+  
+  <span id="extensionErrorMessage" style="display:none">
+    <apex:pageMessage summary="Validation error. Please specify dates and duraction." severity="error" strength="3"/>
+  </span>   
+     
+  <p>A new draft BDR will be created with a copy of all the data from this BDR.</p>
+  <p> 
+  The new BDR may require approval, based on the value of the Contract Extension 
+  or the signature level required by the commissioners.</p> 
+  <p>The new BDR and Contract will be linked to the current BDR and Contract for easy reference.</p>
+  <p>The value entered will be split across the Financial Years. You 
+  will be able to edit that once the new BDR is created <br/>
+  </p>
+  <p><!-- spacer --></p>
+  
+  <apex:pageblockSection rendered="{!bdrWrapper.incBlock!=null && bdrWrapper.contract!=null}" title="Current Contract" collapsible="false">
+      <apex:pageblockSectionItem >
+         <apex:outputlabel value="Value"/>
+         <apex:outputText value="{0, number, ?0,000}">
+               <apex:param value="{!bdrWrapper.incBlock.Total_Amount__c}" />
+         </apex:outputText>
+      </apex:pageblockSectionItem>
+      
+        <apex:pageblockSectionItem >
+        <!-- <apex:outputlabel value="Start Date"/> 
+          <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+             <apex:param value="{!bdrWrapper.contract.Start_date__c}" /> 
+         </apex:outputText> -->
+        </apex:pageblockSectionItem>
+        
+        <apex:pageblockSectionItem >
+           <apex:outputlabel value="End Date"/> 
+          <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+             <apex:param value="{!bdrWrapper.contract.End_date__c}" /> 
+         </apex:outputText>
+        </apex:pageblockSectionItem>
+      </apex:pageblockSection>
+    
+  <p><!-- spacer --></p>
+  <apex:pageblockSection columns="1" title="Contract Extension" collapsible="false">
+    <apex:inputField label="Value" 
+            value="{!dummyBdr.Total_Value__c}" 
+            id="_ev__required"/>  
+    <apex:inputField label="End Date" 
+            value="{!dummyContract.End_date__c}" 
+            id="_ed__required" 
+            showDatePicker="false"
+            html-data-class="jdatepicker" />
+    
+
+  </apex:pageBlockSection>
+  
+  <apex:pageBlockButtons location="bottom">
+      <apex:commandButton action="{!createBdrExtension}" 
+                          value="Create" 
+                          id="btnCreateExtension" 
+                          onclick="return validateSubmitForExtension()"/>                                          
+      
+      <apex:commandButton action="{!cancel}" 
+                          value="Cancel" 
+                          id="btnCreateExtensionCancel" 
+                          onclick="return closeDialog('create-extension-dialog')" />
+  </apex:pageBlockButtons>
+  
+  </apex:pageBlock>
+  </apex:form>        
+  
+  </div> 
+
+
+<!-- ============================================================================================== 
+     
+     This dialog is displayed when the user clicks 'Clone BDR'
+     ============================================================================================== -->
+
+  <div id="clone-bdr-dialog" title="Clone this BDR" style="display:none">
+  <h2>Create a new BDR and copy data from this BDR over to the new one</h2>
+  
+  <apex:form id="form_clone_bdr">
+  
+  <script type="text/javascript">
+
+     function validateSubmitForClone() {
+
+       if (isDoubleClick('clone-bdr-dialog')) { return false; } 
+
+       var i = 0; 
+       j$('[id$=form_clone_bdr]').find('[id$=__required]').each(function() {               
+            var s = j$.trim(j$(this).val());   
+            if(s.length == 0) i++;
+        });       
+
+        if(i>0) { 
+            alert('Please enter expected start date, estimated duration and an income figure (zero for none).');
+            buttonClicks['clone-bdr-dialog']='N';
+            return false;
+        }
+
+        return true;
+     }
+
+    </script>
+  
+  <apex:pageBlock >
+  
+  <span id="extensionErrorMessage" style="display:none">
+    <apex:pageMessage summary="Validation error. Please specify dates and duration." severity="error" strength="3"/>
+  </span>   
+     
+  <p>A new draft BDR will be created with a copy of data from this BDR.</p>
+  <p>Data copied over will be : Locality, Income Source, the summary information and links to the same services. 
+  </p>
+  <p>
+    You will be able 
+    to edit and change the list of services once the new BDR is created.    
+ </p>
+ <p>The new BDR will NOT be linked back to this BDR. <br/>
+  </p>
+    
+  <p><!-- spacer --></p>
+  <apex:pageblockSection columns="1" title="New BDR" collapsible="false">     
+                <apex:pageBlockSectionItem labelStyle="width:35%">
+                <apex:outputLabel value="Intended Start Date"/>
+                <apex:inputField value="{!dummyBdr.Intended_Start_Date__c}"                         id="_cl0__required" 
+                        showDatePicker="false"
+                        html-data-class="jdatepicker" />
+                </apex:pageBlockSectionItem>        
+                
+                <apex:pageBlockSectionItem labelStyle="width:35%">
+                <apex:outputLabel value="Estimated Duration (months)" style="width:50%"/>
+                <apex:inputField value="{!dummyBdr.Estimated_Duration__c}"                          id="_cl1__required"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem labelStyle="width:35%">
+                 <apex:outputLabel value="Estimated Income Required" style="width:50%"/>       
+                 <apex:inputField value="{!dummyBdr.Total_Value__c}"                        id="_cl2__required"/>  
+                 </apex:pageBlockSectionItem>   
+     
+  </apex:pageBlockSection>
+  
+  <apex:pageBlockButtons location="bottom">
+      <apex:commandButton action="{!cloneBdr}" 
+                          value="Create" 
+                          id="btnCLoneBdr" 
+                          onclick="return validateSubmitForClone()"/>                                          
+      
+      <apex:commandButton action="{!cancel}" 
+                          value="Cancel" 
+                          id="btnCreateExtensionCancel" 
+                          onclick="return closeDialog('clone-bdr-dialog');" />
+  
+  </apex:pageBlockButtons>
+  
+  </apex:pageBlock>
+  </apex:form>        
+  
+  </div>
+
+
+  <!-- ============================================================================================== 
+     
+     This dialog is displayed when the user clicks 'Update Contract' - which is only available for a Live BDR
+     ============================================================================================== -->
+
+  <div id="update-contract-dialog" title="Update Contract Management Information" style="display:none">
+  
+  <h2>Contract Management Information</h2>
+  
+  <apex:form id="form_update_contract">
+  
+  <script type="text/javascript">
+
+     function validateSubmitUpdateContract() {
+
+       if (isDoubleClick('update-contract-dialog')) { return false; }   
+
+       var i = 0; 
+       j$('[id$=form_update_contract]').find('[id$=__required]').each(function() {               
+            var s = j$.trim(j$(this).val());   
+            if(s.length == 0) i++;
+        });       
+
+        if(i>0) { 
+            alert('Please enter ');
+            buttonClicks['update-contract-dialog']='N';
+            return false;
+        }
+
+        return true;
+     }
+
+    </script>
+  
+  <apex:pageBlock >
+  
+  <span id="extensionErrorMessage" style="display:none">
+    <apex:pageMessage summary="Validation error." severity="error" strength="3"/>
+  </span>   
+       
+        <apex:pageBlockSection columns="2" showHeader="false">
+      
+             <apex:inputField value="{!bdrWrapper.contract.Renewal_Risk__c}" />
+             <apex:inputField value="{!bdrWrapper.contract.Contract_Paperwork_Attached__c}" />
+             
+             <apex:inputField value="{!bdrWrapper.contract.Contract_paperwork_received__c}" />
+             <apex:inputField value="{!bdrWrapper.contract.Contract_paperwork_checked_by__c}"/>
+             
+             <apex:inputField value="{!bdrWrapper.contract.Location_of_Original_Signed_Contract__c}" />
+             <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+
+             <apex:inputField value="{!bdrWrapper.contract.Most_Senior_Signature_Job_Title__c}" />               
+             <apex:inputField value="{!bdrWrapper.contract.Most_Senior_Signature_Name__c}" />
+             
+             <apex:inputField value="{!bdrWrapper.contract.Written_Confirmation_Received__c}" />
+      
+        </apex:pageBlockSection>
+  
+      <apex:pageBlockButtons location="bottom">
+      <apex:commandButton action="{!updateContract}" 
+                          value="Update" 
+                          id="btnUpdateContract" 
+                          onclick="return validateSubmitUpdateContract()"/>                                          
+      
+      <apex:commandButton action="{!cancel}" 
+                          value="Cancel" 
+                          id="btnUpdateContractCancel" 
+                          onclick="return closeDialog('update-contract-dialog');" />
+  
+      </apex:pageBlockButtons>
+  
+  </apex:pageBlock>
+  </apex:form>        
+  
+  </div>
+  
+  
+<!-- ============================================================================================== 
+     
+     This dialog is displayed when the user clicks 'Release Services for Edit'
+     ============================================================================================== -->
+
+  <div id="release-services-for-edit-dialog" title="Release Services for Edit by Locality Administrators" style="display:none">
+  <h2>Release Draft and Accepted Services for update by Locality Administrators</h2>
+  
+    <apex:form id="release-services-for-edit-form">
+  
+  <script type="text/javascript">
+
+     function stopDoubleClick() {
+       return isDoubleClick('release-services-for-edit-dialog')
+     }
+
+    </script>
+  
+  <apex:pageBlock >
+  
+  <span id="releaseServicesErrorMessage" style="display:none">
+    <apex:pageMessage summary="Error. There was a problem updating the Services." severity="error" strength="3"/>
+  </span>   
+     
+  <p>This action will check and update the owner of all Services so that the associated Locality Administrators will be able to 
+     update them, change the status of the Services to Open and release the records to the web site, where appropriate. </p>
+
+  <P> Take this action only when you are happy for the Service records to be updated by Locality Management</p>
+  
+  <p>
+    The OM for the locality associated with the BDR will be notified. You will be able to continuing editing the Services through the BDCS interface as long as the BDR itself remains editable. 
+  </p>
+    
+  <p><!-- spacer --></p>
+     
+  
+  <apex:pageBlockButtons location="bottom">
+      <apex:commandButton action="{!doReleaseServicesForEdit}" 
+                          value="OK" 
+                          id="btnReleaseServicesForEdit" 
+                          rerender="hiddenBlock"
+                          onclick="if(stopDoubleClick()){ return false;} else { closeDialog('release-services-for-edit-dialog'); alert('Action Completed');}"/>                                          
+      
+      <apex:commandButton action="{!clicked}" 
+                          value="Cancel" 
+                          id="btnReleaseServicesForEditCancel"
+                          onclick="closeDialog('release-services-for-edit-dialog');return false;" />
+  
+  </apex:pageBlockButtons>
+  
+  </apex:pageBlock>
+  </apex:form>        
+  
+  </div>
+
+
+<!--  =================================================================================  
+       Javascript 
+      ================================================================================= -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+
+    <apex:outputPanel id="errorMessages"> 
+    <script type="text/javascript">
+
+            var fiscalYears =   '{!bdrWrapper.bdr.Fiscal_Years__c}';     
+            var hasContract =   '{!bdrWrapper.hasContract}';     
+            var hasIncomeBlock ='{!bdrWrapper.hasIncomeBlock}';
+    
+             /* Validation Errors              
+                There will only be any messages here if validation (which runs before the page is displayed) generated any messages. 
+                When the Submit for Approval button is clicked, the dialog either displays the validation error messages (if there are any) or 
+                shows the dialog confirming the BDR will be submitted for approval. 
+                 
+                The error messages are only displayed in Read Mode
+                Submit For Approval is not available from Edit Mode          
+              */
+
+            var errors = new Array();
+
+            <apex:repeat value="{!bdrWrapper.validationMessages}" var="msg">
+                errors.push('{!msg}');
+            </apex:repeat>
+        
+    </script>
+    </apex:outputPanel>
+
+
+    <script type="text/javascript">
+        
+    var j$=jQuery.noConflict();
+         
+   /*
+     *  Get the value of a named parameter from the query string
+     */    
+   function getParam(name) 
+   {
+        var query = location.search.substring(1);
+     
+        if (query.length) {
+            var parts = query.split('&');
+            for (var i = 0; i < parts.length; i++) {
+                var pos = parts[i].indexOf('=');
+                if (parts[i].substring(0,pos) == name) {
+                    return parts[i].substring(pos+1);
+                }
+            }
+        }
+        return 0;
+    }
+    
+    function getEditUrl()
+    {
+        var url ="{!URLFOR($Action.BDR__c.Edit, BDR__c.id)}"
+        var activeTab = j$('#tabs-nohdr ul .ui-tabs-active').attr("id");
+        if (activeTab!='') 
+                { url = url + '&tab=' + activeTab.substr(1); }
+        window.location.href=url;
+    }
+    
+    /* If Customer Portal has been enabled on the org all the user selectors show the option of selecting Customer Portal users.
+          Hide that where it's not of interest. This is relevant for Dialogs  */
+    function hideCustomerPortalOption()
+    {
+     // Hide all the dropdowns for portal users
+     j$('select').each(function() {
+        var select = j$(this);
+        select.children('option').each(function() {
+           var optText = j$(this).text();
+           if (optText =='Customer Portal User' || optText=='Queue') {
+                select.hide();
+           }    
+       });
+     });
+    
+    }
+    
+
+    j$(document).ready(function() {
+    
+     
+            hideCustomerPortalOption();
+     
+            // Display the status after div - pageTitle, div content
+            
+             j$(".configLinks").text("Printable View (PDF)");
+            // <span>Status: </span>
+             var bdrStatus = '{!bdr__c.Status__c}'; 
+             var statusHTML = '<div class="statusDiv"><span class="headerStatus">'+bdrStatus+'</span></div>'; 
+             j$(statusHTML).insertAfter( j$( "h2.pageDescription" ) );
+             
+             
+    
+             // Initialise the tabs 
+             var requestedTab = parseInt(getParam('tab'));
+             j$( "#tabs-nohdr" ).tabs({ selected : requestedTab });
+             j$( "#tabs-nohdr" ).css("display","block");
+
+             
+             // Set the active tab if referenced by name
+             var index = j$('#tabs-nohdr a[href="#{!$CurrentPage.parameters.tab}"]').parent().index();
+             if (index>0) {
+               j$("#tabs-nohdr").tabs("option", "active", index);
+             }
+             
+             //j$("img.pageTitleIcon").remove();
+             //j$("#phHeaderLogoImage").remove();
+             //j$(".bPageTitle").css("margin-left", "10");
+
+     
+             // Get rid of the first pHeader to get rid of the horizonal lines
+             //j$(".pbHeader:first").hide();
+
+             // Collapse all the collapsible sections                
+             j$('img.hideListButton').each(function() {
+                 twistSection(this);           
+             });
+                     
+             // Remove the Salesforce generated title TD (if it is empty) 
+             // to the left of the action buttons to enable centering                    
+             j$('td.pbTitle').each(function() {
+                 var b = (j$(this).text().trim()=== '' && j$(this).children().length == 0);
+                 if(b) j$(this).remove();
+              });
+                             
+             // Hide the Salesforce standard Approval buttons in the 'Approval History' section at the bottom of the page
+             // These are replaced with a set of context sensitive buttons at the top of the page
+             var v= j$('div.relatedProcessHistory').find('input[name="piSubmit"]');                       
+             v.hide();
+             
+             /* Use the jQuery date picker for date fields in dialogs
+                The salesforce default datepicker does not position correctly for a field displayed on a jquery UI generated dialog 
+             */
+             j$('input[data-class="jdatepicker"]').datepicker({ dateFormat: 'dd/mm/yy' });
+             
+
+            /* Create buttons for Approval and Reassignment. 
+               These replicate the function of the buttons in the Approval History. 
+               Placing them at the top of the form makes them easier to see and more obvious for the approvers. 
+               
+             */
+             
+            //If the user is an approver or a SysAdmmin 
+            var bdrIsApprover = {!currentApprovalActor};
+            if (bdrIsApprover) {
+            
+                // Get the current approval link
+                var appr = j$("[title^='Approve / Reject']");
+                var reassign = j$("[title^='Reassign']");
+                    
+                // Make a new button , put in the href
+                var btnApprove = j$('<a/>', {
+                    text: 'Approve / Reject',
+                    id : 'bdrApproveReject',
+                    class : 'btn linkBtn',
+                    style : 'width:90px',
+                    href : appr.attr('href')
+                });
+                
+                // Make a new button for reassign, put in the href
+                var btnReassign = j$('<a/>', {
+                    text: 'Reassign',
+                    id : 'bdrReassign',
+                    class : 'btn linkBtn',
+                    style : 'width:55px',
+                    href : reassign.attr('href')
+                    
+                });
+                
+                //This is a container added specifically to hold these buttons
+                var container=j$("[id$='ApprovalButtonContainer']");
+                container.append(btnApprove);
+                container.append(btnReassign);
+                        
+            }
+                       
+    });
+
+</script>
+
+<c:BDR_View_Js bdrWrapper="{!bdrWrapper}"/>
+ 
+</apex:page>

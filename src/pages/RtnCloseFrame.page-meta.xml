@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>27.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>GENERIC, BDR: A return page assumed to be called inside a frame. The code closes the frame by making a call to the parent. 
+Current hardcoded to call a specific close method.</description>
+    <label>RtnCloseFrame</label>
+</ApexPage>

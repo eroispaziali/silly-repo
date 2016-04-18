@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>UI_Participant</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>UI_Search_Participants</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A User Involvement Participant with Consent</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Activity_Types__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Types of Activity for which the Participant has given consent to be Involved</inlineHelpText>
+        <label>Activity Types</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Campaigning</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Awareness raising</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Training</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Recruitment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Research</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Fundraising</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service development</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Working groups</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Governance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Misc</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Areas_Of_Expertise__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Types of Activity where this Participant can provide particularly relevant skills or experience</inlineHelpText>
+        <label>Areas Of Expertise</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Care homes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Home care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Human resources</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Local government</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Management</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Project management</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Research</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Public speaking</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Any comments or other information which may be of use</inlineHelpText>
+        <label>Comments</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Consent_Type__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>In what form was Consent given?</inlineHelpText>
+        <label>Consent Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Verbal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Written</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>This has to be look-up, not a Master-Detail so that anyone can own a Participant, regardless of the Contact Owner.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The CRS Person record for this Participant. You may have limited access to data on the Person Profile</inlineHelpText>
+        <label>Person Record</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Participant Records</relationshipLabel>
+        <relationshipName>User_Involvement_Participant</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Location_of_Consent_Form__c</fullName>
+        <description>Where is the consent form physically located</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Where is the consent form physically located</inlineHelpText>
+        <label>Location of Consent Form</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Methods_of_Involvement__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Methods of Involvement for which the Participant has given Involvement Consent</inlineHelpText>
+        <label>Methods of Involvement</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Questionnaire</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Interview</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Group Discussion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Public Speaking</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Steering Group Member</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Focus Group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>8</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Participant_Reference__c</fullName>
+        <displayFormat>UIP-{0000}</displayFormat>
+        <externalId>false</externalId>
+        <inlineHelpText>A unique reference number for this Participant (different to their Person reference)</inlineHelpText>
+        <label>Participant Reference</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Participation_Count__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of separate times this Participant has been Involved in an Activity</inlineHelpText>
+        <label>Participation Count</label>
+        <summaryForeignKey>UI_Activity_Participation__c.UI_Participant__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Requires_Approval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If the Person is an active service user at the point they are set to Active, and the current user is not a CRS user with access to the Person record then 
+approval will be requested from the Service Usage primary contact</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this Person is an active service user, and you do not already have access to their personal details, then approval will be requested from their current Primary Service Usage Assigned Worker.</inlineHelpText>
+        <label>Requires Approval</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SU_EPO__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Engagement and Participation Officer for the Region associated with the most recent Service Usage. This is used by the work flow approval.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Engagement and Participation Officer for the Region associated with the most recent Service Usage. This is used by the work flow approval.</inlineHelpText>
+        <label>Engagement and Participation Officer</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>SU_Participant_EPO</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SU_SSM__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Services Manager for the most recently used Service Usage. 
+Computed in by the trigger, used in the approval workflow.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The Services Manager for the most recently used Service Usage. 
+Computed in by the trigger, used in the approval workflow.</inlineHelpText>
+        <label>SU Services Manager</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>UI_Participant_SSM</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Society_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Who is the primary contact for this Participant inside the Society</inlineHelpText>
+        <label>Society Contact</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Contact_For_UI_Consents</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>The status of the Participant</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The current status of Participant.</inlineHelpText>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Suspended</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Withdrawn</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unconfirmed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Valid_From_Date__c</fullName>
+        <description>The date the consent is valid to be used</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date Consent is valid from</inlineHelpText>
+        <label>Valid From Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Valid_To_Date__c</fullName>
+        <description>The date the consent should be reviewed. Participation should not be considered if this date is passed and not updated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date the consent should be reviewed. Participation should not be considered if this date is passed and not continued consent has not be confirmed.</inlineHelpText>
+        <label>Review Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>User Involvement Participant</label>
+    <listViews>
+        <fullName>Active_Participants</fullName>
+        <columns>NAME</columns>
+        <columns>Valid_To_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Valid</value>
+        </filters>
+        <label>Active Participants</label>
+    </listViews>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>Activity_Types__c</columns>
+        <columns>Valid_From_Date__c</columns>
+        <columns>Valid_To_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Expired_Participants</fullName>
+        <columns>NAME</columns>
+        <columns>Valid_To_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Expired</value>
+        </filters>
+        <label>Expired Participants</label>
+    </listViews>
+    <nameField>
+        <label>Participant Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Participants</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Valid_From_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Valid_To_Date__c</customTabListAdditionalFields>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Valid_From_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Valid_To_Date__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Status__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Valid_From_Date__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Valid_To_Date__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchFilterFields>Valid_To_Date__c</searchFilterFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Valid_From_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Valid_To_Date__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>UI_Consent_Review_Date_Not_Passed</fullName>
+        <active>true</active>
+        <description>Ensures that Valid status cannot be set for Participation where Valid From is in the past and Valid To is in the Future.</description>
+        <errorConditionFormula>AND ( 
+     NOT( $User.IgnoreValidationRules__c ), 
+     Or ( 
+          ISPICKVAL(Status__c,&apos;Active&apos;),
+          ISPICKVAL(Status__c,&apos;Pending Approval&apos;)
+        ),    
+     OR(
+        ISBLANK(Valid_From_Date__c),
+        Valid_From_Date__c &gt; TODAY(),
+        Valid_From_Date__c &lt; TODAY()-180, 
+        ISPICKVAL(Consent_Type__c,&quot;&quot;) 
+     )
+)</errorConditionFormula>
+        <errorMessage>Participants must have a valid Consent to participate in Society activities. Please check Status is valid and the review date has not been exceeded.</errorMessage>
+    </validationRules>
+</CustomObject>

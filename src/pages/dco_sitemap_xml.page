@@ -1,0 +1,11 @@
+<apex:page contentType="application/xml" showHeader="false" readOnly="true" controller="DcoSitemapController" cache="false" >
+    
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+    
+     <apex:repeat value="{!services}" var="svc">
+       <url><loc>{!urlRoot}#!/detail/{!svc.Id}</loc></url>
+    </apex:repeat>
+
+</urlset>   
+    
+</apex:page>

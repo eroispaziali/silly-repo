@@ -1,0 +1,488 @@
+<apex:page standardController="Services__c" 
+                   extensions="BdrServiceAddUpdateExtension" 
+                   showHeader="true"
+                   sidebar="false"  
+                   tabStyle="Services__c" >
+
+<head>
+
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/redmond/jquery-ui.css" />
+
+<style type="text/css"> 
+        
+        a.linkBtn {padding : 4px ; text-decoration : none;}
+        a.linkBtn:hover {color : black; text-decoration : none;}
+        
+       .statusDiv { float:right;   font-size: 1.8em;}
+       .headerStatus { color:#E17009; padding-left: 20px;}
+        
+        body .bPageTitle .ptBody .pageType, body .bPageTitle .ptBody .pageDescription { margin-left: 10px;  }
+        body .pbBody table.list tr.dataRow td { vertical-align: top ; }
+        
+        body  .secondaryPalette { background-color: #FFFFFF !important; }
+        form  .bDescription {margin-left:16px; font-size: 14px;}
+        
+        .table-bordered td.align-right { text-align: right; }
+        
+       
+        table.helpTable { margin-bottom: 20px; 
+                                   margin-left: 19%;
+                                   border-collapse: collapse; 
+                                   border-spacing: 0;
+                                   display: none;
+                                  }
+        
+        table.helpTable th {
+                                        font-weight: bold;
+                                        padding-top: 5px;
+                                        padding-bottom: 4px;
+                                        }
+                        
+        table.helpTable td, .helpTable th {
+                                                        font-size: 1.0em;
+                                                        border: 1px solid #D7E6F0;
+                                                        padding: 3px 7px 2px 7px;
+                                                        background-color: white;
+                                                        font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+                                                        }
+                        
+        table.helpTable  td.money {
+                    text-align: right;
+                    }
+                    
+        table.helpTable  td.center {
+                    text-align: center;
+                    vertical-align: top;
+                    }
+                
+                
+        table.helpTable     th:first-child {
+                border-radius: 6px 0 0 0;
+                }
+
+        table.helpTable    th:last-child {
+                border-radius: 0 6px 0 0;
+        }
+        
+       table.helpTable  td:last-child {
+                border-radius: 6px 0 0 0;
+                }
+
+        table.helpTable    th:only-child {
+            border-radius: 6px 6px 0 0;
+        }
+        
+        table.helpTable tr:last-child td:first-child {
+            border-radius: 6px 0 0 0;
+        }
+        
+        .efnTitle {display : none;}
+        
+</style>
+               
+    
+</head>
+
+    <apex:outputPanel id="errorMsg">
+        <apex:pageMessages ></apex:pageMessages>
+    </apex:outputPanel>
+
+    <apex:form >
+    
+       <apex:sectionHeader title="BDR Service Data" 
+                               subtitle="{!bdrReference}  {!bdrName} - Add / Edit Service"  
+                              description="This form is for adding a new draft Service to Dementia Connect from this BDR<br/>
+                                    If the you are linking to an existing Service, cancel this page and select the 'Add Existing Services' button on the BDR Services tab. "
+            />
+            
+    <!-- This field is necessary to properly initialise the underlying record 
+         so that the filters on the drop down fields work (drop down options are dependent on RecordTypeId)-->
+    <apex:inputField value="{!Services__c.RecordTypeId}" style="display:none"/>
+
+        <apex:pageBlock id="Container" mode="edit">
+
+                <apex:pageBlockButtons >
+              
+                   <apex:commandButton action="{!save}" value="Save"  id="btnSave" reRender="hiddenBlock,errorMsg"/>                                                      
+                   <apex:commandButton action="{!saveAndClose}" value="Save and Close" styleClass="btn" id="btnSaveAndClose" />                                                      
+                   <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn" id="btnCancel" onclick="return confirmCancel()" immediate="true" />      
+                                                     
+               </apex:pageBlockButtons>
+                       
+               <apex:pageBlock id="hiddenBlock" rendered="false"></apex:pageBlock>
+               
+               <!--  Only Draft or Accepted Services should allow the bulk of the Service data to be edited -->
+               <apex:outputPanel rendered="{!allowServiceEdit==true}">
+               
+                       <apex:pageBlock title="Service Overview" id="SvcDetail" mode="edit">                       
+        
+                       <apex:pageBlockSection columns="2">
+                  
+                           <apex:pageBlockSectionItem helpText="The service name should include at least the type of service and location, and should not include any abbreviations">
+                                
+                            <apex:outputLabel >Service Name</apex:outputLabel>                
+                            <apex:inputField required="true" value="{!Services__c.name}" style="width:92%"/>                
+                                
+                           </apex:pageBlockSectionItem>
+                                
+                           <apex:outputField value="{!Services__c.service_status__c}" label="Service Status" />
+                        
+                      </apex:pageBlockSection>
+                      
+                      
+                      
+                    
+                      <apex:actionRegion >                       
+                      <apex:actionFunction name="populateSVCDesc"  action="{!populateSVCDesc}" reRender="sdPanel">
+                      </apex:actionFunction>
+    
+                      <apex:pageBlockSection columns="2">
+                       <apex:pageblockSectionItem >
+                        <apex:outputLabel value="Service Type" for="chooseLabelSize"/>
+                            <apex:outputPanel styleClass="requiredInput" layout="block" id="stPanel"  >
+                            <apex:outputPanel styleClass="requiredBlock"/>
+
+
+
+                            <apex:inputField value="{!Services__c.service_type__c}" id="check" onchange="populateSVCDesc();"/>
+
+                            </apex:outputPanel>
+                            
+                      </apex:pageBlockSectionItem>
+           
+
+                      <apex:pageBlockSectionItem >
+                      <apex:outputLabel value="Sub Type" for="subPanel" />
+                      <apex:outputPanel layout="block" id="stPanel">
+                      <apex:outputPanel styleClass="requiredBlock"/>
+
+                          <apex:inputField value="{!Services__c.Sub_Type_Internal__c}" onchange="populateSVCDesc();"/>
+
+                      </apex:outputPanel>
+                      </apex:pageBlockSectionItem>
+
+
+                     </apex:pageBlockSection>
+
+                     </apex:actionRegion> 
+
+                               
+                               
+                               
+                               
+                               
+                                      <apex:pageBlockSection columns="2">
+                                    
+                            <apex:pageblockSectionItem helptext="Service start date (if known), or leave blank if not known.">                
+                               <apex:outputLabel >Open Date</apex:outputLabel>
+                               <apex:inputField value="{!Services__c.service_opendate__c}"/>
+                            </apex:pageblockSectionItem>
+                    
+                      </apex:pageBlockSection>
+                      
+                      
+                    
+                      <apex:pageBlockSection columns="2">    
+        
+                         
+                        <!--  This is linked to Operated by that the dependent drop down functions properly -->            
+                        <apex:pageBlockSectionItem id="localityBlockSectionItem">
+                                <apex:outputLabel value="Locality"/>
+                                <apex:outputPanel styleClass="requiredInput" layout="block" id="pwPanel" >
+                                <apex:outputPanel styleClass="requiredBlock"/>
+                                
+                                 <apex:actionRegion >
+                                  <apex:selectList value="{!selectedLocality}" size="1" required="true" id="locality">                            
+                                     <apex:selectOptions value="{!serviceLocalities}"/>
+                                      <apex:actionSupport event="onchange" rerender="operatedBy" />
+                                  </apex:selectList>
+                                 </apex:actionRegion>
+                      
+                                </apex:outputPanel>
+                      </apex:pageBlockSectionItem>
+                      
+                    <!--  Dependant lookup gets the option according to selected Locality above -->                        
+                    <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="Operated By"/>
+                            <apex:outputPanel styleClass="requiredInput" layout="block" id="pwPanel" >
+                            <apex:outputPanel styleClass="requiredBlock"/>
+                            
+                            <apex:selectList value="{!Services__c.Operated_By__c}" size="1" required="true" id="operatedBy"  >                            
+                                 <apex:selectOptions value="{!operatedByOptions}"/>
+                            </apex:selectList>
+                            
+                            </apex:outputPanel>
+                  </apex:pageBlockSectionItem>
+                    
+        
+                       </apex:pageBlockSection>
+        
+                    
+        
+                    <apex:pageBlockSection columns="2"  >
+                    
+                    <apex:pageblockSectionItem helptext="Choose the venue from the lookup box (this links to the property database). If venue not listed, make a note in the property notes section.">
+                        <apex:outputLabel >Service Location</apex:outputLabel>
+                        <apex:inputField value="{!Services__c.Default_Location__c}"/>
+                    </apex:pageblockSectionItem>
+                    
+                        <apex:pageblockSectionItem >
+                       <apex:outputLabel >Finance activity code</apex:outputLabel>
+                           <apex:inputField value="{!Services__c.service_financeactivitycode__c}"/>
+                        </apex:pageblockSectionItem>
+                    
+
+                    
+                  </apex:pageBlockSection>
+                  
+                  </apex:pageBlock>
+                    
+                  <apex:pageBlockSection id="principle" title="Framework Principles" columns="1" collapsible="false" showHeader="false"   onmouseover="showHelp('principleHelp');" onmouseout="hideHelp('principleHelp')">       
+                     
+                      <apex:inputField value="{!Services__c.Services_Framework_Principle__c}" />
+                                
+                  </apex:pageBlockSection>
+                       
+                  <table id="principleHelp"  class="helpTable"  style="width:800px; " >
+        
+                                    <tr>
+                                        <th class="ui-state-default ui-corner-top">Principle</th>
+                                        <th class="ui-state-default ui-corner-top" >Services Included</th>
+                                    </tr>
+                                    
+                                    <tr><td class="center">1</td>
+                                          <td>Helpline, Talking Point, Publications Framework (in draft), Dementia Adviser, Dementia Support, Support Group</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="center">2</td>
+                                        <td>Dementia Cafes, Singing for the Brain, Befriending, Operational Quality Framework, Community Support for Individuals, CrISP</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td class="center">3</td>
+                                        <td>Advocacy, Day Care, Registered Home Care</td>
+                                    </tr>
+                      
+                    </table>
+                   
+
+                    <apex:outputPanel layout="block"  id="sdPanel">
+                    <apex:pageBlockSection columns="1" >
+                  
+                      <apex:inputTextArea id="svcdescription" value="{!Services__c.service_description__c}" disabled="true" rows="5"  style="width:92%"   />
+                                          
+                    </apex:pageBlockSection>
+                 </apex:outputPanel>
+                 
+                    
+                   <apex:pageBlockSection columns="2">
+        
+                        <apex:pageblocksectionitem >          
+                            <apex:outputLabel value="Internal Evaluation Methods"/>           
+                            <apex:selectcheckboxes layout="pageDirection" value="{!Internal_Evaluation_Methods_selection}">                   
+                                <apex:selectoptions value="{!Internal_Evaluation_Methods_options}" />          
+                            </apex:selectcheckboxes> 
+                        </apex:pageblocksectionitem>
+                       <apex:inputField value="{!Services__c.External_Evaluation__c}" />        
+                   
+                   </apex:pageBlockSection>
+                    
+                   <apex:pageBlockSection columns="1" title="Eligibility">
+                   
+                        <apex:inputField value="{!Services__c.service_targetclientgroup__c}" />
+                        <apex:inputField value="{!Services__c.Other_Target_Client_Group__c}" style="width:92%"/>
+                        <apex:inputField value="{!Services__c.Regulatory_Body__c}" />
+        
+                   </apex:pageblockSection>
+           
+          
+           </apex:outputPanel> <!-- End Page Block that allows Detail Editing -->
+           
+           <!--  Only Draft or Accepted Services should allow editing of the actual Services__c data -->
+
+
+           <apex:pageBlock title="Service Detail" id="SvcDetailRead" mode="edit" rendered="{!allowServiceEdit==false}">                      
+
+                <apex:pageBlockSection columns="2">
+                        <apex:outputField value="{!Services__c.name}" />
+                        <apex:outputField value="{!Services__c.service_status__c}"  label="Service Status" />
+                        <apex:outputField value="{!Services__c.service_type__c}"/>
+                        <apex:outputField value="{!Services__c.Locality__c}" />
+                        <apex:outputField value="{!Services__c.service_targetclientgroup__c}" />
+                        <apex:outputField value="{!Services__c.Operated_By__c}" />
+                        <apex:outputField value="{!Services__c.Default_Location__c}" />                
+                        
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="2">
+                        <apex:outputText value="{!Services__c.service_description__c}"/>
+                </apex:pageBlockSection>
+                            
+            </apex:pageBlock>
+
+           <apex:pageBlock title="Property Notes" id="SvcPropertyNote" mode="edit">            
+
+            <apex:pageBlockSection columns="1">  
+
+               <apex:pageBlockSection columns="1">
+                      <apex:pageblockSectionItem >
+                          <apex:outputLabel >Property Notes</apex:outputLabel>
+                          <apex:inputTextArea value="{!Services__c.Property_Notes__c}" rows="5" style="width:92%" html-data-help-text="propertyHelpText"/>
+                      </apex:pageblockSectionItem>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="1">
+                      <apex:pageblockSectionItem >
+                          <apex:inputhidden value="{!Services__c.Recordtypeid}"/>
+                      </apex:pageblockSectionItem>
+                </apex:pageBlockSection>
+
+                    <apex:outputPanel rendered="{!Services__c.service_status__c!='Draft' && Services__c.service_status__c!='Accepted'}">
+                     <div style="margin-right:6%; margin-left:18%; padding: 10px; background-color: #FFFFE0; display :none;" id="propertyHelpText"  >
+                        <strong>Notes for Open / Closed Services</strong> 
+                        <p>If the premises are going to change, please provide details of the planned changes.</p>
+                    </div>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!Services__c.service_status__c=='Draft' || Services__c.service_status__c=='Accepted'}">
+                    <div style="margin-right:7%; margin-left:19%; padding: 10px; background-color: #FFFFE0; display:none; " id="propertyHelpText"  >
+                        <strong>Notes for Draft / Accepted Services</strong>  
+                        <p>If the Service Location is not listed, provide the addresses of the planned premises, together with information about the lease (length, costs etc). <br/>
+                            If the premises are not yet confirmed, include notes on what is planned.               
+                        </p>
+                    </div>
+                    </apex:outputPanel>
+            </apex:pageBlockSection>
+
+            </apex:pageBlock>
+
+
+            <apex:pageBlock title="Evidence of Need" id="Evidence" mode="edit">
+                <c:BDR_Efn_Edit evidence="{!evidence}" />            
+            </apex:pageBlock>
+            
+            <apex:pageBlock title="Service Costs" id="FundingRequirement" mode="edit">
+                <apex:pageBlockSection columns="1">
+    
+                    <apex:inputField value="{!Services__c.Estimated_Break_Even__c}"
+                          rendered="{!Services__c.service_status__c=='Draft' || Services__c.service_status__c == 'Accepted'}"
+                    />
+            
+                    <apex:pageblockSectionItem >
+                        <apex:outputLabel value="Service Costs"/>
+                        
+                        <apex:pageBlockTable value="{!fundingData}" var="row" id="theTable" styleClass="table table-condensed" headerClass="dataHeaderRow" style="width:92%">
+                                
+                            <apex:column >
+                                <apex:facet name="header">Year</apex:facet>
+                                <apex:outputField id="year" value="{!row.Fiscal_Year__c}"/>
+                            </apex:column>
+                            
+                            <apex:column title="{!$ObjectType.Funding_Requirement__c.fields.Total_Amount__c.inlineHelpText}" >
+                                <apex:facet name="header">Cost</apex:facet>
+                                <apex:inputField id="def" value="{!row.Total_Amount__c}"/>
+                            </apex:column>
+            
+                            <apex:column title="{!$ObjectType.Funding_Requirement__c.fields.Funding_In_Budget__c.inlineHelpText}" >
+                                <apex:facet name="header">In Budget</apex:facet>
+                                <apex:inputField id="ib" value="{!row.Funding_In_Budget__c}"/>
+                            </apex:column>
+            
+                            <apex:column title="{!$ObjectType.Funding_Requirement__c.fields.Comments__c.inlineHelpText}">
+                                <apex:facet name="header">Comments</apex:facet>
+                                <apex:inputField id="comm" value="{!row.Comments__c}"   style="width:96%"/>
+                            </apex:column>
+            
+                        </apex:pageBlockTable>
+                    
+                    </apex:pageblockSectionItem>
+    
+                </apex:pageBlockSection>
+            
+            </apex:pageBlock>              
+
+       </apex:pageBlock>
+       
+       <apex:inputHidden value="{!Services__c.Internal_Evaluation_Methods__c}" />
+       
+    </apex:form>
+        
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+       var j$ = jQuery.noConflict();
+        
+       // Toggle the visibility of the lookup
+       function switchEnhancedLookup(obj) 
+       {
+           var el = document.getElementById(obj);        
+           el.style.display = ( el.style.display != 'none' ? 'none'  : '' ) ;    
+       }
+
+          function confirmCancel() {
+              var isCancel = confirm("Are you sure you wish to cancel?");
+              if (isCancel) return true;
+          
+             return false;
+          }  
+  
+
+         j$(document).ready(function() {
+             
+                //j$("img.pageTitleIcon").remove();
+                //j$("#phHeaderLogoImage").remove();
+                //j$(".bPageTitle").css("margin-left", "10");
+                
+                j$('[data-help-text]').focus(function(event){
+                    showHelp(j$(event.target).attr('data-help-text'));
+                }); 
+             
+                j$('[data-help-text]').focusout(function(event){
+                    hideHelp(j$(event.target).attr('data-help-text'));
+                });
+                
+                var fld_OperatedBy = j$("select[id$=operatedBy]" );
+                var localityValue = getSelectValue('locality');
+                if (localityValue==null || localityValue=='') {
+                
+                    j$('#localityBlockSectionItem').hide();
+                    }
+                    else {
+                        j$('#localityBlockSectionItem').show();
+                }
+                  
+                
+          });  
+          
+      function showHelp(ending) 
+       {
+           var ident = '[id$='+ending+']';
+           var el = j$(ident)[0];         
+          if (typeof(el) != "undefined") {
+                el.style.display = 'block';
+                }
+       }
+       
+      function hideHelp(ending) 
+       {
+           var ident = '[id$='+ending+']';
+           var el = j$(ident)[0];     
+               if (typeof(el) != "undefined")  {
+           el.style.display = 'none';
+           }
+       }
+       
+        function getSelectValue(inputFieldName) {
+                      var ending = 'select[id$=FIELD]';
+                      var res = ending.replace("FIELD", inputFieldName);
+                      var result =  j$(res).val();
+                      return result;
+        }
+       
+
+   
+       
+  </script>
+
+
+</apex:page>

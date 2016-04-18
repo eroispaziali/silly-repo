@@ -1,0 +1,13 @@
+<apex:page standardController="Bid__c" tabstyle="Bid__c">
+    <apex:sectionHeader title="{!Bid__c.Name}" />
+    <apex:form >
+        <apex:pageBlock title="Reason for Outcome">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!Save}" value="Save"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title=" Comments ">
+                <apex:inputField id="ReasonforOutcome" value="{!Bid__c.Reason_for_Outcome__c}" style="width: 500px;"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

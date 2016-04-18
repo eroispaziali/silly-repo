@@ -1,0 +1,63 @@
+<apex:page showHeader="false" standardController="Site_Lead__c" extensions="sitesLeadCapture" sidebar="false">
+    <apex:include pageName="temp_css"/>
+    
+          <div class="container-fluid" id="mainContent">
+          <div class="row-fluid page-header">
+              <h3>
+                  Register your interest
+              </h3>
+              
+          </div>
+          
+          <apex:form styleClass="formentry" >
+              <apex:messages styleClass="alert alert-danger"/>
+              <div class="row-fluid">
+                  <div class="lbl span1">
+                      First Name
+                  </div>
+                  <div class="span11">
+                      <apex:inputtext value="{!firstName}" label="First name" styleClass="input input-large" />
+                  </div>
+              </div>
+              <div class="row-fluid">
+                  <div class="lbl span1">
+                      Last Name
+                  </div>
+                  <div class="span11">
+                      <apex:inputtext value="{!firstName}" label="First name" styleClass="input input-large" />
+                  </div>
+              </div>
+              <div class="row-fluid">
+                  <div class="lbl span1">
+                      Email Address
+                  </div>
+                  <div class="span11">
+                      <apex:inputtext value="{!firstName}" label="First name" styleClass="input input-large" />
+                  </div>
+              </div>
+              <div class="row-fluid">
+                  <div class="lbl span1"></div>
+                  <div class="span9">
+                    <span class="pull-left" style="margin-right:10px"><apex:inputCheckbox value="{!consent}" id="check"/></span><span><apex:outputlabel for="check" >I agree to be contacted about this project</apex:outputlabel></span>
+                   </div>
+              </div>
+              <div class="row-fluid">
+                  <div class="lbl span1"></div>
+                  <div class="span2">
+                   <center><apex:commandButton value=" Register " action="{!createSiteLead}" /></center>
+                   </div>
+              </div>
+        </apex:form>
+          </div>
+          
+    <div class="row-fluid" >
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.dementiafriends.org.uk/" data-text="I've signed up to be kept informed about #dementiafriends at" data-via="alzheimerssoc" data-size="small">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <a href="https://twitter.com/DementiaFriends" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @DementiaFriends</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.dementiafriends.org.uk&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow: visible; width:200px; height:30px;" allowTransparency="true"></iframe>
+    </div>
+   
+    <c:SiteFooter ></c:SiteFooter>
+    
+</apex:page>

@@ -1,0 +1,33 @@
+<apex:page standardController="Service_Usage__c" >
+<script type="text/javascript"> 
+var __sfdcSessionId = '{!GETSESSIONID()}';
+</script>
+<script src="../../soap/ajax/23.0/connection.js" type="text/javascript"></script>
+
+<script>
+try
+{
+if ("{!Service_Usage__c.service_type__c}"=="Advocacy")
+  {
+    var result =sforce.connection.query("Select Id, Name from RecordType where IsActive=true and SobjectType='Event' and DeveloperName ='CRS_Advocacy_Event'");
+    var recs = result.getArray("records" );
+    //alert(recs[0].Id);
+
+    window.location.href='/00U/e?what_id={!Service_Usage__c.id}&retURL=%2F{!Service_Usage__c.id}&RecordType='+recs[0].Id+'&ent=Event';
+}
+else if ("{!Service_Usage__c.service_type__c}"=="Registered home care and support")
+    {
+    var result =sforce.connection.query("Select Id, Name from RecordType where IsActive=true and SobjectType='Event' and DeveloperName ='CRS_Home_Support_Event'");
+    var recs = result.getArray("records" );
+    //alert(recs[0].Id);
+    window.location.href='/00U/e?what_id={!Service_Usage__c.id}&retURL=%2F{!Service_Usage__c.id}&RecordType='+recs[0].Id+'&ent=Event';
+}
+else {
+    var result =sforce.connection.query("Select Id, Name from RecordType where IsActive=true and SobjectType='Event' and DeveloperName ='CRS_Individual_Event'");
+    var recs = result.getArray("records" );
+    //alert(recs[0].Id);
+    window.location.href='/00U/e?what_id={!Service_Usage__c.id}&retURL=%2F{!Service_Usage__c.id}&RecordType='+recs[0].Id+'&ent=Event';
+}
+}catch(ex){alert(ex);}
+</script> 
+</apex:page>

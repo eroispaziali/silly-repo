@@ -1,0 +1,39 @@
+<apex:page sidebar="false" showheader="false">
+   <apex:include pageName="temp_css"/>
+   <div class="container-fluid" id="mainContent">
+          <div class="row-fluid page-header">
+              <h3>
+                  Privacy Matters
+              </h3>
+          </div>
+     <h2>Alzheimer's Society privacy statement</h2>
+
+<p>This website is run by the Alzheimer's Society. We regard your privacy as important and comply with the Data Protection Act 1998.</p>
+
+<p>You are welcome to access our site without disclosing your personal data.</p>
+
+<p>Alzheimer's Society will not pass your details on to any other organisation and will only use the information given to communicate with you about Dementia Friends and other Alzheimer's Society activities.</p>
+
+<p>We will only hold your information for as long as necessary and will not pass it to any other parties. All employees who have access to your personal data and are associated with the handling of that data are obliged to respect the confidentiality of your personal data. Your communications to us are protected against unauthorised access by third parties.</p>
+
+<p>You can ask us whether we are keeping personal data about you by writing to the Information Security Manager, Alzheimer's Society, Devon House, 58 St Katharine's Way, London E1W 1LB . Please ask for a data protection access request form. Once we have received the form with full details of your request we will respond within 40 days. There is an administrative charge of £10 for this service.</p>
+
+<p>Alzheimer's Society tries to keep the information we have about you accurate and up to date. If however, you find errors or inaccuracies in your data, we will erase, complete or amend that information upon request.</p>
+
+<p>Our site uses cookies. A cookie is a small text marker stored on your computer that enables us to track the use of our website. We use cookies to help us understand what our users' interests and preferences are to ensure the website is as user friendly as possible.</p>
+
+<p>This site uses cookies in order to provide a service to visitors. No personal data is stored in cookies and cookies are not used in order to provide advertising. Cookies are used for the following purposes:</p>
+
+<ul>
+<li>to store a reference to session data that is stored on the web server.</li>
+<li>to help us better understand how visitors engage with this website.</li>
+</ul>
+<p>The only third party cookie in use on this website is that used to embed our YouTube video.</p>
+<p>If you have any concerns about the processing of your personal data by the Alzheimer's Society, please contact Information Security Manager, Alzheimer's Society, Devon House, 58 St Katharine's Way, London E1W 1LB</p>
+      </div>
+          
+    
+     
+      <c:SiteFooter ></c:SiteFooter>
+
+</apex:page>

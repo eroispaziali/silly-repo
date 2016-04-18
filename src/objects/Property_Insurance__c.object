@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Annual_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Annual Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Budget_received__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Budget received</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Building_Replacement_Value__c</fullName>
+        <externalId>false</externalId>
+        <label>Building Replacement Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Building__c</fullName>
+        <externalId>false</externalId>
+        <label>Building</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Contents_Value__c</fullName>
+        <externalId>false</externalId>
+        <label>Contents Value</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Contents__c</fullName>
+        <externalId>false</externalId>
+        <label>Contents</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Email_for_alert__c</fullName>
+        <description>This field is used by two workflow rules to alert service managers and/or operation managers</description>
+        <externalId>false</externalId>
+        <label>Email for alert</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email_formula__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(CONTAINS(Property_Contract__r.Location__r.Where__r.Name,&quot;Local Service Office&quot;), Property_Contract__r.Location__r.Where__r.Locality_Manager__r.Email
+,IF(CONTAINS(Property_Contract__r.Location__r.Where__r.Name,&quot;Area&quot;), Property_Contract__r.Location__r.Where__r.Regional_Operations_Manager__r.Email ,IF(CONTAINS(Property_Contract__r.Location__r.Where__r.Name,&quot;Region&quot;), Property_Contract__r.Location__r.Where__r.Operations_Director__r.Email, 
+&apos;&apos;)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Email formula</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>End_Date_Insurance__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Insurance Charge</inlineHelpText>
+        <label>Insurance End Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Charge End Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Insurance_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Insurance Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Insurance_Percentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Insurance Percentage</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Insurance_Rent_Payable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Insurance Rent Payable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Loss_of_Rent__c</fullName>
+        <externalId>false</externalId>
+        <label>Loss of Rent</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Method_of_Payment_in__c</fullName>
+        <externalId>false</externalId>
+        <label>Method of Payment Insurance</label>
+        <picklist>
+            <controllingField>Insurance_Rent_Payable__c</controllingField>
+            <picklistValues>
+                <fullName>Paid as Insurance Rent</fullName>
+                <controllingFieldValues>checked</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Paid as a part of Service Charge</fullName>
+                <controllingFieldValues>checked</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Method_of_Payment_sc__c</fullName>
+        <externalId>false</externalId>
+        <label>Method of Payment Service Charge</label>
+        <picklist>
+            <controllingField>Service_Charge_Payable__c</controllingField>
+            <picklistValues>
+                <fullName>Paid on demand</fullName>
+                <controllingFieldValues>checked</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Paid together with the rent</fullName>
+                <controllingFieldValues>checked</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Years__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Years</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Percentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Plate_Glass_Value__c</fullName>
+        <externalId>false</externalId>
+        <label>Plate Glass Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Plate_Glass__c</fullName>
+        <externalId>false</externalId>
+        <label>Plate Glass</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Policy_Amount__c</fullName>
+        <defaultValue>10000000</defaultValue>
+        <externalId>false</externalId>
+        <label>Policy Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Property_Contract__c</fullName>
+        <externalId>false</externalId>
+        <label>Property Contract</label>
+        <referenceTo>Property_Contract__c</referenceTo>
+        <relationshipName>Property_Insurance_s</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Reconciliation_Actioned__c</fullName>
+        <externalId>false</externalId>
+        <label>Reconciliation Actioned</label>
+        <picklist>
+            <picklistValues>
+                <fullName>To be Paid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>To be Received</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Reconciliation_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Reconciliation Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Reconciliation_Received__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Reconciliation Received</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Service_Charge_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Charge Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Service_Charge_Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Charge Comments</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Service_Charge_Payable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Service Charge Payable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Service_Charge_Percentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Charge Percentage</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date_Insurance__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Insurance Charge</inlineHelpText>
+        <label>Insurance Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Charge Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Tenant_Public_Liability__c</fullName>
+        <externalId>false</externalId>
+        <label>Tenant Public Liability</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Tenant</fullName>
+                <default>true</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Insurance &amp; Service Charge</label>
+    <nameField>
+        <displayFormat>ISC-{00}</displayFormat>
+        <label>Insurance &amp; Service Charge Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Insurance &amp; Service Charge(s)</pluralLabel>
+    <recordTypes>
+        <fullName>Insurance_Charge</fullName>
+        <active>true</active>
+        <label>Insurance Charge</label>
+        <picklistValues>
+            <picklist>Building__c</picklist>
+            <values>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Contents__c</picklist>
+            <values>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Loss_of_Rent__c</picklist>
+            <values>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Method_of_Payment_in__c</picklist>
+            <values>
+                <fullName>Paid as Insurance Rent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paid as a part of Service Charge</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Method_of_Payment_sc__c</picklist>
+            <values>
+                <fullName>Paid on demand</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paid together with the rent</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Plate_Glass__c</picklist>
+            <values>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reconciliation_Actioned__c</picklist>
+            <values>
+                <fullName>To be Paid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Tenant_Public_Liability__c</picklist>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Service_Charge</fullName>
+        <active>true</active>
+        <label>Service Charge</label>
+        <picklistValues>
+            <picklist>Building__c</picklist>
+            <values>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Contents__c</picklist>
+            <values>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Loss_of_Rent__c</picklist>
+            <values>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Method_of_Payment_in__c</picklist>
+            <values>
+                <fullName>Paid as Insurance Rent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paid as a part of Service Charge</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Method_of_Payment_sc__c</picklist>
+            <values>
+                <fullName>Paid on demand</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paid together with the rent</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Plate_Glass__c</picklist>
+            <values>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reconciliation_Actioned__c</picklist>
+            <values>
+                <fullName>To be Paid</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Tenant_Public_Liability__c</picklist>
+            <values>
+                <fullName>Tenant</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Building_Replacement_Value_is_required</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF(AND(ISPICKVAL(Building__c,&apos;Tenant&apos;),  ISBLANK(Building_Replacement_Value__c),  (RecordType.DeveloperName  =&apos;Insurance_Charge&apos;), $User.IgnoreValidationRules__c=False),True,False)</errorConditionFormula>
+        <errorDisplayField>Building_Replacement_Value__c</errorDisplayField>
+        <errorMessage>“Building Replacement Value” field must be populated</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Insurance_Contents_Value_Required</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT(ISPICKVAL(Contents__c,&quot;NA&quot;) || ISBLANK(TEXT(Contents__c)) ) 
+&amp;&amp;
+ISBLANK(Contents_Value__c)
+&amp;&amp; 
+$User.IgnoreValidationRules__c =False
+&amp;&amp;
+RecordType.DeveloperName=&apos;Insurance_Charge&apos;</errorConditionFormula>
+        <errorDisplayField>Contents_Value__c</errorDisplayField>
+        <errorMessage>&quot;Contents value&quot; field must be populated</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Insurance_Rent_Checked</fullName>
+        <active>true</active>
+        <description>Either Amount or Percentage has to be entered</description>
+        <errorConditionFormula>$User.IgnoreValidationRules__c=False 
+&amp;&amp; 
+RecordType.DeveloperName=&apos;Insurance_Charge&apos; 
+&amp;&amp; 
+Insurance_Rent_Payable__c = TRUE 
+&amp;&amp;  
+
+     Text(Method_of_Payment_in__c)&lt;&gt;&quot;Paid as a part of Service Charge&quot;
+
+&amp;&amp;
+(
+    ISBLANK( Insurance_Amount__c)  
+          &amp;&amp;  
+    ISBLANK(Insurance_Percentage__c )
+)</errorConditionFormula>
+        <errorDisplayField>Insurance_Amount__c</errorDisplayField>
+        <errorMessage>Insurance Amount or Percentage to be filled if Insurance Rent is Payable</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Insurance_Rent_Paid_Part_Of_Service_Char</fullName>
+        <active>true</active>
+        <description>Either Amount or Percentage has to be entered</description>
+        <errorConditionFormula>$User.IgnoreValidationRules__c=False 
+&amp;&amp; 
+RecordType.DeveloperName=&apos;Insurance_Charge&apos; 
+&amp;&amp; 
+Insurance_Rent_Payable__c = TRUE 
+&amp;&amp;  
+
+     Text(Method_of_Payment_in__c)=&quot;Paid as a part of Service Charge&quot;
+
+&amp;&amp;
+(
+
+   (
+    NOT(ISBLANK( Insurance_Amount__c))  
+          &amp;&amp;  
+    NOT(ISBLANK(Insurance_Percentage__c ))
+    )
+      || 
+   (
+    NOT(ISBLANK( Insurance_Amount__c))  
+          ||
+    NOT(ISBLANK(Insurance_Percentage__c ))
+   )
+)</errorConditionFormula>
+        <errorDisplayField>Insurance_Amount__c</errorDisplayField>
+        <errorMessage>Insurance Amount and/or Percentage must be blank if Insurance Rent is paid as a part of the Service Charge</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Insurance_Rent_UnChecked</fullName>
+        <active>true</active>
+        <description>Either Amount or Percentage has to be entered</description>
+        <errorConditionFormula>$User.IgnoreValidationRules__c=False &amp;&amp; RecordType.DeveloperName=&apos;Insurance_Charge&apos; &amp;&amp; Insurance_Rent_Payable__c = FALSE 
+&amp;&amp;   
+(
+  (
+   NOT(ISBLANK( Insurance_Amount__c))  
+       || 
+   NOT(ISBLANK(Insurance_Percentage__c ))
+
+    )
+
+        || 
+
+   (
+    NOT(ISBLANK( Insurance_Amount__c))  
+               &amp;&amp;  
+    NOT(ISBLANK(Insurance_Percentage__c ))
+   )
+)</errorConditionFormula>
+        <errorDisplayField>Insurance_Amount__c</errorDisplayField>
+        <errorMessage>Insurance Amount or Percentage to be filled Only if Insurance Rent is Payable</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Number_of_Years_is_required</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF(AND(NOT(ISPICKVAL( Loss_of_Rent__c ,&apos;NA&apos;)),   ISBLANK(Number_of_Years__c),RecordType.DeveloperName  =&apos;Insurance_Charge&apos;,$User.IgnoreValidationRules__c=False),True,False)</errorConditionFormula>
+        <errorDisplayField>Number_of_Years__c</errorDisplayField>
+        <errorMessage>&quot;Number of Years” field must be populated</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Service_Charge_Checked</fullName>
+        <active>true</active>
+        <description>Either Amount or Percentage has to be entered</description>
+        <errorConditionFormula>$User.IgnoreValidationRules__c=False&amp;&amp; Service_Charge_Payable__c  = TRUE &amp;&amp;   
+(ISBLANK( Service_Charge_Amount__c )  &amp;&amp;  
+ISBLANK( Service_Charge_Percentage__c ))&amp;&amp; RecordType.DeveloperName=&apos;Service_Charge&apos;</errorConditionFormula>
+        <errorDisplayField>Service_Charge_Amount__c</errorDisplayField>
+        <errorMessage>Service Charge Amount or Percentage to be filled if Insurance Rent is Payable</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Service_Charge_UnChecked</fullName>
+        <active>true</active>
+        <description>Either Amount or Percentage has to be entered</description>
+        <errorConditionFormula>$User.IgnoreValidationRules__c=False &amp;&amp;
+RecordType.DeveloperName=&apos;Service_Charge&apos; &amp;&amp; Service_Charge_Payable__c  = FALSE &amp;&amp;   (NOT(ISBLANK( Service_Charge_Amount__c ))  ||  NOT(ISBLANK( Service_Charge_Percentage__c )))</errorConditionFormula>
+        <errorDisplayField>Service_Charge_Amount__c</errorDisplayField>
+        <errorMessage>Service Charge Amount or Percentage to be filled Only if Insurance Rent is Payable</errorMessage>
+    </validationRules>
+</CustomObject>

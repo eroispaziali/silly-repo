@@ -1,0 +1,103 @@
+<apex:page standardController="User" extensions="SwapServiceUsageOwnership" showHeader="true">
+<script type="text/javascript">
+//function to select all datatable rows.
+function selectAll(cb)
+  {
+            var inputElem = document.getElementsByTagName("input"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("serviceSelect")!=-1)                          
+                inputElem[i].checked = cb.checked;
+            }
+  }
+</script>
+<apex:form id="F">
+<h1 style="font-size: 150%; font-weight: bold;">
+    Swap Service Usage Owners
+</h1>
+<br/><br/><br/>
+
+<apex:pageBlock id="P" mode="edit">
+    <apex:pageblockButtons >
+        <apex:commandButton value=" Cancel " action="{!cancel}"/>
+    </apex:pageblockButtons>
+    <apex:pageblocksection columns="1">
+        <apex:pageMessages />
+    </apex:pageblocksection>
+    <apex:pageBlockSection columns="1" id="SelectUsers">
+        <apex:outputText >1. Find old owner and new owner</apex:outputText>
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel >Old User</apex:outputLabel>
+          <apex:inputfield value="{!fromSU.ownerid}" />
+      </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel >New User</apex:outputLabel>
+          <apex:inputfield value="{!toSU.ownerid}" />
+        </apex:pageBlockSectionItem>
+      </apex:pageBlockSection>
+
+    <apex:pageBlock id="P2" mode="edit">
+    <apex:pageblockButtons location="bottom" >
+        <apex:commandButton value=" Find " action="{!find}" rendered="{!ProcessingStage=='1'}" />
+    </apex:pageblockButtons>
+    <apex:pageBlockSection columns="1" id="FindSU">
+    <apex:outputText >2. Find services that open service usages are for.</apex:outputText>
+    
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+
+
+    <apex:pageBlock id="P3" mode="edit">
+        <apex:pageBlockSection columns="1" id="SelectServices">
+    <apex:outputText >3. Select services for which you want to move the service usage to the new owner.</apex:outputText>
+    
+    <apex:pageBlock rendered="{!ServiceWp.size>0}">
+    <!--apex:inputHidden value="{!selectedRelContactId}" id="selectedRelContactId"/-->
+    <!--apex:inputHidden value="{!selectedRelContactName}" id="selectedRelContactName"/-->
+
+    
+    <apex:pageBlockTable value="{!ServiceWp}" var="rec">
+        <apex:column headerValue="Select" width="5%">
+                <apex:facet name="header">
+                <apex:inputCheckbox onclick="selectAll(this)"/>  
+                </apex:facet>
+                <apex:inputCheckbox id="serviceSelect" value="{!rec.isSelected}"/>
+            </apex:column>
+
+       <apex:column >
+          <apex:facet name="header">Service</apex:facet>
+            <a href="javascript:window.parent.location='/{!rec.ServiceId}?retURL={!returnURL}'" 
+                onmouseover="LookupHoverDetail.getHover('lookup{!rec.ServiceId}', '/{!rec.ServiceId}/m?retURL=%2F{!rec.ServiceId}&isAjaxRequest=1').show();" 
+                onmouseout="LookupHoverDetail.getHover('lookup{!rec.ServiceId}').hide();" 
+                onfocus="LookupHoverDetail.getHover('lookup{!rec.ServiceId}', '/{!rec.ServiceId}/m?retURL=%2F{!rec.ServiceId}&isAjaxRequest=1').show();" 
+                onblur="LookupHoverDetail.getHover('lookup{!rec.ServiceId}').hide();" id="lookup{!rec.ServiceId}">
+                    {!rec.ServiceName } 
+            </a>  
+        </apex:column> 
+    <apex:column >
+          <apex:facet name="header">Number of Service Usages</apex:facet>
+          {!rec.CountServiceUsage }
+            </apex:column>
+        </apex:pageBlockTable>
+     </apex:pageBlock>   
+    
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+    
+    <apex:pageBlock id="P4" mode="edit">
+    <apex:pageblockButtons location="bottom" rendered="{!ProcessingStage=='2'}" >
+        <apex:commandButton value=" Submit " action="{!submit}"/>
+    </apex:pageblockButtons>
+    <apex:pageBlockSection columns="1" id="SubmitBatch">
+    <apex:outputText >4. Submit Change of owner requests.</apex:outputText>
+    
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+    <apex:pageBlock title="Results" id="debug" >
+    <apex:outputText value="{!DebugLog}"  escape="false" />
+
+    </apex:pageBlock>
+</apex:pageBlock>
+</apex:form>  
+</apex:page>

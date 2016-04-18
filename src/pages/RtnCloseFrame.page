@@ -1,0 +1,99 @@
+<apex:page showHeader="false" sidebar="false" >
+
+<!-- gary.grant@conseq.co.uk
+     page displayed on submit of a dialog form. Shows a wait animation and reloads the page
+     the page reload clears the dialog and reloads the underlying page to display new data 
+     
+    j$.support.leadingWhitespace
+    This detects IE8 and below. The Sonic wait widget does not work there...           
+-->
+
+<head>
+<apex:includeScript value="{!URLFOR($Resource.jQuery19, '/js/jquery-1.8.2.min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.jQuery19, '/js/sonic.js')}"/>
+
+<script type="text/javascript">
+
+var j$ = jQuery.noConflict();
+
+var parent_domain = '{!$CurrentPage.parameters.parent_domain}';
+var parent_action = '{!$CurrentPage.parameters.parent_action}';
+
+    if (j$.support.leadingWhitespace) {
+    
+        var circle = new Sonic({
+    
+            width: 450,
+            height: 450,
+    
+            stepsPerFrame: 1,
+            trailLength: 1,
+            pointDistance: .025,
+    
+            strokeColor: '#E08E1B',
+    
+            fps: 20,
+    
+            setup: function() {
+                this._.lineWidth = 2;
+            },
+            step: function(point, index) {
+    
+                var cx = this.padding + 50,
+                    cy = this.padding + 50,
+                    _ = this._,
+                    angle = (Math.PI/180) * (point.progress * 360);
+    
+                this._.globalAlpha = Math.max(.5, this.alpha);
+    
+                _.beginPath();
+                _.moveTo(point.x, point.y);
+                _.lineTo(
+                    (Math.cos(angle) * 35) + cx,
+                    (Math.sin(angle) * 35) + cy
+                );
+                _.closePath();
+                _.stroke();
+    
+                _.beginPath();
+                _.moveTo(
+                    (Math.cos(-angle) * 32) + cx,
+                    (Math.sin(-angle) * 32) + cy
+                );
+                _.lineTo(
+                    (Math.cos(-angle) * 27) + cx,
+                    (Math.sin(-angle) * 27) + cy
+                );
+                _.closePath();
+                _.stroke();
+    
+            },
+            path: [
+                ['arc', 50, 50, 40, 0, 360]
+            ]
+        
+            });
+
+        }
+
+    j$(document).ready(function() {
+
+        CallToParent();
+        if(parent_action=="page_reload") {        
+           circle.play();
+           document.body.appendChild(circle.canvas);     
+        }
+        
+    });
+
+function CallToParent() {
+    window.parent.doCloseServiceDialog();;     
+}
+
+</script>
+
+</head>
+
+<div>Update In Progress... please wait</div>
+
+</apex:page>

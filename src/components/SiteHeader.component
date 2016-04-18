@@ -1,0 +1,33 @@
+<apex:component id="headerComponent">
+   
+    <div>
+    <apex:outputPanel layout="block" styleclass="row-fluid">
+        <div style="background-color:#fff" class="pull-left"><apex:image id="logo" value="{!$Resource.Dementia_Friends_RGB_land_PNG}"/></div>
+        <div style="background-color:#fff" class="pull-left">
+            <apex:outputPanel layout="block" styleclass="textNow">Text FRIEND to 88080 and we will let you know when we launch</apex:outputPanel>
+        </div>
+    </apex:outputPanel>
+    </div>
+  <apex:panelGrid cellpadding="0" cellspacing="0" width="100%" border="0" columns="2" style="text-align: left;" id="theHeader">
+    
+    </apex:panelGrid>
+    <apex:panelGrid cellpadding="0" cellspacing="0" width="100%" border="0" columns="1" style="text-align: right;" id="Links">
+      <apex:panelGroup rendered="{!AND(ISPICKVAL($User.UserType,'Guest'), $Site.LoginEnabled)}">
+        <apex:outputLink value="/site/SiteLogin.apexp">{!$Label.site.login_button}</apex:outputLink>
+        <apex:outputText value=" | "/>
+        <apex:outputLink value="/site/ForgotPassword.apexp">{!$Label.site.forgot_your_password_q}</apex:outputLink>
+        <apex:outputText value=" | " rendered="{!$Site.RegistrationEnabled}"/>
+        <apex:outputLink value="/site/SiteRegister.apexp" rendered="{!$Site.RegistrationEnabled}">{!$Label.site.new_user_q}</apex:outputLink>
+      </apex:panelGroup>
+      <apex:outputLink value="{!$Site.Prefix}/secur/logout.jsp" rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}">{!$Label.site.logout}</apex:outputLink>
+    </apex:panelGrid>
+    <apex:panelGrid cellpadding="0" cellspacing="0" width="100%" border="0" columns="1" style="text-align: center;" id="buttons">
+      <apex:form >
+        <apex:commandlink styleclass="menuItem" value=" Home " action="/apex/siteHomePage" />
+        <apex:commandlink styleclass="menuItem" value=" What is this? " action="/apex/siteWhatPage" />
+        <apex:commandlink styleclass="menuItem" value=" Why is this needed? " action="/apex/siteWhyPage" />
+        <apex:commandlink styleclass="menuItem" value=" Register your interest " action="/apex/siteRegisterPage"/>
+        <apex:commandlink styleclass="menuItem" value=" Blog " action="http://www.dementiafriendsblog.org.uk"/>
+      </apex:form>
+  </apex:panelGrid>
+</apex:component>

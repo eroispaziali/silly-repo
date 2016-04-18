@@ -1,0 +1,7 @@
+<apex:page standardController="Bid__c" extensions="BDCBidOutcome" action="{!setSuccessful}" tabStyle="Bid__c">
+	<apex:form >
+	    <apex:pageBlock title="Bid Outcome Cannot Be Changed">
+	    	<apex:messages />
+	    </apex:pageBlock>
+    </apex:form>
+</apex:page>

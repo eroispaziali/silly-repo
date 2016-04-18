@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A single figure representing the funding requirement to cover the costs of providing the service, including FCR</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Actual_FCR__c</fullName>
+        <description>The amount of Full Cost Recovery added to the funding requirement to make the total</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The amount of Full Cost Recovery added to the funding requirement to make the total</inlineHelpText>
+        <label>Actual FCR</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <description>Change 410</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter comments on budget status.</inlineHelpText>
+        <label>Comments</label>
+        <length>500</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Fiscal_Year__c</fullName>
+        <externalId>false</externalId>
+        <label>Financial Year</label>
+        <picklist>
+            <picklistValues>
+                <fullName>2010/11</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2011/12</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2012/13</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2013/14</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2014/15</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2015/16</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Funding_In_Budget__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Yes = new or existing service which is fully in budget. No = new service not in budget (add notes in comments box to explain). Partial = new or existing service in budget but with additional growth. Check with OM if unsure if service is in budget or not</inlineHelpText>
+        <label>In Budget</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partial</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>InBudget__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Is this funding requirement in budget</inlineHelpText>
+        <label>zzOldInBudget</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Service_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Service__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Service Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Service__c</fullName>
+        <description>The Service to which this Funding Requirement relates</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the service for which this funding requirement applies</inlineHelpText>
+        <label>Service</label>
+        <referenceTo>Services__c</referenceTo>
+        <relationshipName>Funding_Requirements</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Total_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter full cost of service per financial year. Details should already exist for existing services but adjust or add additional years if needed. If service is expanding, ensure entire cost is included. If service is for part year, reduce amount accordingly</inlineHelpText>
+        <label>Total Amount</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Cover_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Cover Amount</label>
+        <summarizedField>Fund_Allocation__c.Allocation_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>Fund_Allocation__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Live</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Fund_Allocation__c.Funding_Requirement__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Cover_Percent__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(BLANKVALUE(Total_Cover_Amount__c,0) ==0,0,   
+    if(BLANKVALUE(Total_Amount__c,0)==0,0,
+        Total_Cover_Amount__c  /  Total_Amount__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Cover Percent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Total_Cover_Potential_Percent__c</fullName>
+        <externalId>false</externalId>
+        <formula>if(BLANKVALUE(Total_Cover_Potential__c,0) ==0,0,   
+    if(BLANKVALUE(Total_Amount__c,0)==0,0,
+        Total_Cover_Potential__c  /  Total_Amount__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Cover Potential Percent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Total_Cover_Potential__c</fullName>
+        <externalId>false</externalId>
+        <formula>Total_Cover_Amount__c  +  Total_Cover_Proposed__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Cover Potential</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Cover_Proposed__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Cover Proposed</label>
+        <summarizedField>Fund_Allocation__c.Allocation_Amount__c</summarizedField>
+        <summaryFilterItems>
+            <field>Fund_Allocation__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Draft, Accepted, Proposed</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Fund_Allocation__c.Funding_Requirement__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_Uncovered_Potential__c</fullName>
+        <externalId>false</externalId>
+        <formula>Total_Amount__c -  Total_Cover_Potential__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Uncovered Potential</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>uniqueFiscalService__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A validation field to ensure that no two records are linked to the same service for a given fiscal year. See the workflow rule with the same name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is an internal check field and should not be made visible</inlineHelpText>
+        <label>uniqueFiscalService</label>
+        <length>26</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>BDR Service Cost</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>FR-{0000}</displayFormat>
+        <label>Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>BDR Service Costs</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Allocation_Exceeds_Requirement</fullName>
+        <active>false</active>
+        <description>This rule disabled at request of BDM&apos;s. It is useful to know of allocation exceeds requirements.</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) &amp;&amp; 
+Total_Cover_Potential_Percent__c  &gt; 1</errorConditionFormula>
+        <errorMessage>Allocation exceeds the funds required</errorMessage>
+    </validationRules>
+</CustomObject>

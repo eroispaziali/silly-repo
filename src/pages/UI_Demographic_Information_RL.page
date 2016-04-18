@@ -1,0 +1,56 @@
+<apex:page standardController="UI_Participant__c" extensions="UIDemographicInfoRLController">
+    
+    <!-- 
+    
+    	gary.grant@conseq.co.uk
+    	Dec 2014
+    	
+    	Show the Demographic Information for a contact. 
+    	This version of the page is displayed in the UI_Participant__c	page layout. The record is linked to the contact, but not
+    	shown on that layout.
+    	
+    	Demographic Information is only relevant for People who have given consent for this data to be stored.
+    	NOTE: Demographic_Information__c is Public Read/Write   
+    
+     -->
+        
+    <apex:form id="frm">
+    <apex:pageBlock id="DgData">
+    <apex:pageBlockButtons location="top">
+      <apex:commandButton value="New Demographic Information" 
+          action="{!create}" 
+          rerender="frm" 
+          onclick="window.parent.location.href='/apex/Contact_Demographic_Information_Edit?id={!UI_Participant__c.Contact__c}&rtnId={!UI_Participant__c.id}'"
+          rendered="{!showAddButton}"          
+          />
+    </apex:pageBlockButtons>
+
+            <apex:pageMessages ></apex:pageMessages>
+
+				<apex:outputPanel rendered="{!showData==false}">
+					<p>Demographic Data is only accessible for Participants with Status: Active</p>
+				</apex:outputPanel>
+
+                <!-- Table for Demographic Information -->
+                <apex:pageBlockTable value="{!dgData}" var="row" width="50%" rendered="{!NOT(ISNULL(dgData))}" border="0">
+                    <!-- Actions links -->
+                    <apex:column >
+                        <apex:facet name="header">Action</apex:facet>
+                        <apex:outputLink value="{!URLFOR($Action.Demographic_Information__c.View,row.id,[retURL=URLFOR($Action.UI_Participant__c.View, UI_Participant__c.Id)])}" style="font-weight: bold;" target="_top">View</apex:outputLink>
+                        &nbsp;|&nbsp;
+                        <apex:outputLink value="/apex/Contact_Demographic_Information_Edit?id={!UI_Participant__c.Contact__c}&rtnId={!UI_Participant__c}" style="font-weight: bold;" target="_top">Edit</apex:outputLink>
+                        
+                        <apex:outputtext value=" | " rendered="{!IF($Profile.Name =='System Administrator', true , false)}"></apex:outputtext>
+                        <apex:outputLink value="{!URLFOR($Action.Demographic_Information__c.Delete,row.id,[retURL=URLFOR($Action.UI_Participant__c.View, UI_Participant__c.Id)])}" style="font-weight: bold;" target="_top" onclick="return window.confirm('Are you sure?');" rendered="{!IF($Profile.Name =='System Administrator', true , false)}">Delete</apex:outputLink>
+                    </apex:column>
+                    <!-- Demographic Information Name Field -->                
+                    <apex:column >
+                        <apex:facet name="header">Demographic Information</apex:facet>
+                        <apex:outputLink target="_top" value="/{!Row.Id}">{!Row.Name}</apex:outputLink> 
+                    </apex:column> 
+
+                                
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+    </apex:form>
+</apex:page>

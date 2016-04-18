@@ -1,0 +1,8 @@
+<apex:component controller="BDRWrapper" access="global">
+
+   <apex:attribute name="BDRObject" description="The bdr" type="BDR__c" assignTo="{!bdr}"/>       
+   <apex:attribute name="BDRObjectId" description="The bdr id" type="String" assignTo="{!bdrid}"/>
+
+   <apex:outputText escape="false" value="{!pdfHtml}" ></apex:outputText> 
+
+</apex:component>

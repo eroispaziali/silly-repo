@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>27.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>BDR, Dialog: Add a new service with a quick form displayed in a modal dialog
+This should include the minimal data and funding requirements</description>
+    <label>BDR Service Add Update</label>
+</ApexPage>

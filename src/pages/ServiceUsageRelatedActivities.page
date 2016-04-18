@@ -1,0 +1,114 @@
+<apex:page standardController="Service_Usage__c" extensions="ServiceUsageRelatedActivitiesController" renderAs="{!IF($CurrentPage.Parameters.printPDF!=null,'PDF','')}">
+    <head>
+        <style>
+            @page {
+                @bottom-center {  content:"Confidential";  }
+            }
+        </style> 
+    </head> 
+<style type="text/css">
+table.block {
+    border-collapse:collapse;
+    background:#EFF4FB url({!$Resource.teaser}) repeat-x;
+    border-left:1px solid #686868;
+    border-right:1px solid #686868;
+    color: #333;
+}
+
+td.cell {
+    padding:5px;
+}
+
+th.header {
+    background:#333 url({!$Resource.llsh}) repeat-x;
+    color:#fff;
+    padding:5px;
+}
+
+h1 { font-size: 150% }
+</style>
+
+<!---------------Logo and Header Links--------------------->
+<table width="98%" border="0" cellpadding="0" cellspacing="0">
+    <tr><td><apex:image url="{!$Resource.AS_Logo}" width="140" height="53" /></td>
+    <td align="right">
+    <apex:form rendered="{!IF($CurrentPage.Parameters.printPDF!=null,false,true)}">    
+        <apex:commandLink value="Back" action="/{!$CurrentPage.Parameters.id}" rendered="{!IF($CurrentPage.Parameters.printPDF!=null,false,true)}" />
+        &nbsp;&nbsp;&nbsp;
+        <apex:commandLink value="PDF" action="/apex/{!$CurrentPage.Name}?id={!$CurrentPage.Parameters.id}&printPDF=1" rendered="{!IF($CurrentPage.Parameters.printPDF!=null,false,true)}" target="_blank"/>
+    </apex:form>
+    </td></tr>
+</table>
+<!---------------(End) Logo and Header Links--------------------->
+<apex:pageblock >
+
+
+<h1>Activity History for:&nbsp;<apex:outputText value="{!Service_Usage__c.Name}"/></h1>
+<br/>
+<h1>Person ID:&nbsp;<apex:outputText value="{!person.Client_reference_number__c}"/></h1>
+<br/>
+<apex:form rendered="{!IF($CurrentPage.Parameters.printPDF!=null,false,true)}">
+    <apex:commandLink action="{!sort}" >
+        Sorted by Date 
+        <apex:image url="{!IF(sortDirection=='ASC','/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif')}"/>
+    </apex:commandLink>     
+
+</apex:form>
+<p/>
+<!---------------Seperate for each Activity--------------------->
+
+    <apex:repeat value="{!lstActivities}" var="rec">
+        <!-- Display each event in a nice little table -->
+        <table border="1" class="block" width="100%" >
+            <tr>
+                <th colspan="3" class="header">
+                    <span style="float: left"><strong><apex:outputText value="{!rec.Subject}"/></strong></span>
+                </th>
+            </tr>
+            <tr>
+                <td class="cell"><strong>Activity Type:&nbsp;</strong><apex:outputText value="{!IF(rec.isEventType==true,'Event','Task')}"/></td>
+                <td class="cell"><strong><apex:outputText value="{!IF(rec.isEventType==true,'Start Date:','Completion Date:')}"/>&nbsp;</strong>
+                    <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> 
+                    <apex:param value="{!rec.CompletionDate}" /> 
+                    </apex:outputText> 
+                </td>
+                <td class="cell"><strong>Owner Name:&nbsp;</strong><apex:outputText value="{!rec.OwnerName}"/></td>
+            </tr>
+            	<td class="cell"><strong>Status:&nbsp;</strong><apex:outputText value="{!rec.Status}"/></td>
+                <td class="cell"><strong>Outcome Number:&nbsp;</strong><apex:outputText value="{!rec.OutcomeNumber}"/></td>
+			<tr>
+			</tr>          
+            <tr><td colspan="3" class="cell" >
+                <strong>Description:</strong><br/>
+                
+                <apex:outputPanel rendered="{!IF($CurrentPage.Parameters.printPDF!=null,true,false)}">
+                    <div style="white-space:pre-line;width:700px; word-wrap:break-word;overflow:hidden;">
+                        <apex:outputText style="white-space:pre-line;" value="{!IF(rec.isElipsesOn,LEFT(rec.Description,CHARS_TO_SHOW),rec.Description)}" />    
+                    </div>
+                </apex:outputPanel>
+                
+<!-----------------From should not be rendered, while rendering page as PDF------------------------------->
+                <apex:form rendered="{!IF($CurrentPage.Parameters.printPDF!=null,false,true)}"> 
+                   
+                   <div style="width:900px;word-wrap: break-word;">
+                       <apex:outputText style="white-space:pre-line;"  value="{!IF(rec.isElipsesOn,LEFT(rec.Description,CHARS_TO_SHOW),rec.Description)}"/>    
+                       
+                        &nbsp;
+                        <apex:commandLink value="(More >>)" rendered="{!rec.isElipsesOn}" action="{!FullDesciption}">
+                            <apex:param name="rowIndex" id="rowIndex" value="{!rec.rowIndex}"/>
+                        </apex:commandLink>
+    
+                        <apex:commandLink value="(<< Less)" rendered="{!LEN(rec.Description)>CHARS_TO_SHOW && !rec.isElipsesOn}" action="{!FullDesciption}">
+                            <apex:param name="rowIndex" id="rowIndex2" value="{!rec.rowIndex}"/>
+                        </apex:commandLink>  
+                    </div>                  
+                </apex:form> 
+                </td>
+            </tr>
+        </table>
+        <p/>
+    </apex:repeat>
+
+<!---------------Seperate for each Activity--------------------->    
+</apex:pageblock>
+</apex:page>

@@ -1,0 +1,71 @@
+<apex:page standardController="Contact" extensions="listContacts" action="{!AutoRunListContacts}">
+ <apex:form id="form">
+ <apex:variable value="/{!URLENCODE(IF($CurrentPage.Parameters.full==null,$CurrentPage.Parameters.id,'apex/'+$CurrentPage.Name+'?id='+$CurrentPage.Parameters.id+'%26full=true'))}" var="returnURL"/>
+ <apex:pageBlock >
+ <apex:pageBlockTable value="{!lstMatchingContacts}" var="rec">
+         <apex:column >
+          <apex:facet name="header">Action</apex:facet>
+          <apex:outputlink value="/apex/MergeContacts" rendered="{!canMerge}" style="font-weight: bold;" target="_top"> Merge <apex:param name="masterid" value="{!Contact.Id}"/><apex:param name="childid" value="{!rec.Id}"/><apex:param name="retURL" value="{!returnURL}"/></apex:outputlink>
+          <apex:outputlink value="/apex/MergeContacts" rendered="{!canMerge==false}" style="font-weight: bold;" target="_top"> Request Merge <apex:param name="masterid" value="{!Contact.Id}"/><apex:param name="childid" value="{!rec.Id}"/><apex:param name="retURL" value="{!returnURL}"/></apex:outputlink>
+        </apex:column>
+ 
+ 
+       <apex:column >
+          <apex:facet name="header">Person</apex:facet>
+            <a href="javascript:window.parent.location='/{!rec.Id}?retURL={!returnURL}'" 
+                onmouseover="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onmouseout="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" 
+                onfocus="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onblur="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" id="lookup{!rec.Id}">
+                     {!rec.Salutation} {!rec.Name} 
+            </a>  
+        </apex:column> 
+        <!--<apex:column >
+          <apex:facet name="Id">Id</apex:facet>
+          {!rec.Id}
+        </apex:column>-->
+        <!-- <apex:column >
+          <apex:facet name="header">Person</apex:facet>
+          <apex:outputLink value="/{!rec.Id}" >
+            {!rec.Name}
+          </apex:outputLink>
+        </apex:column>-->
+        
+        <apex:column >
+          <apex:facet name="header">Person record Type</apex:facet>
+          {!rec.Record_Type_Name__c}
+        </apex:column>
+       <!-- <apex:column >
+          <apex:facet name="header">Company</apex:facet>
+          {!rec.Name}
+        </apex:column> --> 
+        <apex:column >
+          <apex:facet name="header">Street</apex:facet>
+          {!rec.MailingStreet}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">City</apex:facet>
+          {!rec.MailingCity}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Postcode</apex:facet>
+          {!rec.MailingPostalCode}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">County</apex:facet>
+          {!rec.MailingState}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Phone</apex:facet>
+          {!rec.Phone}
+        </apex:column>
+        <apex:column rendered="{!showBirthDate}"     >
+            <apex:facet name="header">Birthdate</apex:facet>
+            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                <apex:param value="{!rec.Birthdate}" /> 
+            </apex:outputText>
+        </apex:column>
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

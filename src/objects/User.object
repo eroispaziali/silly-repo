@@ -1,0 +1,1456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>CallHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EditUserAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EmailHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>FreezeUserAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ManagePermSetsAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>PasswordUnlockAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ResetPasswordAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>UserActivationAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>Area__c</fullName>
+        <description>The Society Area to which the user is allocated (if any).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Must match Name from corresponding Internal Organisation.</inlineHelpText>
+        <label>Area</label>
+        <picklist>
+            <controllingField>Region__c</controllingField>
+            <picklistValues>
+                <fullName>Central West Area</fullName>
+                <controllingFieldValues>West Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>East Anglia and Central Area</fullName>
+                <controllingFieldValues>East Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>East Midlands Area</fullName>
+                <controllingFieldValues>East Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>London Area</fullName>
+                <controllingFieldValues>East Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North &amp; East Northern Ireland Area</fullName>
+                <controllingFieldValues>Northern Ireland Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North East Area</fullName>
+                <controllingFieldValues>North Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Wales Area</fullName>
+                <controllingFieldValues>Wales Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North West Area</fullName>
+                <controllingFieldValues>North Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South &amp; West Northern Ireland Area</fullName>
+                <controllingFieldValues>Northern Ireland Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South East Area</fullName>
+                <controllingFieldValues>East Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Wales Area</fullName>
+                <controllingFieldValues>Wales Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South West Area</fullName>
+                <controllingFieldValues>West Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West Midlands Area</fullName>
+                <controllingFieldValues>West Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Whole Wales Area</fullName>
+                <controllingFieldValues>Wales Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yorkshire Area</fullName>
+                <controllingFieldValues>North Region</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>DB_Region__c</fullName>
+        <description>This is a field that is installed by and used with the Adoption Dashboard AppExchange package. If your org already has a similar field, you can change the reports that are part of the Adoption Dashboard package to use your custom field and then delete this field.</description>
+        <externalId>false</externalId>
+        <label>DB Region</label>
+        <picklist>
+            <picklistValues>
+                <fullName>NA</fullName>
+                <color>#009900</color>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EMEA</fullName>
+                <color>#3333FF</color>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>APAC</fullName>
+                <color>#CC6600</color>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>LA</fullName>
+                <color>#990000</color>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IgnoreValidationRules__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>System Admins need to check this value on their user record before using DataLoader or Deploying code.</description>
+        <externalId>false</externalId>
+        <label>IgnoreValidationRules</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Locality__c</fullName>
+        <description>The Society Locality to which the user is assigned (if any).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Must match the Name of the corresponding Internal Organisation.</inlineHelpText>
+        <label>Locality</label>
+        <picklist>
+            <controllingField>Area__c</controllingField>
+            <picklistValues>
+                <fullName>Abertawe Bro Morgannwg Locality</fullName>
+                <controllingFieldValues>South Wales Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Avon, Gloucestershire &amp; Wiltshire Locality</fullName>
+                <controllingFieldValues>South West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bedfordshire &amp; Luton Locality</fullName>
+                <controllingFieldValues>East Anglia and Central Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Berkshire, Buckinghamshire, Oxfordshire Locality</fullName>
+                <controllingFieldValues>Central West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cambridgeshire &amp; Peterborough Locality</fullName>
+                <controllingFieldValues>East Anglia and Central Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cardiff and the Vale Locality</fullName>
+                <controllingFieldValues>South Wales Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cheshire &amp; St Helens Locality</fullName>
+                <controllingFieldValues>North West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cumbria Locality</fullName>
+                <controllingFieldValues>North East Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cwm Taff Locality</fullName>
+                <controllingFieldValues>South Wales Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Darlington &amp; Teesside Locality</fullName>
+                <controllingFieldValues>North East Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Derbyshire Locality</fullName>
+                <controllingFieldValues>East Midlands Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Devon, Cornwall &amp; Isles of Scilly Locality</fullName>
+                <controllingFieldValues>South West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dorset &amp; Somerset Locality</fullName>
+                <controllingFieldValues>South West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Durham Locality</fullName>
+                <controllingFieldValues>North East Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>East Riding &amp; Humber Locality</fullName>
+                <controllingFieldValues>Yorkshire Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Essex Locality</fullName>
+                <controllingFieldValues>East Anglia and Central Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Greater Manchester Central &amp; West Locality</fullName>
+                <controllingFieldValues>North West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Greater Manchester Central South and East Locality</fullName>
+                <controllingFieldValues>North West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Gwent Locality</fullName>
+                <controllingFieldValues>South Wales Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hampshire, Isle of Wight and the Channel Islands Locality</fullName>
+                <controllingFieldValues>Central West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Herefordshire &amp; Worcestershire Locality</fullName>
+                <controllingFieldValues>West Midlands Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hertfordshire Locality</fullName>
+                <controllingFieldValues>East Anglia and Central Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kent &amp; Medway Locality</fullName>
+                <controllingFieldValues>South East Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lancashire Locality</fullName>
+                <controllingFieldValues>North West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Leicestershire Locality</fullName>
+                <controllingFieldValues>East Midlands Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lincolnshire Locality</fullName>
+                <controllingFieldValues>East Midlands Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Merseyside &amp; Isle of Man Locality</fullName>
+                <controllingFieldValues>North West Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Midlands Central Locality</fullName>
+                <controllingFieldValues>West Midlands Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Norfolk Locality</fullName>
+                <controllingFieldValues>East Anglia and Central Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North &amp; East Northern Ireland Locality</fullName>
+                <controllingFieldValues>North &amp; East Northern Ireland Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Northamptonshire Locality</fullName>
+                <controllingFieldValues>East Midlands Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North East London Locality</fullName>
+                <controllingFieldValues>London Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North of Tyne Locality</fullName>
+                <controllingFieldValues>North East Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Wales Locality</fullName>
+                <controllingFieldValues>North Wales Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North West London Locality</fullName>
+                <controllingFieldValues>London Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Yorkshire Locality</fullName>
+                <controllingFieldValues>Yorkshire Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nottinghamshire Locality</fullName>
+                <controllingFieldValues>East Midlands Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shropshire &amp; Staffordshire Locality</fullName>
+                <controllingFieldValues>West Midlands Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South &amp; West Northern Ireland Locality</fullName>
+                <controllingFieldValues>South &amp; West Northern Ireland Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South East London Locality</fullName>
+                <controllingFieldValues>London Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South of Tyne Locality</fullName>
+                <controllingFieldValues>North East Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Yorkshire Locality</fullName>
+                <controllingFieldValues>Yorkshire Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Suffolk Locality</fullName>
+                <controllingFieldValues>East Anglia and Central Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Surrey Locality</fullName>
+                <controllingFieldValues>South East Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sussex Locality</fullName>
+                <controllingFieldValues>South East Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West London Locality</fullName>
+                <controllingFieldValues>London Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West Wales Locality</fullName>
+                <controllingFieldValues>North Wales Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West Yorkshire Locality</fullName>
+                <controllingFieldValues>Yorkshire Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Whole Wales Locality</fullName>
+                <controllingFieldValues>Whole Wales Area</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ManagerId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Hierarchy</type>
+    </fields>
+    <fields>
+        <fullName>Nonprofit_Template_Version__c</fullName>
+        <externalId>false</externalId>
+        <label>Nonprofit Template Version</label>
+        <length>10</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <description>The Society Region to which the user is allocated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Must match the Name of the corresponding Internal Organisation.</inlineHelpText>
+        <label>Region</label>
+        <picklist>
+            <picklistValues>
+                <fullName>East Region</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Northern Ireland Region</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Region</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wales Region</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West Region</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Sys_Admin_Notes__c</fullName>
+        <description>Add any notes as to why changes have been made here</description>
+        <externalId>false</externalId>
+        <label>Sys Admin Notes</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Trainer_for_Alzheimer_s_Trading_Ltd__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Alzheimer&apos;s Trading Ltd</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please check this if the user is used for Training for Education &amp; Development or in that department</inlineHelpText>
+        <label>Trainer for Alzheimer&apos;s Trading Ltd</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Worker_Type__c</fullName>
+        <description>Specifies whether the user is a member of staff or a volunteer.</description>
+        <externalId>false</externalId>
+        <label>Worker Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Staff</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Volunteer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ezca__ezcaSettings__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>ezcaSettings</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <listViews>
+        <fullName>ActiveUsers</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Active Users</label>
+    </listViews>
+    <listViews>
+        <fullName>Active_Volunteers_Befriending_and_Care</fullName>
+        <columns>EMPLOYEE_NUMBER</columns>
+        <columns>CORE.USERS.FIRST_NAME</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>Worker_Type__c</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>CRS - One App User</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Active Volunteers (Befriending and Care)</label>
+        <sharedTo>
+            <group>All_CRS_Users</group>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>AdminUsers</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>System Administrator</value>
+        </filters>
+        <label>Admin Users</label>
+    </listViews>
+    <listViews>
+        <fullName>AllUsers</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>MARKETING_USER</columns>
+        <columns>OFFLINE_USER</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Users</label>
+    </listViews>
+    <listViews>
+        <fullName>Alzheimers_Trading_Users</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>SFCONTENT_USER</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>contains</operation>
+            <value>Trading</value>
+        </filters>
+        <label>Alzheimers Trading Users</label>
+    </listViews>
+    <listViews>
+        <fullName>BDC_Users</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>startsWith</operation>
+            <value>BDC</value>
+        </filters>
+        <label>BDC Users</label>
+    </listViews>
+    <listViews>
+        <fullName>Config_Users</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>contains</operation>
+            <value>Config</value>
+        </filters>
+        <label>Config Users</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+            <role>ITAdministrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>DA_Logons</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USER_ROLE.NAME</field>
+            <operation>startsWith</operation>
+            <value>DA</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>DA Logons</label>
+    </listViews>
+    <listViews>
+        <fullName>Darlington_New_Users_for_Derbyshire</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Darlington</value>
+        </filters>
+        <label>New Users for Locality Darlington</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Durham_New_Users_for_Derbyshire</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Durham</value>
+        </filters>
+        <label>New Users for Locality Durham</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>IT_Admin_Users</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>IT Administrator</value>
+        </filters>
+        <label>IT Admin Users</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+            <role>ITAdministrator</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Mike_New_Users_for_External_Affairs</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>CORE.USER_ROLE.NAME</field>
+            <operation>contains</operation>
+            <value>Fundraising</value>
+        </filters>
+        <label>Mike New Users for Fundraising</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Mike_New_Users_for_New_GB_RW</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <columns>Worker_Type__c</columns>
+        <columns>EMPLOYEE_NUMBER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>CRS - One App User</value>
+        </filters>
+        <label>Mike New Volunteers</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>NELondon_New_Users_for_Derbyshire</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>North East London</value>
+        </filters>
+        <label>New Users for Locality North East London</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_Greater_Manchester_C_West</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <columns>Locality__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Greater Manchester Central &amp; West Locality</value>
+        </filters>
+        <label>New Users Greater Manchester C &amp; West</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Greater_Manchester_CW</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <columns>Locality__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Greater Manchester Central &amp; West Locality</value>
+        </filters>
+        <label>New Users for Greater Manchester CW</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_Avon</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Avon</value>
+        </filters>
+        <label>New Users for Locality Avon</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_Berks</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <columns>PASSWORD_EXPIRES</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Suffolk</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <label>New Users for Locality Suffolk</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_East_Riding</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>East Riding</value>
+        </filters>
+        <label>New Users for Locality East Riding</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_Essex</fullName>
+        <columns>CORE.USERS.FIRST_NAME</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <columns>PASSWORD_EXPIRES</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Essex</value>
+        </filters>
+        <label>Users for Locality Essex</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_Hereford_and_Worc</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <columns>PASSWORD_EXPIRES</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>equals</operation>
+            <value>North Wales Locality</value>
+        </filters>
+        <label>New Users for Locality North Wales</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_Herts</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Hertfordshire Locality</value>
+        </filters>
+        <label>New Users for Locality Herts</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_Leicester</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Leicester</value>
+        </filters>
+        <label>New Users for Locality Leicester</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_Lincolnshire</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>contains</operation>
+            <value>Lincolnshire</value>
+        </filters>
+        <label>New Users for Locality Lincolnshire</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_West_Wales</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>PASSWORD_EXPIRES</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_LOGIN</field>
+            <operation>equals</operation>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>equals</operation>
+            <value>West Wales Locality</value>
+        </filters>
+        <label>New Users for Locality West Wales</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>New_Users_for_Locality_Whole_Wales</fullName>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <columns>Locality__c</columns>
+        <columns>CORE.USERS.EMAIL</columns>
+        <columns>PASSWORD_EXPIRES</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.ACTIVE</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>&lt;No</value>
+        </filters>
+        <filters>
+            <field>Locality__c</field>
+            <operation>startsWith</operation>
+            <value>Whole Wales</value>
+        </filters>
+        <label>New Users for Locality Whole Wales</label>
+        <sharedTo>
+            <group>SystemAdministrators</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>SSM</fullName>
+        <booleanFilter>1 or 2 or 3</booleanFilter>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <columns>CORE.USERS.TITLE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.USERS.TITLE</field>
+            <operation>contains</operation>
+            <value>service support</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.TITLE</field>
+            <operation>contains</operation>
+            <value>support service</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.TITLE</field>
+            <operation>contains</operation>
+            <value>ssm</value>
+        </filters>
+        <label>SSM&apos;s</label>
+    </listViews>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>FULL_NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CORE.USER_ROLE.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CORE.USERS.TITLE</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>FULL_NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USER_ROLE.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USERS.PHONE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USERS.EXTENSION</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CORE.USERS.CELL</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>FULL_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.TITLE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.PHONE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.EMAIL</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USER_ROLE.NAME</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <validationRules>
+        <fullName>Restrict_Email</fullName>
+        <active>true</active>
+        <description>Restrict Access to Email</description>
+        <errorConditionFormula>ISCHANGED( Email ) &amp;&amp; NOT($Profile.Name   = &quot;System Administrator&quot; || $Profile.Name   = &quot;IT Administrator&quot;)</errorConditionFormula>
+        <errorDisplayField>Email</errorDisplayField>
+        <errorMessage>Changing User Email is not allowed</errorMessage>
+    </validationRules>
+</CustomObject>

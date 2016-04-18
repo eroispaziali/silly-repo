@@ -1,0 +1,32 @@
+<apex:page standardController="Evidence_for_Need__c" extensions="EvidenceForNeedControllerExtension">
+
+
+<apex:form >
+
+<apex:sectionHeader title="Evidence For Need" subtitle="{!Evidence_for_Need__c.name}"/>
+<apex:messages /> 
+
+<apex:pageBlock id="Detail" mode="Detail">
+
+    <apex:pageBlockButtons >    
+        <apex:commandButton action="{!save}" value="save"/>    
+        <apex:commandButton action="{!cancel}" value="cancel"/>    
+    </apex:pageBlockButtons>   
+    
+    <apex:pageBlockSection id="Overview" title="Summary" columns="2">
+
+       <apex:outputField value="{!Evidence_for_Need__c.Version__c}"/>       
+       <apex:outputField value="{!Evidence_for_Need__c.isCurrent__c}"/>       
+       <apex:outputField value="{!Evidence_for_Need__c.Release_Date__c}"/>       
+
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection id="Text" columns="1">
+       
+    </apex:pageBlockSection>
+
+</apex:pageBlock>
+
+</apex:form>
+
+</apex:page>

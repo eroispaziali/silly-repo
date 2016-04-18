@@ -1,0 +1,62 @@
+<apex:page standardController="Account" extensions="listAccounts" action="{!AutoRunListAccounts}">
+<apex:form id="form">
+ <apex:variable value="/{!URLENCODE(IF($CurrentPage.Parameters.full==null,$CurrentPage.Parameters.id,'apex/'+$CurrentPage.Name+'?id='+$CurrentPage.Parameters.id+'%26full=true'))}" var="returnURL"/>
+ <apex:pageBlock >
+ <apex:pageBlockTable value="{!lstMatchingAccounts}" var="rec">
+        <apex:column >
+          <apex:facet name="header">Account</apex:facet>
+            <a href="javascript:window.parent.location='/{!rec.Id}?retURL={!returnURL}'" 
+                onmouseover="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onmouseout="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" 
+                onfocus="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onblur="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" id="lookup{!rec.Id}">
+                    {!rec.Name} 
+            </a>  
+        </apex:column> 
+        <!--<apex:column >
+          <apex:facet name="header">Account</apex:facet>
+          <apex:outputLink value="/{!rec.Id}" >
+            {!rec.id}
+          </apex:outputLink>
+        </apex:column>-->
+       <!-- <apex:column >
+          <apex:facet name="header">Company</apex:facet>
+          {!rec.Name}
+        </apex:column> --> 
+        <apex:column >
+          <apex:facet name="header">Street</apex:facet>
+          {!rec.BillingStreet}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">City</apex:facet>
+          {!rec.BillingCity}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">County</apex:facet>
+          {!rec.BillingState}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Postcode</apex:facet>
+          {!rec.BillingPostalCode}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Phone</apex:facet>
+          {!rec.Phone}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Category</apex:facet>
+          {!rec.Category__c}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Owner</apex:facet>
+          {!rec.Owner.Alias}
+        </apex:column>
+        <!--apex:column rendered="{!ShowAllRecordTypes}" >
+          <apex:facet name="header">Record Type</apex:facet>
+          {!rec.Record_Type_Name__c}
+        </apex:column
+        -->
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,4 @@
+<apex:page standardController="Services__c" extensions="servicesEXT" action="{!deletePhoto}" tabStyle="Services__c">
+    <apex:pageBlock title="Photo deleted">
+    </apex:pageBlock>
+</apex:page>

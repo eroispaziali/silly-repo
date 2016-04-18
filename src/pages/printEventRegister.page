@@ -1,0 +1,119 @@
+<apex:page standardController="Event" extensions="EventAttendeeController" renderAs="pdf" applyBodyTag="false" applyHtmlTag="false" sidebar="false" showHeader="false" standardStylesheets="false">
+
+    <html>
+
+    <head>
+
+        <style type="text/css">
+            body {
+                font-family: sans-serif;
+                font-size: 11pt;
+            }
+            
+            h1 {
+                font-family: sans-serif;
+                font-size: 150%;
+                font-weight: bold;
+            }
+            
+            .activeTab {
+                background-color: #1797C0;
+                color: white;
+                background-image: none
+            }
+            
+            .inactiveTab {
+                background-color: lightgrey;
+                color: black;
+                background-image: none
+            }
+        </style>
+    </head>
+
+
+    <body>
+
+
+        <h1>{!strServiceName}</h1>
+
+        <apex:form >
+            <apex:pageBlock >
+
+                <apex:pageBlockSection columns="2">
+                    <apex:pageBlockSectionItem dataStyle="width:10%" labelStyle="width:10%">
+                        <apex:outputLabel value="Event" for="evt" />
+                        <apex:outputField label="Event" value="{!Event.Subject}" id="evt" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem dataStyle="width:10%" labelStyle="width:10%">
+                        <apex:outputLabel value="Date & Time" for="dt" />
+                        <apex:outputField label="Date & Time" value="{!Event.StartDateTime}" id="dt" />
+                    </apex:pageBlockSectionItem>
+
+                </apex:pageBlockSection>
+                <apex:outputField label="Location" value="{!Event.Location}" rendered="{Event.Location!=null}" />
+
+            </apex:pageBlock>
+            
+            <apex:pageBlock rendered="{!isServiceEvent}">
+                <apex:pageBlockSection columns="1" title="Worker Attendances" collapsible="false">
+
+
+                    <apex:pageBlockTable value="{!lstWorkerAttendance}" var="rec3" styleClass="body">
+                        <apex:column width="23%">
+                            <apex:facet name="header">Full Name</apex:facet>
+                            <apex:outputText value="{!rec3.workerName}" escape="false" />
+
+
+                        </apex:column>
+
+                        <apex:column headerValue="Staff/Volunteer" width="23%">
+
+
+                            <apex:outputText value="{!rec3.StaffVolunteerType}" />
+                        </apex:column>
+
+                        <apex:column headerValue="Attendance Status" width="23%">
+
+                       
+                            <img src="/img/{!IF(rec3.recEAT.Attendance_Status__c=='Attended','check', 'checkbox_unchecked')}.gif"/>
+
+                       <!-- </apex:pageBlockSectionItem>
+                            <apex:outputfield value="{!rec3.recEAT.Attendance_Status__c}" />-->
+                        </apex:column>
+                        <apex:column headerValue="Preparation Time" width="23%">
+                         <apex:image url="{!$Resource.CSR_TextBox_Image}" width="40" height="15" />
+                          </apex:column>
+                          <apex:column headerValue="Travel Time"  width="23%">
+                        <apex:image url="{!$Resource.CSR_TextBox_Image}" width="40" height="15" />
+                          </apex:column>
+                          <apex:column headerValue="Attendance Time" width="23%">
+                        <apex:image url="{!$Resource.CSR_TextBox_Image}" width="40" height="15" />
+                          </apex:column>
+
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+
+            <apex:pageBlock tabStyle="Contact" rendered="{!isServiceEvent}">
+                <apex:pageblockSection title="Group Register" collapsible="false" columns="4">
+
+                    <apex:repeat value="{!lstAllOrderedCons}" var="rec" id="pbtAvailableCons">
+                        <apex:pageBlockSectionItem dataStyle="width:10%">
+                            <apex:outputText value="{!rec.contactFullName}" escape="false" />
+               </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem dataStyle="width:10%">
+                       
+                            Attended: <img src="/img/{!IF(rec.recEAT.Attendance_Status__c=='Attended','check', 'checkbox_unchecked')}.gif" />
+
+                        </apex:pageBlockSectionItem>
+                  </apex:repeat>
+                 
+
+                </apex:pageblockSection>
+
+            </apex:pageBlock>
+        </apex:form>
+    </body>
+
+    </html>
+</apex:page>

@@ -1,0 +1,68 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section One: Compliance"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="Utilities" id="compliance">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!section1}" value="Back" styleClass="btn"/>
+                    <apex:commandButton action="{!section3}" value="Next" styleClass="btn"/>
+                    <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+
+            <apex:pageBlockSection title="Legionella Water">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Date of risk assessment" for="w1"/>
+                  <apex:inputField id="w1" value="{!survey.b_Water_Date_of_Risk_Assessment__c}"/>
+                  <apex:outputLabel value="Is there a functioning management plan?" for="w2"/>
+                  <apex:inputField id="w2" value="{!survey.b_Water_Functioning_Management_Plan__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Electrical">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Date of last periodic inspection" for="e1"/>
+                  <apex:inputField id="e1" value="{!survey.b_Elec_Last_Periodic_Inspection__c}"/>
+                  <apex:outputLabel value="Are there electrical safety certificates?" for="e2"/>
+                  <apex:inputField id="e2" value="{!survey.b_Electrical_Safety_Certificates__c}"/>
+                  <apex:outputLabel value="Date of last PAT" for="e3"/>
+                  <apex:inputField id="e3" value="{!survey.b_Elec_Last_PAT__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Gas/Boilers">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Date of last inspection" for="g1"/>
+                  <apex:inputField id="g1" value="{!survey.b_Gas_Date_of_Last_Inspection__c}"/>
+                  <apex:outputLabel value="Is there a functioning management plan?" for="g2"/>
+                  <apex:inputField id="g2" value="{!survey.b_Gas_Functioning_Management_Plan__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Lifts">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Were lifts installed before 1997?" for="l1"/>
+                  <apex:inputField id="l1" value="{!survey.b_Lifts_Installed_before_1997__c}"/>
+                  <apex:outputLabel value="Date of last inspection" for="l2"/>
+                  <apex:inputField id="l2" value="{!survey.b_Lifts_Date_of_Last_Inspection__c}"/>
+                  <apex:outputLabel value="Is there a functioning management plan?" for="l3"/>
+                  <apex:inputField id="l3" value="{!survey.b_Lifts_Functioning_Management_Plan__c}"/>
+                  <apex:outputLabel value="Is there a record/log?" for="l4"/>
+                  <apex:inputField id="l4" value="{!survey.b_Lifts_Log__c}"/>
+                  <apex:outputLabel value="Are the safety features adequate?" for="l5"/>
+                  <apex:inputField id="l5" value="{!survey.b_Lifts_Adequate_Safety_Features__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Comments">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Comments" for="Comments"/>
+                  <apex:inputField id="Comments" value="{!survey.Comments_page_2__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+ </apex:pageBlock>
+    </apex:form>
+</apex:page>

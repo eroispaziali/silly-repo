@@ -1,0 +1,4 @@
+<apex:page standardController="Services__c" extensions="serviceClone" action="{!cloneService}" tabStyle="Services__c">
+    <apex:pageBlock title="Service Cloned">
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,45 @@
+<apex:component >
+
+        <apex:attribute name="bdrWrapper" description="The BDR Wrapper" type="BDRWrapper" required="true"/>
+
+         <!-- if this empty pageBlockSection is removed, the rerender thinks a pageBlockSection is a "first" and removes the nice 15px top margin....-->
+         <apex:pageBlockSection title="" showHeader="false"></apex:pageBlockSection>
+         <apex:pageBlockSection title="Income Summary" columns="2">
+         <apex:pageBlockSectionItem >
+            <apex:outputlabel >Total Income</apex:outputlabel>
+            <apex:outputText value="{0,number,£#,###,###}">
+              <apex:param value="{!bdrWrapper.incBlock.Total_Amount__c}" />
+            </apex:outputText>        
+         </apex:pageBlockSectionItem>
+         <!--change 487 hide fund allocations and funding requirements-->
+         <apex:pageBlockSectionItem >
+            <apex:outputlabel >Total Allocation</apex:outputlabel>
+            <apex:outputText value="{0,number,£#,###,###}">
+              <apex:param value="{!bdrWrapper.totalAllocation}" />
+            </apex:outputText>       
+         </apex:pageBlockSectionItem>
+         <apex:pageBlockSectionItem >
+            <apex:outputlabel >Total Funding Requirement</apex:outputlabel>
+            <apex:outputText value="{0,number,£#,###,###}">
+              <apex:param value="{!bdrWrapper.totalFundingRequirement}" />
+            </apex:outputText>               
+         </apex:pageBlockSectionItem>
+         <apex:pageBlockSectionItem >
+            <apex:outputlabel >Total Other Allocation</apex:outputlabel>       
+            <apex:outputText value="{0,number,£#,###,###}">
+              <apex:param value="{!bdrWrapper.totalOtherSecureAllocation}" />
+            </apex:outputText>
+         </apex:pageBlockSectionItem>
+         <apex:pageBlockSectionItem >
+            <!-- spacer -->       
+         </apex:pageBlockSectionItem>
+         <apex:pageBlockSectionItem >
+            <apex:outputlabel >Total Other Proposed Allocation</apex:outputlabel>     
+            <apex:outputText value="{0,number,£#,###,###}">
+              <apex:param value="{!bdrWrapper.totalOTherProposedAllocation}" />
+            </apex:outputText>
+         </apex:pageBlockSectionItem>
+         
+         </apex:pageBlockSection>
+    
+</apex:component>

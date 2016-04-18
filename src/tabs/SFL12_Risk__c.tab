@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customObject>true</customObject>
+    <description>Use Risk tab to track your Company&apos;s risks.</description>
+    <mobileReady>false</mobileReady>
+    <motif>Custom2: Fan</motif>
+</CustomTab>

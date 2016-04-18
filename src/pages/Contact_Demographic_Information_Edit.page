@@ -1,0 +1,38 @@
+<apex:page standardController="Contact" extensions="ContactDemographicInformationController">
+
+
+<apex:sectionHeader title="Demographic Information" subtitle="{!PersonName} : {!PersonReference}"/>
+    <apex:form >           
+        <apex:pageMessages /> <!-- this is where the error messages will appear-->
+        <apex:pageBlock title="Demographic Information">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+                <apex:pageBlockSection > 
+                    <apex:inputfield value="{!demo.NHS_Number__c}" id="NHSNumber"/>                                                        
+                    <apex:pageBlockSectionItem ><!--spacer--></apex:pageBlockSectionItem>
+                    <apex:inputfield value="{!demo.Ethnic_Group__c}" id="EthnicGroup"/>
+                    <apex:pageBlockSectionItem ><!--spacer--></apex:pageBlockSectionItem>
+                    <apex:inputfield value="{!demo.Ethnicitiy__c}" id="Ethnicitiy"/>
+                    <apex:pageBlockSectionItem ><!--spacer--></apex:pageBlockSectionItem>                    
+                    <apex:inputField value="{!demo.Faith_Culture__c}" id="FaithCulture"/>
+                    <apex:inputfield value="{!demo.Employment_Status__c}" id="EmploymentStatus"/>
+                    <apex:inputfield value="{!demo.Partnership_status__c}" id="PartnershipStatus"/>  
+                    <apex:inputfield value="{!demo.Number_of_dependent_children__c}" id="DependentChildren"/>              
+                    <apex:inputfield value="{!demo.Sexual_Status__c }" id="SexualStatus"/>
+                    <apex:inputfield value="{!demo.Registered_with_Social_Services__c}" id="RegisteredWithSocialServices"/>                    
+                    <apex:inputfield value="{!demo.People_in_household__c}" id="PeopleInHousehold"/>  
+                    <apex:inputfield value="{!demo.Veteran__c}" id="Veteran"/> 
+                    <apex:inputfield value="{!demo.Living_arrangements__c}" id="LivingArrangements"/> 
+                    <apex:inputfield value="{!demo.NI_Trust_Area__c}" id="NITrustArea"/> 
+                    <apex:inputfield value="{!demo.Date_of_Change_of_Living_Arrangements__c}" id="DateOfChange"/>
+                    <apex:pageBlockSectionItem ><!--spacer--></apex:pageBlockSectionItem>                     
+                                                                                                  
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="1" >
+                <apex:inputfield value="{!demo.Other_Demographic_Details__c}" id="OtherDemographicDetails" />
+                </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

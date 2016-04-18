@@ -1,0 +1,142 @@
+<apex:page tabStyle="BDR__c" StandardController="BDR__c" extensions="BDRControllerExtension" sidebar="false">
+
+ <head>
+<apex:includeScript value="{!URLFOR($Resource.jQuery19, '/js/jquery-1.8.2.min.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.bootstrap_custom, '/css/bootstrap.css')}"/>
+
+<script type="text/javascript">
+        
+    var j$=jQuery.noConflict();
+
+    j$(document).ready(function() {
+
+    
+        //hide all the dropdowns for the portal users
+        j$('select').each(function() {
+            var select = j$(this);
+            select.children('option').each(function() {
+               if (j$(this).text() =='Customer Portal User') {
+                 select.hide();
+               }
+            });
+        });
+        
+        // collapse all the service sections                
+        // j$('[id$=service_panel]').find('img.hideListButton').each(function() {
+        //    twistSection(this);           
+        // });    
+    });
+    
+</script>
+
+</head>
+
+<apex:form >
+
+<apex:sectionHeader title="Business Development Record" subtitle="New Business Development Record" rendered="{!BDR__c.id==null}"/>
+<apex:sectionHeader title="Business Development Record" subtitle="{!BDR__c.name} : {!BDR__c.BDR_Name__c}" rendered="{!BDR__c.id!=null}"/>
+<apex:pageMessages />
+
+<apex:pageBlock id="Detail" >
+
+    <apex:pageBlockButtons >    
+        <apex:commandButton action="{!saveAll}" value="Save"/>  
+        <!--change412-->
+        <apex:commandButton action="{!saveAndContinueEditing}" value="Save and Continue"/>  
+        
+        <apex:commandButton action="{!cancel}" value="Cancel"/>    
+    </apex:pageBlockButtons>  
+
+    <apex:pageBlockSection id="Overview" title="Summary" columns="1">
+       <c:BDR_Summary_Edit hasFiscalYears="{!hasFiscalYears}" BDR="{!BDR__c}" lstApprovalLevel="{!ApprovalLevelList}" 
+                           lstStrategicAmbitions="{!StrategicAmbitionsList}"/>                
+    </apex:pageBlockSection>
+
+    <c:BDR_Partner_Edit BDR="{!BDR__c}" lstPartnershipStatus="{!PartnershipStatusList}"/>    
+    <c:BDR_Bid_Edit BDR="{!BDR__c}" rendered="{!BDR__c.Bid_Status__c!='None'}"/>
+    <c:BDR_Income_Edit incBlock="{!bdrWrapper.incBlock}" incomeData="{!bdrWrapper.incomeData}" BDR="{!BDR__c}" rendered="{!hasIncomeBlock=='Yes'}"/>        
+
+    <apex:outputPanel id="service_panel" rendered="{!hasService=='Yes'}" title="Associated Services" >
+
+    <apex:pageBlockSection id="Services" title="Services Overview" columns="1">
+         
+    <apex:repeat value="{!bdrWrapper.services.svcWrappers}" var="rep" id="svcRepeat">
+
+     <apex:pageBlockSection id="Services" title="{!rep.svc.name}" columns="1">
+   
+     <apex:pageBlockSection showheader="false" columns="2">
+
+        <apex:pageBlockSectionItem labelStyleClass="labelCol"> 
+         <apex:outputlabel >Service Name</apex:outputlabel>
+         <apex:outputLink value="/{!rep.svc.id}" id="name_link">
+               <apex:outputField value="{!rep.svc.name}" label="Service Name"/>
+         </apex:outputLink> 
+        </apex:pageBlockSectionItem>     
+   
+            <apex:outputField value="{!rep.svc.service_status__c}"/>            
+            <apex:outputField value="{!rep.svc.service_type__c}"/>
+            <apex:outputField value="{!rep.svc.service_opendate__c}"/>
+            <apex:outputField value="{!rep.svc.Locality__c}"/>
+            <apex:outputField value="{!rep.svc.Estimated_Break_Even__c}" rendered="{rep.svc.service_status__c=='Draft' || rep.svc.service_status__c=='Accepted'"/>
+            <apex:pageBlockSectionItem >   <!-- spacer --> </apex:pageBlockSectionItem> 
+            <apex:outputField value="{!rep.svc.Internal_Evaluation_Methods__c}" />
+            <apex:outputField value="{!rep.svc.External_Evaluation__c}" />        
+
+    </apex:pageBlockSection>                           
+
+     <apex:pageBlockSection showHeader="false" columns="1">
+        <apex:outputText value="{!rep.svc.Property_Notes__c}"  style="width:92%"/>
+     </apex:pageBlockSection>                           
+        
+        <apex:dataTable value="{!rep.fundReqWrappers}" var="row" id="serviceTable" styleClass="table table-bordered table-condensed" style="width:80%;margin-left:8%">
+    
+                <apex:column >
+                    <apex:facet name="header">Financial Year</apex:facet>
+                    <apex:outputField id="year" value="{!row.freq.Fiscal_Year__c}" />
+                </apex:column>
+    
+                <apex:column >
+                    <apex:facet name="header">Cost</apex:facet>
+                    <apex:inputField id="total" value="{!row.freq.Total_Amount__c}" />
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">This Cover</apex:facet>
+                    <apex:inputField id="thisCover" value="{!row.allocation.Allocation_Amount__c}"/>
+                </apex:column>
+                
+                <apex:column >
+                    <apex:facet name="header">Other Cover</apex:facet>
+                    <apex:outputText id="otherCover" value="{0,number,£#,###,###}">
+                        <apex:param value="{!row.OtherAllocationAmountPotential}" />
+                    </apex:outputText>    
+                </apex:column>
+
+                <apex:column >
+                    <apex:facet name="header">Total not covered</apex:facet>
+                    <apex:outputField id="uncovered" value="{!row.freq.Total_Uncovered_Potential__c}" />
+                </apex:column>
+
+           </apex:dataTable>                      
+           
+      <c:BDR_Efn_Edit evidence="{!rep.evidence}"/>
+
+    </apex:pageBlockSection>                           
+       
+    </apex:repeat> 
+
+    </apex:pageBlockSection>
+
+    </apex:outputPanel> 
+
+    <c:BDR_Contract_Edit contract="{!bdrWrapper.contract}" rendered="{!hasContract=='Yes'}"
+                         lstContractType="{!ContractTypeList}" 
+                         FinanceActivityCodes="{!bdrWrapper.services.FinanceActivityCodes}"/>            
+
+    <c:BDR_Feedback_Edit BDR="{!BDR__c}" />
+
+</apex:pageBlock>
+
+</apex:form>
+ 
+</apex:page>

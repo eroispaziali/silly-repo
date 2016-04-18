@@ -1,0 +1,548 @@
+<apex:page showHeader="true" sidebar="false" controller="PI_IssueSearchController">
+    
+
+ <!-- =============================================================================
+         gary.grant@conseq.co.uk 
+         May 2015         
+        
+         Search Page for Porjects and Issues
+
+      =============================================================================  -->
+ 
+  <style>  
+      .dataCell .btn {width:160px;}
+      .searchSelection {padding-3px; border :solid 1px #ccc;margin-top:10px;} 
+  </style>  
+
+  <head>
+
+  <!-- The SF Ajax Framework -->    
+  <apex:includeScript value="/soap/ajax/32.0/connection.js"/> 
+  <apex:includeScript value="/soap/ajax/32.0/apex.js" /> 
+    
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css" />
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+  
+   <style type="text/css">
+      
+      h1 {font-size: 22px; 
+             margin-right: 30px; 
+             font-family: "HelveticaNeue-Light", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;
+             }
+             
+      .bold-label { font-weight:bold; padding-top:10px; padding:bottom: 3px;}      
+      .searchLink {font-size:14px;  display:block; padding-top: 10px; padding-bottom: 10px} 
+      .right-align {text-align : right;}
+      
+      #search-filters input, select { width: 200px; padding-bottom: 5px;}  
+      #search-filters input[type=checkbox] { width: 10px; float: left; margin-right: 15px;}
+      
+      tr.headerRow th {font-size: 1.0em !important;}
+
+      body .pbBody table.list tr.dataRow td.dataCell { min-width : 6%; vertical-align: text-top;}
+      .wrapped {width : 45%; height : auto;}
+      .wrapped h3 {display: block; width:100%; margin:10px 5px 0px 0px;}
+
+      .toggler {border : solid 1px #ccc; padding: 2px 4px 2px 4px;}
+
+
+  </style>  
+  
+  </head>
+ 
+  <apex:form >
+  <apex:outputPanel id="hiddenBlock" layout="none" />
+  <apex:pageMessages id="errors" />
+
+  <!-- Page Title and "New BDR" button -->
+  <div style="margin-bottom:10px; margin-top:10px; padding-left: 5px;"> 
+         <h1>Projects Issues </h1>
+         <h2>Issues from the Projects and Issues Application</h2>
+
+          <apex:commandButton value="New Issue"  
+                          action="{!URLFOR($Action.SFDC_Issue__c.New)}"                          
+                          style="margin-left:25px;"
+                          />    
+
+         <span style = "float:right;padding-right:5px;width:30%;color:#666;text-align:right">Search shows a maximum of 200 results<br/>Use the filters on the left to help find what you are looking for</span>         
+
+  </div>
+
+ <!--  The Search Page  Outer table with narrow column on the left -->
+  <table width="100%" border="0">
+  <tr>  
+    <td width="190" valign="top">
+     
+      <apex:pageBlock mode="edit" id="criteria">              <!-- mode="edit" as we want the search fields to be editable -->
+
+      <!--  The order of the parameters is important. 
+              It must match the calls to this function from the UI js functions -->  
+      <apex:actionFunction name="runSearch" action="{!runSearch}" 
+              rerender="results,debug,errors,createAction"
+              oncomplete="initResults();"
+              >                   
+      </apex:actionFunction>
+      
+      <apex:actionFunction name="afUpdateSubProjectOptions" action="{!clicked}"
+                           rerender="sub-project-selector"
+                           onComplete="doSetSubprojectOption();"
+                           > 
+       </apex:actionFunction>                    
+      
+      <div style="padding:10px;"  id="search-filters">
+      
+      <div style="font-size:14px; font-weight: bold;">Issue Details</div>
+      
+      <div class="bold-label">Project</div>
+      <div class="searchSelection">
+          <apex:selectList value="{!project}" html-data-search="project" id="project" multiselect="false" size="1">
+                 <apex:selectOptions value="{!projectOptions}"/>     
+                  <apex:actionSupport event="onchange" reRender="sub-project-selector"/>
+          </apex:selectList>  
+      </div>
+
+      <apex:outputPanel id="sub-project-selector">
+      <div class="bold-label">Sub Project</div>
+      <div class="searchSelection">
+          <apex:selectList value="{!subProject}" html-data-search="subProject" id="subProject" multiselect="false" size="1">
+                 <apex:selectOptions value="{!subProjectOptions}"/>     
+          </apex:selectList>  
+      </div>
+      </apex:outputPanel>
+
+      <div class="bold-label">Owner</div>
+      <div class="searchSelection">
+          <apex:selectList value="{!owner}" html-data-search="owner" id="owner" multiselect="false" size="1">
+                 <apex:selectOptions value="{!ownerOptions}"/>     
+          </apex:selectList>  
+      </div>
+      
+      <div class="bold-label">Status</div>  
+      <div class="searchSelection">
+          <apex:selectCheckboxes value="{!status_selection}"  layout="pageDirection" html-data-search="status" id="status">
+                 <apex:selectOptions value="{!statusOptions}"/>     
+          </apex:selectCheckboxes>  
+      </div>
+
+      <div class="bold-label">Priority</div>
+      <div class="searchSelection">
+          <apex:selectCheckboxes value="{!priority_selection}"  layout="pageDirection" html-data-search="priority" id="priority">
+                 <apex:selectOptions value="{!priorityOptions}"/>     
+          </apex:selectCheckboxes>
+      </div>
+
+
+      <div class="bold-label">Category</div>   
+      <div class="searchSelection">
+          <apex:selectCheckboxes value="{!category_selection}"  layout="pageDirection" html-data-search="category" id="category">
+                 <apex:selectOptions value="{!categoryOptions}"/>     
+          </apex:selectCheckboxes>
+      </div>
+      
+      <div style=" margin-top: 20px; margin-bottom : 20px;">                 
+        <apex:commandLink onclick="doBlankSearch();return false;" styleClass="searchLink">Clear Search Filters</apex:commandLink>                                      
+      </div>        
+
+
+      <div style="margin:15px 0 15px 0;">   
+          <apex:commandButton value="Search" action="{!clicked}" onclick="doSearch();return false;" id="btnSearch"/>
+      </div>
+
+      <h3 style="margin-top:15px;display:block;">Remember this Search</h3>
+      <apex:commandLink onclick="setDefaultSearch();return false;" 
+                styleClass="searchLink"  
+                id="setDefaultLink"
+                style="float:left;"
+                >Set
+      </apex:commandLink>
+      <apex:commandLink onclick="removeDefaultSearch();return false;" 
+                styleClass="searchLink"  
+                id="removeDefaultLink"
+                style="float:right;margin-right:25px;"
+                >Clear
+      </apex:commandLink>
+      
+      <div style="clear:both"></div>
+
+    
+    </div>  
+ 
+   </apex:pageBlock>
+ 
+    </td>
+    <td valign="top">
+    
+    <apex:outputPanel id="mainPanel"> 
+        
+        <apex:pageBlock mode="edit" id="results">
+ 
+        <apex:pageBlockTable value="{!searchResults}" var="row"  id="results">
+    
+           <apex:column >
+    
+            <apex:outputLink value="/{!row.id}/e?retURL=/apex/PI_Search_Issues">
+               <i class="fa fa-pencil-square-o"></i>               
+            </apex:outputLink>                 
+            
+          </apex:column>
+
+           <apex:column >
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="Issue" action="{!toggleSort}" rerender="results,debug"
+                     title="Click to change sort order" oncomplete="initResults()">
+                        <apex:param name="sortField" value="Name" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                                             
+                <apex:outputLink value="/{!row.id}">
+                {!row.Name}
+                </apex:outputLink> 
+         
+            </apex:column>
+
+           <apex:column styleClass="wrapped">
+           
+                <apex:facet name="header">
+                    <apex:outputText >Title</apex:outputText>
+                </apex:facet>
+                
+                <apex:outputText value="{!row.SFDC_Issue_Name__c}"/> 
+                <span style="float:right;" class = "toggler" id="up_toggler_{!row.id}">+</span>
+                <span style="float:right;display:none" class = "toggler" id="down_toggler_{!row.id}">-</span>
+
+                <div id="item_detail_{!row.id}">                 
+                  <h3>Description</h3>
+                  <apex:outputText value="{!row.SFDC_Issue_Description__c}"/> 
+                  <h3>Detail</h3>
+                  <apex:outputText value="{!row.Issue_Detail__c}"/>
+                </div>
+
+            </apex:column>
+
+            <apex:column >
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="Category" action="{!toggleSort}" rerender="results,debug"
+                     title="Click to change sort order" oncomplete="initResults()">
+                        <apex:param name="sortField" value="Category__c" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputText value="{!row.Category__c}"/>
+             
+            </apex:column>
+
+            <apex:column >
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="Priority" action="{!toggleSort}" rerender="results,debug"
+                     title="Click to change sort order" oncomplete="initResults()">
+                        <apex:param name="sortField" value="SFDC_Issue_Priority__c" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputText value="{!row.SFDC_Issue_Priority__c}"/> 
+             
+            </apex:column>
+
+            <apex:column >
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="Status" action="{!toggleSort}" rerender="results,debug"
+                     title="Click to change sort order" oncomplete="initResults()">
+                        <apex:param name="sortField" value="SFDC_Issue_Status__c" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputText value="{!row.SFDC_Issue_Status__c}"/> 
+             
+            </apex:column>
+          
+        </apex:pageBlockTable>
+ 
+    </apex:pageBlock>
+ 
+    </apex:outputPanel>
+ 
+    </td>
+  </tr>
+  </table>
+  
+  
+  
+  <apex:pageBlock title="Review Issues in the Projects and Issues Database">
+
+      
+  </apex:pageBlock>    
+ 
+
+  </apex:form>
+      
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"/>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/jquery.spin.min.js"/>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.js"/>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"/>
+      
+      
+      <script type="text/javascript">
+
+             var j$ = jQuery.noConflict();
+             
+             j$(document).ready(function() {
+                 
+                  j$(window).keydown(function(event) {
+                    if (event.keyCode == 13) {
+                      callSearch();
+                      return false;
+                    }
+                   });
+                   
+                   sforce.connection.sessionId = "{!$Api.Session_ID}";
+  
+                    // Run the search stored in a cookie, if available
+                  doCookieSearch();     
+                  
+
+              });  
+                          
+
+            function doSearch(thisField) {
+
+                    //Currently not checks on enoughInput
+                    var enoughInput=true;                                        
+                    if (enoughInput) {
+                       callSearch();
+                    }
+
+             }
+             
+             /*   Salesforce puts it's own markup into the id so this function returns the value of the field
+                  ending in the given string */
+                  
+             function getValue(inputFieldName) {
+                  var ending = '*[id$=FIELD]';
+                  var res = ending.replace("FIELD", inputFieldName);
+                  var result =  j$(res).val();
+                  return result;
+             }
+             
+                   function setValue(inputFieldName, value) {
+                var ending = '*[id$=FIELD]';
+                var res = ending.replace("FIELD", inputFieldName);
+                var result =  j$(res).val(value);
+                return result;
+              }
+           
+
+             // Use the data attribute for selection 
+             function getDataValue(attrValue) {
+                  var ending = '*[data-search="ATTR-VALUE"]';
+                  var res = ending.replace("ATTR-VALUE", attrValue);
+                  var result =  j$(res).val();
+                  return result;             
+             }
+
+             function getCheckboxValue(inputFieldName) {
+
+                var ending = 'input[name$=FIELD]:checked';
+                var res = ending.replace("FIELD", inputFieldName);    
+
+                    var items = [];
+                    j$(res).each(function() {
+                            items.push(j$(this).val());
+                    });
+                var s = items.join(',');
+                return s;
+
+             }
+
+                 function setCheckboxValue(inputFieldName, value) {
+           
+                var ending = 'input[name$=FIELD]';
+                var res = ending.replace("FIELD", inputFieldName);  
+                j$(res).val(value);
+                
+             }
+
+             function getSelectValue(inputFieldName) {
+                  var ending = 'select[id$=FIELD]';
+                  var res = ending.replace("FIELD", inputFieldName);
+                  var result =  j$(res).val();
+                  return result
+             }
+
+                   function setSelectValue(inputFieldName, value) {
+                
+                  var ending = 'select[id$=FIELD]';
+                  var res = ending.replace("FIELD", inputFieldName);
+                  var result =  j$(res).val(value);
+                  return result           
+            }
+
+             
+             function hasCheckboxValue(inputFieldName) {
+                    var ending = 'input[name$=FIELD]:checked]';
+                    var res = ending.replace("FIELD", inputFieldName);                  
+                    return j$(res).length>0;
+                
+             }
+             
+             function clearValue(inputFieldName) {
+                      var ending = '*[id$=FIELD]';
+                      var res = ending.replace("FIELD", inputFieldName);                      
+                      j$(res).val('');
+             }
+
+             function doBlankSearch() {
+                      clearInputFields();
+                      callSearch();
+             }
+             
+            function callSearch() {
+
+                    j$("[id$=results]").html('');
+                    j$("[id$=results]").spin({ top:'20%', left: '50%', color : '#ccc', radius : 25, length : 20 });
+            
+                    // No need to pass the check box values, they are tied
+                    // directly to the ViewState
+                    
+                    runSearch();
+
+               
+            }
+
+            function initResults() {
+
+                j$('[id^=item_detail]').hide();
+                j$('.toggler').click( function (){
+                  
+                  var id = this.id.split('_')[2];
+
+                  j$('#item_detail_' + id).slideToggle();
+                  j$('[id$=toggler_' + id +']').toggle();  
+                
+                });
+
+
+            }  
+            
+            /* Clear the values in all input fields */
+            function clearInputFields() {
+               j$('input[type=checkbox]').not('#create-option-toggle').prop('checked',false);
+               j$('input[type=text]').val('');
+            }
+
+
+                function setDefaultSearch() {
+                   
+                   // apex_ as a prefix is required for the Apex code to see the cookie     
+                   j$.removeCookie('apex__alzIssueSearch');
+                   
+                   var s='';
+                   
+                   s+= getValue('project') + ';';
+                   s+= getValue('owner') + ';';
+                   s+= getCheckboxValue('priority') + ';';
+                   s+= getCheckboxValue('status') + ';';
+                   s+= getCheckboxValue('category') + ';';                    
+                   s+= getValue('subProject');
+                    
+                   //set with a name prefixed with apex__ so Apex can see the cookie if required
+                   j$.cookie('apex__alzIssueSearch',s,{expires : 365});                   
+                   
+                   j$('#setDefaultSearchDialog').dialog({
+                         buttons: [
+                         {
+                          text: "OK",
+                          click: function() {
+                            j$( this ).dialog( "close" );
+                          }
+                        }
+                      ]
+                   });
+                                    
+           }
+           
+           function removeDefaultSearch() {
+                   
+               j$.removeCookie('apex__alzIssueSearch'); 
+               j$('#removeDefaultSearchDialog').dialog({
+                     buttons: [
+                     {
+                      text: "OK",
+                      click: function() {
+                        j$( this ).dialog( "close" );
+                      }
+                    }
+                  ]
+               });
+                                    
+           }
+           
+           function doCookieSearch() {
+                
+                var s= j$.cookie('apex__alzIssueSearch');
+                   
+                if (typeof s === 'undefined') { 
+                    callSearch(); 
+                    return;
+                }  
+ 
+                var v = s.split(';'); 
+                                
+                setValue('project',v[0]);
+                setValue('owner',v[1]);
+                setCheckboxValue('priority',v[2].split(','));
+                setCheckboxValue('status',v[3].split(','));
+                setCheckboxValue('category',v[4].split(','));
+                
+                /* This doesn't work because the option does not exist until the 
+                   the select option list is refreshed 
+        
+                    setValue('subProject',v[5]);                   
+                    callSearch();        
+          
+                    Instead, Rerender the option set for subProject, which is dependent on the 
+                    selected Project. This will call doSetSubProjectOptions() when it completes
+                
+                */
+                
+                afUpdateSubProjectOptions();                
+           
+           }
+           
+           function doSetSubprojectOption() {
+           
+               var s= j$.cookie('apex__alzIssueSearch');
+                   
+                if (typeof s === 'undefined') { 
+                    callSearch(); 
+                    return;
+                }  
+ 
+                var v = s.split(';'); 
+                setValue('subProject',v[5].split(','));           
+                callSearch();
+           
+           }
+
+            
+
+      </script>
+
+      <div style="display:none">
+      <div id="setDefaultSearchDialog" title="Remember this Search">
+         <p>Default Search has been set. The search will run with the selections you have made each time the page is opened.</p>
+      </div>
+      
+      <div id="removeDefaultSearchDialog" title="Basic dialog">
+        <p>Default search has been cleared.</p>
+      </div>
+      </div>
+      
+
+</apex:page>

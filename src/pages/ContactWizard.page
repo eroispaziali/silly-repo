@@ -1,0 +1,94 @@
+<apex:page standardController="Contact" extensions="ContactWizardController" showheader="true">
+  <img title="People" class="pageTitleIcon" alt="People" src="/s.gif"/>
+ <apex:includeScript value="{!URLFOR($Resource.jQuery19, '/js/jquery-1.8.2.min.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.jQuery19, '/js/jquery-ui-1.10.0.custom.min.js')}"/> 
+
+  <apex:stylesheet value="{!URLFOR($Resource.jQuery19, '/css/ui-lightness/jquery-ui-1.10.0.custom.min.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.bootstrap_custom, '/css/bootstrap.css')}"/>
+  <script type="text/javascript">
+
+    //Ensure correct version of jQuery
+    var j$;
+    for (var i=0;i<5;i++){
+        j$=jQuery.noConflict(true);
+        if(j$().jquery=="1.8.2") {break;}
+    }
+
+    j$(document).ready(function() {
+    
+        //Remove those iritating titles to the left of the buttons                     
+        j$('td.pbTitle').each(function() {
+            var b = (j$(this).text().trim()=== '' && j$(this).children().length == 0);
+            if(b) j$(this).remove();
+         });
+                
+    });
+
+</script>
+  <apex:form >
+  <apex:pageBlock title="CRS Person Wizards">
+    A set of tasks that can be performed on this person.
+   <apex:pageBlockButtons location="Bottom">
+    <!--apex:commandButton value="  Save  " action=""/-->
+    <apex:commandButton value=" Cancel " action="/{!recContact.id}?retId={!recContact.id}"/>
+   </apex:pageblockButtons>
+   <apex:pageblocksection columns="1">
+        <apex:pageMessages />
+
+   </apex:pageblocksection>
+
+
+  
+   <apex:pageBlockSection title="Person Details" columns="2" collapsible="false">
+    <apex:pageBlockSectionItem ><apex:outputLabel value="Person ID"></apex:outputLabel><apex:outputField id="PersonID" label="Person ID" value="{!recContact.Client_reference_number__c}" /></apex:pageBlockSectionItem>
+  
+    <apex:pageBlockSectionItem ><apex:outputLabel value="Person Record Type"></apex:outputLabel><apex:outputText id="RecordType" label="Person Record Type" value="{!recRecordTypeName}" /></apex:pageBlockSectionItem>
+  
+    <apex:pageBlockSectionItem ><apex:outputLabel value="Name"></apex:outputLabel><apex:outputField id="ContactName" label="Name" value="{!recContact.name}" /></apex:pageBlockSectionItem>
+  
+    <apex:pageBlockSectionItem ><apex:outputLabel value="Date of Birth"></apex:outputLabel><apex:outputField id="ContactDoB" label="Date of Birth" value="{!recContact.Birthdate}" /></apex:pageBlockSectionItem>
+
+    <apex:pageBlockSectionItem rendered="{!recContact.rrpu__Alert_Message__c!=null}" ><apex:outputLabel value="Alert Message"></apex:outputLabel><apex:outputField id="AlertMsg" label="Alert Message" value="{!recContact.rrpu__Alert_Message__c}" /></apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem rendered="{!recContact.rrpu__Alert_Message__c==null}" ></apex:pageBlockSectionItem>
+
+    <apex:pageBlockSectionItem ><apex:outputLabel value="Deceased?"></apex:outputLabel><apex:outputField id="ContactDead" label="Deceased?" value="{!recContact.Deceased__c}" /></apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem ><apex:outputLabel value="Deceased Date"></apex:outputLabel><apex:outputField id="ContactDeceasedDate" label="Deceased Date" value="{!recContact.Deceased_Date__c}" /></apex:pageBlockSectionItem>
+
+
+    
+   </apex:pageBlockSection>
+   <apex:pageBlockSection title="Service Usage Summary"  columns="1" collapsible="false">
+    <apex:pageBlockSectionItem rendered="{!totalRecCnt==0}">This person has no service usages.</apex:pageBlockSectionItem> 
+    <apex:pageBlockSectionItem rendered="{!totalRecCnt>0}">
+    This person has {!totalOpenCnt} open Service Usage record{!IF(totalOpenCnt==1,'','s')} 
+    and {!totalClosedCnt} closed Service Usage record{!IF(totalClosedCnt==1,'','s')}.
+    
+    </apex:pageBlockSectionItem>
+   </apex:pageBlockSection>
+   <apex:pageBlockSection title="Available Actions"  columns="2" collapsible="false">
+
+<!--Two columns - available actions go here-->
+<!--button to screen here-->
+<apex:pageBlockSectionItem >Anonymise Person</apex:pageBlockSectionItem>
+<!--Anonymise - Only available if new criteria (Change 426) for Anonymise Person are passed.  Otherwise "Not Available for this Person" will be displayed.-->
+<apex:pageBlockSectionItem rendered="{!CanAnon==true}"><apex:commandButton value="           Anonymise         " action="/apex/ContactAnonymiseWizard?id={!recId}" />  </apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem rendered="{!CanAnon==false}" helptext="{!AnonymisingHelpText}">
+    <apex:outputText >Person cannot be anonymised as they or a related person are in receipt of services.</apex:outputText>
+</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem >Person has died. {!IF(totalOpenCnt>=1,'Close open service(s) and r','R')}ecord date of death on Person record.  </apex:pageBlockSectionItem>
+<apex:PageBlockSectionItem rendered="{!recContact.Deceased__c==true}">Person has already been recorded as deceased, this wizard is not now available.</apex:pageBlockSectionItem>
+
+<apex:pageBlockSectionItem rendered="{!recContact.Deceased__c==false}">
+<apex:commandButton value="Record Death of Person" action="/apex/ContactDiedWizard?id={!recId}"/>
+<!--Button  Enter details of date and a comment that is sent to all Assigned Workers for Open Service Usage records.  Open Service Usage records will be closed.-->
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >Log an Action, record against {!IF(totalOpenCnt>1,'one or more','the')} open service{!IF(totalOpenCnt>1,'s','')}.  </apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem rendered="{!totalOpenCnt>0||totalRelatedRecCnt>0}" ><apex:commandButton value="        Log An Action         " action="/apex/ContactLogAnActionWizard?id={!recId}" />  </apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem rendered="{(!totalOpenCnt==0)&&(totalRelatedRecCnt==0)}" >Cannot log an action as this person does not have any open service usages.</apex:pageBlockSectionItem>
+
+   </apex:pageBlockSection>
+  </apex:pageBlock>
+  </apex:form>  
+</apex:page>

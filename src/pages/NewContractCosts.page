@@ -1,0 +1,63 @@
+<apex:page standardController="Service_Contract__c" extensions="ServiceContractWizard">
+<script type="text/javascript">
+    function changeFCR(element, output) {
+        // Look up cost and take 15%
+        var cost = document.getElementById(element);
+        var fcr = parseFloat(cost.value - (cost.value/1.15));
+        
+        // If it's not a number, set FCR to £0.00
+        if (isNaN(fcr)) fcr = 0.00;
+        
+        // Write to FCR field
+        document.getElementById(output).value = fcr;
+    }
+</script>
+    <apex:sectionHeader title="Add/Edit Contract Costs" />
+    <apex:form >
+        <apex:pageBlock title="Contract Cost Lines">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!saveCosts}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancelCosts}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+            
+            <p>Please enter the cost of contract for each service type and financial year including its full cost recovery amount.</p><p/>
+            <p>NOTE: Only enter digits in the cost fields. For example, 35000 and 40000.50 are both valid, whereas 35,000 is not.</p><p/>
+            
+            <apex:pageBlockSection >
+                <apex:dataTable value="{!costs}" var="cost" id="theTable" rowClasses="odd,even" styleClass="tableClass">
+                    <apex:column >
+                        <apex:facet name="header">Financial Year</apex:facet>
+                        <apex:inputField id="year" value="{!cost.Year__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Service Definition</apex:facet>
+                        <apex:inputField id="def" value="{!cost.Service_Definition__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Cost (inc FCR)</apex:facet>
+                        <apex:inputField id="c" value="{!cost.Cost__c}" onchange="changeFCR('{!$Component.c}', '{!$Component.fc}');"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">FCR (£)</apex:facet>
+                        <apex:inputField value="{!cost.FCR__c}"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Suggested FCR (£)</apex:facet>
+                        <apex:inputText id="fc" value="{!defaultFCR}" disabled="true"/>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Pays VAT?</apex:facet>
+                        <apex:inputField id="vat" value="{!cost.Pays_VAT__c}"/>
+                    </apex:column>
+                </apex:dataTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

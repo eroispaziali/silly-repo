@@ -1,0 +1,227 @@
+<apex:page standardController="Contact" extensions="CollectorSessionController">
+<apex:form >
+<apex:pageBlock >
+
+<img title="User" class="pageTitleIcon" alt="User" src="/s.gif"/>
+
+<h1 style="font-size: 100%; font-weight: bold;">
+    Collection Sessions for :  
+</h1>
+<br/>
+<h1 style="font-size: 150%; font-weight: bold;">{!Contact.Name} [{!Contact.Client_reference_number__c}]</h1>
+<br/><br/>
+<apex:pageblocksection id="pgmessage" >
+  <apex:pageMessages />
+</apex:pageblocksection>
+<apex:pageblocksection columns="1">
+<apex:outputfield id="description" value="{!Contact.description}"> 
+</apex:outputfield>
+<apex:outputfield id="additonal_notes" value="{!Contact.Additional_notes__c}"> 
+</apex:outputfield>
+</apex:pageblocksection>
+</apex:pageblock>
+
+<apex:pageblock >
+<!-- ///////////////////////////////// Search Criteria block \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<table width='100%'>
+    <apex:outputPanel id="mainsearch"> 
+    <tr>
+    <td width='40%'>
+        Collections:&nbsp;&nbsp; 
+        <apex:selectList id="selectCollection" size="1" value="{!selectCollection}">
+          <apex:selectOptions value="{!lstCollectionOptions}" /> 
+          <apex:actionSupport event="onchange" reRender="selectLocation,selectDate" />
+        </apex:selectList>
+    </td>
+   <td width='40%'>
+           Available Locations:&nbsp;&nbsp; 
+        <apex:selectList id="selectLocation" size="1" value="{!selectLocation}">
+          <apex:selectOptions value="{!lstLocationOptions}" />
+          <apex:actionSupport event="onchange" reRender="selectDate" /> 
+        </apex:selectList>
+    </td>
+    
+<!--td width='40%'-->
+<!--        Available Locations:&nbsp;&nbsp; -->
+<!--        <apex:selectList id="selectLocation" size="1" value="{!selectLocation}"> -->
+<!--          <apex:selectOptions value="{!lstLocationOptions}" />  -->
+<!--        </apex:selectList> -->
+<!--/td-->
+    <td>
+        Dates:&nbsp;&nbsp;  
+        <apex:selectList id="selectDate" size="1" value="{!selectDate}">
+          <apex:selectOptions value="{!lstAvailableDays}" /> 
+        </apex:selectList>
+    </td>
+    
+    </tr>
+    <tr>
+    <td/>
+    <td/>
+    <td > 
+        <apex:commandButton style="border: 10 ; color: #1797C0; font-size: 90%; font-weight: bold; height: 24px;"  value="  Search  " action="{!doSearch}" status="searchWait" rerender="pbtSearchResult,divPrevNextLinks,pgmessage"/>
+            
+        <apex:actionStatus id="searchWait">
+          <apex:facet name="start">
+          <img class="waitingImage" src="/img/loading.gif"/>
+          Searching...
+          </apex:facet>
+          <apex:facet name="stop"/>
+        </apex:actionStatus>     
+
+            <apex:commandButton style="border: 10 ; color: #1797C0; font-size: 90%; font-weight: bold; height: 24px;"  value="  Clear  " action="{!ClearResult}" status="searchWait" />            
+        </td>
+    </tr>
+    </apex:outputPanel>
+
+</table> 
+<br/>
+<apex:actionFunction name="doSearchAF" action="{!doSearch}" rerender="pbtSearchResult,divPrevNextLinks,pgmessage"/>
+
+<!-- ///////////////////////////////// PageBlock to show searched result \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<apex:pageBlockTable value="{!lstToShowSearchedSessions}" id="pbtSearchResult" var="a"  > 
+   <apex:column width="3%">
+        <apex:facet name="header">
+             <!--apex:inputCheckbox onclick="selectAll(this)" value="{!bolUnSelect}"/-->
+        </apex:facet>
+        <apex:inputCheckbox value="{!a.isSelected}" id="sessionSelect"/>
+    </apex:column>  
+    
+    <apex:column headerValue="Location">
+        <apex:facet name="header">
+            <apex:outputPanel >
+                <apex:commandLink action="{!sortNSearch}" status="sortWait" rerender="pbtSearchResult,divPrevNextLinks">
+                    Location
+                    <apex:image url="{!IF(sortDirection=='ASC','/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif')}"/>
+                </apex:commandLink>            
+                    <apex:actionStatus id="sortWait">
+                          <apex:facet name="start">
+                          <img class="waitingImage" src="/img/loading.gif"/>
+                          Sorting...
+                          </apex:facet>
+                          <apex:facet name="stop"/>     
+                    </apex:actionStatus>  
+            </apex:outputPanel>
+
+        </apex:facet>
+        <apex:outputField value="{!a.recCTS.Collection_Location__r.name}"/> 
+  
+    </apex:column>  
+    <apex:column headerValue="Date">
+        <apex:outputtext value="{0,date,EEEE dd'/'MM'/'yyyy}"  id="StartDAte">
+            <apex:param value="{!a.recCTS.Start_Date_Time__c}"/>
+        </apex:outputText>
+    </apex:column>
+    <apex:column headerValue="Start Time">
+        <apex:outputtext value="{0,date, HH:mm}" id="StartTime">
+         <apex:param value="{!a.recCTS.Start_Date_Time__c}"/>
+        </apex:outputText>
+    </apex:column>
+    <apex:column headerValue="Collectors Assigned">
+        <apex:outputtext value="{!a.recCTS.Count_of_Collectors__c}" id="NumberCollectors"/>
+    </apex:column>
+    
+</apex:pageBlockTable>
+<br/>
+
+<apex:actionFunction action="{!PageReSized}" name="PageReSized" rerender="pbtSearchResult,divPrevNextLinks">   
+</apex:actionFunction>
+
+<!-- ///////////////////////////////// Records/Page and navigation links section \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<apex:outputPanel id="divPrevNextLinks">
+    <div class='prevNextLinks' align='right' >
+        Records: &nbsp;
+        <apex:selectList size="1"  onchange="document.getElementById('{!$Component.pageSize}').value=this.options[this.selectedIndex].value;PageReSized(this.options[this.selectedIndex].value);" >
+            <apex:selectOption itemLabel="12" itemValue="12" />
+            <apex:selectOption itemLabel="24" itemValue="24" />
+            <apex:selectOption itemLabel="48" itemValue="48" />
+            <apex:selectOption itemLabel="96" itemValue="96" />
+            <apex:selectOption itemLabel="200" itemValue="200" />            
+        </apex:selectList>
+        
+        &nbsp;Per Page.
+        <apex:inputHidden id="pageSize" value="{!PageSize}" />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        <apex:outputPanel style="align:right">
+            <apex:commandLink id="prevLnk1" styleClass="prevArrow" action="{!previous}" status="navigateWait" rendered="{!hasPrevious}" rerender="pbtSearchResult,divPrevNextLinks" > 
+                <apex:image styleClass="prevArrow" url="/img/search_prevarrow.gif"/>
+                Previous
+            </apex:commandLink>
+            
+            <apex:image styleClass="prevoff" url="/img/search_prevarrow_disabled.gif" rendered="{!NOT(hasPrevious)}"/> 
+            &nbsp;
+            
+            <apex:outputText id="prevLnk2" styleClass="prevArrow"  rendered="{!NOT(hasPrevious)}">
+                Previous
+            </apex:outputText>
+            
+            &nbsp;|&nbsp;
+            
+            <apex:commandLink id="nextLnk1" styleClass="nextArrow" action="{!next}" status="navigateWait" rendered="{!hasNext}" value="Next" rerender="pbtSearchResult,divPrevNextLinks">  
+                &nbsp;<apex:image styleClass="nextArrow" url="/img/search_nextarrow.gif"/>
+            </apex:commandLink>
+            
+            <apex:outputText id="nextLnk2" styleClass="nextArrow"  rendered="{!NOT(hasNext)}">
+                Next
+            </apex:outputText> 
+            &nbsp;
+            
+            <apex:image styleClass="nextArrow" url="/img/search_nextarrow_disabled.gif" rendered="{!NOT(hasNext)}"/>
+        </apex:outputPanel>
+        <apex:actionStatus id="navigateWait">
+              <apex:facet name="start">
+              <img class="waitingImage" src="/img/loading.gif"/>
+              Navigating...
+              </apex:facet>
+              <apex:facet name="stop"/>     
+        </apex:actionStatus>    
+    </div>
+</apex:outputPanel>
+
+<br/>
+<apex:commandButton value=" Insert Selected " action="{!InsertSelected}"  rerender="pbtSearchResult,divPrevNextLinks,pbtAddedSUs,pgmessage"/>
+<br/>
+<hr/>
+<!-- ///////////////////////////////// PageBlock of Selected/Added Sessions \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+</apex:pageBlock>
+<apex:pageBlock title="Selected Session(s)">
+    <apex:pageBlockButtons > 
+        <apex:commandButton value=" Cancel " action="/{!$CurrentPage.Parameters.id}"/> 
+        <apex:commandButton value=" Done " action="{!saveNReturn}"/> 
+    </apex:pageBlockButtons> 
+    <apex:pageBlockTable value="{!lstAddedSessions}" id="pbtAddedSUs" var="a" rendered="true" > 
+    
+    <apex:column width="3%">
+        <apex:facet name="header">
+             <!--apex:inputCheckbox onclick="selectInsertedAll(this)" /-->
+        </apex:facet>
+    </apex:column>  
+    
+        <apex:column >
+            <apex:facet name="header">Location</apex:facet>
+            <apex:outputfield value="{!a.recCTS.Collection_Location__r.name}"/>
+        </apex:column> 
+
+        <apex:column headerValue="Date" >
+            <apex:outputtext value="{0,date,EEEE dd'/'MM'/'yyyy}"  id="StartDAte">
+                <apex:param value="{!a.recCTS.Start_Date_Time__c}"/>
+            </apex:outputText>
+        </apex:column>
+
+        <apex:column headerValue="Start Time" >
+        <apex:outputtext value="{0,date, HH:mm}" id="StartTime">
+         <apex:param value="{!a.recCTS.Start_Date_Time__c}"/>
+        </apex:outputText>
+        </apex:column>  
+
+    <apex:column headerValue="Collectors Assigned">
+        <apex:outputtext value="{!IF(a.IsNew==true,a.recCTS.Count_of_Collectors__c+1, a.recCTS.Count_of_Collectors__c)}" id="NumberCollectors"/>
+    </apex:column>
+ 
+
+
+    </apex:pageBlockTable>
+</apex:pageblock> 
+</apex:form>
+</apex:page>

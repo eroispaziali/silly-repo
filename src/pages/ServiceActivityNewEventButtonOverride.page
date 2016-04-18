@@ -1,0 +1,45 @@
+<apex:page standardController="Services__c" >
+<script type="text/javascript">
+var __sfdcSessionId = '{!GETSESSIONID()}';
+</script>
+<script src="../../soap/ajax/23.0/connection.js" type="text/javascript"></script>
+
+<script>
+try
+{
+//alert('{!Services__c.service_type__c}');
+//console.log("{!Services__c.service_type__c}");
+//console.log(typeof "{!Services__c.service_type__c}");
+//console.log({!Services__c.service_type__c});
+//console.log(typeof {!Services__c.service_type__c});
+
+if ("{!Services__c.service_type__c}"=="Awareness raising")
+  {
+  var result =sforce.connection.query("Select Id, Name from RecordType where IsActive=true and SobjectType='Event' and DeveloperName ='Awareness_Raising_Event'");
+  var recs = result.getArray("records" );
+  //alert(recs[0].Id);
+  window.location.href='/00U/e?what_id={!Services__c.id}&retURL=%2F{!Services__c.id}&RecordType='+recs[0].Id+'&ent=Event';
+  //window.location.href='/00U/e?what_id={!Services__c.id}&retURL=%2F{!Services__c.id}&RecordType='+'012S00000008lkTIAQ'+'&ent=Event';
+  }
+else if ("{!Services__c.service_type__c}"=="Activity group" || 
+         "{!Services__c.service_type__c}"=="Dementia cafe" || 
+         "{!Services__c.service_type__c}"=="Information programme" ||
+         "{!Services__c.service_type__c}"=="Peer support group" ||
+         "{!Services__c.service_type__c}"=="Singing for the Brain" ||
+         "{!Services__c.service_type__c}"=="Newsletter" ||
+         "{!Services__c.service_type__c}"=="Day care and support (establishment based)" )
+  {
+  var result =sforce.connection.query("Select Id, Name from RecordType where IsActive=true and SobjectType='Event' and DeveloperName ='CRS_Group_Event'");
+  var recs = result.getArray("records" );
+  //alert(recs[0].Id);
+  window.location.href='/00U/e?what_id={!Services__c.id}&retURL=%2F{!Services__c.id}&RecordType='+recs[0].Id+'&ent=Event';
+  //window.location.href='/00U/e?what_id={!Services__c.id}&retURL=%2F{!Services__c.id}&RecordType='+'012S00000008l4hIAA'+'&ent=Event';
+  }
+else
+  {
+  alert('Event cannot be created for this Service Type!');
+  window.location.href='/{!Services__c.id}';
+  }
+}catch(ex){alert(ex);}
+</script> 
+</apex:page>

@@ -1,0 +1,87 @@
+<apex:page standardController="Contact" extensions="QuickEntryTaskPersonController" sidebar="true" showHeader="true">
+    <!-- Define Tab panel .css styles -->
+     <style>
+    .activeTab {background-color: #236FBD; color:white; background-image:none}
+    .inactiveTab { background-color: lightgrey; color:black; background-image:none}
+    </style> 
+     
+    <script language="javascript">
+        function cancel()
+        {
+             window.close();   
+        }
+    </script>
+    <script>
+        function setFocusOnLoad() {}
+    </script>
+    <apex:form id="F">
+        <!-- Define the JavaScript function setFocus-->
+        <apex:actionFunction name="setFocus" focus="click"
+        rerender="out" />
+                <br/>
+                <h1 style="font-size: 150%; font-weight: bold;">
+                    Call Details 
+                </h1>
+                <br/><br/><br/>
+                <apex:pageBlock id="P2">
+                    
+                    <apex:pageblockButtons location="bottom">
+                         <apex:commandButton value=" Save " action="{!createTask}" />
+                         <apex:commandButton action="{!createTaskAndSearchForPerson}" value="Save and Add Caller" />    
+                         <apex:commandButton onclick="cancel()" value="Cancel"/>
+                    </apex:pageblockButtons>
+                    <apex:pageblocksection columns="1" > 
+                        <apex:pageMessages />  
+                    </apex:pageblocksection>
+                    <apex:pageBlockSection columns="2" id="T1" title="Call Details">
+                        <apex:pageBlockSection columns="1" >
+                         <apex:pageBlockSectionItem labelStyle="width: 300px" helptext="Enter the Service Name of the Information Provision service.  The service name is followed by Operated By in brackets.   If you have more than one Account in CRS, you will see services for all your localities, with the locality name in a second set of brackets."> 
+                           <apex:outputLabel value="Service"/> 
+                           <apex:outputPanel layout="block" styleClass="requiredInput">
+                           <apex:outputPanel layout="block" styleClass="requiredBlock"></apex:outputPanel>
+                            <apex:selectList size="1" value="{!selectedServiceName}" id="sel1" label="Service">
+                                <apex:selectOptions value="{!ServiceNames}" id="selOpt2"/>
+                            </apex:selectList>
+                           </apex:outputPanel> 
+                         </apex:pageBlockSectionItem>  
+                        </apex:pageBlockSection>
+                        <apex:pageblockSection columns="1" id="T3">
+                            <apex:inputfield value="{!recTask.Time_of_call__c}" required="true"/> 
+                        </apex:pageblockSection>
+                    </apex:pageBlockSection> 
+                    <apex:outputpanel >
+                        <apex:outputLabel value="Comments" style="font-weight:bold" for="ip"/>
+                        <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"></apex:outputPanel>   
+                        <apex:inputtextarea value="{!recTask.Description}" rows="6" style="width:95%;" id="ip"/>
+                    </apex:outputpanel>
+                    </apex:outputpanel>
+                    <apex:pageBlockSection columns="2" id="T4" title="Information requirements">
+                        <apex:inputfield value="{!recTask.Information_Provided__c}" id="test"/>
+                         <apex:inputfield value="{!recTask.Other_Information_Provided__c}" />
+                         <apex:inputField value="{!recTask.Postcode_Sector__c}" id="Custom_validation"/>
+                    </apex:pageBlockSection> 
+                    <apex:pageBlockSection columns="2" id="T5" title="Call reporting">
+                        <apex:pageBlockSection columns="1" id="T6">
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Caller Type" for="CallerTypeId"/>
+                                    <apex:inputfield value="{!recTask.Caller_type__c}" required="true" id="CallerTypeId">
+                                    </apex:inputField>
+                            </apex:pageBlockSectionItem>
+                            <apex:inputfield value="{!recTask.Other_Caller_type__c}" />
+                            <apex:inputfield value="{!recTask.Format__c}" required="true"/>
+                            <apex:inputfield value="{!recTask.In_Out__c}" />
+                            <apex:inputfield value="{!recTask.Subject}" required="true"/>
+                        </apex:pageBlockSection>
+                        <apex:pageblockSection columns="1" id="T7">
+                            <apex:inputfield value="{!recTask.Call_Outcome__c}" required="true"/>
+                            <apex:inputfield value="{!recTask.Staff_Time_Minutes__c}" required="true"/>
+                            <apex:inputfield value="{!recTask.Volunteer_Time_Minutes__c}" required="true"/>
+                        </apex:pageblockSection>
+                    </apex:pageBlockSection> 
+                    <apex:pageblockSection columns="1" id="T8">
+ <br/><p><h4>Caller Details are only required if you expect that the caller will become a service user; otherwise do not record the information.</h4></p>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+    </apex:form>
+</apex:page>

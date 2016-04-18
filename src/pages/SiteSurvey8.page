@@ -1,0 +1,42 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section Six: Branding"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="" id="bra">
+            <apex:outputLabel value="Brand visibility" for="b1"/>
+            <apex:inputField id="b1" value="{!survey.f_Brand_visibility__c}"/>
+            <br/>
+            <apex:outputLabel value="Is the brand visible and appropriate?" for="b2"/>
+            <apex:inputField id="b2" value="{!survey.Is_the_brand_visible_and_appropriate__c}"/>
+        </apex:pageBlock>
+    </apex:form>
+    <br/>
+<apex:sectionHeader title="" subtitle="Section Seven: Environmental"/>
+<apex:messages />
+    <apex:form >
+        <apex:pageBlock title="" id="env">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!section7}" value="Back" styleClass="btn"/>
+                    <apex:commandButton action="{!section9}" value="Next" styleClass="btn"/>
+                    <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+            
+            <apex:outputLabel value="Any recycling policies in place?" for="e1"/>
+            <apex:inputField id="e1" value="{!survey.g_Recycling_policies__c}"/>
+            <br/>
+            <apex:outputLabel value="Any other environmental systems" for="e2"/>
+            <apex:inputField id="e2" value="{!survey.g_Environmental_systems__c}"/>      
+        </apex:pageBlock>
+        
+         <apex:pageBlockSection title="Comments">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Comments" for="Comments"/>
+                  <apex:inputField id="Comments" value="{!survey.Comments_page_8__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+
+    </apex:form>
+</apex:page>

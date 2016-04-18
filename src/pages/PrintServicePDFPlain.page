@@ -1,0 +1,246 @@
+<apex:page standardController="Services__c" showHeader="false" sidebar="false" standardStylesheets="false" renderAs="pdf">
+<head>
+<style type="text/css">
+@page {
+    size: A4;
+    body { font-family: Arial Unicode MS; }
+    
+    margin-top: 1cm;
+    margin-left: 0.8cm;
+    margin-right: 1cm;
+    margin-bottom: 1.1cm;
+}
+
+#container
+{
+margin: 0px;
+font-size: 17px;
+position: absolute;
+}
+
+#main
+{
+height: 24.5cm;
+margin: 0px;
+padding: 0px;
+}
+
+#left
+{
+float: left;
+margin: 0;
+padding: 0;
+width: 9cm;
+}
+
+#right
+{
+float: left;
+margin: 0;
+padding: 0px 1em;
+width: 9cm;
+}
+
+#bottom
+{
+clear: both;
+margin: 0;
+padding: 0;
+}
+
+#divoptimes
+{
+clear: both;
+margin: 0px;
+padding: 0px;
+padding-top: 20px;
+}
+
+#divcomments
+{
+clear: both;
+margin: 0;
+padding: 0px;
+padding-top: 20px;
+}
+
+#divdisclaimer
+{
+clear: both;
+margin: 0;
+padding: 0;
+height: 0.5cm;
+}
+
+body {
+    font-family: "FS Albert", Arial, sans-serif;
+    padding: 0px;
+}
+
+h1, h2, h3, h4, h5 {
+    margin-bottom: 0px;
+}
+
+h1 {
+    margin-top: 2px;
+}
+
+h3 {
+    margin-top: 0px;
+}
+
+h4 {
+    margin-top: 25px;
+}
+
+.heading {
+    font-weight: normal;
+}
+
+#disclaimer {
+    font-weight: bold;
+    font-size: 10px;
+    margin-top: 0px;
+}
+</style>
+</head>
+
+<div id="container">
+  <div id="main">
+    <h1>{!Services__c.Name}</h1>
+
+    <div id="left">
+        <apex:outputField value="{!Services__c.Photo__c}"/>
+        <br/>
+        <!--<apex:outputText value="{!Services__c.Photo_Caption__c}"/>-->
+        
+        <apex:outputText rendered="{!((Services__c.Default_Location__r.Street__c <> '') || (Services__c.Default_Location__r.City__c <> '') || (Services__c.Default_Location__r.Postcode__c <> ''))}">
+            <h4>Address</h4>
+            <apex:outputText rendered="{!(Services__c.Default_Location__r.Address_Details__c <>'')}">
+                <apex:outputText value="{!Services__c.Default_Location__r.Address_Details__c}"/><br/> 
+            </apex:outputtext>
+           <apex:outputText value="{!Services__c.Default_Location__r.Street_Line_1__c}"/><br/>
+            <apex:outputText rendered="{!(Services__c.Default_Location__r.Street_Line_2__c <> '')}">
+                <apex:outputText value="{!Services__c.Default_Location__r.Street_Line_2__c}"/><br/>
+            </apex:outputtext>
+            <apex:outputText rendered="{!(Services__c.Default_Location__r.Street_Line_3__c <> '')}">
+                <apex:outputText value="{!Services__c.Default_Location__r.Street_Line_3__c}"/><br/>
+            </apex:outputtext>
+            <apex:outputText rendered="{!(Services__c.Default_Location__r.Street_Line_4__c <> '')}">
+                <apex:outputText value="{!Services__c.Default_Location__r.Street_Line_4__c}"/><br/>
+            </apex:outputtext>
+            <apex:outputText value="{!Services__c.Default_Location__r.City__c}"/><br/>
+            <apex:outputText value="{!Services__c.Default_Location__r.Postcode__c} {!Services__c.Default_Location__r.Country__c}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!((Services__c.Default_Location__r.Street__c == '') && (Services__c.Default_Location__r.City__c == '') && (Services__c.Default_Location__r.Postcode__c =='')) && ((Services__c.service_street__c <> '') || (Services__c.service_city__c <> '') || (Services__c.service_postcode__c <> ''))}">
+            <h4>Address</h4>
+            <!--<apex:outputText value="{!Services__c.service_street__c}"/><br/>-->
+            <apex:outputText value="{!Services__c.Street_Line_1__c}"/><br/>
+            <apex:outputText rendered="{!(Services__c.Street_Line_2__c <> '')}">
+            <apex:outputText value="{!Services__c.Street_Line_2__c}"/><br/>
+            </apex:outputtext>
+            <apex:outputText rendered="{!(Services__c.Street_Line_3__c <> '')}">
+            <apex:outputText value="{!Services__c.Street_Line_3__c}"/><br/>
+            </apex:outputtext>
+            <apex:outputText rendered="{!(Services__c.Street_Line_4__c <> '')}">
+            <apex:outputText value="{!Services__c.Street_Line_4__c}"/><br/>
+            </apex:outputtext>
+            <apex:outputText value="{!Services__c.service_city__c}"/><br/>
+            <apex:outputText value="{!Services__c.service_postcode__c} {!Services__c.service_country__c}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!( Services__c.RecordType.Name=='Internal Service')}">
+            <h4>Getting There</h4>
+            <apex:outputField value="{!Services__c.Getting_There__c}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!Services__c.Parking__c <> ''}">
+            <h4>Parking</h4>
+            <apex:outputText value="{!Services__c.Parking__c}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!((Services__c.Price__c <> '') &&( Services__c.RecordType.Name=='Internal Service'))}">
+            <h4>Price&nbsp;<apex:outputText styleClass="heading" value="{!Services__c.Price__c}"/></h4>
+        </apex:outputText>
+    </div>
+    
+    <div id="right">
+        <apex:outputText rendered="{!Services__c.service_telephone__c <> ''}">
+            <h4>Telephone</h4>
+            <apex:outputText value="{!Services__c.service_telephone__c}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!Services__c.service_email__c <> ''}">
+            <h4>Email</h4>
+            <apex:outputText value="{!Services__c.service_email__c}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!(Services__c.Primary_contact__r.Name <> '')}">
+            <h4>Contact</h4>
+            <apex:outputText value="{!Services__c.Primary_contact__r.Name}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!Services__c.service_website__c <> ''}">
+            <h4>Website</h4>
+            <apex:outputText value="{!Services__c.service_website__c}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!Services__c.Toilet_Facilities__c <> ''}">
+            <h4>Toilets</h4>
+            <apex:outputText styleClass="heading" value="{!Services__c.Toilet_Facilities__c}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!Services__c.Refreshments__c <> ''}">
+            <h4>Refreshments</h4>
+            <apex:outputText value="{!Services__c.Refreshments__c}"/>
+        </apex:outputText>
+        
+        <apex:outputText rendered="{!Services__c.Accessibility__c <> ''}">
+            <h4>Venue Accessibility</h4>
+            <apex:outputText styleClass="heading" value="{!Services__c.Accessibility__c}"/>
+        </apex:outputText>
+        
+         <apex:outputText rendered="{!((Services__c.service_targetclientgroup__c <> '')||(Services__c.Referral_only__c <> False) ||(Services__c.Funder_restriction__c <> ''))&& (Services__c.Record_Type_Name__c=='Internal')}"> 
+                    <h4>Who is this service for?</h4>
+                    <apex:outputText rendered="{!(Services__c.service_targetclientgroup__c <> '')&&(Services__c.Record_Type_Name__c=='Internal')}" value="{!Services__c.service_targetclientgroup__c}"/><BR/>
+                    <apex:outputText rendered="{!Services__c.Referral_only__c<>False}" value="Referral Only"/><BR/>
+                    <apex:outputText rendered="{!Services__c.Funder_restriction__c <> ''}" value="{!Services__c.Funder_restriction__c}"/>
+                </apex:outputText>
+                <apex:outputText rendered="{!((Services__c.Service_Criteria__c <> '')||(Services__c.Referral_only__c <> False) ||(Services__c.Funder_restriction__c <> ''))&&(Services__c.Record_Type_Name__c=='External')}"> 
+                    <h4>Who is this service for?</h4>
+                    <apex:outputText rendered="{!(Services__c.Service_Criteria__c <> '')&&(Services__c.Record_Type_Name__c=='External')}" value="{!Services__c.Service_Criteria__c}"/><BR/>
+                    <apex:outputText rendered="{!Services__c.Referral_only__c==true}" value="Referral Only"/><BR/>
+                    <apex:outputText rendered="{!Services__c.Funder_restriction__c <> ''}" value="{!Services__c.Funder_restriction__c}"/>
+                </apex:outputText>
+    </div>
+
+    <div id="divoptimes">
+        <apex:outputText rendered="{!Services__c.Opening_Times_Guidebook__c <> ''}">
+            <h3>Opening Times</h3>
+            <apex:outputField value="{!Services__c.Opening_Times_Guidebook__c}"/>
+        </apex:outputText>
+    </div>
+    <div id="divcomments">
+        <apex:outputText rendered="{!Services__c.service_description__c <> ''}">
+            <h3>Description</h3>
+            <apex:outputField value="{!Services__c.service_description__c}"/>
+        </apex:outputText>
+    </div>
+  </div>
+
+  <div id="divdisclaimer">
+      <apex:image id="logo" value="{!$Resource.AlzLogoBW}" style="float:right; margin: 0 0 0px 0px;" height="72" width="227"/>
+      <h5>Last Reviewed:&nbsp;<apex:outputText styleClass="heading" value="{0,date,dd'/'MM'/'yyyy}">
+                                  <apex:param value="{!Services__c.Last_Reviewed__c}"/>
+                              </apex:outputText>
+      </h5>
+      <apex:outputText rendered="{!Services__c.Record_Type_Name__c <> 'Internal'}">
+      <p id="disclaimer">DISCLAIMER: Opinions expressed in no way express the opinion of the Alzheimer's Society,
+          who will not accept liability arising from use or reliance upon this information.</p>
+      </apex:outputText>
+      <p id="disclaimer">Registered charity no. 296645. A company limited and registered in England no. 2115499</p>
+    
+  </div>
+</div>
+</apex:page>

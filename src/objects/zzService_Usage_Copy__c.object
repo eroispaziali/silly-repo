@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Assessed_for_benefits__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Assessed for benefits</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Benefits_received__c</fullName>
+        <externalId>false</externalId>
+        <label>Benefits received</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Attendance/Disability living allowance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Blue badge</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Carer allowance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Council tax discount</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Housing benefit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Income support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pension credit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other (please describe below)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Closure_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Set only when case is closed. Must be set if a ‘Closure Reason’ is set</inlineHelpText>
+        <label>Closure Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Closure_Reason__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Set only when case is closed. Must be set if ‘Closure Date’ is set</inlineHelpText>
+        <label>Closure Reason</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Case complete - outcomes met</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Financial Reasons</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Person Declined Service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Person no longer eligible for service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service no longer required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service user moved into full time care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service user moved out of area</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service user or person cared for deceased</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Temporary Suspension</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Referred to another service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Date_Assessment_Commenced__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The date on which the Full Assessment was started</inlineHelpText>
+        <label>Date Assessment Commenced</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_Referral_Acknowledged__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The date on which the service acknowledged receipt of the referral</inlineHelpText>
+        <label>Date Referral Acknowledged</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_Service_User_Contacted__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The date on which the Service User was first contacted</inlineHelpText>
+        <label>Date Service User Contacted</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_of_last_Activity__c</fullName>
+        <description>Calculated field - set to the date of the last completed activity related to the Service Usage or one of its outcomes.</description>
+        <externalId>false</externalId>
+        <label>Date of Last Activity</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Funding_Arrangement__c</fullName>
+        <description>Funding Arrangement as an optional picklist to Service Usage for Day Support, Home Support, Social Inclusion, Social Activity Group, Dementia Café, Peer Support and Singing for the Brain.</description>
+        <externalId>false</externalId>
+        <label>Funding Arrangement</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Direct Payments</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Personal Budget</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Self Funder</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Block Contract</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Has_Cognitive_Enhancer_been_Prescribed__c</fullName>
+        <description>Brought forward from Dementia Adviser CRS (moved from Person to Service Usage - Dementia Adviser Service only).</description>
+        <externalId>false</externalId>
+        <label>Has Cognitive Enhancer been Prescribed?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>How_Referrer_Heard_of_the_Service__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Records how the referrer found out about the service. Useful for reporting, particularly for self-referrals and referrals by family members</inlineHelpText>
+        <label>How Referrer Heard of the Service</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Advertisement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Existing relationship</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Leaflet</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Personal Recommendation from Professional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Personal Recommendation from Acquaintance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Referral from Professional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tesco Roadshow</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>If_yes_which_Enhancer__c</fullName>
+        <description>Used with the Has Cognitive Enhancer been Prescribed field.</description>
+        <externalId>false</externalId>
+        <label>If yes which Enhancer?</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Known_Risks__c</fullName>
+        <description>Used to record any risks of which we were notified by the Referrer.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Used to note any known risks indicated by the referrer</inlineHelpText>
+        <label>Known Risks</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Location_of_Paper_File__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Required if ‘ACTIVE’ or ‘PRE-CRS ONLY’ is selected as specifies where any paper file is held (i.e. name of office or specific service where it is filed)</inlineHelpText>
+        <label>Location of Paper File</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Next_Review_Date__c</fullName>
+        <description>Automatically set from related Activities with Subject &apos;Review&apos;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Specifies the (approximate) date of the next review</inlineHelpText>
+        <label>Next Review Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Other_How_referrer_heard_of_the_service__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Used to describe how the referrer heard of the service if ‘OTHER’ is selected in previous ‘How Referrer Heard’ field</inlineHelpText>
+        <label>Other</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Type_of_Referrer__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Used to describe the Referral Source if ‘OTHER’ is selected in previous ‘Referral Source’ field</inlineHelpText>
+        <label>Other Type of Referrer</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_benefits__c</fullName>
+        <externalId>false</externalId>
+        <label>Other Benefits</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Priority__c</fullName>
+        <description>Priority of service usage, only to be displayed on one-to-one services.</description>
+        <externalId>false</externalId>
+        <label>Priority</label>
+        <picklist>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medium</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Public_Alert_Message_Required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Only tick if everyone who is involved with this service user should contact you regarding the person.</inlineHelpText>
+        <label>Public Alert Message Required</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Reason_for_Referral__c</fullName>
+        <description>Shows the Reason for Referral/Outline of service required from the referral form.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Used to capture referral reason/outline of service requested from referral form</inlineHelpText>
+        <label>Reason for Referral</label>
+        <length>5000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Referral_Acknowledged__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Tick when any required feedback has been set to the referrer.</inlineHelpText>
+        <label>Feedback to Referrer</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Assessment_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The date on which the appropriateness, eligibility and suitability of the referral were assessed and a decision was taken as to whether the service should be provided</inlineHelpText>
+        <label>Date of Initial Assessment</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Referral Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Outcome__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The outcome of the assessment of the referral – whether ‘Case Opened’ or ‘Service Required’. Specifies if person accepted onto the service or not (and any action taken)</inlineHelpText>
+        <label>Referral Outcome</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Case Opened</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service Required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Eligible (Referred on)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Eligible (No further action)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service Declined (Referred on)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service Declined (No further action)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Active User</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Interested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Source__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The type of organisation or individual who made the referral. Used when reporting referral numbers. If Internal, complete ‘Referral Service’; if External, complete fields ‘Referral Organisation’ and ‘Referral Individual’ from that organisation</inlineHelpText>
+        <label>Referral Source</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Internal Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Carer (Non Professional)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Consultant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community Mental Health Team</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community Psychiatric Nurse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia Specialist Nurse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Early Intervention with Dementia Service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family/Friend</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>GP</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Independent Mental Capacity Advocate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Memory Clinic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Practice Nurse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Self Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social Worker / Care Manager</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Voluntary Organisation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Referral Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phonecall</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Signposting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Residence_Access_Details__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Gives details of how to gain access to the Service User’s property when visiting (e.g. key code, warden contact number, etc)</inlineHelpText>
+        <label>Residence Access Details</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Risk_Identified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates whether any significant risks have been identified and highlighted within an attached Risk Assessment document</inlineHelpText>
+        <label>Risk Identified (see Risk Assessment)</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Service_Type__c</fullName>
+        <description>The type of Service to which Service Usage relates.
+Used as a filter when selecting Service.
+Used to set Record Type on saving a new Service Usage.</description>
+        <externalId>false</externalId>
+        <label>Service Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Activity group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Advocacy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Befriending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community support service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Day care and support (establishment based)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia adviser</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia cafe</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information programme</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Newsletter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other (one to one)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Peer support group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Registered home care and support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Singing for the Brain</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Service_Usage_Notes__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Summary of service provision and latest status</inlineHelpText>
+        <label>Service Usage Notes</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Service_User_Aware_of_Referral__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter &apos;Yes&apos; if Service User is currently aware of the referral, &apos;No&apos; if not, or &apos;Not Stated&apos; if not sure</inlineHelpText>
+        <label>Service User Aware of Referral?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Stated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Service_User_Deceased__c</fullName>
+        <description>Shows whether the Person has been identified as deceased.</description>
+        <externalId>false</externalId>
+        <label>Service User Deceased</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Share_with_colleagues__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Indicates whether the Service Usage should be automatically shared with colleagues (via trigger).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates whether the Service Usage record should be shared with colleagues. All records are shared by default unless the checkbox is deselected by an SSM or above</inlineHelpText>
+        <label>Share with colleagues?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Type_of_Paper_File__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Select ‘PRE-CRS ONLY’ if only now keeping paper files that existed before the CRS; but ‘ACTIVE’ if still having an active paper file as well as using CRS. For new Service users, leave as ‘NONE’ if keeping all records only on the CRS</inlineHelpText>
+        <label>Type of Paper File</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pre-CRS Only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Updated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Updated</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>zzService_Usage_Copy</label>
+    <nameField>
+        <label>Service_Usage_Copy Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>zzService_Usage_Copy</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

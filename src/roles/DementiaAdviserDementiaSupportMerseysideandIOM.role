@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>Dementia Adviser &amp; Dementia Support -  Merseyside and IOM</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>Dementia Adviser &amp; Dementia Support - Merseyside &amp; Isle of Man</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>LocalityManagementMerseysideandIOM</parentRole>
+</Role>
