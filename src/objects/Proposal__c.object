@@ -1,0 +1,2161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <content>ProposalClone</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Another_agency_currently_delivering__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Is another agency currently delivering the service?</inlineHelpText>
+        <label>Another agency currently delivering?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Any_other_reasons__c</fullName>
+        <externalId>false</externalId>
+        <label>Any other reasons</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Approx_amount_funding__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>FCA must be attached to this proposal</inlineHelpText>
+        <label>Total Cost of this Proposal</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Area2__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Locality__r.zzdelArea__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Area</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Area_Manager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Area Manager</label>
+        <lookupFilter>
+            <active>true</active>
+            <booleanFilter>1 OR 2</booleanFilter>
+            <errorMessage>This person is not an Area Manager.</errorMessage>
+            <filterItems>
+                <field>User.UserRole.Name</field>
+                <operation>contains</operation>
+                <value>Area Management</value>
+            </filterItems>
+            <filterItems>
+                <field>User.UserRole.Name</field>
+                <operation>contains</operation>
+                <value>Regional</value>
+            </filterItems>
+            <infoMessage>Select an Area Manager</infoMessage>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Proposals1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Area__c</fullName>
+        <externalId>false</externalId>
+        <label>Area</label>
+        <picklist>
+            <controllingField>Country_Region__c</controllingField>
+            <picklistValues>
+                <fullName>Central West</fullName>
+                <controllingFieldValues>West</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>East Anglia and Central</fullName>
+                <controllingFieldValues>East</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>East Midlands</fullName>
+                <controllingFieldValues>East</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lakes</fullName>
+                <controllingFieldValues>North</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>London</fullName>
+                <controllingFieldValues>East</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North and East Northern Ireland</fullName>
+                <controllingFieldValues>Northern Ireland</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North East</fullName>
+                <controllingFieldValues>North</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Wales</fullName>
+                <controllingFieldValues>Wales</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North West</fullName>
+                <controllingFieldValues>North</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South and West Northern Ireland</fullName>
+                <controllingFieldValues>Northern Ireland</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South East</fullName>
+                <controllingFieldValues>East</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Wales</fullName>
+                <controllingFieldValues>Wales</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South West</fullName>
+                <controllingFieldValues>West</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West Midlands</fullName>
+                <controllingFieldValues>West</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yorkshire</fullName>
+                <controllingFieldValues>North</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>BDM__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>BDM</label>
+        <lookupFilter>
+            <active>true</active>
+            <booleanFilter>1 OR 2</booleanFilter>
+            <errorMessage>This person is not a Business Development Manager</errorMessage>
+            <filterItems>
+                <field>User.UserRole.Name</field>
+                <operation>startsWith</operation>
+                <value>BDM</value>
+            </filterItems>
+            <filterItems>
+                <field>User.UserRole.Name</field>
+                <operation>startsWith</operation>
+                <value>Regional Management -</value>
+            </filterItems>
+            <infoMessage>Please select a Business Development Manager</infoMessage>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Proposals</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Beneficiaries__c</fullName>
+        <externalId>false</externalId>
+        <label>Beneficiaries</label>
+        <picklist>
+            <picklistValues>
+                <fullName>People with dementia - all ages</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BME communities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Current carers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Early stage dementia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Former carers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Gay / Lesbian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>General public</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health and social care professionals</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Older people with dementia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>People with advanced stage dementia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>People with dementia over 65</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>People with dementia under 65</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Younger people with dementia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other minority groups</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Capacity_infrastructure_to_deliver__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Explain how we have the capacity/infrastructure to deliver</inlineHelpText>
+        <label>Capacity/infrastructure to deliver</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Cost_Centre_Proposal__c</fullName>
+        <externalId>false</externalId>
+        <formula>Locality__r.COst_Centre__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Cost Centre</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Country_Region__c</fullName>
+        <externalId>false</externalId>
+        <label>Country/Region</label>
+        <picklist>
+            <picklistValues>
+                <fullName>East</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Northern Ireland</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wales</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Currently_delivering_the_service__c</fullName>
+        <externalId>false</externalId>
+        <label>Currently delivering the service?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Demography__c</fullName>
+        <externalId>false</externalId>
+        <label>Demography</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dependence_on_buying_external_services__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Does your service development or tender rely on sub-contracting to a third party in order to deliver the service?</inlineHelpText>
+        <label>zzdel_DependenceonbuyingExternalServices</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Description_of_proposed_service__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Brief description of proposed service. Use ASTOR as a tool:
+Aims, Settings, Target group, Objectives (and service outputs to achieve them), Resources needed</inlineHelpText>
+        <label>Description of proposed service</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Does_TUPE_apply__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>For all tender bids, assume yes unless clear evidence otherwise.
+
+If yes, make sure costs are in the budget - refer to BDM for avice.</inlineHelpText>
+        <label>Does TUPE apply?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Draft_budget_attached__c</fullName>
+        <externalId>false</externalId>
+        <label>FCA attached</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Evaluation_service_users_views__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>How will the views of service users be taken into account in any evaluation?</inlineHelpText>
+        <label>Evaluation: service users&apos; views</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Evidence_from_service_users__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Is there detailed evidence or views from service users? e.g. consultation/focus groups</inlineHelpText>
+        <label>Evidence from service users?</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Existing_good_practice__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Detail any existing good practice from other areas</inlineHelpText>
+        <label>Existing good practice</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Existing_service_data__c</fullName>
+        <externalId>false</externalId>
+        <label>Existing service data</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fits_Corporate_Plan__c</fullName>
+        <externalId>false</externalId>
+        <label>zzdel_HowitfitsSociety&apos;s Corporate Plan</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Service improvement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Understand impact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Help more people</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Target the most in need</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Evidence-based service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Recognised education &amp; development</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Be an accredited awarding body</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information accreditation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Increased accessibiity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Extended evidence base</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Implemented dementia strategy plans</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Innovative services and provision</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Developed and extended service provision</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transform individual services provision</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Increased rights and protection</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Fits_external_business_plans__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Describe how it fits with external strategic/operational business plans (health/local authority)</inlineHelpText>
+        <label>Fits with external business plans?</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Funding_source_s__c</fullName>
+        <externalId>false</externalId>
+        <label>Funding source(s)</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Tender (competitive)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tender (non-competitive)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health and Social Care Statutory bodies</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Variation to existing contract</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Charitable Trust</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lottery</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Statutory Grant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Local Fundraising/Voluntary Income</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expression of interest only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Source unknown at present</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Have_relationship_with_a_trust__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Do you have any current relationships with charitable trusts or have any in mind?</inlineHelpText>
+        <label>zzdel_Have relationship with a trust?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Health_social_care_professional_views__c</fullName>
+        <externalId>false</externalId>
+        <label>Health/social care professional views</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>How_it_fits_with_the_Services_Framework__c</fullName>
+        <externalId>false</externalId>
+        <label>How it fits with the Services Framework</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Principle 1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Principle 2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Principle 3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>How_it_meets_strategic_objective__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Describe how the proposal meets the strategic objective you selected</inlineHelpText>
+        <label>zzdel_How it meets strategic objective</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>How_many_years_funding__c</fullName>
+        <externalId>false</externalId>
+        <label>How many years&apos; funding?</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>How_will_service_be_evaluated__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Refer to service specification, where available</inlineHelpText>
+        <label>How will service be evaluated?</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Identified_funding_in_fundraising_plan__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Have you identified any funding for this service in your fundraising plan? If so, please attach details.</inlineHelpText>
+        <label>zzdel_IdentifiedFundinginFundraisingPlan</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Identified_gap__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>(Survey results etc)</inlineHelpText>
+        <label>Identified gap</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Job_title__c</fullName>
+        <externalId>false</externalId>
+        <formula>CreatedBy.Title</formula>
+        <label>Job title</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Joint_local_working_considered__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Have you considered whether this service could be delivered across several local services, a locality or area?</inlineHelpText>
+        <label>zzdel_Joint local working considered?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Local_delivery_skills__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Do you consider that existing local organisations have the relevant skills to deliver?</inlineHelpText>
+        <label>Local delivery skills?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Locality__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Locality or Office</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Account.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Internal Organisation</value>
+            </filterItems>
+            <infoMessage>Select an Alzheimer&apos;s Society office</infoMessage>
+            <isOptional>true</isOptional>
+        </lookupFilter>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Proposals</relationshipLabel>
+        <relationshipName>Proposals</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Other_beneficiary__c</fullName>
+        <externalId>false</externalId>
+        <label>Other beneficiary</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Partnership_working_been_considered__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Have you considered whether this service could be delivered in partnership with other organisations locally?</inlineHelpText>
+        <label>Partnership working been considered?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Proposal_ID__c</fullName>
+        <displayFormat>P-{00000}</displayFormat>
+        <externalId>false</externalId>
+        <label>Proposal ID</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Locality__r.Region_Alztrading__c)</formula>
+        <label>Country/Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Service_definition__c</fullName>
+        <externalId>false</externalId>
+        <label>zzdel_Service definition</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Advocacy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Befriending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Counselling</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Day support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Day support from other providers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia advisers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia cafés</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Home support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Home support from other providers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information programmes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information provision</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Newsletters</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Outings and day trips</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provision of grants for holidays/other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Singing for the brain</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social events</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Support groups</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Telephone helplines</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Training</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Service_recently_reviewed__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Has the service been recently reviewed (internally/externally within the last two years)</inlineHelpText>
+        <label>Service recently reviewed?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Service_specification__c</fullName>
+        <externalId>false</externalId>
+        <label>Service specification</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Activity Groups operational framework</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Advocacy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Befriending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CrISP</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Day Care and Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Day support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia Adviser</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia Adviser service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia Cafe</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia Friendly Communities - to dev</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dementia support services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Home Care and Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information Provision - to be developed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Outing and Events</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Peer Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Registered Home Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Singing for the Brain</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>User Involvement - to be developed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Service specification available</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Service_start_funding_date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>When is the service due to start or from when is funding needed?</inlineHelpText>
+        <label>Service start/funding date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Skilled_staff_available_to_deliver__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Do we have the necessary skilled staffing available to deliver?</inlineHelpText>
+        <label>Skilled staff available to deliver?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Source_of_current_funding__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>(if applicable)</inlineHelpText>
+        <label>Source of current funding</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Specific_budget_quoted__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>For tender bids, has a specific budget been quoted?</inlineHelpText>
+        <label>Specific budget quoted?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Specified_in_current_business_plans__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Is the service specified in current regional/area/local business plans?</inlineHelpText>
+        <label>Specified in current business plans?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Existing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Existing but repackaged</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Extension to existing service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Strategic_objectives_met__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Demonstrate the way in dementia care and support; Be the foremost contact point for anyone dealing with dementia; Lead research to improve care and prevention and move closer to a cure;Campaign for people affected by dementia to live the lives they want</inlineHelpText>
+        <label>Strategic ambitions met</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Service Quality dementia care &amp; support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reach</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Research</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Campaigning</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Influencing policy -makers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Info &amp; help for people with dementia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Information &amp; support for carers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lead on worldclass knowledge on dementia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Monitor services -action to address gaps</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Research -cause, prevention and care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Excellence -governance leadership &amp; mgt</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Training &amp; info for all involved in care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Suitable_premises_available__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Do we have suitable premises (e.g. to meet H&amp;S legislation and service standards)?</inlineHelpText>
+        <label>Suitable premises available?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Sustainability_of_service_exit_strategy__c</fullName>
+        <externalId>false</externalId>
+        <label>Sustainability of service/exit strategy</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>TUPE_Contracts_Exist__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>If TUPE applies, are existing staff contracts and collective agreements available?</inlineHelpText>
+        <label>Existing contracts/agreements available?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Tender_submission_date__c</fullName>
+        <externalId>false</externalId>
+        <label>Tender deadline</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Timescale_to_set_up_realistic__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Is the timescale to set up the service realistic?</inlineHelpText>
+        <label>Timescale to set up realistic?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Type_of_current_funding__c</fullName>
+        <externalId>false</externalId>
+        <label>Type of current funding</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Local authority</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Charitable trust</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vol income</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>VAT_applicable__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Refer to Regional Accountant for advice</inlineHelpText>
+        <label>VAT applicable?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Which_funding_source_s__c</fullName>
+        <externalId>false</externalId>
+        <label>Which funding source(s)</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Who_joint_working_considered__c</fullName>
+        <externalId>false</externalId>
+        <label>zzdel_Who, if joint working considered?</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Who_partnership_working_considered__c</fullName>
+        <externalId>false</externalId>
+        <label>Who, if partnership working considered?</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Who_reviewed_service__c</fullName>
+        <externalId>false</externalId>
+        <label>Who reviewed service?</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Why_best_for_us_to_deliver__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Why do we feel it is in the best interests of people with dementia for us to deliver the service?</inlineHelpText>
+        <label>Why best for us to deliver?</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Why_timescales_unrealistic__c</fullName>
+        <externalId>false</externalId>
+        <label>Why are the timescales unrealistic?</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Proposal</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Proposal_ID__c</columns>
+        <columns>NAME</columns>
+        <columns>Locality__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>BDM__c</columns>
+        <columns>Service_specification__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Proposals</label>
+    </listViews>
+    <listViews>
+        <fullName>Proposals_without_Service_Specification</fullName>
+        <columns>NAME</columns>
+        <columns>Locality__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>BDM__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Locality__c</field>
+            <operation>contains</operation>
+            <value>Northampton</value>
+        </filters>
+        <label>Proposals with no Service Specification</label>
+    </listViews>
+    <nameField>
+        <label>Proposal Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Proposals</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Proposal_Rec</fullName>
+        <active>true</active>
+        <label>Proposal_Rec</label>
+        <picklistValues>
+            <picklist>Another_agency_currently_delivering__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Area__c</picklist>
+            <values>
+                <fullName>Central West</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>East Anglia and Central</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>East Midlands</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lakes</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>London</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North East</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North Wales</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North West</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North and East Northern Ireland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>South East</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>South Wales</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>South West</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>South and West Northern Ireland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>West Midlands</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yorkshire</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Beneficiaries__c</picklist>
+            <values>
+                <fullName>BME communities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Current carers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Early stage dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gay %2F Lesbian</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General public</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health and social care professionals</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other minority groups</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>People with advanced stage dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>People with dementia - all ages</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>People with dementia over 65</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>People with dementia under 65</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Country_Region__c</picklist>
+            <values>
+                <fullName>East</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Northern Ireland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wales</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>West</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Currently_delivering_the_service__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Does_TUPE_apply__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Draft_budget_attached__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Fits_Corporate_Plan__c</picklist>
+            <values>
+                <fullName>Be an accredited awarding body</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developed and extended service provision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Evidence-based service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Extended evidence base</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Help more people</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Implemented dementia strategy plans</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Increased accessibiity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Increased rights and protection</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information accreditation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Innovative services and provision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Recognised education %26 development</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service improvement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Target the most in need</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transform individual services provision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Understand impact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Funding_source_s__c</picklist>
+            <values>
+                <fullName>Charitable Trust</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expression of interest only</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health and Social Care Statutory bodies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local Fundraising%2FVoluntary Income</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lottery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Source unknown at present</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Statutory Grant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tender %28competitive%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tender %28non-competitive%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Variation to existing contract</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Have_relationship_with_a_trust__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>How_it_fits_with_the_Services_Framework__c</picklist>
+            <values>
+                <fullName>Principle 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Principle 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Principle 3</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Identified_funding_in_fundraising_plan__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Joint_local_working_considered__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Local_delivery_skills__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Partnership_working_been_considered__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Service_definition__c</picklist>
+            <values>
+                <fullName>Advocacy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Befriending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Counselling</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Day support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Day support from other providers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dementia advisers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dementia cafés</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dementia support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home support from other providers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information programmes</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Newsletters</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outings and day trips</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provision of grants for holidays%2Fother</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Singing for the brain</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social events</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Support groups</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone helplines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Training</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Service_recently_reviewed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Service_specification__c</picklist>
+            <values>
+                <fullName>Activity Groups operational framework</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advocacy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Befriending</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community Support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CrISP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Day Care and Support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dementia Adviser</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dementia Cafe</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dementia Friendly Communities - to dev</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dementia Support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home Care and Support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information Provision - to be developed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Service specification available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Peer Support</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Singing for the Brain</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>User Involvement - to be developed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Skilled_staff_available_to_deliver__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Specific_budget_quoted__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Specified_in_current_business_plans__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Existing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Existing but repackaged</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Extension to existing service</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Strategic_objectives_met__c</picklist>
+            <values>
+                <fullName>Campaigning</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reach</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Research</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service Quality dementia care %26 support</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Suitable_premises_available__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>TUPE_Contracts_Exist__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Timescale_to_set_up_realistic__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type_of_current_funding__c</picklist>
+            <values>
+                <fullName>Charitable trust</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local authority</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Vol income</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>VAT_applicable__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>Read</sharingModel>
+    <sharingReasons>
+        <fullName>BDM__c</fullName>
+        <label>BDM</label>
+    </sharingReasons>
+</CustomObject>

@@ -1,0 +1,63 @@
+<apex:page sidebar="false" showheader="false" controller="siteHome" title="Be a Friend Today" name="Be a friend today" >
+    
+    <apex:form >
+    <head><title>Welcome - Dementia Friends</title></head>
+    
+    
+    <apex:outputPanel id="allcontent" >
+    <apex:include pageName="temp_css" rendered="{!isAuth}" id="header"/>
+    <apex:outputPanel layout="block" styleclass="container-fluid" id="mainContent" rendered="{!isAuth}">
+          <div class="row-fluid">
+              <h1>
+                  Home
+              </h1>
+          </div>
+          <hr class="divider"/>
+          <div class="row-fluid">
+              <div class="span6">
+              <div class="row-fluid" style="margin-bottom:20px; margin-top:20px">
+               
+                    <div class="span4">
+                         <a href="https://twitter.com/DementiaFriends" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @DementiaFriends</a>
+                         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                     </div>
+                     <div >
+                      <div class="fb-like" data-href="http://www.dementiafriends.org.uk" data-send="false" data-layout="button_count" data-width="250" data-show-faces="true"></div>
+                     </div>
+                  
+                </div>
+                    <h2>What you can do about dementia</h2>
+                    <p>You hear about dementia but do you really know what it is and what it’s like to have it?</p>
+                    <p>It makes such a huge difference to people with dementia if those around them know what dementia is and how it might affect them.</p>  
+                    <h2>Introducing Dementia Friends</h2>
+                    <p>Dementia Friends aims to make everyday life better for people with dementia by changing the way the nation thinks, talks and acts. By 2015, we want there to be a million people with the know-how to help people with dementia feel understood and included in their community.</p> 
+                   <p>So <a href="http://www.dementiafriends.org.uk/siteRegisterPage">register your interest</a> today and be one of the first to hear about when and how you can take the first step to becoming a Dementia Friend. By volunteering at the start, you can help build a network of Dementia Friends in your local community.</p>  
+                   
+                     </div>
+              <div class="span6">
+                     <iframe class="video" src="http://www.youtube.com/embed/VD3epu4SB2Y" frameborder="0"></iframe>
+              </div>
+          </div>
+      </apex:outputPanel>
+      <apex:outputPanel rendered="{!NOT(isAuth)}" id="lgin">
+        <apex:pageblock title="Please Log In" mode="mainDetail">
+              <apex:pageMessages ></apex:pageMessages>
+              <apex:pageblockButtons location="bottom">
+                  <apex:commandButton value="Submit" action="{!login}" />
+              </apex:pageblockButtons>
+              <apex:pageblocksection columns="1" >
+                  <apex:pageblocksectionItem >
+                      <apex:outputLabel >Username</apex:outputLabel>
+                      <apex:inputText value="{!lin}"/>
+                  </apex:pageblocksectionItem>
+                  <apex:pageblocksectionItem >
+                      <apex:outputLabel >Password</apex:outputLabel>
+                      <apex:inputSecret value="{!pw}"/>
+                  </apex:pageblocksectionItem>
+              </apex:pageblocksection>
+          </apex:pageblock>
+      </apex:outputPanel>
+      <c:SiteFooter rendered="{!isAuth}" ></c:SiteFooter>
+      </apex:outputPanel>
+  </apex:form>
+</apex:page>

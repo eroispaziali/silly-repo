@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>Information, Peer Support Services - North Wales Locality</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>Information, Peer Support Services - North Wales</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentRole>LocalityManagementNorthWales</parentRole>
+</Role>

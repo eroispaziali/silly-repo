@@ -1,0 +1,290 @@
+<apex:page controller="BDRServicesFundCoverageController" sidebar="false"  cache="true">
+ 
+<!-- ======================================================================
+
+          gary.grant@conseq.co.uk 
+          Jan 2013
+          A search screen to allow users find Services that are funded (have allocated Income) and Services that are not funded
+- ====================================================================== -->
+
+  <head>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+              <style type="text/css">   
+                        
+                       h1 {font-size: 22px; 
+                              margin-right: 30px; 
+                              font-family: "HelveticaNeue-Light", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;
+                              }
+                              
+                       .bold-label  { font-weight:bold; padding-top:10px; padding:bottom: 3px;}      
+                       .searchLink { font-size:14px;  display:block; padding-top: 10px; padding-bottom: 10px} 
+                       .right-align { text-align : right;}
+                       
+                       #search-filters  input, select { width: 200px; padding-bottom: 5px; margin-top: 3px; height: 20px;}  
+                       tr.headerRow th {font-size: 1.0em !important;}
+                       .helpText  { font-size: 14px; } 
+            </style>  
+                       
+            
+  </head>
+ 
+  <apex:form >
+  <apex:pageMessages id="errors" />
+  
+ <div style="margin-bottom:10px; margin-top:10px; padding-left: 5px;">
+  
+ <h1>Show me Funded Services</h1>
+ <p style="font-size:14px">This page only shows Services where Costs have been added to the system and linked to a Business Development Record.</p> 
+
+</div>
+
+<!--  The Search Page  Outer table with narrow column on the left -->
+
+ 
+  <table width="100%" border="0">
+  <tr>  
+    <td width="200" valign="top">
+ 
+      <apex:pageBlock mode="edit" id="criteria">
+ 
+      <apex:actionFunction name="runApexSearch" action="{!runApexSearch}" rerender="results,debug,errors">
+                  <apex:param name="locality" value="" />
+                  <apex:param name="service_type" value="" />
+                  <apex:param name="fiscal_year" value="" />
+                  <apex:param name="funding_type" value="" />
+                  <apex:param name="service_status" value="" />
+      </apex:actionFunction>
+ 
+      
+      <div style="padding:10px;"  id="search-filters">
+      
+      <div style="font-size:14px; font-weight: bold;">Refine your Search</div>
+
+
+       <div class="bold-label">Locality</div>
+                       
+       <apex:selectList size="1"    id="locality"  html-data-search="locality" >            
+                    <apex:selectOptions value="{!localities}"/>
+        </apex:selectList>
+        
+
+      <!--
+      <tr>
+        <td style="font-weight:bold;">Operated by<br/>
+            <apex:inputField value="{!dummyService.operated_by__c}" onkeyup="doSearch('operated');" id="operated" onchange="doSearch('operated');"/>
+        </td>
+      </tr>      
+      -->
+
+
+          <div class="bold-label">Service Type</div>
+          <apex:selectList size="1"  id="service_type"  html-data-search="service_type">
+                    <apex:selectOptions value="{!service_types}"/>
+            </apex:selectList>
+           
+   
+          <div class="bold-label">Financial Year</div>
+          <apex:selectList size="1"  id="fiscal_year"  html-data-search="fiscal_year">
+                    <apex:selectOptions value="{!yearsOptions}"/>
+          </apex:selectList>
+        
+      
+
+         <div class="bold-label">Funding Status</div>
+          <apex:selectList size="1" id="funding_type"  html-data-search="funding_type"> 
+                 <apex:selectOptions value="{!funding_types}"/>
+        </apex:selectList>
+        
+    
+        <div class="bold-label">Service Status</div>
+          <apex:selectList size="1" id="service_status"  html-data-search="service_status">
+                 <apex:selectOptions value="{!service_status_options}"/>
+        </apex:selectList>
+     
+
+       <div style=" margin-top: 20px;">        
+                <apex:commandLink onclick="doBlankSearch();return false;" styleClass="searchLink">Clear Search Filters</apex:commandLink>  
+        </div>
+        
+        </div>
+      
+ 
+      </apex:pageBlock>
+ 
+    </td>
+    <td valign="top">
+ 
+    <apex:pageBlock mode="edit" id="results">
+ 
+        <apex:pageBlockTable value="{!services}" var="service">
+    
+           <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Service Name" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="Name" assignTo="{!sortField}"/>
+                                              <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputLink value="/{!service.freq.service__r.id}">{!service.freq.service__r.Name}</apex:outputLink>
+            </apex:column>
+            
+            
+           <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Financial Year" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="Fiscal_Year__c" assignTo="{!sortField}"/>
+                                              <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!service.freq.Fiscal_Year__c}"/>
+            </apex:column>
+
+             <apex:column style="text-align:right; padding-right:10px;">
+                <apex:facet name="header">
+                    <apex:commandLink value="Current Funding" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="Total_Cover_Potential_Percent__c" assignTo="{!sortField}"/>
+                                              <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                
+           <apex:outputField value="{!service.freq.Total_Cover_Potential_Percent__c}"/> 
+                
+        <!--            <apex:outputText value="{0, percent, ###.#}">
+                    <apex:param value="{!service.freq.Total_Cover_Potential_Percent__c}" />
+                </apex:outputText> --> 
+                
+                
+            </apex:column>
+ 
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Locality" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="Service__r.Locality__r.name" assignTo="{!sortField}"/>
+                                              <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!service.freq.Service__r.Locality__r.name}"/>
+            </apex:column>
+ 
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Service Type" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="service__r.service_type__c" assignTo="{!sortField}"/>
+                                              <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!service.freq.service__r.service_type__c}"/>
+            </apex:column>
+
+           <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Status" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="service__r.service_status__c" assignTo="{!sortField}"/>
+                                              <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!service.freq.service__r.service_status__c}"/>
+            </apex:column>
+
+ 
+        </apex:pageBlockTable>
+ 
+    </apex:pageBlock>
+ 
+    </td>
+  </tr>
+  </table>
+ 
+
+ 
+   <apex:pageBlock title="Services Fund Coverage - what's this ?">
+       <p style="font-size:14px">Use the filters on the left hand side of the screen to identify services with and wihout funding.</p>
+       <p style="font-size:14px">The figures in the column show funding for individual financial years. Services will appear multiple times in the listing, once for each financial year where a funding requirement is defined.</p> 
+       <p style="font-size:14px">The screen will update once a selection any one of the filter fields.</p>
+   </apex:pageBlock>    
+ 
+
+ 
+  </apex:form>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+           var j$ = jQuery.noConflict();
+           
+           var pid = '{!$CurrentPage.parameters.pid}';
+           
+           j$(document).ready(function() {
+           
+                /*
+                * Call the search on document.ready
+                * This means that when the user returns to the page using the browser back key, the search will run again 
+                *  with the same list of filters
+                *
+                */
+               callSearch();
+           
+               //j$("img.pageTitleIcon").remove();
+               //j$("#phHeaderLogoImage").remove();
+               //j$(".bPageTitle").css("margin-left", "10");
+           
+               j$(window).keydown(function(event) {
+                   if (event.keyCode == 13) {
+                     event.preventDefault();
+                     return false;
+                   }
+                });
+                
+                j$('[data-search').change(function(event) {
+                                callSearch(j$(event.target).attr('data-search'));
+                });
+            });    
+            
+            function doBlankSearch() {
+                    clearInputFields();
+                    runSearch('','','','','');
+            }
+           
+             function clearValue(inputFieldName) {
+                    var ending = '*[id$=FIELD]';
+                    var res = ending.replace("FIELD", inputFieldName);                    
+                     j$(res).val('');
+             }
+        
+             function getValue(inputFieldName) {
+                    var ending = '*[id$=FIELD]';
+                    var res = ending.replace("FIELD", inputFieldName);
+                    return  j$(res).val();
+              }
+                
+              function getSelectValue(inputFieldName) {
+                          var ending = 'select[id$=FIELD]';
+                          var res = ending.replace("FIELD", inputFieldName);
+                          var result =  j$(res).val();
+                          return result
+             }
+           
+           
+              /* Clear the values in all 5 input fields */
+              function clearInputFields() {
+                                   clearValue('locality');
+                                   clearValue('service_type');
+                                   clearValue('fiscal_year');
+                                   clearValue('funding_type');
+                                   clearValue('service_status');
+               }
+        
+           function callSearch(thisField) {
+        
+                   runApexSearch(
+                                   getSelectValue('locality'),
+                                   getSelectValue('service_type'),
+                                   getSelectValue('fiscal_year'),
+                                   getSelectValue('funding_type'),
+                                   getSelectValue('service_status')
+                    );
+           }
+      
+  </script> 
+ 
+</apex:page>

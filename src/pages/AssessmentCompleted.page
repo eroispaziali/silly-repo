@@ -1,0 +1,128 @@
+<apex:page standardController="Completed_Assessment__c" extensions="AssessmentCompletedController" tabStyle="Service_Usage__c">
+<apex:form >
+<!-----------------------List Active Surveys to Pick to Fill/Answer--------------------->
+<apex:pageBlock rendered="{!lstAllAssessments.size>0}" >
+Select Assessment to Fill: &nbsp;
+<apex:selectlist size="1" id="selAssessment">
+    <apex:selectOptions value="{!lstAllAssessments}"></apex:selectOptions>
+</apex:selectlist>
+<input class="btn" value=" Proceed " type="button" onclick="parent.location.href='/apex/AssessmentCompleted?sid='+document.getElementById('{!$Component.selAssessment}').options[document.getElementById('{!$Component.selAssessment}').selectedIndex].value+'&suid={!$CurrentPage.Parameters.suid}';" />
+<input class="btn" value=" Cancel " type="button" onclick="parent.location.href='/{!$CurrentPage.Parameters.suid}';" />
+</apex:pageBlock>
+<!-----------------------List Active Surveys to Pick to Fill/Answer--------------------->
+
+<apex:pageBlock rendered="{!lstAllAssessments.size==0}">
+
+<img title="Assessment" class="pageTitleIcon" alt="Assessment" src="/s.gif"/>
+<table width="100%">
+<tr>
+<td width="50%">
+<h1 style="font-size: 100%; font-weight: bold;">Assessment :</h1>
+</td>
+<td width="50%">
+<h1 style="font-size: 100%; font-weight: bold;">Service Usage Primary Service User :</h1>
+</td>
+</tr>
+<tr>
+<td>
+<h1 style="font-size: 150%; font-weight: bold;">{!strAssessment}</h1>
+</td>
+<td>
+<h1 style="font-size: 150%; font-weight: bold;">{!strServiceUsage}</h1>
+</td>
+</tr>
+</table>
+<apex:pageblocksection columns="1">
+<apex:outputtext value="{!strAssessmentNotes}"/>
+</apex:pageblocksection>
+<br/><br/>
+
+<!--------------------Audit Trial Block------------------------>    
+    <apex:pageblockSection title="Audit Trail." columns="1" rendered="{!AuditTrail.size>0}">
+        <apex:pageblockTable value="{!AuditTrail}" var="rec">
+        <apex:column >
+        
+            <apex:facet name="header">Updated DateTime</apex:facet>
+             <apex:commandLink action="/apex/AssessmentCompletedAudit?id={!rec.recId}{!IF(rec.isFirstRecord>0,'&isFirstRecord=1','')}" target="_blank">
+                 <apex:outputText value="{!rec.dateTimeDisplay}" />            
+             </apex:commandLink>
+         </apex:column>
+        <apex:column value="{!rec.recUserName}" headerValue="By"/>
+        </apex:pageblockTable>
+
+    </apex:pageblockSection>
+<!---------------------(End) Audit Trial Block----------------------->        
+</apex:pageBlock>
+
+<!----------------Questions/Answers---------------------------->    
+<apex:pageBlock title="Question(s)" rendered="{!lstAllAssessments.size==0}">
+    <apex:pageBlockButtons >
+        <apex:commandButton action="{!SaveAssessment}" value="   Save   " rerender="block" >
+            <apex:param name="ReturnToPage" value="true" assignTo="{!strReturnToPage}"/>
+        </apex:commandButton> 
+                <apex:commandButton action="{!SaveAssessment}" value=" Save and Close " rerender="block" >
+            <apex:param name="ReturnToPage" value="false" assignTo="{!strReturnToPage}"/>
+        </apex:commandButton> 
+
+        <!-- apex:commandButton action="/{!IF($CurrentPage.Parameters.retURL==null,strRetURL,$CurrentPage.Parameters.retURL)}" value="  Cancel  "/-->
+        <!-- apex:commandButton action="{!strRetURL}" value="  Cancel  " rendered="{!$CurrentPage.Parameters.retURL==null}"/>
+        <apex:commandButton action="/{!$CurrentPage.Parameters.retURL}" value="  Cancel  " rendered="{!$CurrentPage.Parameters.retURL!=null}"/-->
+        <apex:commandButton action="{!strRetURL}" value="  Cancel  " />
+        
+    </apex:pageBlockButtons> 
+    <apex:repeat value="{!lstSections}" var="rec">
+        <!------------------Section Title Row-------------------------->    
+        <div class="pbSubheader first tertiaryPalette" >
+            Section :&nbsp;
+            <apex:outputText value="{!rec.sectionOrderNum}" id="SectionOrder" style="width: 100%; height: 150px;" />
+            &nbsp;  [{!rec.strSectionName}]
+        </div>
+        <!-----------------(End) Section Title Row------------------->    
+        
+        <apex:repeat value="{!rec.lstAssessmentQuestions}" var="qRec">
+            [{!qRec.questionNum}] &nbsp;
+            <apex:outputtext value="{!qRec.question}" />
+            <apex:outputPanel id="AssessmentQuestion" styleclass="helpButton">
+                <img title="" class="helpOrb" alt="" src="/s.gif"/>
+                <script type="text/javascript">
+                    ////////////////////////////////////Assessor Note as Tooltip for Question \\\\\\\\\\\\\\\\\\\
+                    sfdcPage.setHelp('{!$Component.AssessmentQuestion}', '{!qRec.assessorNotes}');
+                    document.getElementById('{!$Component.AssessmentQuestion}').id='{!$Component.AssessmentQuestion}-_help';
+                </script>
+            </apex:outputPanel>
+            
+            <!-----------------SubQuestion List--------------------------->    
+            <apex:pageblockTable value="{!qRec.lstRespAnsRecs}" var="sqRec" rendered="{!qRec.lstRespAnsRecs.size>0}">
+                <apex:column headerValue="No." ><apex:outputText value="{!ROUND(sqRec.Sub_Question_Number__c,0)}"/></apex:column>
+                
+                <apex:column headerValue="Question" ><apex:outputText value="{!sqRec.Sub_Question__c}"/></apex:column>
+                <apex:column headerValue="Answer">
+                    <apex:selectList size="1" value="{!sqRec.Choice__c}" rendered="{!qRec.questionType=='Combo'}">
+                        <apex:selectOptions value="{!qRec.lstQuesChoices}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:column>
+
+            </apex:pageblockTable>
+            <!----------------(End) SubQuestion List---------------------------->    
+
+            <apex:variable value="{!qRec.questionType!='Combo' || (qRec.questionType=='Combo' && qRec.AllowNote)}" var="showNotes"/>
+            <br/>
+            <apex:outputText value="{!qRec.NoteDescription}" rendered="{!showNotes}"/>
+            <apex:outputPanel rendered="{!showNotes}">
+            <br/>
+            </apex:outputPanel>
+
+             <apex:inputTextarea id="ResponseNote"  value="{!qRec.respAnsRec.Response_Note__c}"  style="width: 100%; height: 150px;display:{!IF(showNotes,'block','none')}" />
+            <apex:outputPanel rendered="{!showNotes}">
+            <hr/>
+            <br/>
+            <br/>
+            </apex:outputPanel>
+        </apex:repeat>
+        
+    </apex:repeat>
+    
+</apex:pageBlock>
+<!----------------(End) Question/Answers---------------------------->    
+</apex:form>
+</apex:page>

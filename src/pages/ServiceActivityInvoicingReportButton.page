@@ -1,0 +1,49 @@
+<apex:page standardController="Services__c" >
+<script type="text/javascript">
+var __sfdcSessionId = '{!GETSESSIONID()}';
+</script>
+<script src="../../soap/ajax/23.0/connection.js" type="text/javascript"></script>
+
+<script>
+//alert('start of Service Activity Invoicing Report');
+try
+{
+
+//alert('{!Services__c.service_type__c}');
+//console.log("{!Services__c.service_type__c}");
+//console.log(typeof "{!Services__c.service_type__c}");
+//console.log({!Services__c.service_type__c});
+//console.log(typeof {!Services__c.service_type__c});
+//Invoicing Details (One-to-one Events)
+if ("{!Services__c.service_type__c}"=="Registered home care and support" ||
+    "{!Services__c.service_type__c}"=="Befriending" ||
+    "{!Services__c.service_type__c}"=="Community support service")
+  {
+    var result =sforce.connection.query("Select Id, Name from Report where Name = 'Invoicing Details (One to one Events)' "); 
+    var recs = result.getArray("records"); 
+    //alert(recs[0].Id); 
+    window.location.href='/'+recs[0].Id+'?pv2="{!JSENCODE(Services__c.Name)}"&pv3="{!LEFT(Services__c.Id,15)}"';
+  }
+else if ("{!Services__c.service_type__c}"=="Day care and support (establishment based)" ||
+        "{!Services__c.service_type__c}"=="Activity group" ||
+        "{!Services__c.service_type__c}"=="Dementia cafe" ||
+        "{!Services__c.service_type__c}"=="Information programme" ||
+        "{!Services__c.service_type__c}"=="Peer support group" ||
+        "{!Services__c.service_type__c}"=="Singing for the Brain" ||
+        "{!Services__c.service_type__c}"=="Newsletter")
+//Invoicing Details (Group Attendance).
+  {
+    var result =sforce.connection.query("Select Id, Name from Report where Name = 'Invoicing Details (Group Attendance)'  "); 
+    var recs = result.getArray("records" ); 
+    //alert(recs[0].Id); 
+    window.location.href='/'+recs[0].Id+'?pv0="{!LEFT(Services__c.Id,15)}"&pv1="{!JSENCODE(Services__c.Name)}"';
+  }
+else
+  {
+  //window.location.href='/{!Services__c.id}';
+  alert('No invoicing report available');
+  window.close()
+  }
+}catch(ex){alert(ex);}
+</script> 
+</apex:page>

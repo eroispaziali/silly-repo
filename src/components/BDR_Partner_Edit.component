@@ -1,0 +1,73 @@
+<apex:component >
+    <apex:attribute name="bdr" description="The BDR" type="BDR__c" required="true"/>
+    <apex:attribute name="lstPartnershipStatus" description="Help for Partnership status" type="Enhanced_Lookup__c[]" required="false"/>
+
+
+	<apex:pageBlock title="BDR Partnership Details">	
+
+       <apex:pageBlockSection id="Partner"
+                                            title="Partnership: Please remember to attach your Partnership checklist before sending for approval" 
+                                            columns="1"  
+                                            showHeader="true"
+                                            collapsible="false"
+                                            >
+                                            
+			       <apex:inputField value="{!bdr.Partnership_Status__c}"  id="partnershipStatus"   html-data-help-text="partnershipHelpText"/> 
+			       
+		
+    	</apex:pageBlockSection>	       
+			            
+           		      <table id="partnershipHelpText"  class="helpTable"  >
+
+		                    <tr><th class="ui-state-default ui-corner-top">Partnership Status</th>
+		                            <th class="ui-state-default ui-corner-top" >Description</th>
+		                     </tr>
+		                    
+		                    <tr><td>Lead Provider</td><td>Alzheimer&rsquo;s Society is the only name on the contract with the commissioner and is solely, legally responsible for service delivery, reporting, contract management and negotiation. We receive all of the income and will make payment to sub contractor as agreed in a written sub contract.</td></tr>
+		                    <tr><td>Sub Contractor</td><td>Another organisation is the only name on the contract with the commissioner and is solely legally responsible for service delivery, reporting, contract management and renegotiation. It receives all of the income and will pay us to deliver specific services as agreed in a written sub contract.</td></tr>
+		                    <tr><td>Joint Contractors</td><td>There is one contract with multiple named organisations all of whom are responsible for providing specific services as set out in the contract. Each organisation is paid separately by the commissioner but reporting and renegotiation is managed jointly according to the requirements of the contract.</td></tr>
+		                    <tr><td>Legal Consortium</td><td>This is an umbrella organisation which is a separate legal entity owned by the organisations who have individually signed up to the consortium. The consortium tenders for appropriate services and, if successful, manages the contract and divides up the funding between the relevant organisations.</td></tr>
+		                    <tr><td>Collaborative Working</td><td>Two (or more) organisations have an arrangement to share a resource, e.g. staff time, venue, equipment. There may be no formal contract in place and no money will change hands.</td></tr>
+
+            		 </table>
+			       
+		       <apex:pageBlockSection id="Partner2"
+                                            title="Partnership: Please remember to attach your Partnership checklist before sending for approval" 
+                                            columns="1"  
+                                            showHeader="false"
+                                            collapsible="false">
+                                            	
+		<!-- 	       <apex:pageblockSectionItem >
+		       <apex:image value="/img/icon/custom51_100/books32.png" 
+			                       onclick="switchEnhancedLookup('{!$Component.PartnershipStatusTable}')" 
+			                       title="Expand for Details about Partnership Status"/> 
+			                       
+						       <apex:pageBlockTable value="{!lstPartnershipStatus}" var="partStatus" 
+						                            title="Contract Types" 
+						                            id="PartnershipStatusTable" style="display:none; margin-left:215px; width:80%">
+						                            
+										       <apex:column width="170">
+											       <apex:facet name="header">Partnership Status</apex:facet>
+											           <b>{!partStatus.Lookup_Value__c}</b>
+										       </apex:column>
+										       
+										       <apex:column >
+											       <apex:facet name="header">Description</apex:facet>
+											         {!partStatus.Lookup_Description__c}
+										       </apex:column>
+						       
+						       </apex:pageBlockTable>  	
+						       
+			       </apex:pageblockSectionItem>--> 
+			
+			       <apex:inputField value="{!bdr.PartnerType__c}" />  
+			
+			       <apex:inputTextArea value="{!bdr.Partnership_Detail__c}" style="width:82%" rows="6" />              
+
+    </apex:pageBlockSection>
+
+
+    
+    </apex:pageBlock> 
+
+</apex:component>

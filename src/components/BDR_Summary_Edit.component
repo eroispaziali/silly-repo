@@ -1,0 +1,241 @@
+<apex:component >
+
+       
+       <apex:attribute name="BDR" description="The bdr"  type="BDR__c"  required="true"/>
+       
+       <apex:attribute name="allowEditBDRTimeSpan" 
+                               description="Can the user update the BDR Start date and number of months which drives the Financial years"  
+                               type="boolean"   required="true"/>
+      
+        <apex:attribute name="hr_implications_options"  
+                                description="List of HR Implications Checkbox Options"  
+                                type="SelectOption[]"    required="false"/>
+        
+        <apex:attribute name="hr_implications_selection"   
+                                description="List of HR Implications Selected"  
+                                type="String[]"  required="false"/>
+                                
+        <apex:attribute name="localities"   
+                                description="List of A2D Localities"  
+                                type="SelectOption[]"  required="true"/>
+                                
+    
+       
+       <apex:pageBlock title="BDR Proposal Summary">
+       
+       <apex:pageBlockSection columns="2"  id="keyDetails" >
+       
+           <apex:inputField value="{!BDR.BDR_Name__c}"  style="width:300px" required="true"/>  <!--  BDR Name -->
+           <apex:inputField value="{!BDR.OwnerId}"/>  <!--  Owner -->  
+           
+                   <apex:pageBlockSectionItem >
+                   <apex:outputLabel value="Development Type"/>
+            <apex:inputField value="{!BDR.Development_Type__c}"  required="true" /> 
+              </apex:pageBlockSectionItem>
+
+          <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Locality"/>
+                        <apex:outputPanel styleClass="requiredInput" layout="block" id="pwPanel" >
+                        <apex:outputPanel styleClass="requiredBlock"/>
+                          <apex:selectList value="{!BDR.A2D_Locality__c}"    size="1"  required="true"   id="locality"  >                            
+                             <apex:selectOptions value="{!localities}"/>
+                          </apex:selectList>
+                        
+                        </apex:outputPanel>
+          </apex:pageBlockSectionItem>
+          
+     
+      
+       <!--
+            <apex:pageBlockSectionItem rendered="{!BDR.A2D_Locality__c==null && BDR.Locality__c!=null}">
+                        <apex:outputLabel value="Locality (pre-A2D)"/>
+                        <apex:outputField value="{!BDR.Locality__c}"/>
+            </apex:pageBlockSectionItem> 
+            
+        
+                     
+            <apex:pageBlockSectionItem rendered="{!BDR.A2D_Locality__c!=null || BDR.Locality__c==null}">
+               
+            </apex:pageBlockSectionItem>      -->
+            
+            <apex:pageBlockSectionItem id="BdrArea" rendered="{!BDR.A2D_Locality__c!=null}">        
+                <apex:outputlabel value="Area"/>
+                <apex:outputField value="{!BDR.Area__c}"/>
+            </apex:pageBlockSectionItem>
+                
+            <apex:pageBlockSectionItem id="BdrRegion" rendered="{!BDR.A2D_Locality__c!=null}">
+                <apex:outputlabel value="Region"/>
+                <apex:outputField value="{!BDR.Region__c}"/>
+            </apex:pageBlockSectionItem>
+      
+      </apex:pageBlockSection>
+      
+      <div style="height:25px"><!-- spacer --></div>
+         
+       <apex:pageblockSection columns="2">                   
+                    <apex:inputField value="{!BDR.Income_Source__c}" id="incsource"  style="width:300px" />  <!--  Income Source -->  
+                    <apex:inputField value="{!BDR.Total_Value__c}" required="true"/>      <!--  Estimated Income -->              
+       </apex:pageBlockSection>
+
+
+       <!--   BDR is in a status where we allow editing of the start date and duration (which drives the Financial Years)
+                Shows these fields as editable, required input fields  -->
+        <apex:pageBlockSection showHeader="false" collapsible="false" rendered="{!(allowEditBDRTimeSpan)}" columns="2">            
+                <apex:inputField value="{!BDR.Intended_Start_Date__c}"  required="true"/>      
+                <apex:inputField value="{!BDR.Estimated_Duration__c}"  required="true"/>
+        </apex:pageblockSection>
+          
+          
+        <!--   If the BDR NOT in a status where we  allow editing of the start date and duration 
+       Shows these fields as read only  --> 
+        <apex:pageBlockSection showHeader="false" collapsible="false" rendered="{!(!allowEditBDRTimeSpan)}" columns="2">            
+                 <apex:outputField value="{!BDR.Intended_Start_Date__c}"  />      
+                 <apex:outputField value="{!BDR.Estimated_Duration__c}"  />
+
+         </apex:pageblockSection>
+            
+
+       <apex:pageblockSection showHeader="false" collapsible="false"  columns="2" > 
+
+                <apex:inputField value="{!BDR.Required_Approval_Level__c}" id="approvalLevel" style="width:370px"  />
+                <apex:inputField value="{!BDR.Tender__c}"/> 
+           
+        </apex:pageblockSection>  
+        
+
+       <apex:pageBlockSection >
+
+      </apex:pageBlockSection>
+
+       <apex:pageBlockSection columns="1">
+       
+       
+           <apex:pageblockSectionItem helptext="{!$ObjectType.BDR__c.fields.Summary__c.inlineHelpText}">  
+               <apex:outputLabel >Proposal Summary</apex:outputLabel>      
+               <apex:inputTextArea value="{!BDR.Summary__c}" 
+                                              id="pdescription"     style="width:82%" rows="5"/>              
+           </apex:pageblockSectionItem>
+           
+           <apex:pageblockSectionItem helptext="{!$ObjectType.BDR__c.fields.Delivery_Risks__c.inlineHelpText}">  
+               <apex:outputLabel >Infrastructure/Capacity to deliver</apex:outputLabel>  
+               <apex:inputTextArea value="{!BDR.Delivery_Risks__c}" 
+                                               id="risks" 
+                                               style="width:82%" rows="5" />                     
+           </apex:pageblockSectionItem>
+           
+           <apex:pageblockSectionItem helptext="{!$ObjectType.BDR__c.fields.Sustainability__c.inlineHelpText}">  
+               <apex:outputLabel >Sustainability</apex:outputLabel>
+               <apex:inputTextArea value="{!BDR.Sustainability__c}" 
+                                              style="width:82%" rows="4" />                     
+           </apex:pageblockSectionItem>
+           
+           <apex:pageBlockSectionItem helptext="{!$ObjectType.BDR__c.fields.Recruitment_Required__c.inlineHelpText}" >
+                <apex:outputLabel >Staff/Volunteer Recruitment required</apex:outputLabel>
+                <apex:inputTextArea value="{!BDR.Recruitment_Required__c}" style="width:82%" rows="4"/>
+           </apex:pageBlockSectionItem>
+   
+           <apex:pageBlockSectionItem helptext="{!$ObjectType.BDR__c.fields.Any_redundancies__c.inlineHelpText}" >
+                <apex:outputLabel >Redundancy implications</apex:outputLabel>
+                <apex:inputTextArea value="{!BDR.Any_redundancies__c}" style="width:82%" rows="4"/>
+           </apex:pageBlockSectionItem>
+           
+           <apex:pageblockSectionItem helptext="{!$ObjectType.BDR__c.fields.Exit_Strategy__c.inlineHelpText}">  
+               <apex:outputLabel >Impact if proposal is declined</apex:outputLabel>
+               
+               <apex:inputTextArea value="{!BDR.Exit_Strategy__c}" 
+                                              style="width:82%" 
+                                              rows="4" />
+                                                                   
+           </apex:pageblockSectionItem>
+           
+          <!-- 
+          <apex:pageblockSectionItem helptext="{!$ObjectType.BDR__c.fields.Service_Specifications__c.inlineHelpText}">  
+               <apex:outputLabel >Service Specs</apex:outputLabel>
+               
+               <apex:inputTextArea value="{!BDR.Service_Specifications__c}" 
+                                              style="width:82%" 
+                                              rows="4" />
+                                                                   
+           </apex:pageblockSectionItem>
+           -->
+
+
+       
+       </apex:pageBlockSection>       
+         
+         <apex:pageBlockSection columns="1">
+
+           <apex:inputField value="{!BDR.Strategic_objectives_met__c}"  id="strategicAmbition"   style="width:82%"/> 
+        </apex:pageBlockSection>
+    
+         <apex:pageBlockSection columns="2"> 
+    
+           <apex:pageBlockSectionItem >
+                 <apex:outputLabel value="HR Implications"/>
+         
+                <apex:selectCheckboxes value="{!hr_implications_selection}"     layout="pageDirection">
+                            <apex:selectOptions value="{!hr_implications_options}"/>
+                </apex:selectCheckboxes>
+          
+           </apex:pageBlockSectionItem>
+           
+             <apex:inputField value="{!BDR.IT_Implications__c}"  />       
+           
+          <apex:inputHidden value="{!BDR.HR_Implications__c}"/>  
+          
+           
+                
+           <apex:inputField value="{!BDR.Post_Approval_Changes__c}" rendered="{!BDR.Status__c='Proposed'}"/>
+        </apex:pageBlockSection>
+      
+    
+     
+    <apex:pageBlockSection columns="2"> 
+    
+     <apex:pageBlockSectionItem >
+      
+          <apex:outputLabel value="Reporting Implications"/>               
+          <apex:inputCheckbox value="{!BDR.Reporting_Implications__c}" onclick="toggleDisplay('RI_Container',this.checked)" id="ri_check" />
+     
+    </apex:pageBlockSectionItem>   
+   
+  </apex:pageBlockSection>      
+  
+
+  <apex:pageBlockSection id="RI_Container" columns="1" >
+
+        <apex:pageBlockSectionItem >   
+  
+            <apex:outputLabel value="Reporting Implications Detail" />               
+            <apex:inputTextArea id="myInputId" value="{!BDR.Please_specify__c}" style="width:82%" rows="4"  />
+   
+        </apex:pageBlockSectionItem>
+        
+  </apex:pageBlockSection>    
+  
+  
+    </apex:pageblock>
+
+    <apex:pageBlock title="Workflow / Approvals"  rendered="{!BDR.BDM__c!=null}">
+
+        <!--  This list of users should really be computed in from the organisation table. While A2D is still an issue, the data will be wrong, so 
+                we can't load it from the org tables -->
+       <apex:pageBlockSection columns="2">    
+       
+            <apex:outputField value="{!BDR.BDM__c}"/>                                       <!--  Business Development Manager -->    
+            <apex:outputField value="{!BDR.Regional_Accountant__c}"/>               <!--  Regional Accountant -->
+                   
+            <apex:outputField value="{!BDR.Operations_Manager__c}"/>                <!--  Operations Manager (locality manager)--> 
+            <apex:outputField value="{!BDR.SIM__c}"/>                                       <!--  SIM -->
+                                   
+            <apex:outputField value="{!BDR.Area_Manager__c}"/>                          <!--  Regional Operations Manager -->  
+            <apex:outputField value="{!BDR.HR_Advisor__c}"/>                            <!--  HR Advisor -->
+                 
+            <apex:outputField value="{!BDR.Operations_Director__c}"/>                   <!--  Operations Director -->
+
+        
+        </apex:pageBlockSection>               
+
+</apex:pageBlock>
+
+</apex:component>

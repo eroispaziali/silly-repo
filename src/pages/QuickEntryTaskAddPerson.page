@@ -1,0 +1,197 @@
+<apex:page standardController="Task" extensions="QuickEntryTaskAddPersonController"  tabStyle="Contact" sidebar="true" showHeader="true">
+    <!-- Define Tab panel .css styles -->
+     <style>
+    .activeTab {background-color: #236FBD; color:white; background-image:none}
+    .inactiveTab { background-color: lightgrey; color:black; background-image:none}
+    </style> 
+     
+    <script language="javascript">
+        function cancel()
+        {
+             window.close();   
+        }
+    </script>
+    <script>
+        function setFocusOnLoad() {}
+    </script>
+    <script language="JavaScript">   
+        function test(){
+            alert('hallo');
+        }
+    </script>
+
+    <apex:form id="F">
+        <!-- Define the JavaScript function setFocus-->
+        <apex:actionFunction name="setFocus" focus="click"
+        rerender="out" />
+        <!-- <apex:tabPanel switchType="client"  selectedTab="tContact"  id="ContactTabPanel" tabClass="activeTab" inactiveTabClass="inactiveTab"> 
+            <apex:tab label="Caller Details" name="tContact"  id="tabContact">  -->
+                <br/>
+                <img title="Person" class="pageTitleIcon" alt="Contact" src="/s.gif"/>
+
+                <apex:pageBlock id="P">
+                    <apex:pageblocksection columns="1" id="MessageID"> 
+                        <apex:pageMessages />  
+                    </apex:pageblocksection>
+                    <apex:pageBlockSection columns="1" id="S10">
+                        <h1 style="font-size: 150%; font-weight: bold;">
+                            Caller Details 
+                        </h1>
+                        <p><h4>Person Record Type:&nbsp;&nbsp;  {!selectedRecordTypeName}</h4></p>
+                    </apex:pageBlockSection>
+                    <apex:pageblockButtons >
+                        <apex:commandButton value=" Search " action="{!searchPerson}" />
+                        <apex:commandButton value="Create New Person" action="{!ignoreCreatePerson}" rendered="{!AND(lstMatchingContacts.size=0,ignoreAndCreate)}"/>
+                        <!--apex:commandButton value=" Save " action="{!createTaskAndPersonWithSearch}" rendered="{!ignoreAndCreate}"/--> 
+                        <!-- apex:commandButton value=" Save " action="{!createTaskAndPersonWithSearch}" rendered="{!NOT(ignoreAndCreate)}" / -->
+                        <!-- apex:commandButton value=" Save " action="{!createTaskAndPersonWithSearch}" rendered="{!ignoreAndCreate}" / -->
+                        <apex:commandButton onclick="cancel()" value="Cancel"/>
+                    </apex:pageblockButtons>
+                    <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Call Details have been saved.
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Caller Details are only required if you expect that the caller will become a service user; otherwise do not record the information.</h4>
+                    <apex:pageBlockSection Title="Caller Details" columns="2" id="S1">
+                        <apex:pageBlockSection columns="1" id="S2"> 
+                            <apex:inputfield value="{!relContact.Salutation}" />
+                            <apex:inputfield value="{!relContact.FirstName}" />
+                            <apex:inputtext label="Last Name" value="{!lastName}" id="lastNameDD" />
+                            <!-- <apex:inputfield value="{!relContact.Birthdate}" rendered="{!OR(SelectedRecordTypeName=='Person with Dementia', SelectedRecordTypeName=='Carer of Person with Dementia', SelectedRecordTypeName=='Friend or Family of Person with Dementia')}"/> -->
+                            <apex:inputfield value="{!relContact.Birthdate}" rendered="{!SelectedRecordTypeName!='Professional / Stakeholder'}"/>
+                            <!-- <apex:inputfield value="{!relContact.AccountId}" rendered="{!SelectedRecordTypeName=='Professional / Stakeholder'}"/> -->
+                            <apex:inputfield value="{!relContact.Gender__c}" />
+                            <apex:inputfield value="{!relContact.Email}" rendered="{!SelectedRecordTypeName=='Professional / Stakeholder'}"/>
+                            <apex:inputfield value="{!relContact.HomePhone}" id="phone" />
+                            <apex:inputfield value="{!relContact.MobilePhone}" id="mobilephone" />
+                            <br/><br/>
+                            <apex:inputfield value="{!relContact2.Constituency_Derived__c}" id="Constituency"/>
+                            <apex:inputfield value="{!relContact2.Local_authority__c}" id="LocalAuthority"/>
+                        </apex:pageBlockSection>
+                        <apex:pageblockSection columns="1" id="S3">
+                            <apex:inputfield value="{!accountLink.Account__c}" rendered="{!SelectedRecordTypeName=='Professional / Stakeholder'}"/> 
+                            <apex:inputfield value="{!relContact2.MailingCountry}" id="mailingCountry" />
+                            <apex:inputfield value="{!relContact2.MailingPostalCode}" id="mailingPostcode" />
+                            <apex:inputfield value="{!relContact2.MailingStreet}" id="mailingStreet" />
+                            <apex:inputfield value="{!relContact2.MailingCity}" id="mailingCity" />
+                            <apex:inputfield value="{!relContact2.MailingState}" id="mailingState" />
+                            <br/><br/>
+                            <apex:inputfield value="{!relContact2.Primary_care_trust__c}" id="PrimaryCareTrust"/>
+                            <apex:inputfield value="{!relContact2.Ward__c}" id="Ward"/>
+                        </apex:pageblockSection>
+                    </apex:pageBlockSection> 
+                </apex:pageBlock>
+                <apex:pageBlock rendered="{!lstMatchingContacts.size>0}" >
+                    
+                        <apex:inputHidden value="{!selectedRelContactId}" id="selectedRelContactId"/>
+                        <apex:inputHidden value="{!selectedRelContactName}" id="selectedRelContactName"/>
+                        <apex:pageblockButtons rendered="{!lstMatchingContacts.size>0}">
+                            <apex:commandButton value="Add Selected Person to Log a Call" id="btnNext" action="{!AddSelectedPersonToTask}"/>
+                            <apex:commandButton value="Ignore and Create New Person to add to Call " action="{!ignoreCreatePerson}" rendered="{!ignoreAndCreate}"/>
+                        </apex:pageblockButtons>
+                        
+                        <apex:pageBlockTable value="{!lstMatchingContacts}" var="rec">
+                            <apex:column headerValue="Select" >
+                                <apex:inputhidden id="conName" value="{!rec.Name}"/>    
+                                <input type="radio" name ="rdSelected" id="{!rec.Id}" 
+                                        onclick="document.getElementById('{!$Component.selectedRelContactId}').value=this.id;
+                                                document.getElementById('{!$Component.selectedRelContactName}').value=
+                                                document.getElementById('{!$Component.conName}').value;"/>
+                            </apex:column>
+                            <apex:column >
+                              <apex:facet name="header">Person</apex:facet>
+                                <a href="javascript:window.parent.location='/{!rec.Id}?retURL={!returnURL}'" 
+                                    onmouseover="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                                    onmouseout="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" 
+                                    onfocus="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                                    onblur="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" id="lookup{!rec.Id}">
+                                        {!rec.Name} 
+                                </a>  
+                            </apex:column> 
+                            <apex:column >
+                              <apex:facet name="header">Person record Type</apex:facet>
+                              {!rec.Record_Type_Name__c}
+                            </apex:column>
+                            <apex:column >
+                              <apex:facet name="header">Street</apex:facet>
+                              {!rec.MailingStreet}
+                            </apex:column>
+                            <apex:column >
+                              <apex:facet name="header">City</apex:facet>
+                              {!rec.MailingCity}
+                            </apex:column>
+                            <apex:column >
+                              <apex:facet name="header">Postcode</apex:facet>
+                              {!rec.MailingPostalCode}
+                            </apex:column>
+                            <apex:column >
+                              <apex:facet name="header">Phone</apex:facet>
+                              {!rec.Phone}
+                            </apex:column>
+                            <apex:column rendered="{!SelectedRecordTypeName!='Professional / Stakeholder'}">
+                              <apex:facet name="header">Birthdate</apex:facet>
+                              <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                                    <apex:param value="{!rec.Birthdate}" /> 
+                                </apex:outputText>
+                            </apex:column>
+                        
+                </apex:pageBlockTable>
+            </apex:pageBlock>  
+            <!--  </apex:tab> 
+            <apex:tab label="Call Details" name="tTask"  id="tabTask">  -->
+          <!--   </apex:tab> 
+        </apex:tabPanel>  -->
+                <br/>
+                <!-- <img title="Task" class="pageTitleIcon" alt="Task" /> -->
+                <h1 style="font-size: 150%; font-weight: bold;">
+                    Call Details 
+                </h1>
+                <br/><br/><br/>
+                <apex:pageBlock id="P2">
+                    <apex:pageBlockSection columns="2" id="T1" title="Call Details">
+                         <apex:pageBlockSection columns="1" >
+                         <apex:pageBlockSectionItem labelStyle="width: 300px" helptext="Enter the Service Name of the Information Provision service.  The service name is followed by Operated By in brackets.   If you have more than one Account in CRS, you will see services for all your localities, with the locality name in a second set of brackets."> 
+                           <apex:outputLabel value="Service"/> 
+                           <apex:outputtext value="{!selectedServiceName}"/>
+                                                     
+                         </apex:pageBlockSectionItem>  
+                        </apex:pageBlockSection>
+                        <apex:pageblockSection columns="1" id="T3">
+                            <apex:outputfield value="{!recTask.Time_of_call__c}"/> 
+                        </apex:pageblockSection>
+                    </apex:pageBlockSection> 
+                    <apex:outputpanel >
+                        <apex:outputLabel value="Comments" style="font-weight:bold" for="ip"/>
+                        
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"></apex:outputPanel>   
+                        <apex:inputtextarea value="{!recTask.Description}" rows="6" style="width:95%;" id="ip" disabled="true"/>
+                    
+                    </apex:outputpanel>
+                    <apex:pageBlockSection columns="2" id="T4" title="Information requirements">
+                        <apex:outputfield value="{!recTask.Information_Provided__c}" id="test"/>
+                        <apex:outputfield value="{!recTask.Other_Information_Provided__c}" />
+                    </apex:pageBlockSection> 
+                    <apex:pageBlockSection columns="2" id="T5" title="Call reporting">
+                        <apex:pageBlockSection columns="1" id="T6">
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Caller Type" for="CallerTypeId"/>
+                                
+                                <apex:outputfield value="{!recTask.Caller_type__c}" id="CallerTypeId"/>
+                                
+                            </apex:pageBlockSectionItem>
+                            <apex:outputfield value="{!recTask.Other_Caller_type__c}" />
+                            <apex:outputfield value="{!recTask.Format__c}" />
+                            <apex:outputfield value="{!recTask.In_Out__c}" />
+                            <apex:outputfield value="{!recTask.Subject}"/>
+                        </apex:pageBlockSection>
+                        <apex:pageblockSection columns="1" id="T7">
+                            <apex:outputfield value="{!recTask.Call_Outcome__c}"/>
+                            <apex:outputfield value="{!recTask.Staff_Time_Minutes__c}"/>
+                            <apex:outputfield value="{!recTask.Volunteer_Time_Minutes__c}"/>
+
+                            <!-- <apex:inputfield value="{!recTask.WhoId}" /> -->
+                        </apex:pageblockSection>
+                    </apex:pageBlockSection> 
+                </apex:pageBlock>
+
+
+        
+    </apex:form>
+</apex:page>

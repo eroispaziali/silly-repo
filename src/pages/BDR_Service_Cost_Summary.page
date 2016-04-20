@@ -1,0 +1,92 @@
+<apex:page standardController="Services__c" extensions="BDRServiceCostExtension"  showHeader="false" sidebar="false" tabStyle="Services__c" >
+
+    <head>
+    
+        <style>
+        
+            body .pbBody table.content-table {
+                    width : 96%; 
+                    border: none; 
+                    padding : 3px;
+                    font-size : 12px;                    
+            }
+
+            body .pbBody table.content-table tr.content-row, 
+            body .pbBody table.content-table td.content-data {
+                border : none;
+            }
+
+            body .pbBody table.content-table td {
+                padding : 3px;
+            }
+        
+        </style>
+    
+    
+    </head>
+
+
+    <apex:pageBlock >
+    
+    <apex:pageBlockTable value="{!fundReqWrappers}" var="row" id="serviceTable" 
+                                    styleClass="table table-bordered table-condensed" style="width:96%;">
+        
+            <apex:column value="{!row.freq.Fiscal_Year__c}" style="width:10%"><apex:facet name="header">Financial Year</apex:facet></apex:column>
+            <apex:column value="{!row.freq.Total_Amount__c}" style="width:10%"><apex:facet name="header">Service Cost</apex:facet></apex:column>
+            <apex:column value="{!row.freq.Total_Cover_Potential__c}" style="width:10%"><apex:facet name="header">Total Income Allocated*</apex:facet></apex:column>
+            <apex:column value="{!row.freq.Total_Cover_Potential_Percent__c}" style="width:10%"><apex:facet name="header">Cover Ratio*</apex:facet></apex:column>
+
+            <apex:column title="Income Allocation" style="width:60%">
+                <apex:facet name="header">
+                   <table class="content-table">
+                       <tr class="content-row">
+                           <td class="content-data" style="width:35%">BDR</td>
+                           <td class="content-data" style="width:10%">Income Allocated</td>
+                           <td class="content-data" style="width:15%">Status</td>
+                           <td class="content-data" style="width:20%">Income Source</td>
+                           <td class="content-data" style="width:20%">Renewal Risk</td>
+                       </tr>
+                   </table>
+                </apex:facet>
+            
+                <table class="content-table">
+                <tr>
+                   <td class="content-data" style="width:35%"></td>
+                   <td class="content-data" style="width:10%;align:right;padding-right:3px" ></td>
+                   <td class="content-data" style="width:15%"></td>
+                   <td class="content-data" style="width:20%"></td>
+                   <td class="content-data" style="width:20%"></td>
+                </tr>
+                <apex:repeat value="{!row.allocations}" var="allc" id="allocationTable">            
+                <tr class="content-row">
+                  <td class="content-data">
+                    <apex:outputLink value="/{!allc.Income_Block_Period__r.Income_block__r.BDR__r.id}" target="_top">
+                         {!allc.Income_Block_Period__r.Income_block__r.BDR__r.BDR_Name__c}
+                    </apex:outputLink>
+                  </td>
+                  <td class="content-data" style="text-align:right;padding-right:3px" >
+                 &#163;<apex:outputText value="{0,number,#,###,###}">
+                        <apex:param value="{!allc.Allocation_Amount__c}" />                        
+                      </apex:outputText>
+                  </td>
+                  
+                  <td class="content-data">{!allc.Income_Block_Period__r.Income_Block__r.BDR__r.Status__c}</td>
+                  <td class="content-data">{!allc.Income_Block_Period__r.Income_Block__r.BDR__r.Income_Source__r.Name}</td>
+                  <td class="content-data">{!allc.Income_Block_Period__r.Income_Block__r.Contract__r.Renewal_Risk__c}</td>
+                </tr>
+                                          
+               </apex:repeat>
+               </table>                     
+                       
+            </apex:column>         
+        
+        
+        
+        </apex:pageblockTable>
+        <div class="message" style="margin-top:10px;width:40%">*Total Income Allocated and Cover Ratio includes Income from BDRs/Contracts that are not yet confirmed.</div>
+        
+    
+    </apex:pageBlock>
+
+
+</apex:page>

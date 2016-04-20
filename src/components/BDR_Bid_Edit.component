@@ -1,0 +1,57 @@
+<apex:component >
+    <apex:attribute name="bdr" description="The BDR" type="BDR__c" required="true"/>
+
+
+	<apex:pageBlock title="BDR Bid / Tender Details">
+
+   <apex:outputPanel id="bid_panel">
+
+    <apex:pageBlockSection id="Bid_Summary" title="Bid Status" columns="1" collapsible="false" showHeader="false"  >    
+ 
+	       <apex:inputField id="bidStatus" value="{!bdr.Bid_Status__c}"  style="float:left"  html-data-help-text="bidStatusHelpText" /> 
+                    
+                    <table id="bidStatusHelpText"  class="helpTable"  style="float:left;" >
+        
+                    <tr><th class="ui-state-default ui-corner-top">Bid Status</th>
+                           <th class="ui-state-default ui-corner-top">Status Description</th></tr>
+          
+                    <tr><td>In Progress</td><td>Tender/funding application currently being worked on</td></tr>
+                    <tr><td>Submitted</td><td>Tender/funding application has been approved and submitted to funders. Please ensure you attach a copy of application to BDR</td></tr>
+                    <tr><td>Not Submitted</td><td>Decision taken not to proceed with tender/funding application.  Please ensure BDR is set as Declined</td></tr>
+                    <tr><td>Successful</td><td>Tender/funding application was agreed by funders.  Please ensure you complete Contract and Feedback sections of BDR</td></tr>
+                    <tr><td>UnSuccessful</td><td>Tender/funding application not rejected by funders.  Please ensure you complete Feedback sections of BDR</td></tr>
+         
+           			</table>		
+        
+	     
+	</apex:pageBlockSection>
+	
+	
+	<apex:pageBlockSection id="tenderDetails" title="Tender Details" columns="2" collapsible="false" showHeader="false" >  
+	     
+	       <apex:inputField id="deadlne" value="{!bdr.Clarification_Questions_Deadline__c}" taborderhint="2"/>   
+	       <apex:inputField id="signoffdeadlne" value="{!bdr.Bid_Sign_Off_Deadline__c}"/>   
+	       <apex:inputField id="submdeadlne" value="{!bdr.Bid_Submission_Deadline__c}"/>   
+	       <apex:inputField id="tenderamt" value="{!bdr.Fixed_Tender_Amount__c}"/> 
+	
+	       <apex:pageblockSectionItem helptext="{!$ObjectType.BDR__c.fields.Tupe__c.inlineHelpText}">  
+	           <apex:outputLabel >TUPE Status</apex:outputLabel>
+	           <apex:inputField label="TUPE Status" value="{!BDR.Tupe__c}"/>
+	       </apex:pageblockSectionItem>
+	       
+	        </apex:pageBlockSection>
+	        
+	        <apex:pageBlockSection id="tupeDetails"  title="Tender Details" columns="1" collapsible="false" showHeader="false" > 
+	         
+	         <apex:pageblockSectionItem helptext="{!$ObjectType.BDR__c.fields.Tupe_Detail__c.inlineHelpText}">  
+	          <apex:outputLabel >Comments about TUPE</apex:outputLabel>
+	       		<apex:inputTextArea label="Comments about TUPE" value="{!BDR.Tupe_Detail__c}" style="width:82%" rows="2"/>
+	         </apex:pageblockSectionItem>
+
+     		</apex:pageBlockSection>
+    
+    </apex:outputPanel>   
+
+	</apex:pageBlock>
+
+</apex:component>

@@ -1,0 +1,663 @@
+<apex:page tabStyle="BDR__c" 
+                    StandardController="BDR__c" 
+                    extensions="BDRControllerExtension" 
+                    sidebar="false">
+
+<!-- ======================================================================
+    gary.grant@conseq.co.uk        April 2013
+    valerie.dunphy@conseq.co.uk  June 2014   
+    Combined page for managing all the components of a Business Development Record. Using JQuery Tabs
+=========================================================================  -->     
+
+<head>
+
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/redmond/jquery-ui.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.css" />
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+    
+<style type="text/css"> 
+        
+        a.linkBtn {padding : 4px ; text-decoration : none;}
+        a.linkBtn:hover {color : black; text-decoration : none;}
+        
+        body .bPageTitle .ptBody .pageType, body .bPageTitle .ptBody .pageDescription { margin-left: 10px;  }
+        body .pbBody table.list tr.dataRow td { vertical-align: top ; }
+        
+        .table-bordered td.align-right { text-align: right; }
+
+        table.helpTable {margin-bottom: 20px; 
+                                  margin-left: 19%;
+                                  border-collapse: collapse; 
+                                  border-spacing: 0;
+                                  display: none;
+       }
+        
+        table.helpTable th {
+                                font-weight: bold;
+                                padding-top: 5px;
+                                padding-bottom: 4px;
+        }
+                        
+        table.helpTable td, .helpTable th {
+                                font-size: 1.0em;
+                                border: 1px solid #D7E6F0;
+                                padding: 3px 7px 2px 7px;
+                                background-color: white;
+                                font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+                                vertical-align: top;
+        }
+                        
+        table.helpTable  td.money { text-align: right; }    
+        table.helpTable  th:first-child { border-radius: 6px 0 0 0; }
+        table.helpTable  th:last-child { border-radius: 0 6px 0 0; }
+        table.helpTable  td:last-child { border-radius: 6px 0 0 0; }
+        table.helpTable  th:only-child { border-radius: 6px 6px 0 0; }
+        table.helpTable  tr:last-child td:first-child {     border-radius: 6px 0 0 0; }
+        
+        body  .secondaryPalette { background-color: #FFFFFF !important; }
+        
+        h1.pageType {margin-bottom:5px; font-size: 1.1em !important; }
+        
+        h2.pageDescription {float: left;}
+        
+        .statusDiv {float:right;  font-size: 1.6em;}
+        .headerStatus { color:#E17009;}
+        
+    .Custom64Tab .secondaryPalette, .individualPalette .Custom64Block .secondaryPalette {
+            background-color: #00305E;
+            border-color: #AEB3B8;
+    }
+        
+</style>
+
+
+  
+</head>
+
+<apex:form >
+
+
+<!--  These three JS action functions are called from the commandLinks in the Service Repeat loop 
+        They all call actions on the controller that do a full save before proceeding 
+
+-->
+<apex:actionFunction action="{!save}"    name="doSave"   rerender="hiddenBlock" ></apex:actionFunction> 
+
+<apex:actionFunction action="{!removeService}"  id="removeServiceActionFunction" 
+            name="removeService"
+            reRender="hiddenBlock, innerTabServices, innerTabAllocate, actionButtons">
+    <apex:param name="rid" assignTo="{!rid}" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction action="{!deleteService}"    id="deleteServiceActionFunction" 
+            name="deleteService"
+            reRender="hiddenBlock, innerTabServices, innerTabAllocate, actionButtons"
+            >
+    <apex:param name="rid" assignTo="{!rid}" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction action="{!editService}"       id="editServiceAction" 
+            name="editService"
+            reRender="hiddenBlock">
+    <apex:param name="serviceId" assignTo="{!serviceId}" value=""/>
+</apex:actionFunction>
+
+
+<!--  New BDR -->
+<apex:sectionHeader title="Business Development Record" 
+                                 subtitle="New Business Development Record"    rendered="{!BDR__c.id==null}"/>
+
+<!--  Existing BDR -->                                 
+<apex:sectionHeader title="Business Development Record" 
+                                 subtitle="{!BDR__c.name} : {!BDR__c.BDR_Name__c}"    rendered="{!BDR__c.id!=null}"/>
+  
+<apex:pageMessages />
+
+<apex:pageBlock id="Detail" >
+
+    <apex:pageBlockButtons location="top">    
+
+                <apex:commandButton action="{!save}" value="Save"/>                       
+                <apex:commandButton action="{!saveAndClose}" value=" Save and Close" id="saveAndCloseButton"/>              
+                <apex:commandButton action="{!cancel}" value="Cancel"/>    
+    
+    </apex:pageBlockButtons>  
+    
+
+    <div id="tabs"   style="display:none">
+    
+        <!--  Only the Summary tabs should be visible until the summary data has been entered and the BDR has been saved. 
+              The BdrID and fields like Income Source are required for linked records         
+        -->
+  
+        <ul class="nav nav-tabs">
+            <li><a href="#tabProposal">Proposal</a></li>
+            <apex:outputPanel rendered="{!BDR__c.id!=null}" layout="none">
+                <li><a href="#tabServices">Services ({!servicesCount})</a></li> 
+                <li><a href="#tabPartner">Partnership</a></li>
+                <li><a href="#tabIncome">Income</a></li>
+                <li><a href="#tabBid">Bid / Tender</a></li>
+                <li><a href="#tabContract">Contract</a></li>
+                <li><a href="#tabAllocate">Income Allocation</a></li>
+                <li><a href="#tabFeedback">Feedback</a></li>
+            </apex:outputPanel>
+        </ul>
+        
+        
+        
+  
+    <div id="tabProposal" >
+        <apex:outputPanel layout="none">
+            <c:BDR_Summary_Edit allowEditBDRTimeSpan="{!allowEditBDRTimeSpan}"    BDR="{!BDR__c}" 
+                                              hr_implications_options="{!hr_implications_options}"
+                                              hr_implications_selection="{!hr_implications_selection}" 
+                                              localities="{!localities}" 
+                                              /> 
+        </apex:outputPanel>    
+    </div>
+    
+    
+    
+
+    <div id="tabPartner" >
+    <apex:outputPanel rendered="{!BDR__c.id!=null}" layout="none" id="innerTabPartner">
+        <c:BDR_Partner_Edit BDR="{!BDR__c}"/>
+    </apex:outputPanel>    
+    </div>
+    
+    <div id="tabBid" >
+    <apex:outputPanel rendered="{!BDR__c.id!=null}" layout="none" id="innerTabBid">
+        <c:BDR_Bid_Edit BDR="{!BDR__c}" rendered="{!BDR__c.Bid_Status__c!='None'}"/>
+    </apex:outputPanel>    
+    </div>
+
+    <div id="tabIncome" >    
+    <apex:outputPanel rendered="{!BDR__c.id!=null}" layout="none" id="innerTabIncome">     
+      
+    <apex:pageBlock title="BDR Income">  
+       
+     <apex:pageBlockSection collapsible="false" showHeader="false">  
+      
+     <!--    <apex:pageblockSectionItem rendered="{!hasFiscalYears==false}">
+           <apex:outputText >You have not selected the Financial Years to which your BDR applies. 
+                             Before entering Income, select Financial Years on the Proposal Tab and save the BDR.             
+           </apex:outputText>
+       </apex:pageblockSectionItem> -->
+       
+       <apex:pageblockSectionItem rendered="{!BDR__c.Income_Source__c==null}">
+           <apex:outputText >Before entering Income, select an Income Source on the Proposal Tab and save the BDR.  
+           </apex:outputText>
+       </apex:pageblockSectionItem>
+           
+      </apex:pageBlockSection>
+       
+      <apex:commandButton action="{!addIncomeBlock}" 
+      value="Add Income" 
+      rendered="{!hasIncomeBlock=='No' && hasFiscalYears==true && BDR__c.Income_Source__c!=null}" 
+      rerender="innerTabIncome, innerTabContract, innerTabAllocate"/>
+      
+      <c:BDR_Income_Edit incBlock="{!bdrWrapper.incBlock}"   incomeData="{!bdrWrapper.incomeData}"    BDR="{!BDR__c}"  />
+      
+    </apex:pageBlock>
+      
+    </apex:outputPanel>       
+    </div>
+
+    <div id="tabServices" >      
+    
+    <apex:pageBlock title="Services Linked to this BDR" id="innerTabServices">            
+            
+    <apex:outputPanel rendered="{!BDR__c.id!=null}" layout="none" >                      
+                              
+       <apex:pageblockSection columns="2" >         
+    
+            <apex:commandButton value="Add Existing Services" action="{!addExistingServices}"></apex:commandButton> 
+            <apex:commandButton value="Add New Service" action="{!addNewService}"> </apex:commandButton>
+    
+       </apex:pageblockSection>
+            
+                    
+        <apex:repeat value="{!bdrWrapper.services.svcWrappers}" var="rep" id="svcRepeat">
+    
+         <apex:pageBlockSection id="Services" columns="1">
+         <apex:facet name="header">                   
+            <apex:outputPanel layout="inline">{!rep.svc.name} - Status: {!rep.svc.service_status__c}
+            <apex:outputPanel layout="inline" style="float:right">
+                Open Date: 
+                <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                    <apex:param value="{!rep.svc.service_opendate__c}" /> 
+                </apex:outputText>
+            </apex:outputPanel>
+            </apex:outputPanel>
+         </apex:facet> 
+       
+         <apex:pageBlockSection showheader="false" columns="2">
+    
+            <apex:pageBlockSectionItem labelStyleClass="labelCol"> 
+                     <apex:outputlabel >Service Name</apex:outputlabel>
+                     <apex:outputLink value="/{!rep.svc.id}" id="name_link">
+                           <apex:outputField value="{!rep.svc.name}" label="Service Name"/>
+                     </apex:outputLink> 
+            </apex:pageBlockSectionItem>     
+       
+                <apex:outputField value="{!rep.svc.service_status__c}" label="Service Status"/>            
+                <apex:outputField value="{!rep.svc.service_type__c}"/>
+                <apex:outputField value="{!rep.svc.Sub_Type_Internal__c}"/>
+                <apex:outputField value="{!rep.svc.Locality__c}"/>
+                <apex:outputField value="{!rep.svc.Default_Location__c}"/>
+                <apex:outputField value="{!rep.svc.Internal_Evaluation_Methods__c}" />
+                <apex:outputField value="{!rep.svc.External_Evaluation__c}" /> 
+                <apex:outputField value="{!rep.svc.Services_Framework_Principle__c}" />                  
+                <apex:outputField value="{!rep.svc.service_opendate__c}" label="Service Open Date"/>
+                
+                <apex:pageBlockSectionItem ><!--  spacer --></apex:pageBlockSectionItem>             
+
+        </apex:pageBlockSection>        
+                   
+         <apex:pageBlockSection showheader="false" columns="1">         
+         <apex:pageblockSectionItem >      
+                <apex:outputLabel >Property Notes</apex:outputLabel>
+                <apex:outputText value="{!rep.svc.Property_Notes__c}" style="width:92%" />   
+         </apex:pageblockSectionItem>
+        
+        </apex:pageBlockSection>
+        
+           <c:BDR_Efn_Edit evidence="{!rep.evidence}"/>                  
+    
+         <apex:pageBlockSection showHeader="false" columns="1">
+
+            <apex:inputField value="{!rep.svc.Estimated_Break_Even__c}"
+                  rendered="{!rep.svc.service_status__c=='Draft' || rep.svc.service_status__c == 'Accepted'}"  
+            />             
+
+            <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Service Costs"/>         
+            
+            <apex:pageBlockTable value="{!rep.fundReqWrappers}" var="row" id="serviceTable" styleClass="table table-bordered table-condensed" style="width:92%">
+        
+                    <apex:column >
+                        <apex:facet name="header">Financial Year</apex:facet>
+                        <apex:outputField id="year" value="{!row.freq.Fiscal_Year__c}" />
+                    </apex:column>
+        
+                    <apex:column >
+                        <apex:facet name="header">Cost</apex:facet>
+                        <apex:inputField id="total" value="{!row.freq.Total_Amount__c}" />
+                    </apex:column>
+                    
+                    <apex:column title="{!$ObjectType.Funding_Requirement__c.fields.Funding_In_Budget__c.inlineHelpText}" >
+                       <apex:facet name="header">In Budget</apex:facet>
+                       <apex:inputField id="ib" value="{!row.freq.Funding_In_Budget__c}"/>
+                    </apex:column>
+
+                   <apex:column title="{!$ObjectType.Funding_Requirement__c.fields.Comments__c.inlineHelpText}" style="width:65%">
+                       <apex:facet name="header">Comments</apex:facet>
+                       <apex:inputTextArea id="comm" value="{!row.freq.Comments__c}" style="width:96%" rows="3"/>
+                   </apex:column>
+    
+             </apex:pageBlockTable>                      
+               
+         </apex:pageBlockSectionItem>
+         <div style="margin-right:6%; margin-left:18%; padding: 10px; background-color: #FFFFE0;" id="{!rep.svc.id}-costsHelpText"  >
+            <strong>Notes to Service Costs</strong>    
+            <p>Costs should be for the whole time the Service is open in each each financial year, not just the time the Contract/Income covers.</p>
+          </div>                            
+         </apex:pageBlockSection>       
+               
+       
+    
+          <!--  If the Service is a draft service delete it when the request is made to remove it from the BDR
+                The logic of that action will only actually delete the service if no other BDRs are linked to it
+                
+                The delete, remove and edit actions are implemented as commandLinks that call JS functions
+                positioned just inside the form. This is because actionButtons appear not to work inside
+                the Repeat. 
+                
+                The controller methods called save the BDR and all associated records before proceeding. 
+                
+           -->  
+          <apex:outputPanel rendered="{!rep.svc.service_status__c!='Draft'}">
+             
+           <apex:commandButton action="{!removeService}" 
+                value="Remove Service from BDR" 
+                reRender="hiddenBlock, innerTabServices, innerTabAllocate, actionButtons"  
+                onclick="if(!confirm('Are you sure you want to remove this Service and all associated income allocations?')) { return false; }" 
+                oncomplete="j$('[id$=innerTabServices]').find('img.hideListButton').each(function() {twistSection(this);} );"                                               
+                style="margin-right:15px">
+                <apex:param value="{!rep.svc.id}" assignTo="{!rid}" name="rid"/>
+          </apex:commandButton>         
+                    
+          <!-- 
+          <apex:commandButton value="Edit Service" action="/apex/BDR_Service_Add_Update?id={!rep.svc.id}&bdrid={!BDR__c.id}"></apex:commandButton>
+          -->
+          
+          <!--  The rerender on the command button works around a bug in SF that does not fire the setter 
+                (for serviceId in this case) unless there is a rerender
+                Only Services is status Draft or Accepted can have their full detail edited 
+          -->
+          <apex:commandButton value="Edit Service"  action="{!editService}" reRender="hiddenBlock">
+              <apex:param value="{!rep.svc.id}" assignTo="{!serviceId}" name="serviceId"/>
+          </apex:commandButton>
+           
+          </apex:outputPanel> 
+    
+          <!--  If the Service is anything other than Draft, just remove it from this BDR
+          -->
+          <span style="display:none">Service ID {!rep.svc.id} </span>
+          <apex:outputPanel rendered="{!rep.svc.service_status__c=='Draft'}">
+          
+               <apex:commandButton action="{!deleteService}" 
+                         value="Delete Draft Service" 
+                         rerender="hiddenBlock, innerTabServices, innerTabAllocate, actionButtons" 
+                         onclick="if(!confirm('Are you sure you want to delete this Draft Service and all associated income allocations?')) { return false; }" 
+                         oncomplete="j$('[id$=innerTabServices]').find('img.hideListButton').each(function() {twistSection(this);} );"                   
+                         style="margin-right:15px"
+                         >
+                         <apex:param value="{!rep.svc.id}" assignTo="{!rid}" name="rid"/>
+               </apex:commandButton>         
+               
+                <!--  The rerender on the command button works around a bug in SF that does not fire the setter (for SID in this case) unless there is a rerender -->
+                <apex:commandButton value="Edit Service" 
+                                    action="{!editService}"
+                                    rerender="hiddenBlock"
+                                    >                                               
+                         <apex:param value="{!rep.svc.id}" assignTo="{!serviceId}" name="serviceId"/>
+               </apex:commandButton>
+                      
+               <!--      <apex:commandButton value="Edit Service" action="/apex/BDR_Service_Add_Update?id={!rep.svc.id}&bdrid={!BDR__c.id}" ></apex:commandButton>   -->        
+          
+          
+          </apex:outputPanel>              
+    
+        </apex:pageBlockSection>                           
+           
+        </apex:repeat> 
+            
+    </apex:outputPanel>    
+    </apex:pageBlock>
+    </div> <!-- End Services Tab -->
+
+
+    <div id="tabContract" >    
+    <apex:outputPanel rendered="{!BDR__c.id!=null}"  layout="none" id="innerTabContract">   
+    
+        <apex:pageBlock title="BDR Contract Details">
+
+            <apex:commandButton action="{!addContract}" 
+                                value="Add Contract" 
+                                rendered="{!hasContract=='No' && hasIncomeBlock=='Yes'}" 
+                                rerender="innerTabContract"
+                                oncomplete="hideCustomerPortalOption();"/>
+            
+            <apex:pageblockSection rendered="{!hasIncomeBlock=='No'}">
+                <apex:outputText >This BDR has no Income. Add Income before adding the contract details.</apex:outputText>
+            </apex:pageblockSection>
+        
+            <c:BDR_Contract_Edit contract="{!bdrWrapper.contract}"                         
+                             FinanceActivityCodes="{!bdrWrapper.services.FinanceActivityCodes}"
+                             requiredSignaturesOptions="{!required_signatures_options}" 
+                             requiredSignaturesSelection="{!required_signatures_selection}"
+                             highlightedContractItemsOptions="{!highlighted_contract_items_options}"    
+                             highlightedContractItemsSelection="{!highlighted_contract_items_selection}"
+                             />     
+        
+        </apex:pageBlock>
+    
+    </apex:outputPanel>                    
+    </div>
+
+    <div id="tabFeedback" >
+    <apex:outputPanel rendered="{!BDR__c.id!=null}" layout="none" id="innerTabFeedback">
+        <c:BDR_Feedback_Edit BDR="{!BDR__c}" />
+    </apex:outputPanel>    
+    </div>
+    
+    <div id="tabAllocate" >
+    <apex:outputPanel rendered="{!BDR__c.id!=null}" layout="none" id="innerTabAllocate">        
+    
+    <apex:pageBlock title="BDR Income Allocation">   
+    
+       <p>On this tab you can specify how income linked to the BDR will be allocated to Service costs.</p>
+        
+               <apex:pageBlockSection collapsible="false" showHeader="false">  
+          
+               <apex:pageblockSectionItem rendered="{!hasIncomeBlock=='No'}">
+                   <p>This BDR has no Income. </p>
+               </apex:pageblockSectionItem>
+               
+               <apex:pageblockSectionItem rendered="{!hasServices=='No'}">
+                   <p>This BDR is not linked to any Services.</p>
+               </apex:pageblockSectionItem>
+                
+          </apex:pageBlockSection>
+        
+        
+         <!-- <apex:commandButton action="{!doSaveAllocations}" value="Save Allocations"/>-->    
+         <c:BDR_Income_Allocation_Edit IncomeData="{!bdrWrapper.incomeData}" 
+                                       fundReqWrappers="{!bdrWrapper.services.frWrappers}"
+                                       dependentBDRs="{!bdrWrapper.dependentBDRs}"  
+                                       rendered="{!hasIncomeBlock=='Yes' && hasServices=='Yes'}"
+                />    
+         
+    </apex:pageBlock>
+         
+    </apex:outputPanel>        
+    </div>
+    
+    </div>
+
+</apex:pageBlock>
+
+
+<apex:inputHidden value="{!BDR__c.Actual_Value__c}"/>
+<apex:inputHidden value="{!BDR__c.Service_Specifications__c}"/>
+<apex:inputHidden value="{!BDR__c.Service_Types__c}"/>
+<apex:inputHidden value="{!BDR__c.Notifications_Pending__c}"/>
+<apex:inputHidden value="{!BDR__c.Fiscal_Years__c}"/>
+<apex:inputHidden value="{!BDR__c.Regional_Accountant__r.Name}"/>
+<apex:inputHidden value="{!BDR__c.Reasons_Declined__c}"/>
+
+ <!--  
+ See this for an explanation of why this is here  http://blog.jeffdouglas.com/2010/03/04/passing-parameters-with-a-commandbutton/ -->
+ <apex:pageBlock id="hiddenBlock" rendered="false"><!--spacer--></apex:pageBlock> 
+
+</apex:form>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.js"></script>
+    <style>
+     .select2-results li { margin-left: 0 }
+     </style>
+
+
+<script type="text/javascript">
+
+     var j$=jQuery.noConflict();
+       
+     function showHelp(ending) 
+       {
+           var ident = '[id$='+ending+']';
+           var el = j$(ident)[0];         
+          if (typeof(el) != "undefined") {
+                el.style.display = 'block';
+                }
+       }
+       
+      function hideHelp(ending) 
+       {
+           var ident = '[id$='+ending+']';
+           var el = j$(ident)[0];     
+           if (typeof(el) != "undefined")  {
+                el.style.display = 'none';
+           }
+       }
+
+       
+       /* If Customer Portal has been enabled on the org
+          all the user selectors show the option of selecting Customer Portal users.           Hide that where it's not of interest.
+       */
+       function hideCustomerPortalOption()
+       {
+                // Hide all the dropdowns for portal users
+                j$('select').each(function() {
+                   var select = j$(this);
+                   select.children('option').each(function() {
+                              var optText = j$(this).text();
+                              if (optText =='Customer Portal User' || optText=='Queue') {
+                                    select.hide();
+                              }    
+                  });
+        });
+       
+       }
+     
+      function toggleDisplay(inputId, isOn){
+                   
+        if(isOn){            
+            j$('[id$=RI_Container]').fadeIn();            
+        } else {
+           j$('[id$=RI_Container]').fadeOut();        
+        }
+      }
+      
+     j$(document).ready(function() {
+    
+      toggleDisplay('RI_Container', j$('[id$=ri_check]').is(':checked'));
+   
+      j$("#tabs" ).tabs();
+      j$("#tabs" ).css("display","block");
+      
+      //j$("img.pageTitleIcon").remove();
+      //j$("#phHeaderLogoImage").remove();
+       
+      j$(" div.content" ).css("width","97%");
+    
+       var link_SaveAndClose = j$("a[id$=saveAndCloseLink]" );
+       link_SaveAndClose.html('<i class="fa fa-save"></i>  Save and Close');
+        
+      /* Replace the ugly error message for a null Locality value
+         The field is implemented as a drop down not an input field, so the error message references the long VF id  
+         The error will either be in a div, or an li in the case where there is more than one error 
+      */      
+      var elError = j$(".messageText:contains('locality: Validation Error'), .messageTable li:contains('locality: Validation Error')");
+      var elErrorChildren = elError.children(); 
+      elError.text(" Locality: You must enter a value"); 
+      elError.prepend(elErrorChildren);
+      
+       var bdrStatus = '{!bdr__c.Status__c}'; 
+       var statusHTML = '<div class="statusDiv"><span>Status: </span><span class="headerStatus">'+bdrStatus+'</span></div>'; 
+       j$(statusHTML).insertAfter( j$( "h2.pageDescription" ) );
+           
+
+        // Update Labels for "Renewal Risk" dropdown field in Contract section
+        updateLabel('N/A','Risk not applicable as service/acivity is planned to end');
+        updateLabel('Low','Funding confirmed for at least 18 months from the date of review');
+        updateLabel('Medium','Funding confirmed for at least 6-18 months from the date of review');
+        updateLabel('High', 'Funding confirmed for only 6 months or less, or not confirmed in writing');
+        
+        function updateLabel(labelShort, labelLong) {
+          j$('select option:contains('+labelShort+')').text(labelShort + ' - ' + labelLong);
+        
+        }
+
+        // If there is a tab referenced in the url, highlight it  ( This uses a VF variable to get the URL parameter )
+        var index = j$('#tabs a[href="#{!$CurrentPage.parameters.tab}"]').parent().index();
+        if (index>0) {
+            j$("#tabs").tabs("option", "active", index);
+        }
+        
+        hideCustomerPortalOption();
+        
+        var fld_Approval = j$("select[id$=approvalLevel]" );
+        var fld_Ambition = j$("select[id$=strategicAmbition]" );
+        var fld_Partnership = j$("select[id$=partnershipStatus]" );
+        var fld_Contract = j$("select[id$=contractType]" );
+        var fld_Risk = j$("textarea[id$=contractRisk]" );
+        var fld_BidStatus = j$("select[id$=bidStatus]" );
+   //     var link_SaveAndClose = j$("select[a$=SaveAndClose]" );
+        
+        fld_Approval.select2({
+            formatResult: function(opt){
+    
+                var values = {
+                'Operations Manager': '50,000',
+                'Regional Operations Manager': '100,000',
+                'Operations Director': '200,000',
+                'Director of Operations': '350,000', 
+                'CEO': '450,000',
+                'Joint CEO & Director of Corporate Resources':  '600,000',
+                '2 from Chairman, Treasurer, Vice Chair, CEO': 'Above 600,000'
+                };
+                
+                if (opt.text=='--None--') return '<div style="width:100%;font-weight:bold"><div style="float:right">Max Amount</div><div style="float:left">Approval Level</div></div>';
+                
+                return '<div style="width:100%"><div style="float:right">'+(values[opt.text]||'')+'</div><div style="float:left">'+opt.text+'</div></div>';
+                
+                },
+            formatSelection: function(opt){
+                    return opt.text;
+                },
+            escapeMarkup: function(m) { return m; },
+            width: 'copy',
+            minimumResultsForSearch: -1
+        });
+        
+    
+        fld_Ambition.select2({
+        
+            formatResult: function(opt){
+    
+                var values = {
+            
+                        'Service Quality': 'Demonstrate the way in dementia care and support',
+                        'Service Reach' :  'Be the foremost contact point for anyone dealing with dementia',
+                        'Research' : 'Lead partnerships and investments to improve care, advance prevention, move closer to a cure',
+                        'Campaigning' : 'Campaign for people affected by dementia to be able to live the lives they want'
+                
+                    };
+                        
+                    if (opt.text=='--None--') { 
+                        return '<div style="width:100%;font-weight:bold"><div style="float:right;width:85%;">Description</div><div style="float:left;width:15%">Ambition</div></div>';
+                    }               
+                        
+                    return '<div style="width:100%"><div style="float:right;width:85%;"><span>'+(values[opt.text]||'')+'</span></div><div style="float:left;width:15%;">'+opt.text+'</div></div>';              
+             },
+                
+             formatSelection: function(opt){
+                        return opt.text;
+             },
+            
+             escapeMarkup: function(m) { return m; },
+             width: 'copy',
+             minimumResultsForSearch: -1
+        
+        });
+        
+        j$('[data-help-text]').focus(function(event){
+            showHelp(j$(event.target).attr('data-help-text'));
+         }); 
+             
+         j$('[data-help-text]').focusout(function(event){
+            hideHelp(j$(event.target).attr('data-help-text'));
+         }); 
+        
+
+        /* Bid Status Help Text */
+        j$ ( fld_BidStatus ).focus(function() {     
+                 j$("#bidStatusHelp").css("margin-top","100px");
+        });
+        
+        j$ ( fld_BidStatus ).focusout(function() {     
+                 j$("#bidStatusHelp").css("margin-top","0px");
+        });
+        
+
+});
+</script>
+
+
+ 
+</apex:page>

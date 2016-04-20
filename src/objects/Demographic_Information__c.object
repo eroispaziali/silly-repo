@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Demographic Information held against the People (Contact) record.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Date_of_Change_of_Living_Arrangements__c</fullName>
+        <externalId>false</externalId>
+        <label>Date of Change of Living Arrangements</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Employment_Status__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The Employment Status of the person. They do not have to answer. ‘None’ means not asked; ‘Not Disclosed’ means was asked but didn’t answer.</inlineHelpText>
+        <label>Employment Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Employed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unemployed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Retired</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Disclosed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Ethnic_Group__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The Ethnic group the person identifies with. They do not have to answer. ‘None’ means not asked; ‘Not Disclosed’ means was asked but didn’t answer.</inlineHelpText>
+        <label>Ethnic Group</label>
+        <picklist>
+            <picklistValues>
+                <fullName>White English / Welsh / Scottish / Northern Irish / British</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>White Irish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>White Gypsy or Irish Traveller</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>White: Other White background</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mixed: White and Black Caribbean</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mixed: White and Black African</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mixed: White and Asian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Asian: Indian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Asian: Pakistani</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Asian: Bangladeshi</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Asian: Chinese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Asian: Other Asian background</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Black: African</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Black: Caribbean</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Black: Other Black / African / Caribbean background</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other: Arab</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other ethnic group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not disclosed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Any other ethnic group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prefer not to answer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unknown / not completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Ethnicitiy__c</fullName>
+        <description>Ethnic background of the client</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Ethnic background of the client. The client does not have to answer</inlineHelpText>
+        <label>Ethnicitiy</label>
+        <picklist>
+            <controllingField>Ethnic_Group__c</controllingField>
+            <picklistValues>
+                <fullName>Not disclosed</fullName>
+                <controllingFieldValues>Not disclosed</controllingFieldValues>
+                <controllingFieldValues>Prefer not to answer</controllingFieldValues>
+                <controllingFieldValues>Unknown / not completed</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>African</fullName>
+                <controllingFieldValues>Black: African</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Albanian</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>All republics which made up the former USSR</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Any other group</fullName>
+                <controllingFieldValues>Any other ethnic group</controllingFieldValues>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arab</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <controllingFieldValues>Other: Arab</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Asian and Chinese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Baltic States (Estonian, Latvian or Lithuanian)</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bangladeshi</fullName>
+                <controllingFieldValues>Asian: Bangladeshi</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Black and Asian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Black and Chinese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Black and White</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Black British</fullName>
+                <controllingFieldValues>Black: Other Black / African / Caribbean background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bosnian</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>British Asian</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Caribbean</fullName>
+                <controllingFieldValues>Black: Caribbean</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Caribbean Asian</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chinese</fullName>
+                <controllingFieldValues>Asian: Chinese</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chinese and White</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Commonwealth of (Russian) Independent States</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Croatian</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cypriot (part not stated)</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>East African Asian</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>English</fullName>
+                <controllingFieldValues>White English / Welsh / Scottish / Northern Irish / British</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Filipino</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Greek</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Greek Cypriot</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Gypsy/Romany</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Indian</fullName>
+                <controllingFieldValues>Asian: Indian</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Iranian</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Irish</fullName>
+                <controllingFieldValues>White Irish</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Irish Traveller</fullName>
+                <controllingFieldValues>White Gypsy or Irish Traveller</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Israeli</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Italian</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Japanese</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kashmiri</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kosovan</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kurdish</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Latin American</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Malaysian</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Middle Eastern (excluding Israeli, Iranian and Arab)</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mixed Asian</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mixed Black</fullName>
+                <controllingFieldValues>Black: Other Black / African / Caribbean background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mixed Irish and other White</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mixed White</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Moroccan</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Multi-ethnic islands: Mauritian or Seychellois or Maldivian or St Helena</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nigerian</fullName>
+                <controllingFieldValues>Black: Other Black / African / Caribbean background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North African</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Northern Irish</fullName>
+                <controllingFieldValues>White English / Welsh / Scottish / Northern Irish / British</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Asian or Asian unspecified</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Black or Black Unspecified</fullName>
+                <controllingFieldValues>Black: Other Black / African / Caribbean background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Mixed or Mixed Unspecified</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other mixed White</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other republics which made up the former Yugoslavia</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other White European or European unspecified or Mixed European</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other White or White unspecified</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pakistani</fullName>
+                <controllingFieldValues>Asian: Pakistani</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Polish</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Punjabi</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scottish</fullName>
+                <controllingFieldValues>White English / Welsh / Scottish / Northern Irish / British</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Serbian</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sinhalese</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Somali</fullName>
+                <controllingFieldValues>Black: Other Black / African / Caribbean background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South and Central American</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sri Lankan</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tamil</fullName>
+                <controllingFieldValues>Asian: Other Asian background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Traveller</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Turkish</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Turkish Cypriot</fullName>
+                <controllingFieldValues>White: Other White background</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vietnamese</fullName>
+                <controllingFieldValues>Other ethnic group</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Welsh</fullName>
+                <controllingFieldValues>White English / Welsh / Scottish / Northern Irish / British</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>White and Asian</fullName>
+                <controllingFieldValues>Mixed: White and Asian</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>White and Black African</fullName>
+                <controllingFieldValues>Mixed: White and Black African</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>White and Black Caribbean</fullName>
+                <controllingFieldValues>Mixed: White and Black Caribbean</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Faith_Culture__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The Faith and Culture group the person identifies with. They do not have to answer. ‘None’ means not asked; ‘Not Disclosed’ means was asked but didn’t answer.</inlineHelpText>
+        <label>Faith/Culture</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Agnostic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Atheist</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Baptist</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Buddhist</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Catholic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Church of England / Wales / Scotland / Ireland</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Islam / Muslim</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hindu</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Jain</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Jehovah&apos;s Witness</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Jewish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Methodist</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Orthodox</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parsi / Zorastrian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pentecostal / Church of God / Church of Christ</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rastafarian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Roman Catholic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Seventh Day Adventist</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sikh</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>United Reformed / Presbyterian / Congregational</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Christian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other (specify)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not disclosed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Information_Completed__c</fullName>
+        <description>Cannot count faith or veteran or NI Trust as these are not gathered for all regions.</description>
+        <externalId>false</externalId>
+        <formula>CASE(( 
+If(Isblank(NHS_Number__c),0,1) 
++If(Isblank(text(Ethnic_Group__c )),0,1) 
++If(Isblank(text(Ethnicitiy__c)),0,1) 
++If(Isblank(text(Living_arrangements__c)),0,1) 
++If(Isblank(text(Sexual_Status__c)),0,1) 
++If(Isblank(text(People_in_household__c)),0,1) 
++If(Isblank(text(Partnership_status__c)),0,1) 
++If(Isblank(text(Employment_Status__c)),0,1) 
+),0,&quot;RED&quot;, 
+1,&quot;RED&quot;, 
+2,&quot;RED&quot;, 
+3,&quot;RED&quot;, 
+4,&quot;AMBER&quot;, 
+5,&quot;AMBER&quot;, 
+6,&quot;AMBER&quot;, 
+7,&quot;AMBER&quot;, 
+8,&quot;GREEN&quot;,&quot;RED&quot;)</formula>
+        <label>Information Completed</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Living_arrangements__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The Living Arrangements of the person. They do not have to answer. ‘None’ means not asked; ‘Not Disclosed’ means was asked but didn’t answer.</inlineHelpText>
+        <label>Living Arrangements</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Own home</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other family or friend&apos;s home</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Care or nursing home</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sheltered accommodation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hospital</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Private rented</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Council</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not disclosed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>NHS_Number__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The NHS Number is the national unique identifier that makes it possible to share patient information across the whole of the NHS safely, efficiently and accurately. The NHS Number is 10 numeric digits in length.</inlineHelpText>
+        <label>NHS Number</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NI_Trust_Area__c</fullName>
+        <description>Northern Irelend Health and Social Care Trust</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the person&apos;s Health and Social Care Trust</inlineHelpText>
+        <label>NI Trust Area</label>
+        <picklist>
+            <picklistValues>
+                <fullName>BHSCT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NHSCT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SEHSCT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SHSCT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>WHSCT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_dependent_children__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of dependent children</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Demographic_Details__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This MUST be completed if ‘OTHER’ has been selected in any of the demographic fields.</inlineHelpText>
+        <label>Other Demographic Details</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Partnership_status__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The Partnership Status the person identifies with. They do not have to answer. ‘None’ means not asked; ‘Not Disclosed’ means was asked but didn’t answer.</inlineHelpText>
+        <label>Partnership status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Single</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Married</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Civil Partnership</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cohabiting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Separated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Widowed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Divorced</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not disclosed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Single (inc. separated, widowed etc)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partnered (inc. married, civil partnership etc)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prefer not to answer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>People_in_household__c</fullName>
+        <externalId>false</externalId>
+        <label>People in household</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Service User only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service User and others</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not disclosed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client only</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client and others</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Person__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Person</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Demographic Information</relationshipLabel>
+        <relationshipName>Demographic_Information</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Registered_with_Social_Services__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Refers to whether person is registered with Social Services emergency contact database (if your area has such a database in operation.</inlineHelpText>
+        <label>Registered with Social Services?</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sexual_Status__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The Sexual Orientation the person identifies with. They do not have to answer. ‘None’ means not asked; ‘Not Disclosed’ means was asked but didn’t answer.</inlineHelpText>
+        <label>Sexual Orientation</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Heterosexual</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lesbian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Gay</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bisexual</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Disclosed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Veteran__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>If shown, this refers to whether person has been in military service (as benevolent funds may be available to access).</inlineHelpText>
+        <label>Veteran?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes - Army</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yes - Navy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yes - RAF</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Disclosed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Demographic Information</label>
+    <nameField>
+        <label>Person Id</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Demographic Information</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>DemographicInfoStop_Person_being_changed</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) &amp;&amp; 
+NOT(ISNEW() ) &amp;&amp;
+(ISCHANGED(Person__c)  || ISCHANGED( Name ))</errorConditionFormula>
+        <errorMessage>Cannot change person associated with the demographic information.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>NHS_Number_Check</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT(
+ OR(
+  LEN ( NHS_Number__c ) = 0,
+  REGEX(NHS_Number__c , &quot;^-?\\d{10}$&quot;)
+ )
+)</errorConditionFormula>
+        <errorDisplayField>NHS_Number__c</errorDisplayField>
+        <errorMessage>Please make sure that the NHS Number is 10 numeric digits in length.</errorMessage>
+    </validationRules>
+</CustomObject>

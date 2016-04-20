@@ -1,0 +1,77 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section Eight: Building System"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="Building System" id="building">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!section8}" value="Back" styleClass="btn"/>
+                    <apex:commandButton action="{!section10}" value="Next" styleClass="btn"/>
+                     <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+            
+            <apex:pageBlockSection title="Water Supply">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Water supply condition" for="w1"/>
+                  <apex:inputField id="w1" value="{!survey.h_Water_supply__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Site Sanitation">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Sanitation condition" for="s1"/>
+                  <apex:inputField id="s1" value="{!survey.h_Sanitation__c}"/>
+                  <apex:outputLabel value="Feminine hygiene bins" for="s2"/>
+                  <apex:inputField id="s2" value="{!survey.h_Sanitation_fem__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Site Gas">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Does the building have gas service or use liquid petroleum gas" for="g1"/>
+                  <apex:inputField id="g1" value="{!survey.h_Gas_service__c}"/>
+                  <apex:outputLabel value="Is there a valid gas certificate?" for="g2"/>
+                  <apex:inputField id="g2" value="{!survey.h_Gas_certificate__c}"/>
+                  <apex:outputLabel value="Condition" for="g3"/>
+                  <apex:inputField id="g3" value="{!survey.h_Gas_condition__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Site Fuel Oil">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Capacity of above-ground fuel tanks" for="f1"/>
+                  <apex:inputField id="f1" value="{!survey.h_Fuel_Capacity_of_above_ground_tanks__c}"/>
+                  <apex:outputLabel value="Capacity of below-ground fuel tanks" for="f2"/>
+                  <apex:inputField id="f2" value="{!survey.h_Fuel_Capacity_of_below_ground_tanks__c}"/>
+                  <apex:outputLabel value="Condition" for="f3"/>
+                  <apex:inputField id="f3" value="{!survey.h_Fuel_condition__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Site Electrical">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Service provider" for="e1"/>
+                  <apex:inputField id="e1" value="{!survey.h_Electricity_provider__c}"/>
+                  <apex:outputLabel value="Contract" for="e2"/>
+                  <apex:inputField id="e2" value="{!survey.h_Electricity_contract__c}"/>
+                  <apex:outputLabel value="Charge key" for="e3"/>
+                  <apex:inputField id="e3" value="{!survey.h_Electricity_charge_key__c}"/>
+                  <apex:outputLabel value="Other" for="e4"/>
+                  <apex:inputField id="e4" value="{!survey.h_Electricity_other__c}"/>
+                  <apex:outputLabel value="Condition" for="e5"/>
+                  <apex:inputField id="e5" value="{!survey.h_Electricity_condition__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+             <apex:pageBlockSection title="Comments">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Comments" for="Comments"/>
+                  <apex:inputField id="Comments" value="{!survey.Comments_page_9__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

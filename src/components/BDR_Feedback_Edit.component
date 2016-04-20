@@ -1,0 +1,29 @@
+<apex:component >
+
+    <apex:attribute name="bdr" description="The BDR" type="BDR__c" required="true"/>
+    
+    <apex:pageBlock title="BDR Feedback">
+    
+    <apex:outputPanel id="feedback_panel">
+
+ 
+    
+    <apex:pageBlockSection id="feedback_Summary"  columns="1" showheader="false" > 
+  
+     	<h2>Reasons for Success/Loss/Declined (as relevant)</h2>
+
+	   <apex:outputField value="{!bdr.Bid_Status__c}"/>   	
+
+       <apex:inputField value="{!bdr.Bid_Feedback__c}"/>   
+       
+           <p style="font-size:14px;">Include any feedback from the Commissioners, plus our responses discussed the debrief meeting</p>
+    
+       <apex:inputTextArea value="{!bdr.Bid_Feedback_Detail__c}" style="width:82%" rows="5"/>  
+    
+     </apex:pageBlockSection>
+    
+    </apex:outputPanel>   
+
+	</apex:pageBlock>
+
+</apex:component>

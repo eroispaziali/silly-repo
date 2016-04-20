@@ -1,0 +1,13 @@
+<apex:page contentType="application/xml" showHeader="false" readOnly="true" controller="DcoSitemapIndexController" cache="false" >
+
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+   <apex:repeat value="{!blockList}" var="n">
+      <sitemap>
+         <loc>{!sitemapUrl}?p={!n}</loc>
+      </sitemap>
+   </apex:repeat>
+ 
+</sitemapindex>
+
+</apex:page>

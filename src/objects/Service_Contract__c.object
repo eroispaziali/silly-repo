@@ -1,0 +1,1053 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>ServiceContract1</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Area2__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(CONTAINS(Locality__r.Name, &quot;Locality&quot;) , Locality__r.Parent.Name , 
+IF(CONTAINS(Locality__r.Name,&quot;Area&quot;), Locality__r.Name, 
+IF(CONTAINS(Locality__r.Name, &quot;Local Service Office&quot;), Locality__r.Parent.Parent.Name, &quot;&quot;) 
+))</formula>
+        <label>Area</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Area__c</fullName>
+        <externalId>false</externalId>
+        <label>Area</label>
+        <picklist>
+            <controllingField>Country_Region__c</controllingField>
+            <picklistValues>
+                <fullName>Central West</fullName>
+                <controllingFieldValues>West</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>East Anglia and Central</fullName>
+                <controllingFieldValues>East</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>East Midlands</fullName>
+                <controllingFieldValues>East</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lakes</fullName>
+                <controllingFieldValues>North</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>London</fullName>
+                <controllingFieldValues>East</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North and East Northern Ireland</fullName>
+                <controllingFieldValues>Northern Ireland</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North East</fullName>
+                <controllingFieldValues>North</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Wales</fullName>
+                <controllingFieldValues>Wales</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North West</fullName>
+                <controllingFieldValues>North</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South and West Northern Ireland</fullName>
+                <controllingFieldValues>Northern Ireland</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South East</fullName>
+                <controllingFieldValues>East</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Wales</fullName>
+                <controllingFieldValues>Wales</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South West</fullName>
+                <controllingFieldValues>West</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West Midlands</fullName>
+                <controllingFieldValues>West</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yorkshire</fullName>
+                <controllingFieldValues>North</controllingFieldValues>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Bid__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Bid which the contract is based upon</description>
+        <externalId>false</externalId>
+        <label>Bid</label>
+        <referenceTo>Bid__c</referenceTo>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Commissioning_Body__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Commissioning body</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Service Contracts (Commissioning body)</relationshipLabel>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Commissioner</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipName>Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contract_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract Name</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contract_Risk__c</fullName>
+        <description>Please assign a risk level to the contract as per guidance from Service Management.
+
+High - First time applied for or uncertainty over renewal
+Medium - Contract Due for renewal
+Low - Contract not due for renewal
+N/A - Not Applicable</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please refer to definitions for Renewal Risk and and Assign a Risk Level</inlineHelpText>
+        <label>Renewal Risk</label>
+        <picklist>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medium</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>N/A</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Contract_administrator__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Email address of the person who administrates this contract (deals with invoicing etc)</inlineHelpText>
+        <label>zzdel_Contract administrator</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contract_administrator_internal__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Contract administrator (internal)</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Service_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contract_paperwork_received__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract paperwork received</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Country_Region2__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( CONTAINS(Locality__r.Name, &quot;Area&quot;) , Locality__r.Parent.Name , IF(CONTAINS(Locality__r.Name,&quot;Region&quot;), 
+Locality__r.Name, 
+IF (CONTAINS(Locality__r.Name,&quot;Locality&quot;), Locality__r.Parent.Parent.Name, 
+IF (CONTAINS(Locality__r.Name,&quot;Local Service Office&quot;), Locality__r.Parent.Parent.Parent.Name, &quot;&quot;) 
+)))</formula>
+        <label>Country/Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Country_Region__c</fullName>
+        <externalId>false</externalId>
+        <label>Country/Region</label>
+        <picklist>
+            <picklistValues>
+                <fullName>East</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Northern Ireland</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wales</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>End_date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date contract ends or by which grant finishes in the form dd/mm/yyyy</inlineHelpText>
+        <label>End date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Funder_name__c</fullName>
+        <externalId>false</externalId>
+        <label>Funder name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Funder_type__c</fullName>
+        <externalId>false</externalId>
+        <label>Funder type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Local authority social care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Local authority other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CCG</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Primary care trust</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mental health trust</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health and Social Care Trust</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NHS other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Joint PCT/social care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Local Health Boards</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lottery</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Charity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Central government</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Private corporation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Private individual</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other (please specify)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Funding_agreement_code__c</fullName>
+        <externalId>false</externalId>
+        <label>Funding agreement code</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Locality__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Locality or Office</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Account.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Internal Organisation</value>
+            </filterItems>
+            <infoMessage>Select an Alzheimer&apos;s Society office.</infoMessage>
+            <isOptional>true</isOptional>
+        </lookupFilter>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Service Contracts (Locality)</relationshipLabel>
+        <relationshipName>Service_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Migrated_to_BDCS__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates that the contract has been migrated to the new BDCS application</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Tick this box if this Contract has been migrated and entered into the new BDCS application. In that case only the new BDCS record will be included in the Contract Risk Report so as to avoid duplication of data.</inlineHelpText>
+        <label>Migrated to BDCS</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Other_funder_type__c</fullName>
+        <externalId>false</externalId>
+        <label>Other funder type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reporting_requirements_for_funders__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This is for area use only and may include notes on when reports are required.</inlineHelpText>
+        <label>Reporting requirements for funders</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Restricted_income__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Unrestricted income is any income from statutory contracts, or donations that have been received for general purposes, not defined by the donor. Restricted income is from donations given for a specified purpose by the donor, so almost all grants will be restricted income. If in doubt check with your regional accountant.</description>
+        <externalId>false</externalId>
+        <label>Restricted income?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Review_date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>In the form dd/mm/yyyy (if no other date agreed set this for six months before end of contract )</inlineHelpText>
+        <label>Review date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Services__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Service</label>
+        <referenceTo>Services__c</referenceTo>
+        <relationshipLabel>Service Contracts</relationshipLabel>
+        <relationshipName>Service_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Society_contribution__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>How much is the Society contributing to the cost of this service from local or central funds eg possibly for matched funding? If all costs are covered by the agreement record this as zero. Amount in £.</inlineHelpText>
+        <label>Society contribution (£)</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Start_date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>First date contract came into effect or date grant can first be accessed in the form dd/mm/yyyy</inlineHelpText>
+        <label>Start date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Considering application</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Applied for</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved, awaiting contract</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Current</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expired (but replaced)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Term__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Overall length of the agreement in years and months eg 2yrs 3 mths</inlineHelpText>
+        <label>Term</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_FCR_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Total FCR Amount</label>
+        <summarizedField>Contract_Cost__c.FCR__c</summarizedField>
+        <summaryForeignKey>Contract_Cost__c.Contract__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_central_overheads_costs__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Costs incurred from area or central service budgets needed to support the delivery of the services (for example service manager costs). Give the total over the term of the agreement. Estimates are fine but note your assumptions in the comments field.</inlineHelpText>
+        <label>Total central overheads costs</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_local_overhead_costs__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Costs incurred from local budgets that are needed to support the delivery of the services, e.g.  locality manager time costs etc.) Please give the total over the term of the agreement. Estimates are fine but note your assumptions in the comments field.</inlineHelpText>
+        <label>Total local overhead costs</label>
+        <precision>12</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_value_of_agreement2__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Total value of agreement in £ over the complete term (estimated total value in the case of spot contracts)</inlineHelpText>
+        <label>Total Cost (inc. FCR)</label>
+        <summarizedField>Contract_Cost__c.Cost__c</summarizedField>
+        <summaryForeignKey>Contract_Cost__c.Contract__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Total_value_of_agreement__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Total value of agreement in £ over the complete term (estimated total value in the case of spot contracts)</inlineHelpText>
+        <label>Total value of agreement (un-calc&apos;d)</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Type_of_funding_agreement__c</fullName>
+        <externalId>false</externalId>
+        <label>Type of funding agreement</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Block contract</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spot contract</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Combination</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>VAT_should_be_included__c</fullName>
+        <externalId>false</externalId>
+        <label>VAT should be included?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>lookup_cost_centre__c</fullName>
+        <externalId>false</externalId>
+        <formula>Locality__r.COst_Centre__c</formula>
+        <label>Cost Centre</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Service Contract</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Contract_Name__c</columns>
+        <columns>Bid__c</columns>
+        <columns>Commissioning_Body__c</columns>
+        <columns>Funder_name__c</columns>
+        <columns>Total_value_of_agreement2__c</columns>
+        <columns>Country_Region2__c</columns>
+        <columns>Area2__c</columns>
+        <columns>Migrated_to_BDCS__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Created</fullName>
+        <columns>CREATED_DATE</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>NAME</columns>
+        <columns>Contract_Name__c</columns>
+        <columns>Bid__c</columns>
+        <columns>Commissioning_Body__c</columns>
+        <columns>Funder_name__c</columns>
+        <columns>Total_value_of_agreement2__c</columns>
+        <columns>Country_Region2__c</columns>
+        <columns>Area2__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>By Created Date</label>
+    </listViews>
+    <listViews>
+        <fullName>Migrated_to_BDCS</fullName>
+        <columns>NAME</columns>
+        <columns>Contract_Name__c</columns>
+        <columns>Bid__c</columns>
+        <columns>Commissioning_Body__c</columns>
+        <columns>Funder_name__c</columns>
+        <columns>Total_value_of_agreement2__c</columns>
+        <columns>Country_Region__c</columns>
+        <columns>Area__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Migrated_to_BDCS__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Migrated to BDCS</label>
+    </listViews>
+    <nameField>
+        <displayFormat>SC-{00000}</displayFormat>
+        <label>Contract ID</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Service Contracts</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>ServiceContract_Rec</fullName>
+        <active>true</active>
+        <label>ServiceContract_Rec</label>
+        <picklistValues>
+            <picklist>Area__c</picklist>
+            <values>
+                <fullName>Central West</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>East Anglia and Central</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>East Midlands</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lakes</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>London</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North East</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North Wales</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North West</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North and East Northern Ireland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>South East</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>South Wales</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>South West</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>South and West Northern Ireland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>West Midlands</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yorkshire</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Contract_Risk__c</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medium</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%2FA</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Contract_paperwork_received__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Country_Region__c</picklist>
+            <values>
+                <fullName>East</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>North</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Northern Ireland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wales</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>West</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Funder_type__c</picklist>
+            <values>
+                <fullName>CCG</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Central government</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Charity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health and Social Care Trust</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Joint PCT%2Fsocial care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local Health Boards</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local authority other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local authority social care</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lottery</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mental health trust</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NHS other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other %28please specify%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Primary care trust</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Private corporation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Private individual</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Applied for</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved%2C awaiting contract</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Considering application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Current</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Expired %28but replaced%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type_of_funding_agreement__c</picklist>
+            <values>
+                <fullName>Block contract</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Combination</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spot contract</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>VAT_should_be_included__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Contract_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Services__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Locality__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Contract_Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Services__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Locality__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Contract_Name__c</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Contract_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Services__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Locality__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <validationRules>
+        <fullName>Correct_Review_Date</fullName>
+        <active>true</active>
+        <description>Contract&apos;s &apos;review date&apos; is not after the &apos;end date&apos; or before &apos;start date&apos;</description>
+        <errorConditionFormula>(Review_date__c &gt;  End_date__c)  || (Review_date__c &lt;  Start_date__c)</errorConditionFormula>
+        <errorMessage>The contract&apos;s review date must be before its end date and after its start date.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Start_date_before_end_date</fullName>
+        <active>true</active>
+        <description>Service Contract&apos;s start date must be before its end date</description>
+        <errorConditionFormula>Start_date__c &gt;  End_date__c</errorConditionFormula>
+        <errorMessage>Contract&apos;s start date must be before its end date.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Add_Contract_Costs</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Add/Edit Contract Costs</masterLabel>
+        <openType>sidebar</openType>
+        <page>NewContractCosts</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

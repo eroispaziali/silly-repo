@@ -1,0 +1,165 @@
+<apex:page standardController="Services__c" extensions="servicesEXT" showHeader="false" sidebar="false" standardStylesheets="false">
+<head>
+<style type="text/css">
+#container
+{
+width: 890px;
+margin: 0px;
+padding-left: 10px;
+font-size: 24px;
+position: absolute;
+top: 220px;
+left:16px;
+}
+
+#left
+{
+float: left;
+margin: 0;
+padding: 0;
+width: 435px;
+height: 710px;
+}
+
+#right
+{
+float: left;
+margin: 0;
+padding: 0px 1em;
+width: 400px;
+height: 710px;
+}
+
+#bottom
+{
+clear: both;
+margin: 0;
+padding: 0;
+}
+
+#divoptimes
+{
+clear: both;
+margin: 0px;
+padding: 0px;
+height: 2.5cm;
+width: 890px;
+}
+
+#divcomments
+{
+clear: both;
+margin: 0;
+padding: 0;
+height: 4.5cm;
+width: 890px;
+}
+
+#divdisclaimer
+{
+clear: both;
+margin: 0;
+padding: 0;
+height: 1cm;
+width: 890px;
+}
+
+body {
+    font-family: "FS Albert", Arial, sans-serif;
+    padding: 0px;
+}
+
+h1, h2, h3, h4 {
+    margin-bottom: 0px;
+}
+
+h1 {
+    margin-top: 2px;
+}
+
+h3 {
+    margin-top: 0px;
+}
+
+h4 {
+    margin-top: 30px;
+}
+
+.heading {
+    font-weight: normal;
+}
+
+#disclaimer {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 0px;
+}
+
+</style>
+<script>
+  window.onload = new function() { window.print(); };
+</script>
+</head>
+
+<div id="container">
+    <h1>{!Services__c.Name}</h1>
+
+    <div id="left">
+        <c:displayImage documentId="{!Services__c.Image_Doc_ID__c}"/>
+        <br/>
+        <apex:outputText value="{!Services__c.Description__c}"/>
+
+        <h4>Address</h4>
+        <apex:outputText value="{!Services__c.service_street__c}"/><br/>
+        <apex:outputText value="{!Services__c.service_city__c}, {!Services__c.service_county__c}"/><br/>
+        <apex:outputText value="{!Services__c.service_postcode__c}, {!Services__c.service_country__c}"/>
+
+        <h4>Getting There</h4>
+        <apex:outputField value="{!Services__c.Getting_There__c}"/>
+
+        <h4>Parking</h4>
+        <apex:outputText value="{!Services__c.Parking__c}"/>
+
+        <h4>Price&nbsp;<apex:outputText styleClass="heading" value="{!Services__c.Price__c}"/></h4>
+    </div>
+    
+    <div id="right">
+        <h4>Telephone</h4>
+        <apex:outputText value="{!Services__c.service_telephone__c}"/>
+
+        <h4>Email</h4>
+        <apex:outputText value="{!Services__c.service_email__c}"/>
+
+        <h4>Contact</h4>
+        <apex:outputText value="{!Services__c.Contact_first_name__c} {!Services__c.Contact_last_name__c}"/>
+
+        <h4>Website</h4>
+        <apex:outputText value="{!Services__c.service_website__c}"/>
+
+        <h4>Toilets</h4>
+        <apex:outputText styleClass="heading" value="{!Services__c.Toilet_Facilities__c}"/>
+
+        <h4>Refreshments</h4>
+        <apex:outputText value="{!Services__c.Refreshments__c}"/>
+
+        <h4>Accessibility</h4>
+        <apex:outputText styleClass="heading" value="{!Services__c.Accessibility__c}"/>
+
+        <h4>Who can use this service?</h4>
+        <apex:outputText value="{!Services__c.Service_Criteria__c}"/>
+    </div>
+
+    <div id="divoptimes">
+        <h3>Opening Times</h3>
+        <apex:outputField value="{!Services__c.Opening_Times_Guidebook__c}"/>
+    </div>
+    <div id="divcomments">    
+        <h3>Comments</h3>
+        <apex:outputField value="{!Services__c.service_description__c}"/>
+    </div>
+    <div id="divdisclaimer">
+        <p id="disclaimer">DISCLAIMER: Opinions expressed in no way express the opinion of the Alzheimer's Society,
+        who will not accept liability arising from use or reliance upon this information.</p>
+    </div>
+</div>
+</apex:page>

@@ -1,0 +1,44 @@
+<apex:page standardController="Contact" extensions="Contact_Connections_2way">
+  <style>
+    .fewerMore { display: none;}
+  </style>
+  
+  <!-- Show contact relationships -->
+  <apex:form >
+    <apex:pageBlock id="ContactConnections">
+      <apex:pageMessages />
+    
+      <apex:pageBlockTable value="{!connections}" var="connection" id="cList" width="100%" rendered="{!NOT(ISNULL(connections))}" border="0">
+        <!-- Actions links -->
+        <apex:column >
+          <apex:facet name="header">Action</apex:facet>
+          <apex:outputLink value="{!URLFOR($Action.SFDC_Contact_Connector__c.View,connection.id,[retURL=URLFOR($Action.Contact.View, Contact.Id)])}" style="font-weight: bold;" target="_top">View</apex:outputLink>
+          &nbsp;|&nbsp;
+          <apex:outputLink value="{!URLFOR($Action.SFDC_Contact_Connector__c.Edit,connection.id,[retURL=URLFOR($Action.Contact.View, Contact.Id)])}" style="font-weight: bold;" target="_top">Edit</apex:outputLink>
+          &nbsp;|&nbsp;
+          <apex:outputLink value="{!URLFOR($Action.SFDC_Contact_Connector__c.Delete,connection.id,[retURL=URLFOR($Action.Contact.View, Contact.Id)])}" style="font-weight: bold;" target="_top" onclick="return window.confirm('Are you sure?');">Delete</apex:outputLink>
+        </apex:column>
+    
+        <!-- Relationship as plain text -->
+        <apex:column >
+          <apex:facet name="header">Relationship</apex:facet>
+          <!--<apex:outputText value="{!if(LEFT(connection.Contact__c,15) == $CurrentPage.parameters.id, connection.Role_Title__c, connection.Reverse_Relationship__c)}"/>-->
+        </apex:column>
+        
+        <!-- Type as plain text -->
+        <apex:column >
+          <apex:facet name="header">Type of relationship</apex:facet>
+          <!--<apex:outputText value="{!if(LEFT(connection.Contact__c,15) == $CurrentPage.parameters.id, connection.Type__c, connection.Reverse_Type__c)}"/>-->
+        </apex:column>
+    
+        <!-- Contact as link -->
+        <apex:column >
+          <apex:facet name="header">Contact</apex:facet>
+          <apex:outputLink value="/{!if(LEFT(connection.Contact__c,15) == $CurrentPage.parameters.id, connection.Related_Contact__c, connection.Contact__c)}" target="_top">
+            {!if(LEFT(connection.Contact__c,15) == $CurrentPage.parameters.id, connection.Related_Contact__r.name, connection.Contact__r.name)}
+          </apex:outputLink>
+        </apex:column>
+      </apex:pageBlockTable>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

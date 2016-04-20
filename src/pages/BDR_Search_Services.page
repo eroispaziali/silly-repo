@@ -1,0 +1,455 @@
+<apex:page controller="BdrServicesSearchController" sidebar="{!bdrid==null}" showHeader="true" tabStyle="BDR__c" cache="false">
+
+<!-- ======================================================================
+
+          gary.grant@conseq.net        Jan 2013
+          valerie.dunphy@conseq.net  June 2014
+            
+          A search screen to allow users Search for Existing Services to link to a BDR
+- ====================================================================== -->
+
+  <head>   
+  
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    
+    <style>
+    
+        body .bPageTitle .ptBody .pageType, 
+        body .bPageTitle .ptBody .pageDescription {margin-left: 10px;}
+             
+        form  .bDescription {margin-left:16px; font-size: 14px;}  
+           
+        h1 {font-size: 22px;  margin-right: 30px;  font-family: "HelveticaNeue-Light", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+        h1.pageType {margin-bottom:5px; font-size: 1.1em !important; }
+        h2.pageDescription {float: left;}
+        h3 {font-weight: normal; font-family: "HelveticaNeue-Light", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;}
+        
+        .configLinks { font-size: 1.4em;}
+              
+        body .bPageTitle .ptBody .links {
+            padding-top: 0px;
+            margin-top:0px;
+            margin-right: 25px;
+        }
+
+        .statusDiv {float:right;  font-size: 1.6em;}
+        .headerStatus { color:#E17009;}
+        
+        .Custom64Tab .secondaryPalette, .individualPalette .Custom64Block .secondaryPalette {
+                background-color: #00305E;
+                border-color: #AEB3B8;
+        }
+    
+        .bPageTitle .ptBody .content {
+            float: left;
+            width: 85%;
+        }
+                              
+       .bold-label { font-weight:bold; padding-top:10px; margin-top: 5px;}      
+       .searchLink {font-size:14px;  display:block; padding-top: 10px; padding-bottom: 10px} 
+       .right-align {text-align : right;}
+       
+       #search-filters   select { width:220px; padding-bottom: 5px; height:22px; margin-top: 3px; !important}  
+       tr.headerRow th {font-size: 1.0em !important;}
+       
+       .Custom64Tab .secondaryPalette, .individualPalette .Custom64Block .secondaryPalette {
+            background-color: #00305E;
+            border-color: #AEB3B8;
+        }
+    </style>
+  </head>
+ 
+  <apex:form >
+
+  <apex:sectionHeader title="Business Development Record" 
+                               subtitle="{!bdr.name} : {!bdr.BDR_Name__c}" 
+                               printUrl="bdr_print?id={!bdr.id}"     
+                               rendered="{!bdr!=null}"
+                               />
+
+  <apex:outputPanel id="messages">
+      <apex:pageMessages id="errors" />
+  </apex:outputPanel>
+ 
+  <apex:pageBlock title="Find Services" mode="edit">
+  
+   <apex:pageBlockButtons location="top">
+     <apex:commandButton action="{!add}" value="Add Selected Services to BDR" styleClass="btn" id="btnSave" reRender="messages" rendered="{!bdrid!=null}"/>
+     <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn" id="btnCancel"/>                                        
+   </apex:pageBlockButtons>
+  
+ 
+    <apex:outputText value="{!filterMessage}"    id="filter_message"  style="margin-left:10px; font-size: 14px; float: left; color: #E17009; padding-bottom: 10px"/>
+
+  <table width="100%" border="0">
+  <tr>  
+    <td width="220" valign="top">
+ 
+      <apex:pageBlock mode="edit" id="criteria"> 
+        
+      <apex:actionFunction name="runApexSearch" action="{!runApexSearch}" rerender="results,filter_message,errors">
+                  <apex:param name="name" value="" />
+                  <apex:param name="locality" value="" />
+                  <apex:param name="service_type" value="" />
+                  <apex:param name="service_status" value="" />
+      </apex:actionFunction>
+ 
+      <div style="padding:10px;"  id="search-filters">
+      
+      <div style="font-size:14px; font-weight: bold;">Refine your Search</div>
+
+       <div class="bold-label">Service Name</div>
+      <input type="text" name="ref"  onkeyup="callSearch('name');" id="name"   html-data-search="name"  style="width:100px !important"/>
+ 
+       <div class="bold-label">Service Locality</div>
+        <apex:selectList size="1"   html-data-search="locality"  id="locality" >            
+                    <apex:selectOptions value="{!locality_options}"/>
+        </apex:selectList>
+        
+             
+
+      <!--
+      <tr>
+        <td style="font-weight:bold;">Operated by<br/>
+            <apex:inputField value="{!dummyService.operated_by__c}" onkeyup="doSearch('operated');" id="operated" onchange="doSearch('operated');"/>
+        </td>
+      </tr>      
+      -->
+      
+
+          <div class="bold-label">Service Type</div>
+            <apex:selectList size="1"   html-data-search="service_type"  id="service_type" >            
+                    <apex:selectOptions value="{!service_types_options}"/>
+            </apex:selectList>
+          
+
+          
+<!--            
+       <select id="service_type"   data-search="service_type" >
+          <option value=""></option>
+          <apex:repeat value="{!service_types}" var="service_type">
+             <option value="{!service_type}">{!service_type}</option>
+          </apex:repeat>
+        </select>
+-->
+        
+        <div class="bold-label">Select Service Status</div>
+<!--    <apex:selectList size="1"   html-data-search="service_status"  id="service_status" >            
+              <apex:selectOptions value="{!service_status_options}"/>
+         </apex:selectList> 
+-->
+                
+        <apex:selectCheckboxes value="{!service_status_selection}"  layout="pageDirection" html-data-search="service_status" id="service_status">
+             <apex:selectOptions value="{!service_status_options}"/>     
+        </apex:selectCheckboxes>
+        
+<!--  
+        
+         <select id="service_status"   data-search="service_status" >
+           <option value=""></option>
+           <apex:repeat value="{!service_status_options}" var="service_status_option">
+             <option value="{!service_status_option}">{!service_status_option}</option>
+           </apex:repeat>
+         </select>-->
+      
+        <div style=" margin-top: 20px;">      
+              <apex:commandLink onclick="doBlankSearch();return false;">Clear Search Filters</apex:commandLink>  
+        </div>
+
+        </div>
+ 
+    </apex:pageBlock>
+ 
+    </td>
+
+    <td valign="top">
+ 
+    <apex:pageBlock mode="edit" id="results">
+ 
+        <apex:pageBlockTable value="{!serviceList}" var="service" styleClass="table">
+  
+            <apex:column headerValue="Add" rendered="{!bdrid!=null}">
+                <apex:inputCheckbox id="selectedRecords" value="{!service.isSelected}" />
+            </apex:column>
+  
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Name" action="{!toggleSort}" rerender="results">
+                        <apex:param name="sortField" value="Name" assignTo="{!sortField}"/>
+                           <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!service.svc.Name}"/>
+            </apex:column>
+
+            <apex:column >
+                <apex:facet name="header">
+                  <apex:commandLink value="Service Status" action="{!toggleSort}" rerender="results">
+                    <apex:param name="sortField" value="Name" assignTo="{!sortField}"/>
+                           <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                      </apex:facet> 
+                <apex:outputField value="{!service.svc.service_status__c}"/>
+            </apex:column>
+            
+            
+            <apex:column >
+                <apex:facet name="header">
+                  <apex:commandLink value="Open Date" action="{!toggleSort}" rerender="results">
+                    <apex:param name="sortField" value="Service_OpenDate__c" assignTo="{!sortField}"/>
+                           <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                      </apex:facet> 
+                <apex:outputField value="{!service.svc.service_opendate__c}"/>
+            </apex:column>
+
+
+          <!--          [<apex:outputField value="{!service.fundReqWrappers[0].freq.fiscal_year__c}" />] --> 
+       
+
+ 
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Locality" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="locality__c" assignTo="{!sortField}"/>
+                           <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!service.svc.Locality__c}"/>
+            </apex:column>
+ 
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Operated By" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="locality__c" assignTo="{!sortField}"/>
+                           <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!service.svc.Operated_By__c}"/>
+            </apex:column>
+ 
+ 
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Service Type" action="{!toggleSort}" rerender="results,debug">
+                        <apex:param name="sortField" value="service_type__c" assignTo="{!sortField}"/>
+                           <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputField value="{!service.svc.service_type__c}"/>
+            </apex:column>
+ 
+        </apex:pageBlockTable>
+ 
+    </apex:pageBlock>
+ 
+    </td>
+  </tr>
+  </table>
+ 
+
+
+  </apex:pageBlock>
+ 
+  </apex:form>
+ 
+ 
+ 
+<!--  =================================================================================  
+       Javascript 
+      ================================================================================= -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/jquery.spin.min.js"/>
+
+ <script type="text/javascript">
+
+   var j$ = jQuery.noConflict();
+   var bdrid = '{!$CurrentPage.parameters.bdrid}';
+   var parent_domain = '{!$CurrentPage.parameters.parent_domain}';
+   
+    j$(document).ready(function() {
+                    
+           var bdrStatus = '{!bdr.Status__c}'; 
+           var statusHTML = '<div class="statusDiv"><span>Status: </span><span class="headerStatus">'+bdrStatus+'</span></div>'; 
+           j$(statusHTML).insertAfter( j$( "h2.pageDescription" ) );
+          
+            var fld_name = getValue('name');
+            var fld_locality = getSelectValue('locality');
+            var fld_service_type = getSelectValue('service_type');
+            
+            var fld_Draft = isTicked('service_status:0');
+            var fld_Accepted = isTicked('service_status:1');
+            var fld_Pending = isTicked('service_status:2');
+            var fld_Open = isTicked('service_status:3');
+            var fld_Declined = isTicked('service_status:4');
+            var fld_Suspended = isTicked('service_status:5');                                   
+            var fld_Replaced = isTicked('service_status:6');                                                                      
+            var fld_Closed = isTicked('service_status:7');     
+                
+             var filterSelected = 
+                        fld_name && 
+                        fld_locality &&
+                        fld_service_type &&
+                        fld_Declined &&
+                        fld_Suspended &&
+                        fld_Replaced &&
+                        fld_Closed;
+          
+          
+                   /*
+                   * Call the search on document.ready
+                   * This means that when the user returns to the page using the browser back key, the search will run again 
+                   * with the same list of filters
+                   *
+                   */
+                if (filterSelected) callSearch();
+             
+                j$(window).keydown(function(event) {
+                    if (event.keyCode == 13) {
+                      event.preventDefault();
+                      return false;
+                    }
+                }); 
+                
+                 // Call the search if any of the filter fields changed  
+                 j$('[data-search]').change(function(event) {                      
+                     doSearch(j$(event.target).attr('data-search'));
+                  });
+             
+                j$("img.pageTitleIcon").remove();
+                j$("#phHeaderLogoImage").remove();
+                j$(".bPageTitle").css("margin-left", "10");
+                
+                
+       });
+                
+      function getSelectValue(inputFieldName) {
+        var ending = 'select[id$=FIELD]';
+        var res = ending.replace("FIELD", inputFieldName);
+        var result =  j$(res).val();
+        return result;
+      }
+         
+                
+      function clearValue(inputFieldName) {
+          var ending = '*[id$=FIELD]';
+          var res = ending.replace("FIELD", inputFieldName);                    
+          j$(res).val('');
+      }
+     
+      function escapeStr(str) 
+         {
+         
+          if (str) {
+             return str.replace(/([ #;?%&,.+*~\':"!^$[\]()=>|\/@])/g,'\\$1');      
+          }        
+          return str;
+         
+         }
+
+         function doSearch(thisField) {
+              var enoughInput=( thisField=='name' && j$('#name').val().length < 3 ? false : true ) ;
+              if (enoughInput) {
+                  callSearch(); 
+              }
+         }
+   
+         /* This is called when the user clicks 'Clear Search Filters' */
+         function doBlankSearch() {
+                       clearValue('name');
+                       clearValue('locality');
+                       clearValue('service_type');
+                       
+                       tick('service_status:0');
+                       tick('service_status:1');
+                       tick('service_status:2');
+                       tick('service_status:3');
+                       unTick('service_status:4');
+                       unTick('service_status:5');
+                       unTick('service_status:6');
+                       unTick('service_status:7');
+                           
+                       callSearch();
+            }
+   
+
+         /* Salesforce puts it's own markup into the id so this function returns the value of the field ending in the given string */
+              
+         function getValue(fieldName) {
+                   var ending = '*[id$=FIELD]';
+                   var res = ending.replace("FIELD", fieldName);
+                   var result =  j$(res).val();
+                  return result;
+         }
+     
+         function getSelectValue(fieldName) {
+                   var ending = 'select[id$=FIELD]';
+                   var res = ending.replace("FIELD", fieldName);
+                   var result =  j$(res).val();
+                   return result;
+          }
+      
+         function isTicked(fieldName) {
+               var ending = 'input[id$="FIELD"]';
+               var res = ending.replace("FIELD", fieldName);
+    
+               return  j$(res).attr('checked');
+           }
+        
+         function tick(fieldName) {
+            var ending = 'input[id$="FIELD"]';
+            var res = ending.replace("FIELD", fieldName);
+
+            j$(res).attr('checked', true);
+        }
+        
+        function unTick(fieldName) {
+            var ending = 'input[id$="FIELD"]';
+            var res = ending.replace("FIELD", fieldName);
+
+            j$(res).attr('checked', false);
+        }
+
+        function callSearch() {
+           
+              /* The Check boxes are hooked directly into the 
+                 ViewState and do not need to be passed to the search function
+                 - they are already set when the query runs
+                 which is not the same as the dropdown values. 
+              */
+              
+              /*
+              var checkboxes = '';
+              if (isTicked('service_status:0'))
+                checkboxes.concat('Draft');
+               if (isTicked('service_status:1'))
+                checkboxes.concat('Accepted');  
+              if (isTicked('service_status:2'))
+                checkboxes.concat('Pending');   
+              if (isTicked('service_status:3'))
+                checkboxes.concat('Open');
+              if (isTicked('service_status:4'))
+                checkboxes.concat('Declined');              
+              if (isTicked('service_status:5'))
+                checkboxes.concat('Suspended');
+              if (isTicked('service_status:6'))
+                checkboxes.concat('Replaced');              
+              if (isTicked('service_status:7'))
+                checkboxes.concat('Closed');                
+              */  
+                        
+                j$("[id$=results]").html('');
+                j$("[id$=results]").spin({ top:'35%', left: '50%', color : '#ccc', radius : 25, length : 20 });                        
+
+                runApexSearch(
+                 j$('#name').val(),
+                 getSelectValue('locality'),
+                 getSelectValue('service_type'),
+                 ''
+             );
+         }
+      
+  </script>
+ 
+</apex:page>

@@ -1,0 +1,128 @@
+<apex:component >
+
+    <apex:attribute name="incomeData" description="The Income Data" type="Income_Block_Period__c[]" required="true"/>
+    <apex:attribute name="fundReqWrappers" description="Fund Requirements for the Services" type="BdrFundReqWrapper[]" required="true"/>
+    <apex:attribute name="dependentBDRs" description="List of dependent BDRs" type="BDR__c[]" required="true"/>       
+    
+    <apex:outputPanel layout="none"> 
+    
+    <apex:pageBlockSection title="Income Available" collapsible="false">
+    <apex:pageBlockTable value="{!incomeData}" var="row" id="ibp" styleClass="table table-bordered table-condensed">
+    
+      <apex:column >
+         <apex:facet name="header">Financial Year</apex:facet>
+         <apex:outputText value="{!row.Fiscal_Year__c}" />
+      </apex:column>
+
+      <apex:column title="{!$ObjectType.Income_Block_Period__c.fields.Total_Amount__c.inlineHelpText}" >
+         <apex:facet name="header">Amount</apex:facet>
+         <apex:outputField value="{!row.Total_Amount__c}" />
+      </apex:column>
+
+      <!--change 411 funding conditions moved to contract -->
+      
+      <apex:column title="{!$ObjectType.Income_Block_Period__c.fields.Risk_Description__c.inlineHelpText}">
+         <apex:facet name="header">Comments</apex:facet>
+         <apex:outputText value="{!row.Risk_Description__c}" style="width:100%"/>
+      </apex:column>
+
+    </apex:pageBlockTable>    
+    </apex:pageBlockSection>
+    
+    <apex:pageBlockSection title="Income Allocation" collapsible="false" columns="1">
+     <!--  Sort order should be Service/Financial Year  --> 
+     <apex:pageBlockTable value="{!fundReqWrappers}" var="fundReqWrapper" id="treq-table" styleClass="table table-bordered table-condensed">
+
+      <apex:column style="width:20%">
+          <apex:facet name="header">Service Name</apex:facet>                   
+          <apex:outputField id="service" value="{!fundReqWrapper.freq.Service__c}" />
+      </apex:column>
+      
+      <apex:column style="width:10%">
+          <apex:facet name="header">Year</apex:facet>
+          <apex:outputField id="year" value="{!fundReqWrapper.freq.Fiscal_Year__c}" />
+      </apex:column>
+      
+      <apex:column style="width:15%">
+          <apex:facet name="header">Cost</apex:facet>
+          <apex:outputField id="total" value="{!fundReqWrapper.freq.Total_Amount__c}" />
+      </apex:column>
+      
+      <!-- Note : formatting will not work with multi-currency deployments!-->
+      
+      <apex:column style="width:15%">
+          <apex:facet name="header">Confirmed Other Income</apex:facet>
+          &#163;<apex:outputText value="{0,number,#,###,###}">
+              <apex:param value="{!fundReqWrapper.OtherAllocationAmount}" />
+           </apex:outputText>
+      </apex:column>
+
+      <apex:column style="width:15%">
+          <apex:facet name="header">Unconfirmed Other Income</apex:facet>
+          &#163;<apex:outputText value="{0,number,#,###,###}">
+              <apex:param value="{!fundReqWrapper.OtherAllocationAmountProposed}" />
+           </apex:outputText>
+      </apex:column>
+                    
+      <apex:column >
+          <apex:facet name="header">Income from this BDR</apex:facet>
+          <apex:inputField id="allocated" value="{!fundReqWrapper.allocation.Allocation_Amount__c}" />
+      </apex:column>
+      
+      <apex:column >
+          <apex:facet name="header">Total not covered</apex:facet>
+          &#163;<apex:outputText value="{0,number,#,###,###}">
+              <apex:param value="{!fundReqWrapper.freq.Total_Uncovered_Potential__c}" />
+           </apex:outputText>
+          <!--apex:outputField value="{!treqWrapper.OtherAllocationAmountPotential}" /-->
+      </apex:column>                                  
+            
+      <!--       
+      <apex:column rendered="{!if($Profile.Name !='System Administrator',FALSE,TRUE)}" >
+          <apex:facet name="header">Allocation Id</apex:facet>
+          <apex:inputField id="allocationId" value="{!fundReqWrapper.allocation.id}" />
+      </apex:column>
+       -->
+          
+  </apex:pageBlockTable>
+  </apex:pageBlockSection>
+  
+  <apex:pageBlockSection id="DepBdrSec" title="Other BDRs funding these services ({!dependentBdrs.size})" columns="1">
+
+  <apex:pageBlockTable value="{!dependentBdrs}" var="row" id="depBdrTable" styleClass="table table-bordered table-condensed" style="width:100%;">
+
+      <apex:column >
+          <apex:facet name="header">BDR Name</apex:facet>
+          <apex:outputLink value="/{!row.id}" id="name_link">
+            <apex:outputField value="{!row.BDR_Name__c}"/>
+          </apex:outputLink> 
+      </apex:column>
+
+      <apex:column >
+          <apex:facet name="header">Status</apex:facet>
+          <apex:outputField value="{!row.Status__c}" />
+      </apex:column>
+
+      <apex:column >
+          <apex:facet name="header">Financial Years</apex:facet>
+          <apex:outputField value="{!row.Fiscal_Years__c}" />
+      </apex:column>
+
+      <apex:column >
+          <apex:facet name="header">Income Source</apex:facet>
+          <apex:outputField value="{!row.income_source__r.name}" />
+      </apex:column>
+
+      <apex:column >
+          <apex:facet name="header">Total Income</apex:facet>
+          <apex:outputField value="{!row.Actual_Value__c}" />
+      </apex:column>
+
+
+     </apex:pageBlockTable> 
+
+   </apex:pageBlockSection>     
+  
+  </apex:outputPanel>
+  
+</apex:component>

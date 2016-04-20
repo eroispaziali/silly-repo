@@ -1,0 +1,33 @@
+<apex:page standardController="UI_Participant__c" extensions="UIParticipantRLController">
+
+    <apex:form >    
+
+    <apex:pageBlock >
+    
+      <apex:pageBlockButtons location="top">
+         <input type="button" value=" New Relationship " class="btn" onclick="window.parent.location.href='{!newRelationShipUrl}'"/>           
+      </apex:pageBlockButtons>  
+
+        <apex:pageBlockTable value="{!relationships}" var="relationshipWrapper" >
+
+            <apex:column title="Relationhip Record" headerValue="Relationship Record">
+                <apex:outputLink value="/{!relationshipWrapper.relationship.id}" target="_top">
+                    {!relationshipWrapper.relationship.Name}                
+                </apex:outputLink>
+            </apex:column>
+
+            <apex:column title="Participant" headerValue="Participant" style="width:90%">
+                <apex:outputLink value="/{!relationshipWrapper.participantId}" target="_top">
+                    {!relationshipWrapper.participantName}                
+                </apex:outputLink>
+            </apex:column>
+        
+        </apex:pageBlockTable>
+    
+    
+    </apex:pageBlock>
+    
+    <apex:inputHidden value="{!UI_Participant__c.name}"/>    
+    </apex:form>    
+    
+</apex:page>

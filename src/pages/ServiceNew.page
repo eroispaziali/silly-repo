@@ -1,0 +1,61 @@
+<apex:page standardController="Services__c" extensions="servicesEXT" tabStyle="Services__c">
+    <apex:sectionHeader title="New Service" />
+    <apex:form >
+        <apex:pageBlock title="Service Details" id="thePageBlock" mode="edit">
+            <apex:pageMessages />
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Cancel" action="{!cancelNew}" immediate="true"/>                
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection title="Service Overview" columns="1">
+                <apex:inputField value="{!Services__c.name}" style="width: 500px"/>
+                <apex:inputField required="true" value="{!Services__c.Site__c}"/>
+                <apex:inputField value="{!Services__c.Last_Reviewed__c}"/>
+                <apex:inputField required="true" value="{!Services__c.service_type__c}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Address Information" columns="2">
+                <apex:inputField value="{!Services__c.service_street__c}"/>
+                <apex:inputField value="{!Services__c.service_county__c}"/>
+                <apex:inputField value="{!Services__c.service_city__c}"/>
+                <apex:inputField value="{!Services__c.service_country__c}"/>
+                <apex:inputField value="{!Services__c.service_postcode__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!Services__c.Getting_There__c}" style="width: 500px; height: 40px"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Service Details" columns="1">
+                <apex:inputField value="{!Services__c.Accessibility__c}" style="width: 500px"/>
+                <apex:inputField value="{!Services__c.Parking__c}" style="width: 500px"/>
+                <apex:inputField value="{!Services__c.Toilet_Facilities__c}" style="width: 500px"/>
+                <apex:inputField value="{!Services__c.Price__c}" style="width: 500px"/>
+                <apex:inputField value="{!Services__c.Refreshments__c}" style="width: 500px"/>
+                <apex:inputField value="{!Services__c.Service_Criteria__c}" style="width: 500px"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Opening Times" columns="1">
+                <apex:inputField value="{!Services__c.Opening_Times_Guidebook__c}" style="width: 500px"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Contact Information" columns="2">
+                <apex:inputField value="{!Services__c.Contact_first_name__c}"/>
+                <apex:inputField value="{!Services__c.service_email__c}"/>
+                <apex:inputField value="{!Services__c.Contact_last_name__c}"/>
+                <apex:inputField value="{!Services__c.service_telephone__c}"/>
+                <apex:inputField value="{!Services__c.service_website__c}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Description" columns="1">
+                <apex:inputField value="{!Services__c.service_description__c}" style="width: 500px; height: 80px"/>
+                <apex:inputField value="{!Services__c.Description__c}" style="width: 500px"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Photo" columns="2">
+                <apex:outputLabel for="document" value="Select file" style="width: 30px"/>
+                <apex:inputFile value="{!document.body}" filename="{!document.name}" id="document" style="width: 500px"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

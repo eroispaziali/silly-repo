@@ -1,0 +1,546 @@
+<apex:page controller="BDRSearchController" sidebar="false" cache="true">
+ 
+ <!-- =============================================================================
+         valerie.dunphy@conseq.co.uk 
+         June 2014
+         A page to find BDRs by different filters
+
+      =============================================================================  -->
+
+  <head>  
+  
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/redmond/jquery-ui.css" />
+  
+              <style type="text/css">
+                       h1 {font-size: 22px; 
+                              margin-right: 30px; 
+                              font-family: "HelveticaNeue-Light", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;
+                              }
+                              
+                       .bold-label { font-weight:bold; padding-top:10px; margin-top: 5px;}      
+                       .searchLink {font-size:14px;  display:block; padding-top: 10px; padding-bottom: 10px} 
+                       .right-align {text-align : right;}
+                       a.sortableCol {}
+                       
+                       #search-filters  input, select { width: 140px; padding-bottom: 5px;}  
+                       tr.headerRow th {font-size: 1.0em !important;}
+                       
+                      .Custom64Tab .secondaryPalette, .individualPalette .Custom64Block .secondaryPalette {
+                        background-color: #00305E;  border-color: #AEB3B8;
+                        }
+            </style>  
+
+  </head>
+ 
+  <apex:form >
+  <apex:pageMessages id="errors" />
+
+  <!-- Page Title and "New BDR" button -->
+  <div style="margin-bottom:10px; margin-top:10px; padding-left: 5px;">
+  
+         <h1>Business Development Records ({!BDRCount}) </h1>
+         
+         <!--  New BDR - Should only be visible to users in BDC profile -->                           
+          <input type="submit" name="" value="New BDR" onclick="navigateToUrl('/a1A/e',null,'new');return false;" class="btn"/>
+
+</div>
+
+<apex:outputText value="{!filterMessage}"    id="result_count_message"  style="margin-left:10px; font-size: 14px; float: left; color: #E17009; padding-bottom: 10px"/>
+
+ <span style="float:right"> <strong>S</strong>ervices, <strong>P</strong>artnership, <strong>I</strong>ncome, <strong>B</strong>id, <strong>T</strong>ender, <strong>C</strong>ontract</span> 
+
+
+ <!--  The Search Page  Outer table with narrow column on the left -->
+  <table width="100%" border="0">
+  <tr>  
+    <td width="140" valign="top">
+     
+      <apex:pageBlock mode="edit" id="criteria">              <!-- mode="edit" as we want the search fields to be editable -->
+
+      <!--  The order of the parameters is important. 
+              It must match the calls to this function from the UI js functions -->  
+      <apex:actionFunction name="runApexSearch" action="{!runApexSearch}" rerender="results,errors, result_count_message">
+
+              <apex:param name="locality" value="" />              <!--  A2D locality Id -->      
+              <apex:param name="owner" value="" />
+              <apex:param name="status" value="" />
+              <apex:param name="ref" value="" />  
+              <apex:param name="bdr_name" value="" />          
+              <apex:param name="bdm_name" value="" />
+              <apex:param name="approver_name" value="" />
+              <apex:param name="income_source"  value="" />
+                    
+      </apex:actionFunction>
+      
+      <div style="padding:10px; padding-left:8px;"  id="search-filters">
+      
+       <div style="font-size:14px; font-weight: bold;">Refine your Search</div>
+
+       <div class="bold-label">Reference</div>
+       <input type="text" name="ref"  onkeyup="doSearch('ref');" id="ref"   html-data-search="ref"  style="width:100px !important"/>
+          
+       <div class="bold-label">BDR Name</div>
+       <input type="text" name="bdr_name"  onkeyup="doSearch('bdr_name');" id="bdr_name"   html-data-search="bdr_name"  />         
+       
+       <div class="bold-label">Locality</div>
+        <apex:selectList size="1"   html-data-search="locality"  id="locality"  >            
+                    <apex:selectOptions value="{!localities}"/>
+        </apex:selectList>
+          
+        <div class="bold-label">Income Source</div>
+        <apex:selectList size="1"   html-data-search="income_source"  id="income_source" >            
+                    <apex:selectOptions value="{!incomeSources}"/>
+        </apex:selectList>
+          
+        <div class="bold-label">BDM</div>
+        <apex:selectList id="bdm_name"  size="1"    html-data-search="bdm_name"  >                
+                    <apex:selectOptions value="{!BDMs}"/>
+        </apex:selectList>
+           
+         <div class="bold-label">BDR Owner</div>
+        <apex:selectList id="owner"   size="1"  html-data-search="owner"   >    
+                      <apex:selectOptions value="{!Owners}"/>
+         </apex:selectList>
+                     
+        <div class="bold-label">For Approval By</div>           
+        <apex:selectList size="1"  id="approver_name"  html-data-search="approver_name">                 
+                         <apex:selectOptions value="{!Approvers}"/>                     
+        </apex:selectList>
+         
+         <div class="bold-label">BDR Status</div>          
+        <apex:selectList id="status"   size="1"  html-data-search="status"   >    
+                   <apex:selectOptions value="{!statusOptions}"/>
+         </apex:selectList>    
+                     
+    
+    <div style=" margin-top: 20px;">                 
+              <apex:commandLink onclick="doBlankSearch();return false;" styleClass="searchLink">Clear Search Filters</apex:commandLink>             
+              <apex:commandLink onclick="doMyApprovalSearch();return false;" styleClass="searchLink"  rendered="{!pendingApprovalCount!=0}">Pending my Approval {!pendingApprovalCount}</apex:commandLink>
+              <apex:commandLink onclick="findMyBDRs();return false;" styleClass="searchLink"  id="myBDRsLink">My BDRs</apex:commandLink>  
+              
+              <h3 style="margin-top:15px;display:block;">Remember this Search</h3>
+              <apex:commandLink onclick="setDefaultSearch();return false;" 
+                        styleClass="searchLink"  
+                        id="setDefaultLink"
+                        style="float:left;"
+                        >Set
+              </apex:commandLink>
+              <apex:commandLink onclick="removeDefaultSearch();return false;" 
+                        styleClass="searchLink"  
+                        id="removeDefaultLink"
+                        style="float:right;margin-right:25px;"
+                        >Clear
+              </apex:commandLink>
+              
+              <div style="clear:both"></div>
+              
+    </div>        
+               
+    </div>  
+
+    </apex:pageBlock>
+
+ 
+    </td>
+    <td valign="top">
+    
+
+    <!--  This area of the page is re-rendered when the runApexSearch action is run -->
+    <apex:pageBlock mode="edit" id="results">
+
+        <apex:pageBlockTable value="{!lisBDR}" var="row"  id="results">
+    
+           <apex:column style="white-space: nowrap;">
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="" action="{!toggleSort}" rerender="results"  
+                     title="Click to change sort order">
+                                <apex:param name="sortField" value="Name" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputLink value="/{!row.bdr.id}"> {!SUBSTITUTE(row.bdr.Name, 'BDR-', '')}</apex:outputLink>
+             
+            </apex:column>
+
+           <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink value="Title" action="{!toggleSort}" rerender="results"   styleClass="sortableCol"  title="Click to change sort order">
+                        <apex:param name="sortField" value="BDR_Name__c" assignTo="{!sortField}"/>
+                         <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputLink value="/{!row.bdr.id}">{!row.bdr.BDR_Name__c}</apex:outputLink>
+            </apex:column>
+            
+            <apex:column headerValue="Owner">
+                <apex:outputField value="{!row.bdr.Owner.Name}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Created">
+        
+                         <apex:facet name="header">
+                               <apex:commandLink value="Created" action="{!toggleSort}" rerender="results"   styleClass="sortableCol"   title="Click to change sort order">
+                                   <apex:param name="sortField" value="CreatedDate" assignTo="{!sortField}"/>
+                                    <i class="fa fa-sort" style="margin-left:10px;"></i>
+                               </apex:commandLink>
+                           </apex:facet>
+                    
+                           <apex:outputText value="{0, date, dd.MM.yy}">
+                           <apex:param value="{!row.bdr.CreatedDate}" />
+                           </apex:outputText>
+               
+           </apex:column>
+
+             <apex:column >
+             
+                <apex:facet name="header">
+                    <apex:commandLink value="Locality" action="{!toggleSort}" rerender="results"  title="Click to change sort order"  styleClass="sortableCol " >
+                        <apex:param name="sortField" value="A2D_locality__r.name" assignTo="{!sortField}"/>
+                        <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputField value="{!row.bdr.A2D_locality__r.name}"/>
+            </apex:column>
+
+             <apex:column style="text-align:right; padding-right:10px;" headerClass="right-align"  >
+                <apex:facet name="header" >
+                    <apex:commandLink value="Status" action="{!toggleSort}" rerender="results"  title="Click to change sort order"  styleClass="sortableCol" >
+                        <apex:param name="sortField" value="status__c" assignTo="{!sortField}"/>
+                        <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputField value="{!row.bdr.Status__c}"/>
+                
+            </apex:column>
+            
+            <apex:column headerValue="Income" style="text-align:right; padding-right:10px;" headerClass="right-align" >
+         
+           <apex:facet name="header">
+                    <apex:commandLink value="Income" action="{!toggleSort}"  style="padding-right:10px;"  styleClass="sortableCol"   rerender="results"  title="Click to change sort order">
+                        <apex:param name="sortField" value="Total_Value__c" assignTo="{!sortField}"/>
+                        <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+            </apex:facet>
+            <apex:outputField value="{!row.bdr.Total_Value__c}" />
+            </apex:column>
+
+
+
+            <apex:column headerValue="Intended Start">
+            
+                 <apex:facet name="header">
+                    <apex:commandLink value="Intended Start" action="{!toggleSort}" rerender="results" styleClass="sortableCol"  title="Click to change sort order">
+                        <apex:param name="sortField" value="Intended_Start_Date__c" assignTo="{!sortField}"/>
+                         <i class="fa fa-sort" style="margin-left:10px;"></i>
+                    </apex:commandLink>
+                </apex:facet>
+            
+            
+                <apex:outputText value="{0, date, dd.MM.yy}">
+                           <apex:param value="{!row.bdr.Intended_Start_Date__c}" />
+                 </apex:outputText>
+                
+            </apex:column>
+ 
+             <apex:column headerValue="Components">
+                <apex:outputField value="{!row.bdr.Component_List__c}"/>
+            </apex:column>
+            
+            <apex:column headerValue="HR">
+                         <apex:outputText escape="false" value="{!row.hr}"/>
+            </apex:column>
+  
+        </apex:pageBlockTable>
+ 
+    </apex:pageBlock>
+ 
+    </td>
+  </tr>
+  </table>
+  
+  
+  
+  <apex:pageBlock title="Find BDRs">
+
+      <p style="font-size:14px">Use this page to find Business Development Records. Use the fields on the left to filter the list to find BDRs of interest.</p> 
+      <p style="font-size:14px">The search starts automatically when you type at least 3 characters or select a value in any field. Click on the column headers to sort results</p>  
+      <p style="font-size:14px">Click on 'Clear Search Filters' to clear all fields and start a new search.</p>  
+      <p style="font-size:14px">The 'Components' column: <strong>S</strong> Services, <strong>P</strong> Partnership, <strong>I</strong> Income, <strong>B</strong> Bid, <strong>T</strong> Tender, <strong>C</strong> Contract</p> 
+  </apex:pageBlock>    
+ 
+
+  </apex:form>
+      
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.0/select2.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"/>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"/>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/jquery.spin.min.js"/>
+      
+      <script type="text/javascript">
+
+             var j$ = jQuery.noConflict();
+             
+             j$(document).ready(function() {
+            
+             /*     
+              *  If there are some filters set, call the search on document.ready
+              *  This means that when the user returns to the page using the browser back key, the search will run again 
+              *  with the same list of filters                   
+              *  Nov 2014. This is unreliable. It doesn't always run. Replaced with Cookie search. 
+              *
+                
+                  var fld_ref = getValue('ref');
+                  var fld_bdr_name = getValue('bdr_name');
+                  var fld_locality = getSelectValue('locality');
+                  var fld_income_source = getSelectValue('income_source');
+                  var fld_bdm_name = getSelectValue('bdm_name');
+                  var fld_owner = getSelectValue('owner');
+                  var fld_approver = getSelectValue('approver_name');
+                  var fld_status = getSelectValue('status');
+                  
+                  var filterSelected = 
+                            fld_ref && 
+                            fld_bdr_name  &&
+                            fld_locality &&
+                            fld_income_source &&
+                            fld_bdm_name &&
+                            fld_owner &&
+                            fld_approver &&
+                            fld_status;
+                  
+                 if (filterSelected) callSearch();
+              */
+                
+                  // Run the search stored in a cookie, if available
+                  doCookieSearch();  
+                 
+                  j$(window).keydown(function(event) {
+                            if (event.keyCode == 13) {
+                              event.preventDefault();
+                              return false;
+                            }
+                   });
+                  
+                // Hide 'My BDRs' link if current user id is not an option in the Owner Select List
+                 var currentUserId = '{!$User.id}';
+                 var inTheList = false;
+                  j$('[id$=owner]>option').each(function() {
+                        if (this.value == currentUserId) {
+                            inTheList = true;
+                            return false;
+                        }
+                });
+
+                if (! inTheList ) j$('[id$=myBDRsLink]').hide();
+               // End Hide 'My BDRs' link
+                 
+               //j$("img.pageTitleIcon").remove();
+               //j$("#phHeaderLogoImage").remove();
+               //j$(".bPageTitle").css("margin-left", "10");
+    
+               // Call the search if any of the filter fields changed  
+                 j$('[data-search]').change(function(event) {
+                        doSearch(j$(event.target).attr('data-search'));
+                  });
+                  
+              
+              });  
+             
+              function callSearch() {
+              
+                j$("[id$=results]").html('');
+                j$("[id$=results]").spin({ top:'20%', left: '50%', color : '#ccc', radius : 25, length : 20 });
+                
+                runApexSearch(
+                   getSelectValue('locality'),
+                   getSelectValue('owner'),
+                   getSelectValue('status'),
+                   getValue('ref'),
+                   getValue('bdr_name'),
+                   getSelectValue('bdm_name'),
+                   getSelectValue('approver_name'),
+                   getSelectValue('income_source')
+             );
+            }
+      
+            function doSearch(thisField) {
+                
+              var enoughInput=true;
+
+              // We want a minimum of 3 characters in at least one field before doing the search again
+              if ((thisField=='ref' || thisField=='bdr_name'  ) && getValue(thisField).length< 3) {enoughInput=false;}
+        
+                if (enoughInput) {
+                     callSearch();
+                }
+            }
+             
+             /* Salesforce puts it's own markup into the id so this function returns the value of the field
+                  ending in the given string */
+                  
+           function getValue(inputFieldName) {
+                var ending = '*[id$=FIELD]';
+                var res = ending.replace("FIELD", inputFieldName);
+                var result =  j$(res).val();
+               return result;
+           }
+           
+           function setValue(inputFieldName, value) {
+                var ending = '*[id$=FIELD]';
+                var res = ending.replace("FIELD", inputFieldName);
+                var result =  j$(res).val(value);
+               return result;
+           }
+           
+           function getSelectValue(inputFieldName) {
+                var ending = 'select[id$=FIELD]';
+                var res = ending.replace("FIELD", inputFieldName);
+                var result =  j$(res).val();
+                return result
+           }
+           
+           function setSelectValue(inputFieldName, value) {
+                
+                var ending = 'select[id$=FIELD]';
+                var res = ending.replace("FIELD", inputFieldName);
+                var result =  j$(res).val(value);
+                return result           
+           }
+           
+           function clearValue(inputFieldName) {
+                    var ending = '*[id$=FIELD]';
+                    var res = ending.replace("FIELD", inputFieldName);                      
+                    j$(res).val('');
+           }
+
+           function doBlankSearch() {
+                    clearInputFields();
+                    callSearch();
+           }
+           
+
+          
+          /* Clear the values in all 7 input fields */
+          function clearInputFields() {
+             clearValue('locality');
+             clearValue('owner');
+             clearValue('status');
+             clearValue('ref');
+             clearValue('bdr_name');
+             clearValue('bdm_name');
+             clearValue('approver_name');
+             clearValue('income_source');
+          }
+           
+           
+           /*
+            * Returns all BDRs owned by the Current user  "Show My BDRs"
+            */
+           function findMyBDRs() {
+               clearInputFields();
+                j$('select[id$=owner]').val('{!$User.id}');   // Set the owner field to ID the current user
+                callSearch();
+           }
+           
+           /*
+            * Returns all BDRs pending approval by the current user
+            */
+           function doMyApprovalSearch() {
+                 clearInputFields();
+                 j$('select[id$=approver_name]').val('{!$User.id}');
+                callSearch();
+           }
+           
+           function setDefaultSearch() {
+                   
+                   // apex_ as a prefix is required for the Apex code to see the cookie     
+                   j$.removeCookie('apex__alzBdrSearch');
+                   
+                   var s='';
+                   
+                   s+= getValue('ref') + ';';
+                   s+= getValue('bdr_name') + ';';
+                   s+= getSelectValue('locality') + ';';
+                   s+= getSelectValue('income_source') + ';';
+                   s+= getSelectValue('bdm_name') + ';';
+                   s+= getSelectValue('owner') + ';';
+                   s+= getSelectValue('approver_name') + ';';
+                   s+= getSelectValue('status');
+                    
+                    
+                   //set with a name prefixed with apex__ so Apex can see the cookie if required
+                   j$.cookie('apex__alzBdrSearch',s,{expires : 365});                   
+                   
+                   j$('#setDefaultSearchDialog').dialog({
+                         buttons: [
+                         {
+                          text: "OK",
+                          click: function() {
+                            j$( this ).dialog( "close" );
+                          }
+                        }
+                      ]
+                   });
+                                    
+           }
+           
+           function removeDefaultSearch() {
+                   
+                   j$.removeCookie('apex__alzBdrSearch'); 
+                   j$('#removeDefaultSearchDialog').dialog({
+                         buttons: [
+                         {
+                          text: "OK",
+                          click: function() {
+                            j$( this ).dialog( "close" );
+                          }
+                        }
+                      ]
+                   });
+                                    
+           }
+           
+           function doCookieSearch() {
+                
+                var s= j$.cookie('apex__alzBdrSearch');
+   
+                if (typeof s === 'undefined') { return; }  
+ 
+                v = s.split(';'); 
+                                
+                setValue('ref',v[0]);
+                setValue('bdr_name',v[1]);
+                setSelectValue('locality',v[2]);
+                setSelectValue('income_source',v[3]);
+                setSelectValue('bdm_name',v[4]);
+                setSelectValue('owner',v[5]);
+                setSelectValue('approver_name',v[6]);
+                setSelectValue('status',v[7]);
+        
+                callSearch();
+           
+           }
+           
+           
+
+      </script> 
+      
+      <div id="setDefaultSearchDialog" title="Remember this Search">
+         <p>Default Search has been set. The search will run with the selections you have made each time the page is opened.</p>
+      </div>
+      
+      <div id="removeDefaultSearchDialog" title="Basic dialog">
+        <p>Default search has been cleared.</p>
+      </div>
+      
+      
+ 
+</apex:page>

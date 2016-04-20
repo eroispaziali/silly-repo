@@ -1,0 +1,20 @@
+<apex:Page tabStyle="Contact" >
+<script src="/soap/ajax/15.0/connection.js"></script>
+<script type="text/javascript" />
+<script>
+     window.onload = function() {
+
+     sforce.connection.sessionId = '{!$Api.Session_ID}';
+
+     var describeSObjectResult = sforce.connection.describeSObject("contact");
+     var prefix = describeSObjectResult.keyPrefix;
+
+     // 'All Contacts' view
+     var cView = "00B70000006bjh6";
+
+     // Change the whole window to point to this location
+     parent.document.location.href = "/" + prefix + "?fcf=" + cView ;
+}
+</script>
+<center><h2>Please Wait... Loading Contacts</h2></center>
+</apex:page>

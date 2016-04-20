@@ -1,0 +1,33 @@
+<apex:page sidebar="false" showheader="false">
+<head><title>Why is this needed? - Dementia Friends</title></head>
+   <apex:include pageName="temp_css"/>
+    <div class="container-fluid" id="mainContent">
+          <div class="row-fluid">
+              <h1>
+                  Why is this needed?
+              </h1>
+          </div>
+          <hr class="divider"/>
+          <div class="row-fluid" style="margin-bottom:20px; margin-top:20px">
+            <div class="span8">
+                
+                 <div class="span3">
+                     <a href="https://twitter.com/DementiaFriends" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @DementiaFriends</a>
+                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                 </div>
+                 <div >
+                      <div class="fb-like" data-href="http://www.dementiafriends.org.uk" data-send="false" data-layout="button_count" data-width="250" data-show-faces="true"></div>
+                 </div>
+             </div>
+        </div>
+           <div>
+<h2>Dementia can make everyday life a struggle</h2>
+<p>Many of us take for granted how easy it is to do everyday things like shop, visit the bank or take part in our favourite hobby. But people with dementia face many obstacles to these seemingly straightforward tasks. Previously well-known routes can become foreign, bus timetables can become unworkable, money transactions confusing, and social groups daunting.</p>
+<p>As the brain gradually shuts down, people with dementia sometimes need a helping hand to go about their daily lives so that they can live independently for as long as possible.</p>
+<h2>Let's make life better for people with dementia</h2>
+<p>Alzheimer’s Society research found that nearly two thirds of people with dementia feel lonely, and almost half reported losing friends following their diagnosis. With one in three people over 65 developing dementia, it’s vital we change this picture.</p>
+<p>We know people generally don’t want or mean to turn their backs on people with dementia. However, if they don’t understand why or how a person with dementia may need support, it’s much more difficult for them to provide it. By giving people a new level of understanding and awareness, Dementia Friends aims to empower people to make a difference.</p>
+ </div>
+      </div>
+      <c:SiteFooter ></c:SiteFooter>
+</apex:page>

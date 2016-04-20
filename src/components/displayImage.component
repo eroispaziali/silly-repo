@@ -1,0 +1,5 @@
+<apex:component controller="DocumentViewer" access="global">
+    <apex:attribute name="documentId" type="string" assignTo="{!documentId}" description="Image's Document Id"/>
+    
+    <apex:image url="{!ImageURL}"/>
+</apex:component>

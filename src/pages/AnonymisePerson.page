@@ -1,0 +1,22 @@
+<apex:page controller="AnonymisePersonExtension" action="{!AutoRunAnonymisePerson}">
+  <apex:form >
+    <h1 style="font-size: 150%; font-weight: bold;">
+        Anonymise Person
+    </h1>
+      <apex:pageBlock rendered="{!iserror==false}" >
+        <apex:pageMessages />
+        <apex:outputtext >Are you sure you want to anonymise this person?</apex:outputtext>
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Yes" action="{!anonymisePerson}"/>
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+        </apex:pageBlockButtons>
+      </apex:pageBlock>
+      <apex:pageBlock rendered="{!iserror}" >
+        <apex:outputtext >{!diagnosis}</apex:outputtext>
+        <apex:pageMessages />
+        <apex:pageBlockButtons > 
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+        </apex:pageBlockButtons>
+      </apex:pageBlock>       
+  </apex:form>
+</apex:page>

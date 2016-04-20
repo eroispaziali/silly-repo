@@ -1,0 +1,90 @@
+<apex:component >
+
+    <apex:attribute name="incBlock" description="The Income Block" type="Income_Block__c" required="true"/>
+    <apex:attribute name="incomeData" description="The Income Data" type="Income_Block_Period__c[]" required="true"/>
+    <apex:attribute name="bdr" description="The BDR" type="BDR__c" required="true"/>
+
+	<apex:outputPanel layout="none" rendered="{!incBlock!=null}">
+
+		    <!-- if this is removed, the rerender thinks a pageBlockSection is a "first" and removes the nice 15px top margin....-->
+		    <apex:pageBlockSection title="" showHeader="false"></apex:pageBlockSection>
+		
+		    <apex:pageBlockSection columns="2" collapsible="false" showHeader="false">
+		
+		        <apex:pageBlockSectionItem >
+		          <apex:outputlabel >Income Source</apex:outputlabel>
+		          <apex:outputField value="{!incBlock.Income_Source__c}" id="incsource"/>       
+		       </apex:pageBlockSectionItem> 
+		
+		       <apex:pageBlockSectionItem >
+		           <apex:outputlabel >Estimated Income Required</apex:outputlabel>
+		           <apex:outputField value="{!incBlock.BDR_Estimated_Value__c}" id="incEstAmount"/>       
+		       </apex:pageBlockSectionItem> 
+		
+		       <apex:pageBlockSectionItem rendered="{!incBlock.Total_Amount__c != null}">
+		           <apex:outputlabel >Total Income Amount</apex:outputlabel>
+		           <apex:outputField value="{!incBlock.Total_Amount__c}" id="incamount"/>       
+		       </apex:pageBlockSectionItem> 
+		
+		       <apex:pageBlockSectionItem rendered="{!incBlock.Total_Amount__c == null}">
+		           <apex:outputlabel >Total Amount</apex:outputlabel>
+		           <apex:outputText value="[will be calculated]" id="incamount"/>       
+		       </apex:pageBlockSectionItem> 
+		
+		       <apex:pageBlockSectionItem rendered="{!if($Profile.Name !='System Administrator',FALSE,TRUE)}">
+		          <apex:outputlabel >Name</apex:outputlabel>
+		          <apex:outputField value="{!incBlock.name}" id="incname"/>       
+		       </apex:pageBlockSectionItem>  
+		       
+		    </apex:pageBlockSection>  
+		
+			<div style="margin-left:285px; margin-bottom: 20px; margin-top: 20px; font-size:14px;">
+		     The <strong>Total Amount</strong> is the total Income figure required to cover the cost of the services in each Financial Year, including Essential Support and Local Support amounts.
+		     These figures should be taken from the Adjusted Cost of Service tab on <strong>Whole Cost Analysis</strong> spreadsheet.
+		    </div>
+		    
+		    <apex:pageBlockSection columns="1" collapsible="false">  
+		    
+		    <apex:pageBlockSectionItem >
+			    <apex:outputLabel value="Annual Split"/>
+			    <apex:pageBlockTable value="{!incomeData}" var="row" id="ibp" styleClass="table table-condensed" style="width:92%;">
+			
+					<apex:column style="width:8%">
+			           <apex:facet name="header">Year</apex:facet>
+			           <apex:outputText value="{!'Year ' + TEXT(row.Year_Sequence__c)}" label=""/>
+			        </apex:column>
+			
+			        <apex:column >
+			           <apex:facet name="header">Financial Year</apex:facet>
+			           <apex:outputText value="{!row.Fiscal_Year__c}" label=""/>
+			        </apex:column>
+			
+			        <apex:column title="{!$ObjectType.Income_Block_Period__c.fields.Total_Amount__c.inlineHelpText}" >
+			           <apex:facet name="header">Total Amount</apex:facet>
+			           <apex:inputField value="{!row.Total_Amount__c}" label=""/>
+			        </apex:column>
+			
+			        <apex:column title="{!$ObjectType.Income_Block_Period__c.fields.Essential_Support_Amount__c.inlineHelpText}" >
+			           <apex:facet name="header">Essential Support Amount</apex:facet>
+			           <apex:inputField value="{!row.Essential_Support_Amount__c}" label=""/>
+			        </apex:column>
+			        
+			        <apex:column title="{!$ObjectType.Income_Block_Period__c.fields.Local_Support_Amount__c.inlineHelpText}" >
+			           <apex:facet name="header">Local Support Amount</apex:facet>
+			           <apex:inputField value="{!row.Local_Support_Amount__c}" label=""/>
+			        </apex:column>
+			     
+			        <apex:column title="{!$ObjectType.Income_Block_Period__c.fields.Risk_Description__c.inlineHelpText}" >
+			           <apex:facet name="header">Comments</apex:facet>
+			           <apex:inputTextArea value="{!row.Risk_Description__c}" style="width:90%"/>
+			        </apex:column>
+			
+			        </apex:pageBlockTable>
+			
+			</apex:pageBlockSectionItem>
+		  
+		  </apex:pageBlockSection>  
+
+	</apex:outputPanel>
+
+</apex:component>

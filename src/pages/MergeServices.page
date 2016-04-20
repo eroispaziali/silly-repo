@@ -1,0 +1,93 @@
+<apex:page controller="mergeServices">
+<apex:form id="F">
+<img title="Services__c" class="pageTitleIcon" alt="Service" src="/s.gif"/>
+<h1 style="font-size: 150%; font-weight: bold;">
+    Merge Services
+</h1>
+<br/><br/><br/>
+  <apex:pageBlock id="P" mode="edit" rendered="{!mergeRequested==false}">
+  <apex:pageblockButtons location="bottom">
+  <apex:commandButton value=" Merge Service " action="{!mergeService}" rendered="{!canMerge=true}" />
+  <!--<apex:commandButton value=" Request Merge Service " action="{!requestMergeService}"  rendered="{!canMerge=false}"  />-->
+  <apex:commandButton value=" Cancel " action="/003/o"/>
+  </apex:pageblockButtons>
+    <apex:pageblocksection columns="1">
+        <apex:pageMessages />
+    </apex:pageblocksection>
+    <apex:pageBlockSection columns="2" id="ServiceSection">
+        <apex:pageBlockSectionItem >
+        <apex:outputText ><b>          Master Record           </b></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputText ><b>Record to be merged</b></apex:outputText>
+        </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >ID</apex:outputLabel>
+        <apex:outputField id="MasterPID" value="{!master.id}" /> 
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputField id="ChildPID" value="{!child.id}" /> 
+        </apex:pageBlockSectionItem>
+            
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Name</apex:outputLabel>
+        <apex:outputField id="MasterLastName" value="{!master.Name}" /> 
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputField id="ChildLastName" value="{!child.Name}" /> 
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Service Type</apex:outputLabel>
+        <apex:outputField id="MasterType" value="{!master.service_type__c }" /> 
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputField id="ChildType" value="{!child.service_type__c }" /> 
+        </apex:pageBlockSectionItem>
+  
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Service Status</apex:outputLabel>
+        <apex:outputField id="MasterStatus" value="{!master.service_status__c}" /> 
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputField id="ChildStatus" value="{!child.service_status__c}" /> 
+        </apex:pageBlockSectionItem>
+  
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Record Type</apex:outputLabel>
+        <apex:outputField id="MasterRecordType" value="{!master.Record_Type_Name__c}" /> 
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputField id="ChildRecordType" value="{!child.Record_Type_Name__c}" /> 
+        </apex:pageBlockSectionItem>           
+        
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Locality</apex:outputLabel>
+        <apex:outputText id="MasterLocality" value="{!masterOrgLocality}" /> 
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputText id="ChildLocality" value="{!childOrgLocality}" /> 
+        </apex:pageBlockSectionItem>
+         
+        <apex:pageBlockSectionItem >
+        <apex:outputLabel >Operated By</apex:outputLabel>
+        <apex:outputText id="MasterLocality" value="{!masterOrgOperatedBy }" /> 
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:outputText id="ChildLocality" value="{!childOrgOperatedBy }" /> 
+        </apex:pageBlockSectionItem>
+     
+    </apex:pageBlockSection>
+    </apex:pageBlock> 
+    <apex:pageBlock id="D" mode="view" rendered="{!mergeRequested==true}"> 
+      <apex:pageblockButtons location="bottom">
+      <apex:commandButton value=" OK " action="/003/o"/>
+      </apex:pageblockButtons>
+     <apex:pageblocksection columns="1">
+        Your request has been sent to CRS Support Team.  The merge may take a while to happen.
+     </apex:pageblocksection>
+ 
+    </apex:pageBlock>      
+</apex:form>
+</apex:page>

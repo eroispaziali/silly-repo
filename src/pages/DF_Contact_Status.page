@@ -1,0 +1,30 @@
+<apex:page standardController="DF_Event__c" extensions="DfEventAttendeeController" tabStyle="DF_Contact__c">
+    <apex:form >
+    <apex:pageBlock >
+  <apex:pageBlockButtons >
+     <apex:commandButton value="Save" action="{!save}"/>
+     <apex:commandButton value="Cancel" action="{!cancel}"/>   
+  </apex:pageBlockButtons>
+  <apex:pageBlockTable value="{!lstdfcontacts}" var="cons">
+   <apex:column headerValue="DF Champions"
+     value="{!cons.Name}">
+    </apex:column>
+   <apex:column headerValue="Email" value="{!cons.Email__c}">
+   </apex:column>
+   <apex:column headerValue="Contacted?" value="{!cons.Contacted__c}">
+   </apex:column>
+   <apex:column headerValue="Eligible?" value="{!cons.Eligible__c}">
+   </apex:column>
+    <apex:column headerValue="Attended?">
+       <apex:inputField value="{!cons.Attended__c}"/>   
+    </apex:column>   
+    <apex:column headerValue="Status">
+       <apex:inputField value="{!cons.Status__c}"/>   
+    </apex:column>
+    <apex:column headerValue="Note">
+       <apex:inputField value="{!cons.Note__c}"/>   
+    </apex:column>
+  </apex:pageBlockTable>
+ </apex:pageBlock>
+    </apex:form>
+</apex:page>

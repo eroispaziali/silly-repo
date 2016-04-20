@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Amount_Agreed__c</fullName>
+        <externalId>false</externalId>
+        <label>Amount Agreed</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount_Requested__c</fullName>
+        <externalId>false</externalId>
+        <label>Amount Requested</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>CPI__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>CPI Upwards Only</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Date_Agreed__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Agreed</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_Request__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Request from Landlord</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Fixed_Amount__c</fullName>
+        <externalId>false</externalId>
+        <label>Fixed Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Open_Market__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Open Market Upwards Only</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Percentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Property_Contract__c</fullName>
+        <externalId>false</externalId>
+        <label>Property Contract</label>
+        <referenceTo>Property_Contract__c</referenceTo>
+        <relationshipLabel>Rent Reviews</relationshipLabel>
+        <relationshipName>Rent_Reviews</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>RPI__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>RPI Upwards Only</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Rent_Review_Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Rent Review Comments</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Rent_Review_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Rent Review Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Started</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Review_Agreed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Review Agreed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Review_Basis__c</fullName>
+        <externalId>false</externalId>
+        <label>Review Basis</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Open Market</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>RPI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CPI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Fixed Percentage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Fixed Amount</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Review_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Review Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Rent Review</label>
+    <nameField>
+        <displayFormat>ReviewID-{00}</displayFormat>
+        <label>Rent Review ID</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Rent Reviews</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Amount_Agreed_must_be_entered</fullName>
+        <active>true</active>
+        <description>can be filled only if the status is completed</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+ISPICKVAL( Rent_Review_Status__c , &quot;Completed&quot;) 
+&amp;&amp;
+ISBLANK(Amount_Agreed__c )</errorConditionFormula>
+        <errorDisplayField>Amount_Agreed__c</errorDisplayField>
+        <errorMessage>Amount Agreed must be entered when rent review status is completed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Amount_Agreed_must_be_null</fullName>
+        <active>true</active>
+        <description>can be filled only if the status is completed</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+(
+ISPICKVAL( Rent_Review_Status__c , &quot;Not Started&quot;) || ISPICKVAL( Rent_Review_Status__c , &quot;In Progress&quot;)
+) 
+&amp;&amp; NOT(ISBLANK(Amount_Agreed__c ))</errorConditionFormula>
+        <errorDisplayField>Amount_Agreed__c</errorDisplayField>
+        <errorMessage>Amount Agreed must be blank.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Amount_Requested_Agreed</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+(
+ISPICKVAL( Rent_Review_Status__c , &quot;Completed&quot;) || 
+ISPICKVAL( Rent_Review_Status__c , &quot;In Progress&quot;)
+)
+&amp;&amp; 
+ISBLANK(Amount_Requested__c)</errorConditionFormula>
+        <errorDisplayField>Amount_Requested__c</errorDisplayField>
+        <errorMessage>Amount Requested can be filled only after the Rent Review Status is Completed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Amount_cant_fill</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+(
+ISPICKVAL( Review_Basis__c , &quot;Fixed Percentage&quot;) || ISPICKVAL( Review_Basis__c , &quot;RPI&quot;) || 
+ISPICKVAL( Review_Basis__c , &quot;CPI&quot;) || 
+ISPICKVAL( Review_Basis__c , &quot;Open Market&quot;)
+) 
+&amp;&amp; 
+NOT(ISBLANK(Fixed_Amount__c ))&amp;&amp;
+(
+ISBLANK(TEXT(Rent_Review_Status__c))  || 
+ISPICKVAL(Rent_Review_Status__c,&quot;Not Started&quot;)
+)</errorConditionFormula>
+        <errorDisplayField>Fixed_Amount__c</errorDisplayField>
+        <errorMessage>Amount can be filled in only if the Review basis is Fixed Amount</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Amount_to_be_filled</fullName>
+        <active>true</active>
+        <description>can be filled only if the Review basis is a fixed amount</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+ISPICKVAL( Review_Basis__c , &quot;Fixed Amount&quot;) &amp;&amp;  
+ISBLANK(  Fixed_Amount__c )&amp;&amp;
+(ISPICKVAL( Rent_Review_Status__c ,&quot;Completed&quot;))</errorConditionFormula>
+        <errorDisplayField>Fixed_Amount__c</errorDisplayField>
+        <errorMessage>Amount to be filled if the Review basis is Fixed Amount</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Date_Agreed_must_be_entered</fullName>
+        <active>true</active>
+        <description>can be filled only if the status is completed</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+ISPICKVAL( Rent_Review_Status__c , &quot;Completed&quot;)
+&amp;&amp; 
+ISBLANK(  Date_Agreed__c  )</errorConditionFormula>
+        <errorDisplayField>Date_Agreed__c</errorDisplayField>
+        <errorMessage>Date agreed must be enteredwhen  Rent Review Status is set to Completed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Date_Agreed_must_be_null</fullName>
+        <active>true</active>
+        <description>can be filled only if the status is completed</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+(
+ISPICKVAL( Rent_Review_Status__c , &quot;Not Started&quot;) || ISPICKVAL( Rent_Review_Status__c , &quot;In Progress&quot;)
+) 
+&amp;&amp; NOT(ISBLANK(  Date_Agreed__c  ))</errorConditionFormula>
+        <errorDisplayField>Date_Agreed__c</errorDisplayField>
+        <errorMessage>Can be filled only after the Rent Review Status is set to Completed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Date_Request</fullName>
+        <active>true</active>
+        <description>This can be filled in only if the Rent review status is In progress</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+(
+ISPICKVAL( Rent_Review_Status__c , &quot;In Progress&quot;)  || 
+ISPICKVAL( Rent_Review_Status__c , &quot;Completed&quot;)
+)
+&amp;&amp; ISBLANK(  Date_Request__c  )</errorConditionFormula>
+        <errorDisplayField>Date_Request__c</errorDisplayField>
+        <errorMessage>Date Request from Landlord must be entered Rent Review Status is In Progress / Completed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Date_Requested</fullName>
+        <active>false</active>
+        <description>can be filled only if the status is completed</description>
+        <errorConditionFormula>(ISPICKVAL( Rent_Review_Status__c , &quot;Not Started&quot;) || ISPICKVAL( Rent_Review_Status__c , &quot;In Progress&quot;)) &amp;&amp; NOT(ISBLANK(  Date_Agreed__c  ))</errorConditionFormula>
+        <errorDisplayField>Date_Agreed__c</errorDisplayField>
+        <errorMessage>Can be filled only after the Rent Review Status is set to Completed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Percentage_cant_fill</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+(
+ISPICKVAL( Review_Basis__c , &quot;Fixed Amount&quot;) || 
+ISPICKVAL( Review_Basis__c , &quot;RPI&quot;) || 
+ISPICKVAL( Review_Basis__c , &quot;CPI&quot;) || 
+ISPICKVAL( Review_Basis__c , &quot;Open Market&quot;)
+) 
+&amp;&amp; NOT(ISBLANK( Percentage__c ))</errorConditionFormula>
+        <errorDisplayField>Percentage__c</errorDisplayField>
+        <errorMessage>Percentage can be filled in only if the Review basis is Fixed Percentage</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Percentage_to_be_filled</fullName>
+        <active>true</active>
+        <description>can be filled only if Review Basis is Fixed Percentage</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+ISPICKVAL( Review_Basis__c , &quot;Fixed Percentage&quot;) &amp;&amp;
+ISBLANK( Percentage__c )&amp;&amp;
+( 
+ISPICKVAL( Rent_Review_Status__c ,&quot;In progress&quot;) ||
+ISPICKVAL( Rent_Review_Status__c ,&quot;Completed&quot;)
+)</errorConditionFormula>
+        <errorDisplayField>Percentage__c</errorDisplayField>
+        <errorMessage>Percentage to be filled if the Review basis is Fixed Percentage</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Rent_Status_None_Not_Started</fullName>
+        <active>true</active>
+        <description>can be filled only if the status is completed</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+(ISBLANK(TEXT(Rent_Review_Status__c)) ||
+ISPICKVAL(Rent_Review_Status__c,&quot;Not Started&quot; )) &amp;&amp;
+(
+NOT(ISBLANK(Date_Agreed__c)) ||  
+NOT(ISBLANK(Date_Request__c)) ||  
+NOT(ISBLANK(Amount_Requested__c)) ||  
+NOT(ISBLANK(Date_Agreed__c)) ||  
+NOT(ISBLANK(Amount_Agreed__c)) 
+)</errorConditionFormula>
+        <errorMessage>Rent Review Status = “None”, then all fields  should be blank
+Date Request from Landlord,Amount Requested,Date Agreed ,Amount Agreed and Review Agreed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Review_Agreed</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) 
+&amp;&amp;
+ISPICKVAL( Rent_Review_Status__c , &quot;Completed&quot;) 
+&amp;&amp; 
+Review_Agreed__c=False</errorConditionFormula>
+        <errorDisplayField>Review_Agreed__c</errorDisplayField>
+        <errorMessage>Review agreed must be entered when rent review status is completed.</errorMessage>
+    </validationRules>
+</CustomObject>

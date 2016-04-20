@@ -1,0 +1,81 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section Three: Fit For Purpose"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="Premises Spaces" id="presmises">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!section4}" value="Back" styleClass="btn"/>
+                    <apex:commandButton action="{!section6}" value="Next" styleClass="btn"/>
+                    <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+            
+            <apex:pageBlockSection title="Interior Decoration">
+                <apex:inputField id="int" value="{!survey.c_Interior_Decoration__c}"/>
+            </apex:pageBlockSection>
+                  
+            <apex:pageBlockSection title="People">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Number of staff members" for="p1"/>
+                  <apex:inputField id="p1" value="{!survey.c_People_Number_of_Staff__c}"/>
+                  <apex:outputLabel value="Number of volunteers" for="p2"/>
+                  <apex:inputField id="p2" value="{!survey.c_People_Number_of_Volunteers__c}"/>
+                  <apex:outputLabel value="Lone working?" for="p3"/>
+                  <apex:inputField id="p3" value="{!survey.c_People_Lone_Working__c}"/>
+                  <apex:outputLabel value="Approximate number of weekly visitors" for="p4"/>
+                  <apex:inputField id="p4" value="{!survey.c_People_Approx_Number_of_Visitors__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Space Adequacy">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="No. of general purpose rooms" for="s1"/>
+                  <apex:inputField id="s1" value="{!survey.c_Space_No_of_General_Purpose_Rooms__c}"/>
+                  <apex:outputLabel value="No. of workstations" for="s2"/>
+                  <apex:inputField id="s2" value="{!survey.c_Space_No_of_Workstations__c}"/>
+                  <apex:outputLabel value="No. of tea points" for="s3"/>
+                  <apex:inputField id="s3" value="{!survey.c_Space_No_of_Tea_Points__c}"/>
+                  <apex:outputLabel value="No. of toilets" for="s4"/>
+                  <apex:inputField id="s4" value="{!survey.c_Space_No_of_Toilets__c}"/>
+                  <apex:outputLabel value="Is space adequate for the number of users?" for="s5"/>
+                  <apex:inputField id="s5" value="{!survey.c_Space_Adequate__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Telephone Lines">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="No. of non-BT lines" for="t1"/>
+                  <apex:inputField id="t1" value="{!survey.c_Phone_No_of_non_BT_Lines__c}"/>
+                  <apex:outputLabel value="Any numbers billed directly to premises?" for="t2"/>
+                  <apex:inputField id="t2" value="{!survey.c_Phone_Directly_Billed__c}"/>
+                  <apex:outputLabel value="Is there a dedicated fax line?" for="t3"/>
+                  <apex:inputField id="t3" value="{!survey.c_Phone_Dedicated_Fax__c}"/>
+                  <apex:outputLabel value="Is there a telephone system?" for="t4"/>
+                  <apex:inputField id="t4" value="{!survey.c_Phone_System__c}"/>
+                  <apex:outputLabel value="How many handsets?" for="t5"/>
+                  <apex:inputField id="t5" value="{!survey.c_Phone_No_of_Handsets__c}"/>
+                  <apex:outputLabel value="How many sockets?" for="t6"/>
+                  <apex:inputField id="t6" value="{!survey.c_Phone_No_of_Sockets__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Vehicles">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="How many vehicles?" for="v1"/>
+                  <apex:inputField id="v1" value="{!survey.c_Vehicles_No__c}"/>
+                  <apex:outputLabel value="Transport Links" for="v2"/>
+                  <apex:inputField id="v2" value="{!survey.c_Transport_Links__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Comments">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Comments" for="Comments"/>
+                  <apex:inputField id="Comments" value="{!survey.Comments_page_5__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

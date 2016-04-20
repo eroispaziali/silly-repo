@@ -1,0 +1,131 @@
+<apex:page controller="mergeContacts" action="{!AutoRunMergeContacts}">
+
+<style>
+
+.tableStyle {
+	border-spacing: 0px;
+	border-collapse: collapse;
+	width: 960px;
+}
+
+.titleColumn {
+	width: 220px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.radioColumn {
+	width: 20px;
+	text-align: left;
+}
+
+.dataColumn {
+	width: 350px;
+	min-width: 350px;
+	max-width: 350px;
+	text-align: left;
+}
+
+.dataColumnTitle {
+	width: 350px;
+	min-width: 350px;
+	max-width: 350px;
+	text-align: left;
+}
+
+.Master {
+	padding-left: 35px;
+}
+
+.Child {
+	padding-left: 15px;
+}
+
+.multiColumn {
+	width: 700px;
+	min-width: 740px;
+	max-width: 740px;
+	text-align: left;
+}
+
+table tr td input[type="radio"]:disabled {
+	visibility: hidden;
+}
+
+table tr td input[type="radio"] {
+	top: -2px;
+	position: relative;
+}
+
+table tr td label {
+	display: inline-block;
+	width: 320px;
+	min-width: 320px;
+	max-width: 320px;
+	text-align: left;
+}
+
+</style>
+	<apex:form id="F">
+		<img title="Contact" class="pageTitleIcon" alt="Contact" src="/s.gif" />
+		<h1 style="font-size: 150%; font-weight: bold;">Merge People</h1>
+		<br />
+		<br />
+		<br />
+		<apex:pageBlock id="P" mode="edit" rendered="{!mergeRequested==false}">
+			<apex:pageblockButtons location="bottom">
+				<apex:commandButton value=" Switch Records > " action="{!switchPerson}" />
+				<apex:commandButton value=" Merge People " action="{!mergePerson}"
+					rendered="{!nextStep = 2}" />
+				<apex:commandButton value=" Request Merge People "
+					action="{!requestMergePerson}" rendered="{!nextStep=1}" />
+				<apex:commandButton value=" Cancel " action="/003/o" />
+			</apex:pageblockButtons>
+			<apex:pageblocksection columns="1">
+				<apex:pageMessages escape="false" />
+			</apex:pageblocksection>
+						
+			<table class="tableStyle">
+				<tr style="height: 30px; vertical-align: text-bottom;">
+					<td class="titleColumn"></td>
+					<td class="dataColumnTitle Master"><b>Master Record</b></td>
+					<td class="dataColumnTitle Child"><b>Child Record</b></td>
+				</tr>				
+				<tr class="tableStyle">
+					<td class="titleColumn labelCol">ID</td>
+					<td class="dataColumn Master">
+						<apex:outputLink id="MasterPID" value="/{!master.id}">{!master.Client_reference_number__c}
+						</apex:outputLink>
+					</td>
+					<td class="dataColumn Child">
+						<apex:outputLink id="ChildPID" value="/{!child.id}" >{!child.Client_reference_number__c}
+						</apex:outputLink>
+					</td>
+				</tr>							
+				<apex:repeat value="{!titleMap}" var="row"> 				
+					<tr class="tableStyle">
+						<td class="titleColumn labelCol">
+							<apex:outputText value="{!titleMap[row]}" />
+						</td>
+						<td colspan="2" class="multiColumn"> 
+							<apex:selectRadio value="{!postValues[row]}" layout="horizontal" styleClass="multiColumn"
+								html-class="dataColumn" >
+								<apex:selectOptions value="{!radioMap[row]}" html-class="radioColumn">
+								</apex:selectOptions>
+							</apex:selectRadio>
+						</td>
+					</tr>								
+				</apex:repeat>
+			</table>			
+		</apex:pageBlock>
+		<apex:pageBlock id="D" mode="view" rendered="{!mergeRequested==true}">
+			<apex:pageblockButtons location="bottom">
+				<apex:commandButton value=" OK " action="/003/o" />
+			</apex:pageblockButtons>
+			<apex:pageblocksection columns="1">
+        Your request has been sent to CRS Support Team.  The merge may take a while to happen.
+     </apex:pageblocksection>
+
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

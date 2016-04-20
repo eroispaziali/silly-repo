@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Contract_Expiry_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract Expiry Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Contract_Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Contract_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Lease</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>License to Occupy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Contractual_Term__c</fullName>
+        <externalId>false</externalId>
+        <label>Contractual Term</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contratual_Term_Approx__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF ( Contratual_Term_days__c &gt; 0, 
+TEXT(FLOOR( Contratual_Term_days__c/365.2425)) &amp; &quot; Year(s) &quot; &amp; 
+TEXT( FLOOR( 12 * ( (Contratual_Term_days__c/365.2425) - FLOOR((Contratual_Term_days__c/365.2425)) ))) &amp; &quot; Month(s) and &quot; &amp; 
+TEXT( ROUND(30.25 * (ROUND( 12 * ( (Contratual_Term_days__c/365.2425) - FLOOR((Contratual_Term_days__c/365.2425)) ),8) - FLOOR( 
+ROUND( 12 * ( (Contratual_Term_days__c/365.2425) - FLOOR((Contratual_Term_days__c/365.2425)) ),8)) ),0)) &amp; &quot; Day(s) &quot; 
+, &quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contractual Term Approx</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contratual_Term_days__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contract_Expiry_Date__c  -  Contract_Start_Date__c + 2</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contratual Term days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Early_Break_Option__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Early Break Option</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LTA_1954_Applies__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>LTA 1954 Applies</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Latest_service_charge_record__c</fullName>
+        <externalId>false</externalId>
+        <label>Latest service charge record</label>
+        <summarizedField>Property_Insurance__c.CreatedDate</summarizedField>
+        <summaryFilterItems>
+            <field>Property_Insurance__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Service Charge</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Property_Insurance__c.Property_Contract__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Lease_Contract_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( AND(text(Location__r.Property_Status__c) =&quot;Vacant&quot;,Contract_Expiry_Date__c &lt; TODAY()),&quot;Expired&quot;,
+IF( AND(text(Location__r.Property_Status__c) =&quot;Occupied&quot;,Contract_Expiry_Date__c &lt; TODAY(),Contract_Expiry_Date__c &gt; Location__r.Latest_start_date__c ),&quot;Hold Over&quot;,
+IF(AND(text(Location__r.Property_Status__c) =&quot;Occupied&quot;,Contract_Expiry_Date__c &lt; TODAY(), Contract_Expiry_Date__c &lt; Location__r.Latest_start_date__c ) ,&quot;Expired&quot;,
+IF( AND(text(Location__r.Property_Status__c) =&quot;Vacant&quot;,Contract_Start_Date__c &gt; TODAY()),&quot;Future&quot;,
+IF( AND(text(Location__r.Property_Status__c) =&quot;Occupied&quot;,Contract_Start_Date__c &gt; TODAY()),&quot;Future&quot;,
+IF( AND(text(Location__r.Property_Status__c) =&quot;Vacant&quot;,Contract_Expiry_Date__c &gt; TODAY()),&quot;Current&quot;,
+IF( AND(text(Location__r.Property_Status__c) =&quot;Occupied&quot;,Contract_Expiry_Date__c &gt; TODAY()),&quot;Current&quot;,
+&quot;&quot;)))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Property Contract Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Property</label>
+        <referenceTo>Location__c</referenceTo>
+        <relationshipLabel>Property Contracts</relationshipLabel>
+        <relationshipName>Property_Contracts</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Rent_Commencement_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Rent Commencement Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Service_Charge_Payable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Service Charge Payable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Term_months__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(MONTH( Contract_Expiry_Date__c ) - MONTH( Contract_Start_Date__c ) &lt; 0, 
+12 + (MONTH( Contract_Expiry_Date__c ) - MONTH( Contract_Start_Date__c )),
+MONTH( Contract_Expiry_Date__c ) - MONTH( Contract_Start_Date__c )
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Term months</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Term_years__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(  Contratual_Term_days__c  &gt; 365, 
+YEAR( Contract_Expiry_Date__c ) - YEAR( Contract_Start_Date__c ), 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Term years</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VAT_Payable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>VAT Payable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Property Contract</label>
+    <nameField>
+        <displayFormat>PCN-{00}</displayFormat>
+        <label>Property Contract Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Property Contracts</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>After_Contract_Start_Date</fullName>
+        <active>true</active>
+        <description>Expiry date must always be after start date</description>
+        <errorConditionFormula>Contract_Expiry_Date__c   &lt; Contract_Start_Date__c</errorConditionFormula>
+        <errorDisplayField>Contract_Expiry_Date__c</errorDisplayField>
+        <errorMessage>Must be after Contract Start Date</errorMessage>
+    </validationRules>
+</CustomObject>

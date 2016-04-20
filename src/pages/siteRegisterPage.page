@@ -1,0 +1,75 @@
+<apex:page standardController="Site_Lead__c" extensions="sitesLeadCapture" sidebar="false" showheader="false">
+   <head><title>Register your interest - Dementia Friends</title></head>
+   <apex:include pageName="temp_css"/>
+   <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
+   <script>
+       $(function(){
+           console.debug($('input.required'));
+           $('input.required').tooltip({title:'Required Field', trigger:'focus'});
+       });
+   </script>
+   <head><title>Register your interest</title></head>
+   <div class="container-fluid" id="mainContent">
+          <div class="row-fluid">
+              <h1>
+                  Register your interest
+              </h1>
+          </div>
+          <hr class="divider"/>
+          <div class="row-fluid" style="margin-bottom:20px; margin-top:20px;">
+            <div class="span8">
+                
+                 <div class="span3">
+                     <a href="https://twitter.com/DementiaFriends" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @DementiaFriends</a>
+                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                 </div>
+                 <div >
+                      <div class="fb-like" data-href="http://www.dementiafriends.org.uk" data-send="false" data-layout="button_count" data-width="250" data-show-faces="true"></div>
+                 </div>
+             </div>
+        </div>
+          <apex:form styleClass="formentry" >
+              <apex:messages styleClass="alert alert-danger"/>
+              <div class="row-fluid">
+                  <div class="lbl span1">
+                      First Name
+                  </div>
+                  <div class="span11">
+                      <apex:inputtext value="{!firstName}" styleClass="input input-large" />
+                  </div>
+              </div>
+              <div class="row-fluid">
+                  <div class="lbl span1">
+                      Last Name
+                  </div>
+                  <div class="span11">
+                      <apex:inputtext value="{!LastName}"  styleClass="input input-large" />
+                  </div>
+              </div>
+              <div class="row-fluid">
+                  <div class="lbl span1">
+                      Email Address <span style="color:red">*</span>
+                  </div>
+                  <div class="span11">
+                      <apex:inputtext value="{!email}" styleClass="required input input-large" />
+                  </div>
+              </div>
+              <div class="row-fluid">
+                  <div class="lbl span1"></div>
+                  <div class="span9">
+                    <span class="pull-left" style="margin-right:10px"><apex:inputCheckbox value="{!consent}" id="check"/></span><span><apex:outputlabel for="check" ><p> I would like to learn more about Dementia Friends</p>
+<p>Alzheimer’s Society will not pass your details on to any other organisation.  We will use the information given to communicate with you about Dementia Friends and other Alzheimer’s Society activities.</p>
+ </apex:outputlabel></span>
+                   </div>
+              </div>
+              <div class="row-fluid">
+                  <div class="lbl span1"></div>
+                  <div class="span2">
+                   <center><apex:commandButton value="Confirm" action="{!createSiteLead}" /></center>
+                   </div>
+              </div>
+        </apex:form>
+     
+     </div>
+      <c:SiteFooter ></c:SiteFooter>
+</apex:page>

@@ -1,0 +1,74 @@
+<apex:component >
+
+    <!--gary.grant@conseq.co.uk
+      assumes the bootstrap CSS classes are included in the main page
+      change 487 - hide fund allocations
+    -->
+
+    <apex:attribute name="services" type="String"  description="" required="true"/>
+    <apex:attribute name="partnership" type="String" description="" required="true"/>
+    <apex:attribute name="income" type="String" description="" required="true"/>
+    <apex:attribute name="allocation" type="String" description="" required="true"/>
+    <apex:attribute name="contract" type="String" description="" required="true"/>    
+
+    <style>
+<!--487 container changed from 18% to 23% change 492 reversed-->  
+        .h-block-No {
+            border 2px #333 solid;
+            padding : 3px 0px 3px 10px;        
+            width : 18%;
+            display:inline-block;
+            line-height : 1em;
+            margin: 3px 0px 3px 0px;
+            text-align : center;
+            color : #AAA;
+            background-color: #DDD;
+        }
+<!--487 container changed from 18% to 23% change 492 reversed-->  
+        .h-block-Yes {
+            border 2px #333 solid;
+            padding : 3px 0px 3px 10px;        
+            width : 18%;
+            display:inline-block;
+            line-height : 1em;
+            margin: 3px 0px 3px 0px;
+            text-align : center;
+            color : #eee;
+            background-color: #8E9DBE;
+        }
+      
+        .h-block-container-inner {
+            width : 100% ; 
+            margin-left: auto; 
+            margin-right: auto ;
+            border : 1px #ccc solid;
+            padding : 5px 5px 5px 26px;
+        }
+
+        .h-block-container {
+            width : 85% ; 
+            margin-left: auto; 
+            margin-right: auto ;
+            margin-bottom : 25px;
+        }
+        
+        .h-block-title {
+            font-size : 10px;
+            color : #333;        
+        }
+        
+    
+    </style>
+    <div class="h-block-container">
+    <div class="h-block-title">BDR Components</div>
+    <div class="h-block-container-inner">
+        <div class="h-block-{!services}" >Services</div>
+        <div class="h-block-{!partnership}" >Partnership</div>
+        <div class="h-block-{!income}" >Income</div>
+        <!--change 487 - hide allocations, reversed change 492-->
+        <div class="h-block-{!allocation}" >Allocation</div>
+        <div class="h-block-{!contract}" >Contract</div>
+    </div>
+    </div>
+
+</apex:component>

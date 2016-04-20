@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>InDevelopment</deploymentStatus>
+    <description>Object tracks a Company&apos;s business risks.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Put in a description of the Risk</description>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Impact_View__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF((Impact__c/2)&lt;=1,  IMAGE(&quot;/servlet/servlet.FileDownload?file=01570000000iPq2&quot;,&quot;Very Low Impact&quot;),  IF((Impact__c/2)&lt;=2,  IMAGE(&quot;/servlet/servlet.FileDownload?file=01570000000iPq3&quot;, &quot;Low Impact&quot;) ,  IF((Impact__c/2)&lt;=3,  IMAGE(&quot;/servlet/servlet.FileDownload?file=01570000000iPq6&quot;,&quot;Medium Impact&quot;) ,  IF((Impact__c/2)&lt;=4,  IMAGE(&quot;servlet/servlet.FileDownload?file=01570000000iPq4&quot;,&quot;High Impact&quot;) ,  IMAGE(&quot;/servlet/servlet.FileDownload?file=01570000000iPq0&quot;, &quot;Very High Impact&quot;)  ))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Impact View</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Impact__c</fullName>
+        <description>A number between 0 and 10.</description>
+        <externalId>false</externalId>
+        <label>Impact</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Management_Actions__c</fullName>
+        <externalId>false</externalId>
+        <label>Management Actions</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>6</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Mitigating_factors__c</fullName>
+        <description>Please enter a description of any mitigating factors that reduce the probability or impact</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please enter a description of any mitigating factors that reduce the probability or impact</inlineHelpText>
+        <label>Mitigating factors</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Mitigation_Cost__c</fullName>
+        <description>How much to make it go away?</description>
+        <externalId>false</externalId>
+        <label>Mitigation Cost</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Probability_View__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF((Probability__c/2)&lt;=1,  IMAGE(&quot;/servlet/servlet.FileDownload?file=01570000000iPq2&quot;,&quot;Very Low Probability&quot;),  IF((Probability__c/2)&lt;=2,  IMAGE(&quot;/servlet/servlet.FileDownload?file=01570000000iPq3&quot;, &quot;Low Probability&quot;) ,  IF((Probability__c/2)&lt;=3,  IMAGE(&quot;/servlet/servlet.FileDownload?file=01570000000iPq6&quot;,&quot;Medium Probability&quot;) ,  IF((Probability__c/2)&lt;=4,  IMAGE(&quot;servlet/servlet.FileDownload?file=01570000000iPq4&quot;,&quot;High Probability&quot;) ,  IMAGE(&quot;/servlet/servlet.FileDownload?file=01570000000iPq0&quot;, &quot;Very High Probability&quot;)  ))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Probability View</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Probability__c</fullName>
+        <description>A number between 0 and 10, 0 is never, 10 is certain.</description>
+        <externalId>false</externalId>
+        <label>Probability</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reference__c</fullName>
+        <description>A reference number.</description>
+        <displayFormat>RK{000000}</displayFormat>
+        <externalId>false</externalId>
+        <label>Reference</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Residual_Impact__c</fullName>
+        <externalId>false</externalId>
+        <label>Residual Impact</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Residual_Risk__c</fullName>
+        <description>Please enter the residual risk after mitigating factors have been accounted for</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please enter the residual risk after mitigating factors have been accounted for</inlineHelpText>
+        <label>Residual Risk</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Risk_Barometer__c</fullName>
+        <externalId>false</externalId>
+        <formula>IMAGE(&quot;/img/samples/color_red.gif&quot;, &quot;red&quot;, 15,  Weighting_Score__c ) &amp; IMAGE(&quot;/s.gif&quot;, &quot;white&quot;, 15, 100 - ( Weighting_Score__c  * 100))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Risk Barometer</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Risk_Value__c</fullName>
+        <externalId>false</externalId>
+        <label>Risk Value</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Risk__c</fullName>
+        <externalId>false</externalId>
+        <label>Risk</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Scope__c</fullName>
+        <description>People, Processes, Systems and Locations that may be affected by this Risk.</description>
+        <externalId>false</externalId>
+        <label>Scope</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>6</visibleLines>
+    </fields>
+    <fields>
+        <fullName>User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Business Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>R00N700000023TX8EAM</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Weighting_Score__c</fullName>
+        <externalId>false</externalId>
+        <formula>Impact__c  *  Probability__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Weighting Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Risk</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Reference__c</columns>
+        <columns>NAME</columns>
+        <columns>Impact__c</columns>
+        <columns>Probability__c</columns>
+        <columns>Risk_Value__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Risk Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Risks</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>User__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Impact_View__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Probability_View__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Risk_Barometer__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LAST_UPDATE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LAST_ACTIVITY</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>User__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATED_DATE</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>User__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

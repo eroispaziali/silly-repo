@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <frameHeight>800</frameHeight>
+    <hasSidebar>true</hasSidebar>
+    <label>CRS Reports</label>
+    <mobileReady>true</mobileReady>
+    <motif>Custom21: Computer</motif>
+    <url>http://alzreports/Reports/Pages/Folder.aspx?ItemPath=%2fSociety+CRS&amp;ViewMode=List</url>
+    <urlEncodingKey>UTF-8</urlEncodingKey>
+</CustomTab>

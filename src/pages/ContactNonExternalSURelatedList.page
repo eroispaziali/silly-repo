@@ -1,0 +1,101 @@
+<apex:page standardController="Contact" extensions="ContactServiceUsageRelatedListController" action="{!AutoRunNonExternalSU}">
+
+<apex:form id="form">
+<!--<apex:variable value="{!URLFOR($Action.Service_Usage__c.New)+'CF00NS0000000gzwD='+Contact.Name+'&CF00NS0000000gzwD_lkid='+$CurrentPage.Parameters.id}" var="newRecURL" />-->
+<!--<apex:variable value="{!LEFT(URLFOR($Action.Service_Usage__c.New),FIND('retURL',URLFOR($Action.Service_Usage__c.New))-1)+'save_new_url=/'+SUKeyPrefix+'/e?'+$Label.ContactPrimaryServiceUserFieldId+'='+Contact.Name+'&'+$Label.ContactPrimaryServiceUserFieldId+'_lkid='+$CurrentPage.Parameters.id}" var="newRecURL" />-->
+<!-- Based on RecorTypeSelection or Not should be taken to New Service Usage -->
+<apex:variable value="{!LEFT(URLFOR($Action.Service_Usage__c.New),FIND('retURL',URLFOR($Action.Service_Usage__c.New))-1)+
+IF(FIND('save_new_url',URLFOR($Action.Service_Usage__c.New))>0,'save_new_url=/'+SUKeyPrefix+'/e?','')+
+$Label.ContactPrimaryServiceUserFieldId+'='+ CONFirstName + " " + CONLastName +'&Name=(AUTOMATICALLY UPDATED)&'+
+$Label.ContactPrimaryServiceUserFieldId+'_lkid='+
+$CurrentPage.Parameters.id}" var="newRecURL" />
+<!--<apex:variable value="{!LEFT(URLFOR($Action.Service_Usage__c.New),FIND('?',URLFOR($Action.Service_Usage__c.New)))+'CF00NS0000000gzwD='+Contact.Name+'&CF00NS0000000gzwD_lkid='+$CurrentPage.Parameters.id}" var="newRecURL" />-->
+<!--<apex:variable value="{!'/'+SUKeyPrefix +'/e?CF00NS0000000gzwD='+Contact.Name+'&CF00NS0000000gzwD_lkid='+$CurrentPage.Parameters.id}" var="newRecURL" />-->
+<apex:variable value="/{!URLENCODE(IF($CurrentPage.Parameters.full==null,$CurrentPage.Parameters.id,'apex/'+$CurrentPage.Name+'?id='+$CurrentPage.Parameters.id+'%26full=true'))}" var="returnURL"/>
+
+
+<apex:pageBlock >
+
+<apex:outputPanel rendered="{!$CurrentPage.Parameters.full!=null}">
+<img title="Contact" class="pageTitleIcon" alt="Contact" src="/s.gif"/>
+
+<h1 style="font-size: 100%; font-weight: bold;">
+    Service Usage of:  
+</h1>
+<br/>
+<h1 style="font-size: 150%; font-weight: bold;">{!Contact.Name}</h1>
+
+</apex:outputPanel>
+ 
+<center>
+<apex:outputPanel rendered="{!$CurrentPage.Parameters.full==null}">
+<a href="javascript:parent.location.href='{!newRecURL}&retURL={!returnURL}'" class="btn" style="text-decoration: none">  New Service Usage </a>
+<br/>
+</apex:outputPanel>
+<apex:commandButton value="Back" action="/{!$CurrentPage.Parameters.id}" rendered="{!$CurrentPage.Parameters.full!=null}"/> 
+</center>
+
+        <apex:pageBlockTable value="{!lstRelSU}" var="rec">
+
+        <apex:column width="10%">
+        <apex:facet name="header">Action</apex:facet>
+        <apex:outputPanel rendered="{!rec.isAccessible}"> 
+            <a href="javascript:window.parent.location.href='/{!rec.recSU.id}?retURL={!returnURL}'" >View</a>
+        &nbsp;|&nbsp;
+        <a href="javascript:window.parent.location.href='/{!rec.recSU.id}/e?retURL={!returnURL}'" >Edit</a>
+        </apex:outputPanel>
+        </apex:column>
+
+        <apex:column headerValue="Referral Date">  
+            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> <apex:param value="{!rec.recSU.Referral_Date__c}" /> </apex:outputText>        
+        </apex:column>        
+        <apex:column > 
+        <apex:facet name="header">Service</apex:facet>
+
+        <a href="javascript:window.parent.location='/{!rec.recSU.Service_Field__c}?retURL={!returnURL}'" 
+onmouseover="LookupHoverDetail.getHover('lookup{!rec.recSU.Service_Field__c}', '/{!rec.recSU.Service_Field__c}/m?retURL=%2F{!rec.recSU.Service_Field__c}&isAjaxRequest=1').show();" 
+onmouseout="LookupHoverDetail.getHover('lookup{!rec.recSU.Service_Field__c}').hide();" 
+onfocus="LookupHoverDetail.getHover('lookup{!rec.recSU.Service_Field__c}', '/{!rec.recSU.Service_Field__c}/m?retURL=%2F{!rec.recSU.Service_Field__c}&isAjaxRequest=1').show();" 
+onblur="LookupHoverDetail.getHover('lookup{!rec.recSU.Service_Field__c}').hide();" id="lookup{!rec.recSU.Service_Field__c}">
+                {!rec.recSU.Service_Field__r.Name} 
+        </a>  
+
+        </apex:column>      
+
+        <apex:column headerValue="Date of Last Activity">
+            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> <apex:param value="{!rec.recSU.Date_of_last_Activity__c}" /> </apex:outputText>                
+        </apex:column>
+        <apex:column headerValue="Closure Date">
+            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}"> <apex:param value="{!rec.recSU.Closure_Date__c}" /> </apex:outputText>
+        </apex:column>
+        <apex:column > 
+		<apex:facet name="header">Assigned Worker</apex:facet>
+        <a href="javascript:window.parent.location='/{!rec.recSU.Assigned_Worker__c}?retURL={!returnURL}'" 
+onmouseover="LookupHoverDetail.getHover('lookup{!rec.recSU.Assigned_Worker__c}', '/{!rec.recSU.Assigned_Worker__c}/m?retURL=%2F{!rec.recSU.Assigned_Worker__c}&isAjaxRequest=1').show();" 
+onmouseout="LookupHoverDetail.getHover('lookup{!rec.recSU.Assigned_Worker__c}').hide();" 
+onfocus="LookupHoverDetail.getHover('lookup{!rec.recSU.Assigned_Worker__c}', '/{!rec.recSU.Assigned_Worker__c}/m?retURL=%2F{!rec.recSU.Assigned_Worker__c}&isAjaxRequest=1').show();" 
+onblur="LookupHoverDetail.getHover('lookup{!rec.recSU.Assigned_Worker__c}').hide();" id="lookup{!rec.recSU.Assigned_Worker__c}">
+                {!rec.recSU.Assigned_Worker__r.Name} 
+        </a>  
+        </apex:column>
+        <apex:column > 
+        <apex:facet name="header">Risk Identified</apex:facet>
+        <apex:image url="/img/checkbox_{!IF(rec.recSU.Risk_Identified__c,'checked','unchecked')}.gif" />
+        </apex:column>
+        <apex:column > 
+        <apex:facet name="header">Alert</apex:facet>
+        <apex:image url="/img/checkbox_{!IF(rec.recSU.Public_Alert_Message_Required__c,'checked','unchecked')}.gif" />
+        </apex:column> 
+        </apex:pageBlockTable>
+<center>        
+<apex:commandButton value="Back"  action="/{!$CurrentPage.Parameters.id}" rendered="{!$CurrentPage.Parameters.full!=null}"/>        
+</center>
+        <apex:outputPanel rendered="{!totalRecCnt>5 && $CurrentPage.Parameters.full==null}">
+        <a href="javascript:window.parent.location='/apex/{!$CurrentPage.Name}?id={!$CurrentPage.Parameters.id}&full=true&retURL=/{!$CurrentPage.Parameters.id}'" style="font-weight:bold">
+                More ({!totalRecCnt-5})
+        </a> 
+        </apex:outputPanel>
+ 
+</apex:pageBlock>
+</apex:form>
+</apex:page>

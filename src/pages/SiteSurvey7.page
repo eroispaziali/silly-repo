@@ -1,0 +1,44 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section Five: Security"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="Security" id="compliance">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!section6}" value="Back" styleClass="btn"/>
+                    <apex:commandButton action="{!section8}" value="Next" styleClass="btn"/>
+                    <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+            
+            <apex:pageBlockSection title="Building Security">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Monitored alarm system?" for="a1"/>
+                  <apex:inputField id="a1" value="{!survey.e_Monitored_alarm_system__c}"/>
+                  <apex:outputLabel value="Overall security" for="a2"/>
+                  <apex:inputField id="a2" value="{!survey.e_Overall_security__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Data Protection">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Are laptops ever stored on sitre?" for="d1"/>
+                  <apex:inputField id="d1" value="{!survey.e_DPA_Laptops_Stored__c}"/>
+                  <apex:outputLabel value="If yes, are the security measures adequate?" for="d2"/>
+                  <apex:inputField id="d2" value="{!survey.e_DPA_Adequate_laptop_security_measures__c}"/>
+                  <apex:outputLabel value="Are there secure storage systems available for paper files?" for="d3"/>
+                  <apex:inputField id="d3" value="{!survey.e_DPA_Secure_storage_for_paper_files__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+             <apex:pageBlockSection title="Comments">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Comments" for="Comments"/>
+                  <apex:inputField id="Comments" value="{!survey.Comments_page_7__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

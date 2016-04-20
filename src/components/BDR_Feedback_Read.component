@@ -1,0 +1,29 @@
+<apex:component >
+
+    <apex:attribute name="bdr" description="The BDR" type="BDR__c" required="true"/>
+
+	<apex:pageBlock title="BDR Feedback">
+
+    <apex:outputPanel id="feedback_panel">
+
+    <apex:pageBlockSection id="feedback_Summary" title="Reasons for Success/Loss/Declined (as relevant)" columns="1"  showHeader="false">   
+    		 
+    		 
+    		 
+		       <apex:outputField value="{!bdr.Bid_Status__c}"  id="bidStatus"/>
+		       <apex:outputField value="{!bdr.Bid_Feedback__c}"/>   
+		       
+		           <apex:pageBlockSectionItem rendered="{!BDR.Reasons_Declined__c!=null && BDR.Reasons_Declined__c!=''}">
+		              <apex:outputLabel value="Reasons Declined"/>
+		       			<apex:outputField value="{!BDR.Reasons_Declined__c}"  id="reasonsDeclined"/>
+		       </apex:pageBlockSectionItem>
+		       
+		       <apex:outputField value="{!bdr.Bid_Feedback_Detail__c}"/>  
+		      
+     </apex:pageBlockSection>
+    
+    </apex:outputPanel>   
+
+	</apex:pageBlock>
+
+</apex:component>

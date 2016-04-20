@@ -1,0 +1,1421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>RelationshipsTab</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Contact_Record_Type__c</fullName>
+        <description>Record type of main Contact. Populated by LookupRelationshipRecordTypes trigger</description>
+        <externalId>false</externalId>
+        <label>Contact Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipName>Connection</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Current__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Defaults to Ticked.</description>
+        <externalId>false</externalId>
+        <label>Current?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>32000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Emergency_Contact__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Tick if this person is to be contacted in an emergency.</inlineHelpText>
+        <label>Emergency Contact</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Keyholder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox indicating whether this relationship shows the keyholder for a Person with Dementia’s home.  (Only available for Personal relationships involving a Person with Dementia.)</description>
+        <externalId>false</externalId>
+        <label>Keyholder?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Next_of_Kin__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox indicating whether this relationship shows a Person with Dementia’s Next of Kin.  (Only available for Personal relationships involving a Person with Dementia.)</description>
+        <externalId>false</externalId>
+        <label>Next of Kin?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PoA_Holder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox indicating whether this relationship shows the individual holding a Power of Attorney for a Person with Dementia.  (Only available for Personal relationships involving a Person with Dementia.)</description>
+        <externalId>false</externalId>
+        <label>PoA Holder?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Primary_Carer__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox indicating whether this relationship shows a Person with Dementia’s Primary Carer.  (Only available for Personal relationships involving a Person with Dementia.  Ideally should have validation to ensure that each Person with Dementia has a maximum of one Primary Carer.)</description>
+        <externalId>false</externalId>
+        <label>Primary Carer?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Related_Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Related Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Relationships (Related Contact)</relationshipLabel>
+        <relationshipName>Related_Contact</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Related_Organization__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>The name of the EXTERNAL organisation the Professional is attached to. Do NOT just type in name of the organisation – An external Organisation already on the system must be found, selected and inserted by using the Look-Up function (magnifying glass icon)</inlineHelpText>
+        <label>Related Organisation</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Account.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>External organisation</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Relationships</relationshipLabel>
+        <relationshipName>R00N30000001JJgjEAG</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Related_Record_Type__c</fullName>
+        <description>Record type of related Contact. Populated by LookupRelationshipRecordTypes trigger</description>
+        <externalId>false</externalId>
+        <label>Related Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reverse_Relationship_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Reverse Relationship</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Neighbour of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partner of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spouse of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Son/daughter of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parent of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sibling of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cousin of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Uncle/aunt of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nephew/niece of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandson/daughter of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandparent of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Son/daughter-in-law of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parent in-law of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sibling in-law of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step-child of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step-parent of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step-sibling of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Half-sibling of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friend of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (GP)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (Consultant)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of (Social care worker)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of (Social worker)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (Care Manager)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (CPN)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (Admiral nurse)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>GP of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Consultant of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of (Care Manager)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community psychiatric nurse of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Admiral nurse of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social care worker of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social worker of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Care manager of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Paid carer of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of (paid carer)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Reverse_Relationship__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE( Role_Title__c ,
+&quot;GP of&quot;, &quot;Patient of&quot;,
+&apos;Consultant of&apos;, &apos;Client of&apos;,
+&quot;Voluntary sector worker of&quot;, &quot;Voluntary service user of&quot;,
+&quot;Social care worker of&quot;, &quot;Service user of&quot;,
+&quot;Social worker of&quot;, &quot;Service user of&quot;,
+&quot;Care manager of&quot;, &quot;Client of&quot;,
+&quot;Community psychiatric nurse of&quot;, &quot;Patient of&quot;,
+&quot;Admiral nurse of&quot;, &quot;Patient of&quot;,
+&quot;Neighbour of&quot;, &quot;Neighbour of&quot;,
+&quot;Partner of&quot;, &quot;Partner of&quot;,
+&quot;Spouse of&quot;, &quot;Spouse of&quot;,
+&quot;Parent of&quot;, &quot;Child of&quot;,
+&quot;Child of&quot;, &quot;Parent of&quot;,
+&quot;Sibling of&quot;, &quot;Sibling of&quot;,
+&quot;Cousin of&quot;, &quot;Cousin of&quot;,
+&quot;Nephew/neice of&quot;, &quot;Uncle/aunt of&quot;,
+&quot;Uncle/aunt of&quot;, &quot;Nephew/neice of&quot;,
+&quot;Grandparent of&quot;, &quot;Grandchild of&quot;,
+&quot;Grandchild of&quot;, &quot;Grandparent of&quot;,
+&quot;Parent in-law of&quot;, &quot;Child in-law of&quot;,
+&quot;Child in-law of&quot;, &quot;Parent in-law of&quot;,
+&quot;Sibling in-law of&quot;, &quot;Siblng in-law of&quot;,
+&quot;Step-parent of&quot;, &quot;Step-child of&quot;,
+&quot;Step-child of&quot;, &quot;Step-parent of&quot;,
+&quot;Step-sibling of&quot;, &quot;Step-sibling of&quot;,
+&quot;Half-sibling of&quot;, &quot;Half-sibling of&quot;,
+&quot;Patient of&quot;, &quot;GP of&quot;,
+&quot;Friend of&quot;, &quot;Friend of&quot;,
+&quot;Voluntary service user of&quot;, &quot;Voluntary sector worker of&quot;,
+&quot;&quot; )</formula>
+        <label>Reverse Relationship</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reverse_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(  Type__c,
+&apos;Main carer of&apos;, &apos;Cared for by (main)&apos;,
+&apos;Secondary carer of&apos;, &apos;Cared for by (secondary)&apos;,
+&apos;Associated care professional of&apos;, &apos;Client of&apos;,
+&apos;Cared for by (main)&apos;, &apos;Main carer of&apos;,
+&apos;Cared for by (secondary)&apos;, &apos;Secondary carer of&apos;,
+&apos;Client of&apos;, &apos;Associated care professional of&apos;,
+&apos;&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reverse Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Role_Title__c</fullName>
+        <externalId>false</externalId>
+        <label>Relationship</label>
+        <picklist>
+            <picklistValues>
+                <fullName>GP of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Consultant of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social care worker of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social worker of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Care manager of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community psychiatric nurse of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Admiral nurse of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Neighbour of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partner of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spouse of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parent of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Child of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sibling of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cousin of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nephew/neice of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Uncle/aunt of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandparent of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandchild of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parent in-law of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Child in-law of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sibling in-law of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step-parent of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step-child of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step-sibling of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Half-sibling of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friend of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Voluntary sector worker of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of (paid carer)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Paid carer of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Same_Address__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox to indicate that this Person resides as the same address as Person 1</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this is checked, address of Person1 is the same as that of Person2</inlineHelpText>
+        <label>Same Address?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Current</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Former</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Future</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates the relationship that the existing person has with the person you are detailing below</inlineHelpText>
+        <label>Relationship</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Consultant of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social care worker of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social worker of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Care manager of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community psychiatric nurse of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Admiral nurse of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (GP)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (Consultant)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (Care Manager)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (CPN)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Patient of (Admiral nurse)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of (Social care worker)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of (Social worker)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of (Care manager)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Neighbour of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partner of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spouse of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parent of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Son/daughter of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sibling of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cousin of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nephew/niece of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Uncle/aunt of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandparent of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandson/daughter of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parent in-law of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Son/daughter-in-law of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sibling in-law of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step-parent of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step-child of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step-sibling of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Half-sibling of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friend of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>GP of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Main carer of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Secondary carer of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Associated care professional of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cared for by (main)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cared for by (secondary)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client of</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Relationship</label>
+    <nameField>
+        <displayFormat>CC-{0000}</displayFormat>
+        <label>Relationship ID</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Relationships</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Personal</fullName>
+        <active>true</active>
+        <description>Personal Relationship</description>
+        <label>Personal</label>
+        <picklistValues>
+            <picklist>Reverse_Relationship_Type__c</picklist>
+            <values>
+                <fullName>Client of %28paid carer%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cousin of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Friend of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandparent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandson%2Fdaughter of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Half-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephew%2Fniece of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paid carer of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Son%2Fdaughter of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Son%2Fdaughter-in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spouse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-child of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Uncle%2Faunt of</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Title__c</picklist>
+            <values>
+                <fullName>Admiral nurse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Care manager of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Child in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Child of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client of %28paid carer%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community psychiatric nurse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consultant of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cousin of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Friend of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GP of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandchild of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandparent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Half-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephew%2Fneice of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Paid carer of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social care worker of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social worker of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spouse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-child of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Uncle%2Faunt of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary sector worker of</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Current</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Former</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>Cousin of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Friend of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandparent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandson%2Fdaughter of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Half-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephew%2Fniece of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Son%2Fdaughter of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Son%2Fdaughter-in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spouse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-child of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Uncle%2Faunt of</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Professional</fullName>
+        <active>true</active>
+        <description>Professional Relationship</description>
+        <label>Professional</label>
+        <picklistValues>
+            <picklist>Reverse_Relationship_Type__c</picklist>
+            <values>
+                <fullName>Admiral nurse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Care manager of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client of %28Care Manager%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client of %28Social care worker%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client of %28Social worker%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community psychiatric nurse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consultant of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cousin of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Friend of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GP of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandparent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandson%2Fdaughter of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Half-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephew%2Fniece of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28Admiral nurse%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28CPN%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28Care Manager%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28Consultant%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28GP%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social care worker of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social worker of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Son%2Fdaughter of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Son%2Fdaughter-in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spouse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-child of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Uncle%2Faunt of</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Role_Title__c</picklist>
+            <values>
+                <fullName>Admiral nurse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Care manager of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Child in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Child of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Community psychiatric nurse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Consultant of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cousin of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Friend of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>GP of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandchild of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grandparent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Half-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Nephew%2Fneice of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Partner of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling in-law of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social care worker of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social worker of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spouse of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-child of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-parent of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Step-sibling of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Uncle%2Faunt of</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary sector worker of</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Current</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Former</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>Client of %28Care manager%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client of %28Social care worker%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client of %28Social worker%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28Admiral nurse%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28CPN%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28Care Manager%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28Consultant%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Patient of %28GP%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Related_Contact__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>Related_Contact__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Contact__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

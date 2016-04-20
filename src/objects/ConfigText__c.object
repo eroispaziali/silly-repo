@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A block of text that can be used in any application to configurable blocks of text, lists etc</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Body__c</fullName>
+        <description>The text of the configuration item</description>
+        <externalId>false</externalId>
+        <label>Body Text</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Release_Date__c</fullName>
+        <description>The date the item was released as the current version</description>
+        <externalId>false</externalId>
+        <label>Release Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>BDR: Contract Risk Index</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BDR: Income Block Help Text</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BDR: Approval Dialog Text</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BDR: Introduction Text</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BDR: BDR Search Screen Text</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BDR: Services Search Screen Text</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BDR: Fund Coverage Search Screen Text</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Version__c</fullName>
+        <description>The version of the text. This allows different texts to be linked to different objects of the same type over time.</description>
+        <externalId>false</externalId>
+        <label>Version</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isCurrent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>indicates whether this version is the latest, and therefore default, version of the text</description>
+        <externalId>false</externalId>
+        <label>isCurrent</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>ConfigText</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Config_Texts</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>isCurrent__c</columns>
+        <columns>Version__c</columns>
+        <columns>Release_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Config Help Texts</label>
+    </listViews>
+    <listViews>
+        <fullName>Current_Config_Texts</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>isCurrent__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Current Configuration Help Texts</label>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>ConfigTexts</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>isCurrent__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Release_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Version__c</customTabListAdditionalFields>
+        <listViewButtons>Init_Config_Text</listViewButtons>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <webLinks>
+        <fullName>Init_Config_Text</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Init Config Text</masterLabel>
+        <openType>sidebar</openType>
+        <page>SelectObjectForInitConfig</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+</CustomObject>

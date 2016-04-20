@@ -1,0 +1,18 @@
+<apex:page standardController="Attachment"
+           extensions="BDR_Attachment_Print_Controller"
+           docType="html-5.0"           
+           sidebar="false" 
+           showHeader="false"
+           standardStylesheets="false"
+           applyHtmlTag="false"
+           applyBodyTag="false"
+           title="{!Attachment.Name}"
+           renderAs="pdf">
+         
+<html lang="en">      
+
+     <apex:outputText escape="false" value="{!attachmentHtml}" ></apex:outputText> 
+
+</html>   
+
+</apex:page>

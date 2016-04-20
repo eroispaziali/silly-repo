@@ -1,0 +1,82 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section Four: Finance Lease/Contract"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="Finance Lease/Contract" id="legal">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!section5}" value="Back" styleClass="btn"/>
+                    <apex:commandButton action="{!section7}" value="Next" styleClass="btn"/>
+                    <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+            
+            <apex:pageBlockSection title="Building">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Legal Advisors" for="b1"/>
+                  <apex:inputField id="b1" value="{!survey.d_Legal_Advisors__c}"/>
+                  <apex:outputLabel value="Landlord" for="b2"/>
+                  <apex:inputField id="b2" value="{!survey.d_Landlord__c}"/>
+                  
+                  <apex:outputLabel value="Year built" for="b3"/>
+                  <apex:inputField id="b3" value="{!survey.Year_of_Original_Building__c}"/>
+                  <apex:outputLabel value="No. of floors" for="b4"/>
+                  <apex:inputField id="b4" value="{!survey.d_Built_No_of_floors__c}"/>
+                  <apex:outputLabel value="No. of floors occupied by Society" for="b5"/>
+                  <apex:inputField id="b5" value="{!survey.d_Built_No_of_floors_occupied__c}"/>
+                  <apex:outputLabel value="Location of Society-occupied floors" for="b6"/>
+                  <apex:inputField id="b6" value="{!survey.d_Built_Location_of_Society_floors__c}"/>
+                  <apex:outputLabel value="Gross sq. ft. of space occupied by Society" for="b7"/>
+                  <apex:inputField id="b7" value="{!survey.d_Gross_sq_ft_occupied__c}"/>
+                  
+                  <apex:outputLabel value="Building ownership and occupancy status" for="b8"/>
+                  <apex:inputField id="b8" value="{!survey.d_Building_Ownership_Status__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Contract">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Contract status" for="c1"/>
+                  <apex:inputField id="c1" value="{!survey.d_Contract_Status__c}"/>
+                  <apex:outputLabel value="Type of contract" for="c2"/>
+                  <apex:inputField id="c2" value="{!survey.d_Contract_Type__c}"/>
+                  <apex:outputLabel value="Term of contract" for="c3"/>
+                  <apex:inputField id="c3" value="{!survey.d_Contract_Term__c}"/>
+                  <apex:outputLabel value="Start date of lease" for="c4"/>
+                  <apex:inputField id="c4" value="{!survey.d_Contract_Start_Date__c}"/>
+                  <apex:outputLabel value="End date of lease" for="c5"/>
+                  <apex:inputField id="c5" value="{!survey.d_Contract_End_Date__c}"/>
+                  <apex:outputLabel value="Break clause" for="c6"/>
+                  <apex:inputField id="c6" value="{!survey.d_Contract_Break_clause__c}"/>
+                  <apex:outputLabel value="Notice period" for="c7"/>
+                  <apex:inputField id="c7" value="{!survey.d_Contract_Notice_period__c}"/>
+                  <apex:outputLabel value="Protection under L&T Act" for="c8"/>
+                  <apex:inputField id="c8" value="{!survey.d_Contract_Protection_L_T__c}"/>
+                  <apex:outputLabel value="Annual rent (£)" for="c9"/>
+                  <apex:inputField id="c9" value="{!survey.d_Contract_Annual_rent__c}"/>
+                  <apex:outputLabel value="Service charges, insurance, repairs etc" for="c10"/>
+                  <apex:inputField id="c10" value="{!survey.d_Contract_Service_charges_etc__c}"/>
+                  <apex:outputLabel value="Other arrantements" for="c11"/>
+                  <apex:inputField id="c11" value="{!survey.d_Contract_Other_arrangements__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Business Rates (VOA)">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Payable to whome (e.g. local council)" for="v1"/>
+                  <apex:inputField id="v1" value="{!survey.d_VOA_Payable_to_whom__c}"/>
+                  <apex:outputLabel value="Account number" for="v2"/>
+                  <apex:inputField id="v2" value="{!survey.d_VOA_Account_number__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Comments">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Comments" for="Comments"/>
+                  <apex:inputField id="Comments" value="{!survey.Comments_page_6__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

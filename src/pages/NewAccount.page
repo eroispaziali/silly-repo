@@ -1,0 +1,120 @@
+<apex:page standardController="Account" extensions="NewAccountController" showHeader="true">
+
+<apex:form id="F">
+<!-- apex:actionFunction name="TogglePageFields" action="{!RecordTypeChanged}" /-->
+<img title="Contact" class="pageTitleIcon" alt="Contact" src="/s.gif"/>
+<h1 style="font-size: 150%; font-weight: bold;">
+    New Organisation
+</h1>
+<br/><br/><br/>
+
+<apex:pageBlock id="P" mode="edit">
+    <apex:pageblockButtons >
+        <apex:commandButton value=" Search " action="{!doSearch}" />
+        <apex:commandButton value=" Create Account " action="{!ignoreCreateAccount}" rendered="{!searchDone}"/>
+        <apex:commandButton value=" Cancel " action="/001/o"/>
+    </apex:pageblockButtons>
+    <apex:pageblocksection columns="1">
+        <apex:pageMessages />
+    </apex:pageblocksection>
+    <!--apex:pageBlockSection columns="2" id="RecordTypeSelection"-->
+
+    <apex:outputPanel id="fieldsPanel">
+        <apex:pageBlockSection columns="1" id="AccountSection">
+                    <apex:inputtext label="Organisation Name" value="{!AccountName}" id="AccountName" tabIndex="1"/>
+                    <apex:inputfield value="{!relAccount.BillingCountry}" id="billingCountry"/>
+                    <apex:inputtext label="Mailing Postcode" value="{!PostalCode}" id="billingPostcode"/>
+                    <apex:inputtextarea label="Mailing Street" value="{!Street}" rows="5" cols="25" id="billingStreet"/>
+                    <apex:inputtext label="Mailing City" value="{!billingCity}" id="billingCity"/>
+                    <apex:inputtext label="Mailing County" value="{!billingState}" id="billingState"/>
+                    <!--apex:inputtext label="Phone" value="{!mainphone}"/-->
+        </apex:pageBlockSection>
+    </apex:outputPanel>
+        <apex:pageBlockSection columns="1" id="RecordType" rendered="{!CountOfAvailableRecordTypes>1}">
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Account Record Type" for="recordType"/>
+            <apex:selectList size="1" value="{!recordTypeId}" onchange="TogglePageFields()" id="recordType">
+                <apex:selectOptions value="{!AccountRecordTypes}" id="selOpt"/>
+            </apex:selectList> 
+            </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    <apex:pageBlockSection columns="1" id="ShowAllRT">
+            <apex:inputCheckbox label="Show All Record Types" value="{!ShowAllRecordTypes}" id="ShowAllRecordTypes"/>
+    </apex:pageBlockSection>
+    <br/>
+    <!--br/-->
+</apex:pageBlock>
+
+<apex:pageBlock rendered="{!lstMatchingAccounts.size>0}">
+    <apex:inputHidden value="{!selectedrelAccountId}" id="selectedrelAccountId"/>
+    <apex:inputHidden value="{!selectedrelAccountName}" id="selectedrelAccountName"/>
+
+    <apex:pageblockButtons rendered="{!lstMatchingAccounts.size>0}">
+        <apex:commandButton value="Select existing Account" id="btnNext" action="{!selectAccount}"/>
+        <apex:commandButton value="Ignore and Create New " action="{!ignoreCreateAccount}" rendered="{!ignoreAndCreate}"/>
+    </apex:pageblockButtons>
+
+    <apex:pageBlockTable value="{!lstMatchingAccounts}" var="rec">
+        <apex:column headerValue="Select" >
+            <apex:inputhidden id="conName" value="{!rec.Name}"/>    
+            <input type="radio" name ="rdSelected" id="{!rec.Id}" 
+                    onclick="document.getElementById('{!$Component.selectedrelAccountId}').value=this.id;
+                            document.getElementById('{!$Component.selectedrelAccountName}').value=
+                            document.getElementById('{!$Component.conName}').value;"/>
+        </apex:column>
+       <apex:column >
+          <apex:facet name="header">Account</apex:facet>
+            <a href="javascript:window.parent.location='/{!rec.Id}?retURL={!returnURL}'" 
+                onmouseover="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onmouseout="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" 
+                onfocus="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onblur="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" id="lookup{!rec.Id}">
+                    {!rec.Name} 
+            </a>  
+        </apex:column> 
+        <!--<apex:column >
+          <apex:facet name="header">Account</apex:facet>
+          <apex:outputLink value="/{!rec.Id}" >
+            {!rec.id}
+          </apex:outputLink>
+        </apex:column>-->
+       <!-- <apex:column >
+          <apex:facet name="header">Company</apex:facet>
+          {!rec.Name}
+        </apex:column> --> 
+        <apex:column >
+          <apex:facet name="header">Street</apex:facet>
+          {!rec.BillingStreet}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">City</apex:facet>
+          {!rec.BillingCity}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">County</apex:facet>
+          {!rec.BillingState}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Postcode</apex:facet>
+          {!rec.BillingPostalCode}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Phone</apex:facet>
+          {!rec.Phone}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Category</apex:facet>
+          {!rec.Category__c}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Owner</apex:facet>
+          {!rec.Owner.Alias}
+        </apex:column>
+        <apex:column rendered="{!ShowAllRecordTypes}" >
+          <apex:facet name="header">Record Type</apex:facet>
+          {!rec.Record_Type_Name__c}
+        </apex:column>
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

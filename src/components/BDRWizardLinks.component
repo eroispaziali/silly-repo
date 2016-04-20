@@ -1,0 +1,134 @@
+<apex:component >
+    <apex:attribute name="currentPage" type="String" description="" required="true"/>
+    <apex:attribute name="bdrid" type="Id" description="" required="false" />
+<script>
+  function confirmJump() {
+      var isCancel = confirm("Are you sure you wish to change page?  You will lose any changes you have made on this page.");
+      if (isCancel) return true;
+  
+     return false;
+  }  
+</script>
+    <style>
+        .h-block-No {
+            border 2px #333 solid;
+            padding : 3px 0px 3px 10px;        
+            width : 6%;
+            display:inline-block;
+            line-height : 1em;
+            margin: 3px 0px 3px 0px;
+            text-align : center;
+            color : #AAA;
+            background-color: #DDD;
+        }
+
+        .h-block-Yes {
+            border 2px #333 solid;
+            padding : 3px 0px 3px 10px;        
+            width : 6%;
+            display:inline-block;
+            line-height : 1em;
+            margin: 3px 0px 3px 0px;
+            text-align : center;
+            color : #eee;
+            background-color: #8E9DBE;
+        }
+        .h-block-Space {
+            border 2px #333 solid;
+            padding : 3px 0px 3px 10px;        
+            width : 7%;
+            display:inline-block;
+            line-height : 1em;
+            margin: 3px 0px 3px 0px;
+            text-align : center;
+            color : #eee;
+        }
+        
+        .h-block-container-inner {
+            width : 100% ; 
+            margin-left: auto; 
+            margin-right: auto ;
+            border : 1px #ccc solid;
+            padding : 5px 5px 5px 26px;
+        }
+
+        .h-block-container {
+            width : 85% ; 
+            margin-left: auto; 
+            margin-right: auto ;
+            margin-bottom : 25px;
+        }
+        
+        .h-block-title {
+            font-size : 10px;
+            color : #333;        
+        }
+        
+    
+    </style>
+    <apex:outputText value="                     " id="BlockLeft"    styleClass="h-block-Space" 
+        />   
+    <!--Summary-->
+    <apex:outputText value="Summary" id="SummaryNoId"   styleClass="h-block-Yes" rendered="{!currentPage!='Summary'&& bdrid==null}"/>
+    <apex:commandLink action="/apex/BDR_Create_Detail?BDRWizard=1&id={!bdrid}" value="Summary" id="SummaryNo"   styleClass="h-block-Yes"  onclick="return confirmJump()" immediate="true" 
+        rendered="{!currentPage!='Summary'&& bdrid!=null}"/>
+    <apex:outputText value="Summary" id="SummaryYes"    styleClass="h-block-No" 
+        rendered="{!currentPage=='Summary'}"/>
+
+    <!--Services-->
+    <apex:outputText value="Services" id="ServicesNoId"   styleClass="h-block-Yes" rendered="{!currentPage!='Services' && bdrid==null}"/>
+    <apex:commandLink action="/apex/BDR_Create_Services?id={!bdrid}"  value="Services" id="ServicesNo"   styleClass="h-block-Yes" onclick="return confirmJump()" immediate="true" 
+           rendered="{!currentPage!='Services' && bdrid!=null}"/>
+    <apex:outputText value="Services" id="ServicesYes"   styleClass="h-block-No"
+           rendered="{!currentPage=='Services'}"/>
+
+    <!--Partnership-->
+    <apex:outputText value="Partnership" id="PartnershipNoId" styleClass="h-block-Yes"  rendered="{!currentPage!='Partnership' && bdrid==null}"/>
+    <apex:commandLink action="/apex/BDRAddPartnershipWizard?BDRWizard=1&id={!bdrid}" value="Partnership" id="PartnershipNo" styleClass="h-block-Yes"  onclick="return confirmJump()" immediate="true" 
+           rendered="{!currentPage!='Partnership' && bdrid!=null}"/>
+    <apex:outputText value="Partnership" id="PartnershipYes"   styleClass="h-block-No"
+           rendered="{!currentPage=='Partnership'}"/>
+
+    <!--Income-->
+    <apex:outputText value="Income" id="IncomeNoId"   styleClass="h-block-Yes" rendered="{!currentPage!='Income' && bdrid==null}"/>
+    <apex:commandLink action="/apex/BDRAddIncomeWizard?BDRWizard=1&id={!bdrid}"  value="Income" id="IncomeNo"   styleClass="h-block-Yes"  onclick="return confirmJump()" immediate="true" 
+           rendered="{!currentPage!='Income' && bdrid!=null}"/>
+    <apex:outputText value="Income" id="IncomeYes"   styleClass="h-block-No"
+           rendered="{!currentPage=='Income'}"/>
+
+    <!--Allocate-->
+    <!--Change 487 Hide Fund Allocations-->
+    <apex:outputText value="Allocate" id="AllocateNoId"  styleClass="h-block-Yes" rendered="{!currentPage!='Allocate' && bdrid==null}"/>
+    <apex:commandLink action="/apex/AllocateFunds?BDRwizard=1&id={!bdrid}"  value="Allocate" id="AllocateNo"  styleClass="h-block-Yes"  onclick="return confirmJump()" immediate="true" 
+           rendered="{!currentPage!='Allocate' && bdrid!=null}"/>
+    <apex:outputText value="Allocate" id="AllocateYes"   styleClass="h-block-No"
+           rendered="{!currentPage=='Allocate'}"/>
+    <!--Bid-->
+    <apex:outputText value="Bid" id="BidNoId"  styleClass="h-block-Yes" rendered="{!currentPage!='Allocate' && bdrid==null}"/>
+    <apex:commandLink action="/apex/BDRBidWizard?BDRwizard=1&id={!bdrid}"  value="Bid" id="BidNo"  styleClass="h-block-Yes"  onclick="return confirmJump()" immediate="true" 
+           rendered="{!currentPage!='Bid' && bdrid!=null}"/>
+    <apex:outputText value="Bid" id="BidYes"   styleClass="h-block-No"
+           rendered="{!currentPage=='Bid'}"/>
+
+    <!--Contract-->
+    <apex:outputText value="Contract" id="ContractNoId"   styleClass="h-block-Yes" rendered="{!currentPage!='Contract' && bdrid==null}"/>
+    <apex:commandLink action="/apex/BDRAddContractWizard?BDRwizard=1&id={!bdrid}"  value="Contract" id="ContractNo"   styleClass="h-block-Yes" onclick="return confirmJump()" immediate="true" 
+           rendered="{!currentPage!='Contract' && bdrid!=null}"/>
+    <apex:outputText value="Contract" id="ContractYes"   styleClass="h-block-No"
+           rendered="{!currentPage=='Contract'}"/>
+
+    <!--Feedback-->
+    <apex:outputText value="Feedback" id="FeedbackNoId"   styleClass="h-block-Yes" rendered="{!currentPage!='Feedback' && bdrid==null}"/>
+    <apex:commandLink action="/apex/BDRFeedbackWizard?BDRwizard=1&id={!bdrid}"  value="Feedback" id="FeedbackNo"   styleClass="h-block-Yes" onclick="return confirmJump()" immediate="true" 
+           rendered="{!currentPage!='Feedback' && bdrid!=null}"/>
+    <apex:outputText value="Feedback" id="FeedbackYes"   styleClass="h-block-No"
+           rendered="{!currentPage=='Feedback'}"/>
+
+    <!--Finish-->
+    <apex:outputText value="Finish" id="FinishNoId"   styleClass="h-block-Yes" rendered="{!currentPage!='Finish' && bdrid==null}"/>
+    <apex:commandLink action="/apex/BDRApprovalWizard?id={!bdrid}"  value="Finish" id="FinishNo"   styleClass="h-block-Yes"  onclick="return confirmJump()" immediate="true" 
+           rendered="{!currentPage!='Finish' && bdrid!=null}"/>
+    <apex:outputText value="Finish" id="FinishYes"   styleClass="h-block-No"
+           rendered="{!currentPage=='Finish'}"/>
+
+</apex:component>

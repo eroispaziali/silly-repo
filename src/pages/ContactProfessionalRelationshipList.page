@@ -1,0 +1,62 @@
+<apex:page standardController="Contact" extensions="Contact_Connections_2way">
+  <style>
+    .fewerMore { display: none;}
+  </style>
+  
+  <!-- Show contact relationships -->
+  <apex:form >
+  <apex:outputpanel rendered="{!contact.Record_Type_Name__c!='Professional'}">
+        <center>
+            <input type="button" value=" New Relationship " class="btn" onclick="window.parent.location.href='/apex/CreateRelationship?id={!Contact.Id}'" /> 
+        </center>
+  </apex:outputpanel>
+    <apex:pageBlock id="ContactConnections">
+      <apex:pageMessages />
+      <!-- Table for First Personal Relationships -->
+      <apex:outputText value="Professional Relationships" rendered="{!NOT(ISNULL(FirstProfessionalConnections))}"/>
+        <apex:pageBlockTable value="{!FirstProfessionalConnections}" var="profconnection" id="profList" width="100%" rendered="{!NOT(ISNULL(FirstProfessionalConnections))}" border="0">
+        <!-- Actions links -->
+        <apex:column >
+          <apex:facet name="header">Action</apex:facet>
+          <apex:outputLink value="{!URLFOR($Action.SFDC_Contact_Connector__c.View,profconnection.id,[retURL=URLFOR($Action.Contact.View, Contact.Id)])}" style="font-weight: bold;" target="_top">View</apex:outputLink>
+          &nbsp;|&nbsp;
+          <apex:outputLink value="{!URLFOR($Action.SFDC_Contact_Connector__c.Edit,profconnection.id,[retURL=URLFOR($Action.Contact.View, Contact.Id)])}" style="font-weight: bold;" target="_top">Edit</apex:outputLink>
+          <!--&nbsp;|&nbsp;-->
+          <!--apex:outputLink value="{!URLFOR($Action.SFDC_Contact_Connector__c.Delete,profconnection.id,[retURL=URLFOR($Action.Contact.View, Contact.Id)])}" style="font-weight: bold;" target="_top" onclick="return window.confirm('Are you sure?');">Delete</apex:outputLink>-->
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Relationship</apex:facet>
+          <apex:outputText value="{!if(LEFT(profconnection.Contact__c,15) == $CurrentPage.parameters.id, profconnection.Type__c, profconnection.Reverse_Relationship_Type__c)}"/>
+        </apex:column> 
+        <!-- Contact as link -->
+        <apex:column >
+          <apex:facet name="header">Related Person</apex:facet>
+          <apex:outputLink value="/{!if(LEFT(profconnection.Contact__c,15) == $CurrentPage.parameters.id, profconnection.Related_Contact__c, profconnection.Contact__c)}" target="_top">
+            {!if(LEFT(profconnection.Contact__c,15) == $CurrentPage.parameters.id, profconnection.Related_Contact__r.name, profconnection.Contact__r.name)}
+          </apex:outputLink>
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Related Person Record Type</apex:facet>
+         <!--  {!profconnection.Related_Contact__r.Record_Type_Name__c}-->
+            {!if(LEFT(profconnection.Contact__c,15) == $CurrentPage.parameters.id, profconnection.Related_Record_Type__c, profconnection.Contact_Record_Type__c)}
+        </apex:column>
+        <apex:column > 
+            <apex:facet name="header">Current?</apex:facet>
+            <apex:image url="/img/checkbox_{!IF(profconnection.Current__c,'checked','unchecked')}.gif" />
+        </apex:column> 
+        <!-- <apex:column rendered="{!IF(profconnection.Related_Contact__r.Record_Type_Name__c=='Person_with_Dementia',true,false)}"> -->
+        <apex:column >
+          <apex:facet name="header">Dementia Diagnosis</apex:facet>
+          <apex:outputText value="{!if(LEFT(profconnection.Contact__c,15) == $CurrentPage.parameters.id, profconnection.Related_Contact__r.Diagnosis__c, profconnection.Contact__r.Diagnosis__c)}"/>
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"> </apex:facet>
+            {!if(profconnection.Primary_Carer__c == true, 'Primary Carer', '')}
+            {!if(profconnection.Next_of_Kin__c == true, ', Next of Kin', '')}
+            {!if(profconnection.Keyholder__c == true, ', Keyholder', '')}
+            {!if(profconnection.PoA_Holder__c == true, ', PoA Holder', '')}
+        </apex:column>
+      </apex:pageBlockTable> 
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,233 @@
+<apex:component >
+
+    <apex:attribute name="bdrWrapper" description="The BDR Wrapper" type="BDRWrapper" required="true"/>
+
+    <script type="text/javascript">
+
+    var parent_domain = window.location.protocol + '//' + window.location.host; 
+    var currentId='{!bdrWrapper.bdr.Id}';      
+    var bdrStatus = '{!bdrWrapper.bdr.Status__c}'; 
+    var buttonClicks=[];         
+    
+     function isDoubleClick(dialogId) {
+        
+        /*The button has already been pressed */
+        if (buttonClicks[dialogId]=='Y') { return true; }
+
+        /* Set the value to prevent the button being pressed again */ 
+        buttonClicks[dialogId]='Y';         
+        return false;
+     }
+    
+     function closeDialog(dialogId)
+     {
+        buttonClicks[dialogId]='N';
+        j$('#' + dialogId).dialog('close');
+        return false;       
+     }  
+    
+    
+     /*
+     *    Returns True if no validation errors
+     *    Returns False if there are validation errors
+     * 
+     *    Check if there are validation errors. If Yes, show the "Approval Denied" dialog
+     *
+     */
+    function isBDRValid(isLiveRequest)
+    {
+       if (errors.length>0) { 
+       
+         if (isLiveRequest) {
+         
+         j$( "#not-ready-to-be-live" ).dialog({
+             height: 540,
+             width: 540,
+             modal: true
+         });
+         
+         } else {
+       
+         j$( "#not-ready-to-submit" ).dialog({
+             height: 540,
+             width: 540,
+             modal: true
+         });     
+         
+         }              
+         
+         return false;
+       }
+       
+       return true;             
+    }
+    
+
+   /*
+    *   This function calls the validation function to validate that there is enough correct data for Intial Acceptance by the BDM
+    *   If validation fails, an error dialog is displayed
+    *   If validation succeeeds, the Initial Acceptance dialog is displayed, and when that is submitted, the BDR is sent for Initial Acceptance
+    */ 
+   function doInitialAcceptance() {  
+    
+        // Check if the BDR is valid
+        
+        if (isBDRValid()) {
+        
+                  // The BDR is valid. Dispay the Initial Acceptance dislog
+                  
+                  j$( "#initial-acceptance-dialog" ).dialog({
+                       height: 610,
+                       width:  550, 
+                       modal: true
+                  });                    
+        }
+    }
+    
+    function doContractExtensionDialog() {
+    
+       j$( "#create-extension-dialog" ).dialog({
+               height:540,
+               width:640,
+               modal: true
+            });                                  
+    }
+
+    function doReleaseServicesForEditDialog() {
+    
+       j$( "#release-services-for-edit-dialog" ).dialog({
+               height:340,
+               width:640,
+               modal: true
+            });                                  
+    }
+
+
+    function doUpdateContractDialog() {
+    
+       j$( "#update-contract-dialog" ).dialog({
+               height:330,
+               width:990,
+               modal: true,
+            });                                  
+    }
+
+    function doCloneBdrDialog() {
+    
+       j$( "#clone-bdr-dialog" ).dialog({
+               height:540,
+               width:640,
+               modal: true
+            });                                  
+    }
+
+    function doSetSuccessfulDialog() {
+            
+       if (!isBDRValid(true))       { 
+        return false; 
+        }
+
+       j$( "#final-approval-dialog" ).dialog({
+          height: 600,
+          width:640,
+          modal: true
+       });                          
+       showHideSuccessfulText();     
+     
+    }
+
+    function showHideSuccessfulText()
+    {
+      var sValue=j$('[id$=post_approval_changes_d]').val();
+      if (sValue=='Yes') {
+          j$('[id$=successfulNowText]').hide(); 
+          j$('[id$=successfulApprovalTextBlock]').show();
+          j$("#final-approval-dialog").css("height", 568);
+          
+          
+      } else {
+          j$('[id$=successfulNowText]').show();
+          j$('[id$=successfulApprovalTextBlock]').hide();          
+          j$("#final-approval-dialog").css("height", 448);
+      }
+        
+    }
+
+    function doAdminSetSuccessfulDialog() {
+            
+       if (!isBDRValid(true))       { 
+        return false; 
+        }
+
+       j$( "#admin-set-live-dialog" ).dialog({
+          height: 550,
+          width:640,
+          modal: true
+       });                                      
+     
+    }
+
+
+   function doSetUnsuccessfulDialog() {  
+        
+      j$( "#dialog_set_unsuccessful" ).dialog({
+           height: 340,
+           width:540,
+           modal: true
+      });                            
+    }
+
+   function doSetDeclinedDialog() {  
+        
+      j$( "#dialog_set_declined" ).dialog({
+           height: 360,
+           width:540,
+           modal: true
+      });                            
+    }
+
+    function doApprovalDialog() {  
+    
+        if(isBDRValid()) {
+          j$( "#approval-dialog" ).dialog({
+               height: 640,
+               width:540, 
+               modal: true
+          });                    
+        }
+    }
+
+
+
+
+    
+    function openPrintView()
+    {
+       var sUrl = '/apex/bdr_print?id=' + currentId + '&retURL=%2F' + currentId;
+       window.open(sUrl)
+    }
+    
+
+
+    function allowAddContract()
+    {
+
+     if (hasContract=='Yes') { 
+        alert('The contract already exists');       
+        return false;
+        }
+
+     if (hasIncomeBlock=='No') { 
+        alert('Please define Income before adding the contract');       
+        return false;
+        }
+                       
+     return true;   
+    }
+
+
+
+</script>
+
+
+</apex:component>

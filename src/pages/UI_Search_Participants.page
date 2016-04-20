@@ -1,0 +1,657 @@
+<apex:page standardController="UI_Participant__c" extensions="UIParticipantSearchControllerExtension"  sidebar="false" >
+ 
+ <!-- =============================================================================
+         gary.grant@conseq.co.uk 
+         August 2014         
+        
+         Form to create a new General Consent for User Involvement
+         The form searches existing users to prevent duplication of Consents and Contact records
+         Contacts may be created together with new Consent Forms
+         The Web Tab is called "Create Participant" because the act of creating
+         a Consent Form effectively adds a Contact to User Involvement activity as a Participant 
+
+      =============================================================================  -->
+ 
+  <style>  
+      .dataCell .btn {width:160px;}
+      .searchSelection {padding-3px; border :solid 1px #ccc;margin-top:10px;} 
+  </style>  
+
+  <head>
+
+  <!-- The SF Ajax Framework -->    
+  <apex:includeScript value="/soap/ajax/32.0/connection.js"/> 
+  <apex:includeScript value="/soap/ajax/32.0/apex.js" /> 
+    
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css" />
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+  
+   <style type="text/css">
+      h1 {font-size: 22px; 
+             margin-right: 30px; 
+             font-family: "HelveticaNeue-Light", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;
+             }
+             
+      .bold-label { font-weight:bold; padding-top:10px; padding:bottom: 3px;}      
+      .searchLink {font-size:14px;  display:block; padding-top: 10px; padding-bottom: 10px} 
+      .right-align {text-align : right;}
+      
+      #search-filters input, select { width: 200px; padding-bottom: 5px;}  
+      #search-filters input[type=checkbox] { width: 10px; float: left; margin-right: 15px;}
+      tr.headerRow th {font-size: 1.0em !important;}
+  </style>  
+  
+  </head>
+ 
+  <apex:form >
+  <apex:outputPanel id="hiddenBlock" layout="none" />
+  <apex:pageMessages id="errors" />
+
+  <!-- Page Title and "New BDR" button -->
+  <div style="margin-bottom:10px; margin-top:10px; padding-left: 5px;"> 
+         <h1>User Involvement Participants </h1>
+         <h2>Active Participants: ({!ActiveParticipantCount})</h2>
+         <span style = "float:right;padding-right:5px;width:30%;color:#666;text-align:right">Search shows a maximum of 200 results<br/>Use the filters on the left to help find what you are looking for</span>         
+  </div>
+
+
+ <!--  The Search Page  Outer table with narrow column on the left -->
+  <table width="100%" border="0">
+  <tr>  
+    <td width="190" valign="top">
+     
+      <apex:pageBlock mode="edit" id="criteria">              <!-- mode="edit" as we want the search fields to be editable -->
+
+      <!--  The order of the parameters is important. 
+              It must match the calls to this function from the UI js functions -->  
+      <apex:actionFunction name="runSearch" action="{!runSearch}" rerender="results,debug,errors,createAction">
+
+              <apex:param name="firstName" value="" /> 
+              <apex:param name="lastName" value="" />
+              <apex:param name="postCode" value="" />
+              <apex:param name="birthDate" value="" />  
+                    
+      </apex:actionFunction>
+      
+      <div style="padding:10px;"  id="search-filters">
+      
+      <div style="font-size:14px; font-weight: bold;">Participant Details</div>
+      
+      <div class="bold-label">First Name</div>      
+      <input type="text" name="firstName"  id="firstName" data-search="firstName"  />
+
+      <div class="bold-label">Last Name</div>      
+      <input type="text" name="lastName"  id="lastName" data-search="lastName" />
+
+      <div class="bold-label">Post Code</div>      
+      <input type="text" name="postCode"  id="postCode" data-search="postCode" />
+
+      <div class="bold-label">Birth Date (dd/mm/yyyy)</div>      
+      <input type="text" name="birthDate" id="birthDate" data-search="birthDate" />
+      <!-- <apex:inputfield value="{!contact.birthDate}" id ="birthDate" html-data-search="birthDate"/> -->
+
+      <div style="padding-top:10px;"  id="create-action">   
+          <input type="checkbox" onchange="showHideAddButton()" id="create-option-toggle">
+            <Strong>I can't find the Person I need</Strong>
+          </input>              
+      </div>
+
+      <div style="margin:15px 0 15px 0;">   
+          <apex:commandButton value="Search" action="{!clicked}" onclick="doSearch();return false;" id="btnSearch"/>
+          <apex:commandButton value="Add new Person" action="{!clicked}" rerender="mainPanel" onclick="doCreateNewPerson();" id="btnAddPerson" style="display:none"/>
+      </div>
+      
+      <h2>Extended Search</h2>
+      <hr/> 
+
+      <div class="bold-label">Participant Status</div>  
+      <div class="searchSelection">
+          <apex:selectCheckboxes value="{!status_selection}"  layout="pageDirection" html-data-search="status" id="status">
+                 <apex:selectOptions value="{!statusOptions}"/>     
+          </apex:selectCheckboxes>  
+      </div>
+
+      <div class="bold-label">Expertise / Topics</div>
+      <div class="searchSelection">
+          <apex:selectList value="{!topic_selection}" html-data-search="topic" id="topic" multiselect="true">
+                 <apex:selectOptions value="{!topicOptions}"/>     
+          </apex:selectList>  
+      </div>
+
+
+      <div class="bold-label">Activity type</div>   
+      <div class="searchSelection">
+          <apex:selectCheckboxes value="{!activity_type_selection}"  layout="pageDirection" html-data-search="activitytype" id="activity_type">
+                 <apex:selectOptions value="{!activityTypeOptions}"/>     
+          </apex:selectCheckboxes>
+      </div>
+      
+      <div class="bold-label">Method of Involvement</div>   
+      <div class="searchSelection">
+          <apex:selectCheckboxes value="{!method_selection}"  layout="pageDirection" html-data-search="method" id="method_involvement">
+                 <apex:selectOptions value="{!methodOptions}"/>     
+          </apex:selectCheckboxes>
+      </div>    
+
+      <div style=" margin-top: 20px; margin-bottom : 20px;">                 
+        <apex:commandLink onclick="doBlankSearch();return false;" styleClass="searchLink">Clear Search Filters</apex:commandLink>                         
+              
+    </div>        
+                
+               
+    </div>  
+ 
+   </apex:pageBlock>
+ 
+    </td>
+    <td valign="top">
+    
+    <apex:outputPanel id="mainPanel"> 
+    
+        <apex:pageBlock mode="edit" id="addContact" rendered="{!mainPanelContent=='FORM'}">
+        
+            <apex:pageBlockSection title="Add new Contact">
+            
+            <!-- New Contacts should be added using the CRS Interface -->
+            <h2>In Development. New Contacts should be added using the CRS application. </h2>
+            
+            </apex:pageBlockSection>
+        
+        </apex:pageBlock>
+     
+        <apex:pageBlock mode="edit" id="results" rendered="{!mainPanelContent=='SEARCH'}">
+ 
+        <apex:pageBlockTable value="{!lisUICWrapper}" var="row"  id="results">
+    
+           <apex:column style="white-space: nowrap;">
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="Name" action="{!toggleSort}" rerender="results,debug"
+                     title="Click to change sort order">
+                        <apex:param name="sortField" value="Name" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                                             
+                <apex:outputLink value="/{!row.contact.id}" rendered="{!isSysAdmin}">
+                    <i class='fa fa-user' style="margin-right:10px; color:#fc8744;"/>                
+                </apex:outputLink>                             
+
+                <apex:outputPanel layout="none" rendered="{!isSysAdmin==false}">
+                    <i class='fa fa-user' style="margin-right:10px; color:#fc8744;"/>                                
+                </apex:outputPanel>    
+                 
+                <apex:outputLink onclick="gotoParticipantUrl('{!row.contact.id}'); return false;"
+                        rendered="{!row.participant.id!=null}" 
+                >
+                {!row.contact.Name}
+                </apex:outputLink>
+                
+                <apex:outputText rendered="{!row.participant.id==null}" 
+                >
+                {!row.contact.Name}
+                </apex:outputText>
+                
+                
+                <!-- 
+                <apex:outputLink value="/{!row.participant.id}" target="_top"
+                                 rendered="{!row.participant.Status__c!='Unconfirmed'}">
+                                        {!row.participant.name}
+                </apex:outputLink>
+                
+                <apex:outputText value="{!row.contact.name}" 
+                                 rendered="{!row.participant.Status__c=='Unconfirmed'}"/>
+                -->                                                 
+                 
+            </apex:column>
+
+           <apex:column style="white-space: nowrap;">
+           
+                <apex:facet name="header">
+                    <apex:outputText >Participant Status</apex:outputText>
+                </apex:facet>
+                
+                <!-- 
+                <apex:outputText value="{!row.participant.Status__c}"
+                     rendered="{!row.participant.Status__c=='Unconfirmed'}"   
+                /> 
+              
+                <apex:outputLink value="/{!row.participant.id}" target="_top"
+                    rendered="{!row.participant.Status__c!='Unconfirmed'}"   
+                > 
+                    {!row.participant.Status__c} 
+                </apex:outputLink>
+                -->
+                
+                <!-- 
+                <apex:commandLink value="{!row.participant.Status__c}"
+                        action="{!setCreateParticipantUrl}"
+                        reRender="targetPageUrlPanel"
+                        onComplete="gotoTargetUrl();"
+                        >
+                <apex:param value="{!row.contact.id}" assignTo="{!contactId}" name="contactId"/>
+                </apex:commandLink>
+                -->
+                
+                <apex:outputText value="{!row.participant.Status__c}"
+                        rendered="{!row.participant.id != null}"
+                         /> 
+             
+            </apex:column>
+
+           <apex:column style="white-space: nowrap;">
+           
+                <apex:facet name="header">
+                    <apex:outputText >Actions</apex:outputText>
+                </apex:facet>
+                
+                <apex:outputLink onclick="gotoParticipantParticipationUrl('{!row.participant.id}'); return false;"
+                        rendered="{!row.participant.Status__c=='Active' && row.Contact.Deceased__c==false}"
+                        >
+                        [New Participation]
+                </apex:outputLink>
+                
+                <apex:outputLink onclick="gotoParticipantUrl('{!row.contact.id}'); return false;"
+                        rendered="{!row.participant.id==null && row.Contact.Deceased__c==false}"
+                        >
+                        [Create Participant Record]
+                </apex:outputLink>
+                
+             
+            </apex:column>
+
+            <apex:column style="white-space: nowrap;">
+           
+                <apex:facet name="header">
+                    <apex:outputText >Participation Count</apex:outputText>
+                </apex:facet>
+                
+                <apex:outputText value="{!row.participant.Participation_Count__c}"/>
+                
+             
+            </apex:column>
+
+
+
+            <apex:column style="white-space: nowrap;">
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="Last Name" action="{!toggleSort}" rerender="results,debug"
+                     title="Click to change sort order">
+                        <apex:param name="sortField" value="Name" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputText value="{!row.contact.LastName}"/>
+             
+            </apex:column>
+
+            <apex:column style="white-space: nowrap;">
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="First Name" action="{!toggleSort}" rerender="results,debug"
+                     title="Click to change sort order">
+                        <apex:param name="sortField" value="FirstName" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputText value="{!row.contact.FirstName}"/> 
+             
+            </apex:column>
+
+            <apex:column style="white-space: nowrap;">
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="Post Code" action="{!toggleSort}" rerender="results,debug"
+                     title="Click to change sort order">
+                        <apex:param name="sortField" value="MailingPostalCode" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputText value="{!row.contact.MailingPostalCode}"/> 
+             
+            </apex:column>
+
+            <apex:column style="white-space: nowrap;">
+           
+                <apex:facet name="header">
+                    <apex:commandLink value="Date of Birth" action="{!toggleSort}" rerender="results,debug"
+                     title="Click to change sort order">
+                        <apex:param name="sortField" value="BirthDate" assignTo="{!sortField}"/>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <apex:outputText value="{0,date,dd' 'MMM' 'yyyy}">
+                    <apex:param value="{!row.contact.Birthdate}" /> 
+                </apex:outputText> 
+             
+            </apex:column>                                  
+          
+            <apex:column style="white-space: nowrap;" headerValue="Deceased" >                           
+                <apex:outputPanel layout="none" rendered="{!row.contact.Deceased__c}">
+                    <i class='fa fa-check' style="margin-right:10px; color:#fc8744;"/>
+                </apex:outputPanel>                                
+            </apex:column>
+            
+            <apex:column style="white-space: nowrap;" headerValue="Do Not Call">           
+                <apex:outputPanel layout="none" rendered="{!row.contact.DoNotCall}">
+                    <i class='fa fa-ban' style="margin-right:10px; color:#fc8744;"/>
+                </apex:outputPanel>                                              
+            </apex:column>
+            
+            <!--  Nov 2014. Change to provide a click thru to all Participant records in all cases
+                            so that Activity can be added to the record before it is made live
+            <apex:column id="buttonCol">
+            
+                <apex:facet name="header">
+                    <apex:outputText value="Action"/>
+                </apex:facet>
+                
+                <apex:commandButton rendered="{!row.participant.Status__c=='Unconfirmed'}"
+                    value="View Participant Record"
+                    action="{!setCreateParticipantUrl}"
+                    reRender="targetPageUrlPanel"
+                    onComplete="gotoTargetUrl();"                     
+                 >
+                    <apex:param value="{!row.contact.id}" assignTo="{!contactId}" name="contactId"/>
+                </apex:commandButton>                
+                
+                <apex:commandButton rendered="{!row.participant.Status__c=='Expired'}"
+                    value="View Participant Record"
+                    action="{!setCreateParticipantUrl}"
+                    reRender="targetPageUrlPanel"
+                    onComplete="gotoTargetUrl();"                     
+                 >
+                    <apex:param value="{!row.contact.id}" assignTo="{!contactId}" name="contactId"/>
+                </apex:commandButton>                
+                
+                 <apex:commandButton rendered="{!row.participant.Status__c=='Suspended'}"
+                    value="Reactivate General Consent"
+                    action="{!setCreateParticipantUrl}"
+                    reRender="targetPageUrlPanel"
+                    onComplete="gotoTargetUrl();"                     
+                 >
+                    <apex:param value="{!row.contact.id}" assignTo="{!contactId}" name="contactId"/>
+                </apex:commandButton>                
+                
+                <apex:commandButton rendered="{!row.participant.Status__c=='Withdrawn'}"
+                    value="Reinstate General Consent"
+                    action="{!setCreateParticipantUrl}"
+                    reRender="targetPageUrlPanel" 
+                    onComplete="gotoTargetUrl();"                     
+                 >
+                    <apex:param value="{!row.contact.id}" assignTo="{!contactId}" name="contactId"/>
+                </apex:commandButton>                
+                                       
+                 <apex:commandButton rendered="{!row.participant.Status__c=='Valid'}"                    
+                    value="Add Participation"
+                    action="{!setCreateParticipationUrl}"
+                    reRender="targetPageUrlPanel"
+                    onComplete="gotoTargetUrl();"                     
+                 >
+                    <apex:param value="{!row.participant.id}" assignTo="{!participantId}" name="participantId"/>
+                </apex:commandButton>                
+            
+            </apex:column>
+            
+            -->
+
+        </apex:pageBlockTable>
+ 
+    </apex:pageBlock>
+ 
+    </apex:outputPanel>
+ 
+    </td>
+  </tr>
+  </table>
+  
+  
+  
+  <apex:pageBlock title="Adding a new Participant for User Involvement">
+
+       <p>Enter the Name, Birthdate and Postcode of the Participant. If the Contact does not already exist in the database, you will be able to add a new Contact and Participant record. </p>
+       <p>Use the extended search filters to find Participants with a specific profile. It is not possible to create a new Contact when extended filter options are selected.</p>
+      
+  </apex:pageBlock>    
+ 
+
+  </apex:form>
+      
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"/>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/jquery.spin.min.js"/>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.js"/>
+      
+      
+      <script type="text/javascript">
+
+             var j$ = jQuery.noConflict();
+             
+             j$(document).ready(function() {
+                 
+                  j$(window).keydown(function(event) {
+                    if (event.keyCode == 13) {
+                      callSearch();
+                      return false;
+                    }
+                   });
+                   
+                   sforce.connection.sessionId = "{!$Api.Session_ID}";
+                   j$("[id$=topic]").select2({placeholder:"enter a topic"});
+                   j$("[id$=birthDate]").datepicker({ 
+                                        dateFormat: "dd/mm/yy", 
+                                        changeYear : true,
+                                        changeMonth : true,
+                                        yearRange : "c-100 : c"
+                                        });
+  
+              });  
+             
+             function showHideAddButton() {
+                j$('[id$=btnAddPerson]').toggle();
+                j$('[id$=btnSearch]').toggle();
+             }
+             
+             function doCreateNewPerson()
+             {
+                    
+                // Check there are not extended filters             
+                if (                                    
+                    hasCheckboxValue('status') ||
+                    getSelectValue('topic')!=null ||
+                    hasCheckboxValue('activity_type') ||  
+                    hasCheckboxValue('method_involvement')) {
+                    
+                    alert('Please clear all extended search terms and search again to confirm a record for this person does not exist');
+                    return;
+                    
+                    }
+                    
+                // Check the user has entered at the minimum data required              
+                var bPostCodeOrBirthDate = (getDataValue('postCode').length==0 && getDataValue('birthDate').length==0);                 
+                if (                
+                    getDataValue('firstName').length==0 ||
+                    getDataValue('lastName').length==0 ||
+                    bPostCodeOrBirthDate
+                   ) {
+                        alert('Please enter at least first and last name and one of PostCode or Date of Birth');
+                        return;
+                     }                  
+                
+                // Redirect to the create page now all data is entered
+                var sUrl = '/apex/NewPerson';
+                sUrl += '?firstName=' + getDataValue('firstName');              
+                sUrl += '&lastName=' + getDataValue('lastName');
+                sUrl += '&postalCode=' + getDataValue('postCode');
+                sUrl += '&birthDate=' + getDataValue('birthDate');  
+                sUrl += '&participant=true';
+                    
+                top.location.href = sUrl; 
+                return;                 
+             }
+
+            function postcodeValid(postcode) {
+                postcode = postcode.replace(/\s/g, "");
+                var regex = /[A-Z]{1,2}[0-9]{1,2}[ ]{0,1}[0-9][A-Z]{2}/i;
+                //var regex =  /[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}/g;
+                //var regex = /^([a-zA-Z]){1}([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9]){1}([ ])([0-9][a-zA-z][a-zA-z]){1}$/;
+                return regex.test(postcode);
+            }   
+
+            function doSearch(thisField) {
+
+                    //Currently not checks on enoughInput
+                    var enoughInput=true;
+                    
+                    // Check a postCode is valid format
+                    if ( getDataValue('postCode').length>0 ) {
+                        if (!postcodeValid(getDataValue('postCode'))) {
+                        
+                            alert('Please enter a valid postcode string');
+                            return;
+                        
+                        }
+                    }
+                    
+                    if (enoughInput) {
+                       callSearch();
+                    }
+             }
+             
+             /*   Salesforce puts it's own markup into the id so this function returns the value of the field
+                  ending in the given string */
+                  
+             function getValue(inputFieldName) {
+                  var ending = '*[id$=FIELD]';
+                  var res = ending.replace("FIELD", inputFieldName);
+                  var result =  j$(res).val();
+                  return result;
+             }
+             
+             // Use the data attribute for selection 
+             function getDataValue(attrValue) {
+                  var ending = '*[data-search="ATTR-VALUE"]';
+                  var res = ending.replace("ATTR-VALUE", attrValue);
+                  var result =  j$(res).val();
+                  return result;             
+             }
+             
+             function getSelectValue(inputFieldName) {
+                  var ending = 'select[id$=FIELD]';
+                  var res = ending.replace("FIELD", inputFieldName);
+                  var result =  j$(res).val();
+                  return result
+             }
+             
+             function hasCheckboxValue(inputFieldName) {
+                    var ending = 'input[name$=FIELD]:checked';
+                    var res = ending.replace("FIELD", inputFieldName);                  
+                    return j$(res).length>0;
+                
+             }
+             
+             function clearValue(inputFieldName) {
+                      var ending = '*[id$=FIELD]';
+                      var res = ending.replace("FIELD", inputFieldName);                      
+                      j$(res).val('');
+             }
+
+             function doBlankSearch() {
+                      clearInputFields();
+                      callSearch();
+             }
+             
+            function callSearch() {
+
+                    j$("[id$=results]").html('');
+                    j$("[id$=results]").spin({ top:'10%', left: '50%', color : '#ccc', radius : 25, length : 20 });
+            
+                    // No need to pass the check box values, they are tied
+                    // directly to the ViewState
+                    
+                    runSearch(
+                           getValue('firstName'),
+                           getValue('lastName'),
+                           getValue('postCode'),
+                           getValue('birthDate')
+                    );
+                    
+               
+            }
+            
+            /* Clear the values in all input fields */
+            function clearInputFields() {
+               j$('input[type=checkbox]').not('#create-option-toggle').prop('checked',false);
+               j$('input[type=text]').val('');
+            }
+            
+            
+            /* This will call an action that will create a 
+               Participant record if one does not already exist */
+            function gotoParticipantUrl(contactId) {
+                                
+                var sUrl = sforce.apex.execute(
+                            "UIRestUtils",
+                            "getParticipantUrl",
+                            {contactId:contactId}); 
+                    
+                    if (sUrl.length > 0) { 
+                        top.location.href=sUrl; 
+                    } 
+                    else { 
+                        alert("Webservice call failed!"); 
+                    }
+            
+            }   
+            
+            /* This will call an action that will create a 
+               Participant record if one does not already exist */
+            function gotoParticipantParticipationUrl(participantId) {
+                                
+                var sUrl = sforce.apex.execute(
+                            "UIRestUtils",
+                            "getParticipantParticipationUrl",
+                            {participantId:participantId}); 
+                    
+                    if (sUrl.length > 0) { 
+                        top.location.href=sUrl; 
+                    } 
+                    else { 
+                        alert("Webservice call failed!"); 
+                    }
+            
+            }
+            
+
+      </script>
+      
+      <!--  The panel must be rendered into the page to be rerendered, so don't use layout=none 
+            The rerender on the buttons sets the URL to the target page and then
+            the function called onComplete loads that page. Simply returning a pageReference
+            will not work because it will load inside the iFrame and get a browser SAMEORIGIN
+            security error because VF and standard pages are rendered from different hosts                
+    -->           
+      
+      <apex:outputPanel id="targetPageUrlPanel">
+    
+    
+        <!--  This script will reload the page at the top level, exiting the contraints of the
+              iFrame container SF puts in place to support it's feature set. Simply returning a 
+              pageReference from an Apex method would load the page inside that iFrame. 
+        -->
+        <script>            
+
+            var targetUrl = '{!targetPageUrl}';                    
+
+            function gotoTargetUrl()
+            {
+               window.top.location = targetUrl;             
+            }
+
+        </script>
+                        
+    </apex:outputPanel>
+ 
+</apex:page>

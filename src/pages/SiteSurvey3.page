@@ -1,0 +1,52 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section One: Compliance"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="Insurance" id="insurance">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!section2}" value="Back" styleClass="btn"/>
+                    <apex:commandButton action="{!section4}" value="Next" styleClass="btn"/>
+                    <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+            
+            <apex:pageBlockSection title="Insurance">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Valid Employer\'s Liability Insurance Certificate on display?" for="i1"/>
+                  <apex:inputField id="i1" value="{!survey.a_Insurance_valid_certificate__c}"/>
+                  <apex:outputLabel value="Insurances for all site features (lifts, plate glass etc)?" for="i2"/>
+                  <apex:inputField id="i2" value="{!survey.a_Insurance_all_site_features__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="CDM Regs">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Are there any projects/activities on-going or planned subject to CDM Regs?" for="c1"/>
+                  <apex:inputField id="c1" value="{!survey.a_CDM_regs__c}"/>
+                  <apex:outputLabel value="If yes, are they compliant with Regs?" for="c2"/>
+                  <apex:inputField id="c2" value="{!survey.a_CDM_regs_compliant__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Asbestos">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Asbestos report received?" for="a1"/>
+                  <apex:inputField id="a1" value="{!survey.a_Asbestos_report_received__c}"/>
+                  <apex:outputLabel value="Does the report indicate that the premises contain any Asbestos-Containing Materials (ACM)" for="a2"/>
+                  <apex:inputField id="a2" value="{!survey.a_ACM__c}"/>
+                  <apex:outputLabel value="If yes, is there an Asbestos Management plan in place?" for="a3"/>
+                  <apex:inputField id="a3" value="{!survey.a_Asbestos_management_plan__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Comments">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Comments" for="Comments"/>
+                  <apex:inputField id="Comments" value="{!survey.Comments_page_3__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,12 @@
+<apex:page standardcontroller="ConfigText__c" extensions="SelectObjectForInitConfigController" >
+
+  <apex:form >
+
+    <apex:commandButton style="float:Left" value="Admin: Init Object Configuration" action="{!doAction}" rendered="{!isSysAdmin}" />
+    <apex:selectCheckboxes value="{!lisObjects}" layout="pageDirection">
+      <apex:selectOptions value="{!objectNameOptions}"></apex:selectOptions>
+    </apex:selectCheckboxes>
+
+   </apex:form>
+
+</apex:page>

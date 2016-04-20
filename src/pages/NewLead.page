@@ -1,0 +1,99 @@
+<apex:page standardController="Lead" showHeader="true" extensions="NewLeadController">
+<apex:form id="F">   
+  <img title="Lead" class="pageTitleIcon" alt="Lead" src="/s.gif"/> 
+  <h1 style="font-size: 150%; font-weight: bold;">
+    New Lead
+  </h1>
+  <br/><br/><br/>
+   <apex:pageBlock id="P" mode="edit">
+    <apex:pageblockButtons >
+        <apex:commandButton value=" Search " action="{!doSearch}" />
+        <apex:commandButton value=" Create Lead " action="{!ignoreCreateLead}" rendered="{!searchDone}"/>
+        <apex:commandButton value=" Cancel " action="/00Q/o"/>
+    </apex:pageblockButtons> 
+     <apex:pageblocksection columns="1">
+        <apex:pageMessages />
+    </apex:pageblocksection> 
+    <apex:outputPanel id="fieldsPanel">
+      <apex:pageBlockSection columns="1" id="LeadSection">  
+          <apex:inputtext label="First Name" value="{!FirstName}" id="FirstName" />
+          <apex:inputtext label="Last Name" value="{!LastName}" id="LastName" />
+          <apex:inputtext label="Company" value="{!Company}" id="Company" />
+          <apex:inputfield value="{!relLead.Country}" id="Country"/>
+          <apex:inputText label="Postcode" value="{!PostalCode}" id="postalcode" />
+          <apex:inputtextarea label="Street" value="{!Street}" rows="5" cols="25" id="Street" />
+          <apex:inputtext label="City" value="{!City}" id="City" />
+          <apex:inputtext label="County" value="{!State}" id="State"/>
+        </apex:pageBlockSection>
+     </apex:outputPanel>
+     <apex:pageBlockSection columns="1" id="RecordType" rendered="{!CountOfAvailableRecordTypes>=1}"> 
+       <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Lead Record Type" for="recordType"/>
+            <apex:selectList size="1" value="{!recordTypeId}" onchange="TogglePageFields()" id="recordType">
+                <apex:selectOptions value="{!LeadRecordTypes}" id="selOpt"/>
+            </apex:selectList> 
+            </apex:pageBlockSectionItem>
+    </apex:pageBlockSection> 
+    <apex:pageBlockSection columns="1" id="ShowAllRT">
+           <apex:inputCheckbox label="Show All Record Types" value="{!ShowAllRecordTypes}" id="ShowAllRecordTypes"/>
+    </apex:pageBlockSection>
+    <br/>
+    <!--br/-->  
+    </apex:pageBlock> 
+    <apex:pageBlock rendered="{!lstMatchingLeads.size>0}">
+     <apex:inputHidden value="{!selectedrelLeadId}" id="selectedrelLeadId"/>
+    <apex:inputHidden value="{!selectedrelLeadName}" id="selectedrelLeadName"/>
+    
+     <apex:pageblockButtons rendered="{!lstMatchingLeads.size>0}">
+        <apex:commandButton value="Select existing Lead" id="btnNext" action="{!selectLead}"/>
+        <apex:commandButton value="Ignore and Create New " action="{!ignoreCreateLead}" rendered="{!ignoreAndCreate}"/>
+    </apex:pageblockButtons>
+
+      <apex:pageBlockTable value="{!lstMatchingLeads}" var="rec">
+        <apex:column headerValue="Select" >
+            <apex:inputhidden id="conName" value="{!rec.Name}"/>    
+            <input type="radio" name ="rdSelected" id="{!rec.Id}" 
+                    onclick="document.getElementById('{!$Component.selectedrelLeadId}').value=this.id;
+                            document.getElementById('{!$Component.selectedrelLeadName}').value=
+                            document.getElementById('{!$Component.conName}').value;"/>
+        </apex:column>
+       <apex:column >
+          <apex:facet name="header">Lead</apex:facet>
+            <a href="javascript:window.parent.location='/{!rec.Id}?retURL={!returnURL}'" 
+                onmouseover="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onmouseout="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" 
+                onfocus="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onblur="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" id="lookup{!rec.Id}">
+                    {!rec.Name} 
+            </a>  
+        </apex:column> 
+        <!--<apex:column >
+          <apex:facet name="header">Account</apex:facet>
+          <apex:outputLink value="/{!rec.Id}" >
+            {!rec.id}
+          </apex:outputLink>
+        </apex:column>-->
+       <!-- <apex:column >
+          <apex:facet name="header">Company</apex:facet>
+          {!rec.Name}
+        </apex:column> --> 
+        <apex:column >
+          <apex:facet name="header">Street</apex:facet>
+          {!rec.Street}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">City</apex:facet>
+          {!rec.City}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">County</apex:facet>
+          {!rec.State}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Postcode</apex:facet>
+          {!rec.PostalCode}
+        </apex:column>
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

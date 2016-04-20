@@ -1,0 +1,198 @@
+<apex:component >
+
+    <apex:attribute name="contract" description="The Contract" type="BD_Contract__c" required="true"/>
+    
+    <apex:attribute name="FinanceActivityCodes" description="Finance Activity Codes" type="String" required="false"/>
+
+    <apex:attribute name="requiredSignaturesOptions"  
+                                description="List of Required Signatures Checkbox Options"  
+                                type="SelectOption[]"  
+                                required="false"/>        
+                                
+    <apex:attribute name="requiredSignaturesSelection"   
+                                description="List of Required Signatures Selected"  
+                                type="String[]"  
+                                required="false"/>
+                                
+    <apex:attribute name="highlightedContractItemsOptions"  
+                                description="List of highlighted_contract_items Checkbox Options"  
+                                type="SelectOption[]"  
+                                required="false"/>
+                                        
+    <apex:attribute name="highlightedContractItemsSelection"   
+                                description="List of highlighted_contract_items Selected"  
+                                type="String[]"  
+                                required="false"/>
+
+      
+   <apex:outputPanel layout="none" rendered="{!contract!=null}">
+   
+       <apex:pageBlockSection title="Contract Details" showHeader="false" id="xxx" collapsible="false" columns="2">
+           <apex:outputField value="{!contract.Income_Source__c}" />
+           <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+           
+           <apex:inputField value="{!contract.Funding_Conditions__c}" id="riskf"/>
+           <apex:inputField value="{!contract.Details_of_funding_conditions__c}" id="detFundConds"/>
+           
+           <apex:inputField value="{!contract.Contract_administrator_internal__c}" />
+           <apex:inputField value="{!contract.Contract_Paperwork_Attached__c}" />
+           
+        </apex:pageBlockSection>
+
+        <apex:pageblockSection columns="1">
+               <apex:inputField value="{!contract.Contract_Type__c}"  id="contractType"  html-data-help-text="contractTypeHelpText"/>
+               
+               
+                            <table id="contractTypeHelpText"  class="helpTable"  >
+
+                            <tr><th class="ui-state-default ui-corner-top">Contract Type</th>
+                                    <th class="ui-state-default ui-corner-top" >Description</th>
+                            </tr>
+                            
+                            <tr><td>Block</td><td>Block contracts, where a volume of service is purchased for an agreed sum, eg. xx is given to a local service in order to provide ten day care places on five days a week. The local service will still get this money even if not all ten places are filled</td></tr>
+                            <tr><td>Spot</td><td >Spot contracts, where the purchaser buys the service in units, eg. A commissioner agrees to purchase xx days of day care at a price per day for each individual client. If the client isn't booked to come on a certain day, the local service may not get paid for that individual</td></tr>
+                            <tr><td>Grant</td><td>A grant is a donation or gift that is given to support an organisation, service or activity. If the money is not spent for the purposes that the grant was provided, the funder has the right to ask for the money back. A contract with a clawback clause is technically a grant.</td></tr>
+                            <tr><td>Combination</td><td>Combination contracts, where a block contract is established to cover partial costs of the contract, and the funder expects the remainder of the costs to be sourced from direct payments and/or self funders.</td></tr>
+                            <tr><td>Charity of the year</td><td>A contract setting out how we will work with a partner that has selected us as their charity of the year.</td></tr>
+                            <tr><td>Commerical participator</td><td>A contract setting out how we will work with a partner that has offered to give us money in connection with the supply of goods or services.</td></tr>
+                            <tr><td>Sponsorship</td><td>A contract setting out how we will work with a partner that has paid to be associated with and promoted through an event, activity or publication.</td></tr>
+
+                     </table>
+               
+               
+       
+        </apex:pageblockSection>
+           
+        <apex:pageBlockSection columns="2">
+           <apex:inputField value="{!contract.Start_date__c}" id="cstartdate"/>
+           <apex:inputField value="{!contract.Term__c}" id="cterm"/>
+           <apex:inputField value="{!contract.End_date__c}" id="cenddate"/>
+           <apex:inputField value="{!contract.Review_date__c}" id="revdate"/>
+           <apex:inputField value="{!contract.Option_to_extend_to__c}" id="optext"/>
+           <apex:inputField value="{!contract.Extension_Terms__c}" id="optextterm"/>
+    
+       </apex:pageBlockSection>
+       
+       <apex:pageBlockSection columns="2" showHeader="false" collapsible="false">
+       
+       
+          <!--Specific terms for reporting:-->
+             <apex:pageblocksectionitem >         
+              
+                       <apex:outputLabel value="Specific terms for reporting"/>   
+                               
+                       <apex:selectcheckboxes layout="pageDirection" value="{!highlightedContractItemsSelection}">                   
+                             <apex:selectoptions value="{!highlightedContractItemsOptions}" />          
+                       </apex:selectcheckboxes> 
+                       
+            </apex:pageblocksectionitem>
+       
+       
+       
+       
+           <apex:pageblocksectionitem >          
+              <apex:outputLabel value="Required Signatures"/>           
+              <apex:selectcheckboxes layout="pageDirection" value="{!requiredSignaturesSelection}">                   
+                    <apex:selectoptions value="{!requiredSignaturesOptions}" />          
+              </apex:selectcheckboxes> 
+           </apex:pageblocksectionitem>
+           
+
+           
+               
+       </apex:pageBlockSection>
+    
+    </apex:outputPanel>
+    
+    <apex:outputPanel layout="none" rendered="{!contract!=null}">
+    
+    
+                      <apex:pageBlockSection title="Legal Review and Information Governance" columns="2"  collapsible="false" showHeader="false">
+                        
+                           <apex:inputField value="{!contract.Risk_Index_Applies__c}" label="Significant contract risks"/>
+                    
+              
+                   
+                </apex:pageBlockSection>
+    
+       <apex:pageBlock title="Legal Review and Information Governance" >
+       
+               <apex:pageBlockSection title="Legal Review and Information Governance" columns="1"  collapsible="false" showHeader="false">
+               <!--Are there any potential risks with this contract?-->
+               
+                    
+                   <apex:inputTextArea value="{!contract.Risk_Index_Detail__c}" style="width:100%" rows="12" 
+                                                    label=" Contract comments and risks"  id="contractRisk"   html-data-help-text="riskHelpText"/>            
+                      
+                    <!--  Help Text  -->
+                   <div style="margin-left:19%; padding: 20px; background-color: #FFFFE0; display:none;"   id="riskHelpText"  >
+                   <strong>Other Key Contractual Considerations</strong>
+
+                    <p>Please use the field above to highlight any key information about the contract or tender that is not set out elsewhere.</p>
+                    
+                    <p>Include any facts that you would want to be made aware of if you were approving the contract. </p>
+                    
+                    <p>The questions below are intended to be prompts. It is not necessary to set out any points that are not matters of concern.  For example, in respect of the first point if the Service Specification does accurately describe the services we intend to supply it is not necessary to note this.  On the other hand, if the Service Specification does not accurately describe the services that we intend to provide this should be highlighted and details should be given of the issue and any steps taken to resolve it or mitigate its effects.</p>  
+                    
+                    <p>The list below is not exhaustive - you should include in this field any other important considerations that are not set out elsewhere.</p>
+                    
+                    <strong>Service Specification</strong> 
+                    <p>Does the Service Specification accurately describe the services that we intend to supply?</p>
+                      
+                    <strong>Extension of Term</strong>
+                    <p>If the Commissioner has the right to extend the term of the contract at their option (i.e. not by mutual agreement) how much notice do they have to give us of their intention to extend?  Would this period be sufficient for us to make arrangements to wind up or continue to provide the services?
+                    If the Commissioner can unilaterally extend the contract is there a provision increasing the price in subsequent years?</p>
+                    
+                    <strong>Payment and Price</strong>
+                    <p>Does the contract contain any unusual payment provisions?</p> 
+                    <p>Can the Commissioner withhold or delay payments?</p> 
+                    <p>Can the Commissioner reduce the price or the services commissioned without our consent?</p> 
+                    <p>Is any part of the price performance related?</p> 
+                    
+                    <strong>Termination </strong>
+                    <p>Does either party have the right to terminate the contract without cause at unreasonably short notice? In order to manage the winding up of a service we will usually need at least three months? notice.</p> 
+                    <p>Does the Commissioner have the right to terminate the contract if the Society commits a minor (as opposed to material) breach?  </p> 
+                    
+                    <strong>Data Protection and Information Governance</strong>
+                    <p>Does the contract require us to provide data about our service users to the commissioner on termination of or in the course of the contract? </p>
+                    <p>Does the contract require us to comply with particular information governance or data protection standards?</p>
+                    
+                    <strong>Intellectual Property</strong>
+                    <p>Does the contract require us to transfer any intellectual property to the Commissioner?</p>
+                    
+                    <strong>Unusual or Onerous Requirements</strong>
+                    <p>Does the contract contain any unusual or onerous requirements?</p>
+                   </div>
+                   
+                   
+              
+                  </apex:pageBlockSection>
+                       
+
+             
+        </apex:pageBlock>
+    
+
+        
+        <apex:pageBlock title="Contract Management Information">
+        
+		        <apex:pageBlockSection id="ContractMgtInfo" title="Contract Management Information"  columns="1" collapsible="false" showHeader="false"> 
+		        
+		              <apex:inputField value="{!contract.Renewal_Risk__c}" />              
+		         
+		   		</apex:pageBlockSection>
+		   
+		     <apex:pageBlockSection id="ContractMgtInfo2" title="Contract Management Information"  columns="2" collapsible="false" showHeader="false"> 
+		           <apex:inputField value="{!contract.Written_Confirmation_Received__c}" />
+		           <apex:inputField value="{!contract.Contract_paperwork_received__c}" />
+		           <apex:inputField value="{!contract.Contract_paperwork_checked_by__c}"/>
+		           <apex:inputField value="{!contract.Location_of_Original_Signed_Contract__c}" />
+		          
+		           <apex:inputField value="{!contract.Most_Senior_Signature_Name__c}"  style="width: 250px"/>
+		            <apex:inputField value="{!contract.Most_Senior_Signature_Job_Title__c}" />
+		
+		     </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+    </apex:outputPanel>
+</apex:component>

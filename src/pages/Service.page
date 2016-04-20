@@ -1,0 +1,22 @@
+<apex:page standardController="Services__c" showHeader="true" tabStyle="Services__c" title="Service" >
+  <apex:tabPanel switchType="client" selectedTab="name2" id="theTabPanel">
+
+    <apex:tab label="Service Overview" name="ServiceOverview" id="tabOverview">
+      <apex:detail title="true" relatedList="true"/>
+    </apex:tab>
+
+    <apex:tab label="Opening Times" name="OpenTimes" id="tabOpenTimes" rendered="{!(Services__c.RecordType.Name <> 'Local') && (Services__c.RecordType.Name <> 'National')}">
+      <apex:form >
+      <apex:PageBlock >
+        <c:OpeningTimes styleClass="tableClass" border="1" opHours="{!Services__c.service_operationhours__c}"/>
+        <p/>
+        
+        <apex:pageBlockSection title="Comments">
+            <apex:outputField value="{!Services__c.service_operationhourscomment__c}" id="Hours"/>
+        </apex:pageBlockSection>
+      </apex:pageblock>
+      </apex:form>
+    </apex:tab>
+
+  </apex:tabPanel>
+</apex:page>

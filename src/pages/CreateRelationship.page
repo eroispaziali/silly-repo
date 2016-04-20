@@ -1,0 +1,169 @@
+<apex:page standardController="Contact" extensions="CreateRelationshipController">
+ 
+<apex:form id="F">
+<apex:actionFunction name="TogglePageFields" action="{!RecordTypeChanged}"/>
+<br/><br/><br/>
+<img title="Contact" class="pageTitleIcon" alt="Contact" src="/s.gif"/>
+<h1 style="font-size: 150%; font-weight: bold;">
+    Create Relationship for:  {!Contact.Name}
+</h1>
+<!--br/--><!--br/--><!--br/-->
+Relationship Record Type: 
+<apex:selectList size="1" value="{!recordTypeId}" onchange="TogglePageFields()">
+    <apex:selectOptions value="{!RecordTypes}" id="selOpt"/>
+</apex:selectList>
+<apex:pageBlock id="P">
+    <apex:pageblockButtons >
+        <apex:commandButton value=" Create Relationship " action="{!createRelationship}" rendered="{!SearchDone}" />
+        <apex:commandButton value=" Search " action="{!doSearch}" />
+        <apex:commandButton value=" Cancel " action="/{!Contact.Id}"/>
+    </apex:pageblockButtons>
+    <apex:pageblocksection columns="1">
+        <apex:pageMessages />
+    </apex:pageblocksection>
+    <apex:pageBlockSection columns="2" id="S1">
+        <apex:pageBlockSection columns="1" id="S2"> 
+            <!-- <apex:outputPanel rendered="{!SelectedRecordTypeName!='Professional'}">
+                <apex:outputLabel styleclass="labelCol first ">Person Type: </apex:outputLabel>
+                <apex:selectList size="1" value="{!conRecordTypeId}" >
+                    <apex:selectOptions value="{!ContactRecordTypes}" id="selConOpt"/>
+                </apex:selectList>
+            </apex:outputPanel> -->
+            <apex:inputField value="{!recRelationship.Type__c}" /> 
+            <!--br/--><!--br/-->
+            <apex:inputfield value="{!relContact.RecordTypeId}" rendered="{!SelectedRecordTypeName!='Professional'}"/>
+            <apex:inputfield value="{!relContact.Salutation}" />
+            <apex:inputfield value="{!relContact.FirstName}" />
+            <apex:inputtext label="LastName" value="{!lastName}"  />
+            <apex:inputfield value="{!relContact.Birthdate}" rendered="{!SelectedRecordTypeName!='Professional'}"/>
+            <apex:inputfield value="{!relContact.Gender__c}" />
+            <apex:inputfield value="{!relContact.Email}" rendered="{!SelectedRecordTypeName=='Professional'}"/>
+            <apex:inputfield value="{!relContact.HomePhone}" id="phone" />
+            <apex:inputfield value="{!relContact.MobilePhone}" id="mobilephone" />
+        </apex:pageBlockSection>
+        <apex:pageblockSection columns="1" id="S3">
+            <!-- <apex:inputfield value="{!relContact.Consent_Status__c}" rendered="{!SelectedRecordTypeName!='Professional'}"/> -->
+            <apex:inputField value="{!recRelationship.Current__c}" />
+            <!--br/--><!--br/-->
+            <!-- <apex:inputfield value="{!relContact.AccountId}" />  -->
+            <apex:inputfield value="{!recRelationship.Related_Organization__c}" rendered="{!SelectedRecordTypeName=='Professional'}"/>
+            <apex:inputfield value="{!recRelationship.Same_Address__c}" id="sameAddress" rendered="{!AND(SelectedRecordTypeName!='Professional',hasAddress)}"/>
+            <apex:inputfield value="{!relContact.MailingCountry}" id="mailingCountry"/>
+            <apex:inputfield value="{!relContact.MailingPostalCode}" id="mailingPostcode"/>
+            <apex:inputfield value="{!relContact.MailingStreet}" id="mailingStreet"/>
+            <apex:inputfield value="{!relContact.MailingCity}" id="mailingCity"/>
+            <apex:inputfield value="{!relContact.MailingState}" id="mailingState"/>
+            <apex:inputfield value="{!recRelationship.Emergency_Contact__c}" rendered="{!SelectedRecordTypeName=='Professional'}"/>
+
+            <!-- <apex:inputfield value="{!relContact.Constituency_Derived__c}" />
+            <apex:inputfield value="{!relContact.Local_authority__c}" />
+            <apex:inputfield value="{!relContact.Primary_care_trust__c}" />
+            <apex:inputfield value="{!relContact.Clinical_Commissioning_Group__c}" />
+            <apex:inputfield value="{!relContact.Ward__c}" /> -->
+        </apex:pageblockSection>
+    </apex:pageBlockSection> 
+    <apex:pageBlockSection columns="2">
+        <apex:pageBlockSection columns="1">
+            <!--br/--><!--br/-->
+            <apex:inputfield value="{!recRelationship.Primary_Carer__c}" rendered="{!SelectedRecordTypeName!='Professional'}"/>
+            <apex:inputfield value="{!recRelationship.Next_of_Kin__c}" rendered="{!SelectedRecordTypeName!='Professional'}"/>
+            <apex:inputfield value="{!recRelationship.Emergency_Contact__c}" rendered="{!SelectedRecordTypeName!='Professional'}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="1">
+            <!--br/--><!--br/-->
+            <apex:inputfield value="{!recRelationship.Keyholder__c}" rendered="{!SelectedRecordTypeName!='Professional'}"/>
+            <apex:inputfield value="{!recRelationship.PoA_Holder__c }" rendered="{!SelectedRecordTypeName!='Professional'}"/>
+        </apex:pageBlockSection>
+    </apex:pageBlockSection>
+    <apex:pageBlockSection columns="2">
+        <apex:pageBlockSection columns="1">
+            <!--br/--><!--br/-->
+            <apex:inputfield value="{!relContact.Constituency_Derived__c}" id="Constituency"/>
+            <apex:inputfield value="{!relContact.Local_authority__c}" id="LocalAuthority"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="1">
+            <!--br/--><!--br/-->
+            <apex:inputfield value="{!relContact.Primary_care_trust__c}" id="PrimaryCareTrust"/>
+            <apex:inputfield value="{!relContact.Clinical_Commissioning_Group__c}" id="CCG" />
+            <apex:inputfield value="{!relContact.Ward__c}" id="Ward"/>
+        </apex:pageBlockSection>
+    </apex:pageBlockSection>
+    <table border="0" width="100%"> 
+    <tr>
+    <td align="right">
+    <!-- <apex:commandButton rendered="{!NOT(ignoreAndCreate)}" value=" Create Relationship " action="{!createRelationship}" style="border: 10 ; color: #1797C0; font-size: 90%; font-weight: bold; height: 24px;"/> -->
+    </td>
+    </tr>
+    </table>
+</apex:pageBlock>
+{!selectedRelContactId} : {!selectedRelContactName}
+<apex:pageBlock rendered="{!lstMatchingContacts.size>0}">
+<apex:inputHidden value="{!selectedRelContactId}" id="selectedRelContactId"/>
+<apex:inputHidden value="{!selectedRelContactName}" id="selectedRelContactName"/>
+
+<apex:pageblockButtons rendered="{!lstMatchingContacts.size>0}">
+<apex:commandButton value="Create Relationship using Selected Person" id="btnNext" action="{!createRelationship}"/>
+<apex:commandButton rendered="{!ignoreAndCreate}" value="Ignore and Create New " action="{!ignoreCreateRelationship}" />
+</apex:pageblockButtons>
+
+<apex:pageBlockTable value="{!lstMatchingContacts}" var="rec">
+    <apex:column headerValue="Select" >
+    <apex:inputhidden id="conName" value="{!rec.Name}"/>    
+        <input type="radio" name ="rdSelected" id="{!rec.Id}" 
+                onclick="document.getElementById('{!$Component.selectedRelContactId}').value=this.id;
+                        document.getElementById('{!$Component.selectedRelContactName}').value=
+                        document.getElementById('{!$Component.conName}').value;"/>
+    </apex:column>
+   <apex:column >
+      <apex:facet name="header">Person</apex:facet>
+        <a href="javascript:window.parent.location='/{!rec.Id}?retURL={!returnURL}'" 
+            onmouseover="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+            onmouseout="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" 
+            onfocus="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+            onblur="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" id="lookup{!rec.Id}">
+                {!rec.Salutation} {!rec.Name} 
+        </a>  
+    </apex:column> 
+    <!-- <apex:column >
+      <apex:facet name="header">Person</apex:facet>
+      <apex:outputLink value="/{!rec.Id}" >
+        {!rec.Name}
+      </apex:outputLink>
+    </apex:column> -->
+    <apex:column >
+      <apex:facet name="header">Person record Type</apex:facet>
+      {!rec.Record_Type_Name__c}
+    </apex:column>
+   <!-- <apex:column >
+      <apex:facet name="header">Company</apex:facet>
+      {!rec.Name}
+    </apex:column> --> 
+    <apex:column >
+      <apex:facet name="header">Street</apex:facet>
+      {!rec.MailingStreet}
+    </apex:column>
+    <apex:column >
+      <apex:facet name="header">City</apex:facet>
+      {!rec.MailingCity}
+    </apex:column>
+    <apex:column >
+      <apex:facet name="header">Postcode</apex:facet>
+      {!rec.MailingPostalCode}
+    </apex:column>
+    <apex:column >
+      <apex:facet name="header">Phone</apex:facet>
+      {!rec.Phone}
+    </apex:column>
+    <apex:column >
+        <apex:facet name="header">Birthdate</apex:facet>
+        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+            <apex:param value="{!rec.Birthdate}" /> 
+        </apex:outputText>
+    </apex:column>
+</apex:pageBlockTable> 
+
+
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

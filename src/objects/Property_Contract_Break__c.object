@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Break_Applied__c</fullName>
+        <externalId>false</externalId>
+        <label>Break Applied</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Specific Break Date</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Any time during the term upon expiry of the Break Notice</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Break_Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Break Comments</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Break_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Break Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Break_Notice_Months__c</fullName>
+        <externalId>false</externalId>
+        <label>Break Notice (Months)</label>
+        <precision>2</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Estimated_Notice_Date_Ongoing__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( NOT( ISPICKVAL( Break_Applied__c , &quot;Specific Break Date&quot;) ) ,
+DATE(year(TODAY())+ floor((month(TODAY()) + Break_Notice_Months__c + 3)/12) + if(and(month(TODAY())=12,Break_Notice_Months__c + 3&gt;=12),-1,0),
+if( mod( month(TODAY()) + Break_Notice_Months__c + 3 , 12 ) = 0, 12 , mod( month(TODAY()) + Break_Notice_Months__c + 3 , 12 )),
+min(
+day(TODAY()),
+case(
+if( mod( month(TODAY()) + Break_Notice_Months__c + 3, 12 ) = 0, 12 , mod( month(TODAY()) + Break_Notice_Months__c + 3 , 12 )),
+9,30,
+4,30,
+6,30,
+11,30,
+2,(if(mod(year(TODAY()), 4) = 0, 29, 28)),
+31))),
+NULL)</formula>
+        <label>Estimated Break Date Ongoing</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Estimated_Notice_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>DATE (
+
+/*YEAR*/
+YEAR (Break_Date__c) - FLOOR(Break_Notice_Months__c / 12) - IF (MONTH (Break_Date__c) - MOD(Break_Notice_Months__c, 12) &gt; 0, 0, 1),
+
+/*MONTH*/
+IF (MONTH (Break_Date__c) - MOD (Break_Notice_Months__c, 12) &gt; 0, MONTH (Break_Date__c) - MOD (Break_Notice_Months__c, 12), MONTH (Break_Date__c) - MOD (Break_Notice_Months__c, 12) + 12),
+
+/*DAY*/
+MIN (DAY (Break_Date__c),
+CASE (
+/* Month */
+IF (MONTH (Break_Date__c) - MOD (Break_Notice_Months__c, 12) &gt; 0, MONTH (Break_Date__c) - MOD (Break_Notice_Months__c, 12), MONTH (Break_Date__c) - MOD (Break_Notice_Months__c, 12) + 12), 9, 30, 4, 30, 6, 30, 11, 30, 2,
+/* return max days for February dependent on if end date is leap year */
+IF (MOD (YEAR (Break_Date__c) - FLOOR(Break_Notice_Months__c / 12) - IF (MONTH (Break_Date__c) - MOD(Break_Notice_Months__c, 12) &gt; 0, 0, 1), 400) = 0 || (MOD (YEAR (Break_Date__c) - FLOOR(Break_Notice_Months__c / 12) - IF (MONTH (Break_Date__c) - MOD(Break_Notice_Months__c, 12) &gt; 0, 0, 1) ,4) = 0 &amp;&amp; MOD (YEAR (Break_Date__c) - FLOOR(Break_Notice_Months__c / 12) - IF (MONTH (Break_Date__c) - MOD(Break_Notice_Months__c, 12) &gt; 0, 0, 1) ,100) &lt;&gt; 0 ), 29, 28), 31)
+)
+)/* End of Date function */</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Notice Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Not_in_breach_of_lease__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Not in breach of lease</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PropertyContractBreakOption__c</fullName>
+        <externalId>false</externalId>
+        <formula>Property_Contract__r.Early_Break_Option__c</formula>
+        <label>PropertyContractBreakOption</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Property_Contract__c</fullName>
+        <externalId>false</externalId>
+        <label>Property Contract</label>
+        <referenceTo>Property_Contract__c</referenceTo>
+        <relationshipLabel>Property Contracts Break</relationshipLabel>
+        <relationshipName>Property_Contracts_Break</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Rent_Paid_up_to_date__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Rent Paid up to date</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Vacant_Possession__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Vacant Possession</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Who_can_break_lease_early__c</fullName>
+        <externalId>false</externalId>
+        <label>Who can break lease early?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Landlord</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tenant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Landlord or Tenant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Property Contract Break</label>
+    <nameField>
+        <displayFormat>BN-{00}</displayFormat>
+        <label>Break Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Property Contracts Break</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Break_date_Required</fullName>
+        <active>true</active>
+        <description>If  Break applied is a specific break date</description>
+        <errorConditionFormula>ISPICKVAL( Break_Applied__c , &quot;Specific Break Date&quot;) &amp;&amp;  ISBLANK( Break_Date__c )</errorConditionFormula>
+        <errorDisplayField>Break_Date__c</errorDisplayField>
+        <errorMessage>Enter the Break date if Break Applied is a Specific Date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Break_date_not_exists_for_any_time_break</fullName>
+        <active>true</active>
+        <description>Break date can&apos;t be filled if the Break Applied is Anytime during the term upon expiry of Break notice</description>
+        <errorConditionFormula>ISPICKVAL( Break_Applied__c , &quot;Any time during the term upon expiry of the Break Notice&quot;) &amp;&amp;  NOT( ISBLANK( Break_Date__c ) )</errorConditionFormula>
+        <errorDisplayField>Break_Date__c</errorDisplayField>
+        <errorMessage>Break date can&apos;t be filled if the Break Applied is Anytime during the term upon expiry of Break Notice</errorMessage>
+    </validationRules>
+</CustomObject>

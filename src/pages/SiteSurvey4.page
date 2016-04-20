@@ -1,0 +1,67 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section Two: Health & Safety/Well Being"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="" id="dda">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!section3}" value="Back" styleClass="btn"/>
+                    <apex:commandButton action="{!section5}" value="Next" styleClass="btn"/>
+                    <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+            
+    <apex:pageBlockSection title="H & S">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Environment/Comfort/Health/General Appearance" for="hs1"/>
+                  <apex:inputField id="hs1" value="{!survey.b_Env_General_Health_and_Safety__c}"/>
+                  <apex:outputLabel value="Cleanliness" for="hs2"/>
+                  <apex:inputField id="hs2" value="{!survey.b_Env_Cleanliness__c}"/>
+                  <apex:outputLabel value="Acoustics" for="hs3"/>
+                  <apex:inputField id="hs3" value="{!survey.b_Env_Acoustic__c}"/>
+                  <apex:outputLabel value="Office Furniture and Equipment" for="hs4"/>
+                  <apex:inputField id="hs4" value="{!survey.b_Env_Office_Furniture_and_Equipment__c}"/>
+                  <apex:outputLabel value="Lighting Quality" for="hs5"/>
+                  <apex:inputField id="hs5" value="{!survey.b_Env_Lighting_Quality__c}"/>
+                  <apex:outputLabel value="Evidence of Vermin" for="hs6"/>
+                  <apex:inputField id="hs6" value="{!survey.b_Env_Evidence_of_Vermin__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+             <apex:pageBlockSection title="DDA">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="First Aid Kit (fully equipped)?" for="dda1"/>
+                  <apex:inputField id="dda1" value="{!survey.b_First_Aid_Kit__c}"/>
+                  <apex:outputLabel value="Is there an accessible exterior route?" for="dda2"/>
+                  <apex:inputField id="dda2" value="{!survey.b_DDA_Accessible_Exterior_Route__c}"/>
+                  <apex:outputLabel value="Is there an accessible interior route?" for="dda3"/>
+                  <apex:inputField id="dda3" value="{!survey.b_DDA_Accessible_Interior_Route__c}"/>
+                  
+                  <apex:outputLabel value="If multi-storey, are all levels accessible by elevator?" for="dda4"/>
+                  <apex:inputField id="dda4" value="{!survey.b_DDA_Accessible_by_elevator__c}"/>
+                  <apex:outputLabel value="DDA compliant?" for="dda5"/>
+                  <apex:inputField id="dda5" value="{!survey.b_DDA_Compliant__c}"/>
+                  <apex:outputLabel value="If partial, can it be made compliant?" for="dda6"/>
+                  <apex:inputField id="dda6" value="{!survey.b_DDA_Can_be_made_compliant__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Overall">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Date of last H & S audit" for="o1"/>
+                  <apex:inputField id="o1" value="{!survey.b_HS_Date_of_Last_Audit__c}"/>
+                  <apex:outputLabel value="Overall H & S Rating" for="o2"/>
+                  <apex:inputField id="o2" value="{!survey.b_HS_Overall_Rating__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Comments">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Comments" for="Comments"/>
+                  <apex:inputField id="Comments" value="{!survey.Comments_page_4__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

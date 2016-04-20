@@ -1,0 +1,33 @@
+<apex:page standardController="Site_Lead__c" extensions="sitesLeadCapture"  sidebar="false" showheader="false">
+    <apex:include pageName="temp_css"/>
+    <head>
+        <title>Thank You! - Dementia Friends</title>
+    </head>
+    <div class="container-fluid" id="mainContent">
+          <div class="row-fluid page-header">
+              <h1>
+                  Thank you!
+              </h1>
+               
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+                <div class="span2">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.dementiafriends.org.uk/" data-text="I've signed up to be kept informed about #DementiaFriends at" data-via="alzheimerssoc" data-size="large">Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                 </div>
+                 
+             </div>
+            <div class="row-fluid">
+                <div class="span12">
+               <h2>Now tell others about Dementia Friends!</h2>
+                    <p>Thanks for registering your interest in Dementia Friends.  We’ll keep you up to date with all the exciting developments as Dementia Friends sweeps the country. You’ll also have a unique opportunity to help shape this exciting and innovative initiative.</p>
+                        <p>If you have a Twitter account you can use the button above to let your followers know about Dementia Friends. </p>
+                         </div>
+            </div> 
+      </div>
+        </div>
+          
+      
+      <c:SiteFooter ></c:SiteFooter>
+</apex:page>

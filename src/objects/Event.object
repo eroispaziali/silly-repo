@@ -1,0 +1,4287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Decline</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>DeleteSeries</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>NewEvent</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>ActivityDate</fullName>
+    </fields>
+    <fields>
+        <fullName>ActivityDateTime</fullName>
+    </fields>
+    <fields>
+        <fullName>ClientGuid</fullName>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+    </fields>
+    <fields>
+        <fullName>DurationInMinutes</fullName>
+    </fields>
+    <fields>
+        <fullName>Email</fullName>
+    </fields>
+    <fields>
+        <fullName>EndDateTime</fullName>
+    </fields>
+    <fields>
+        <fullName>IsAllDayEvent</fullName>
+    </fields>
+    <fields>
+        <fullName>IsException</fullName>
+    </fields>
+    <fields>
+        <fullName>IsPrivate</fullName>
+    </fields>
+    <fields>
+        <fullName>IsVisibleInSelfService</fullName>
+    </fields>
+    <fields>
+        <fullName>Location</fullName>
+    </fields>
+    <fields>
+        <fullName>OriginalInstanceDateTime</fullName>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Phone</fullName>
+    </fields>
+    <fields>
+        <fullName>ShowAs</fullName>
+    </fields>
+    <fields>
+        <fullName>StartDateTime</fullName>
+    </fields>
+    <fields>
+        <fullName>Subject</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Home Support Visit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Initial Client Contact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Initial Assessment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Full Assessment Visit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Subsequent Client Contact</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prevention</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>General</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Case Conference</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family Meeting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Care Home Visit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>External Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Send Letter/Quote</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Type</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phonecall In</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phonecall Out</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NOT USED</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>National Meeting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Local Meeting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parliamentary Briefing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Briefing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Debate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>WhatId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>WhoId</fullName>
+        <inlineHelpText>Add a Secondary carer / Person with dementia / any other person</inlineHelpText>
+        <type>Lookup</type>
+    </fields>
+    <recordTypes>
+        <fullName>Alzheimer_s_Trading_Ltd_Events</fullName>
+        <active>true</active>
+        <description>Alzheimer&apos;s Trading Ltd Events</description>
+        <label>Alzheimer&apos;s Trading Ltd Events</label>
+        <picklistValues>
+            <picklist>Advice_sheets__c</picklist>
+            <values>
+                <fullName>Aggressive behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carers care for self</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dressing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Eating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Explain to child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeling of guilt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grief bereavement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hallucinations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inconitinence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keeping active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living alone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Availability_Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Outcome__c</picklist>
+            <values>
+                <fullName>Information provided by post%2Femail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provided verbally</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referred to Society Service</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Caller_type__c</picklist>
+            <values>
+                <fullName>Carer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Person with Dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worried about memory</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_Status__c</picklist>
+            <values>
+                <fullName>Cancelled by Service User</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Society</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Third party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>No show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be reassigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worker Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Format__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Face to Face</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>In_Out__c</picklist>
+            <values>
+                <fullName>Incoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outgoing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_Provided__c</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Driving</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living well</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>The future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_sheets__c</picklist>
+            <values>
+                <fullName>AIDS related cognitive impairment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adaptations to home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advance decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>After a diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aluminium Alzheimer%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alzheimer%27s What is%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Am I at risk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assistive technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit rates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>more fields to be added later</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Location_Type_Event__c</picklist>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Home</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>No_of_Training_Days__c</picklist>
+            <values>
+                <fullName>0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Other_publications__c</picklist>
+            <values>
+                <fullName>AS Annual Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a will</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Memory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pack</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sector__c</picklist>
+            <values>
+                <fullName>DFC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Care</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Training_Allocated_to__c</picklist>
+            <values>
+                <fullName>Associate Trainer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Trainer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Awareness_Raising_Event</fullName>
+        <active>true</active>
+        <description>CRS Awareness Raising Event</description>
+        <label>CRS Awareness Raising Event</label>
+        <picklistValues>
+            <picklist>Advice_sheets__c</picklist>
+            <values>
+                <fullName>Aggressive behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carers care for self</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dressing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Eating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Explain to child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeling of guilt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grief bereavement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hallucinations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inconitinence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keeping active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living alone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Availability_Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Outcome__c</picklist>
+            <values>
+                <fullName>Information provided by post%2Femail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provided verbally</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referred to Society Service</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Caller_type__c</picklist>
+            <values>
+                <fullName>Carer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Person with Dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worried about memory</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_Status__c</picklist>
+            <values>
+                <fullName>Cancelled by Society</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Third party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>To be reassigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worker Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Format__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Face to Face</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>In_Out__c</picklist>
+            <values>
+                <fullName>Incoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outgoing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_Provided__c</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Driving</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living well</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>The future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_sheets__c</picklist>
+            <values>
+                <fullName>AIDS related cognitive impairment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adaptations to home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advance decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>After a diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aluminium Alzheimer%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alzheimer%27s What is%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Am I at risk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assistive technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit rates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>more fields to be added later</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Location_Type_Event__c</picklist>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Home</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Other_publications__c</picklist>
+            <values>
+                <fullName>AS Annual Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a will</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Memory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pack</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sector__c</picklist>
+            <values>
+                <fullName>DFC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Care</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prevention</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>NOT USED</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>BDC</fullName>
+        <active>false</active>
+        <description>Business Development Controls Events</description>
+        <label>BDC</label>
+        <picklistValues>
+            <picklist>Advice_sheets__c</picklist>
+            <values>
+                <fullName>Aggressive behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carers care for self</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dressing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Eating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Explain to child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeling of guilt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grief bereavement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hallucinations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inconitinence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keeping active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living alone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Availability_Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Outcome__c</picklist>
+            <values>
+                <fullName>Information provided by post%2Femail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provided verbally</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referred to Society Service</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Caller_type__c</picklist>
+            <values>
+                <fullName>Carer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Person with Dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worried about memory</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_Status__c</picklist>
+            <values>
+                <fullName>Cancelled by Service User</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Society</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Third party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>No show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be reassigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worker Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Format__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Face to Face</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>In_Out__c</picklist>
+            <values>
+                <fullName>Incoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outgoing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_Provided__c</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Driving</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living well</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>The future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_sheets__c</picklist>
+            <values>
+                <fullName>AIDS related cognitive impairment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adaptations to home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advance decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>After a diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aluminium Alzheimer%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alzheimer%27s What is%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Am I at risk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assistive technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit rates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>more fields to be added later</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Location_Type_Event__c</picklist>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Home</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Other_publications__c</picklist>
+            <values>
+                <fullName>AS Annual Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a will</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Memory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pack</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sector__c</picklist>
+            <values>
+                <fullName>DFC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Care</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Full Assessment Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Client Contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subsequent Client Contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phonecall In</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phonecall Out</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CRS_Advocacy_Event</fullName>
+        <active>true</active>
+        <description>Individual Event for Service Type Advocacy</description>
+        <label>CRS Advocacy Event</label>
+        <picklistValues>
+            <picklist>Advice_sheets__c</picklist>
+            <values>
+                <fullName>Aggressive behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carers care for self</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dressing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Eating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Explain to child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeling of guilt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grief bereavement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hallucinations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inconitinence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keeping active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living alone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Availability_Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Outcome__c</picklist>
+            <values>
+                <fullName>Information provided by post%2Femail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provided verbally</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referred to Society Service</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Caller_type__c</picklist>
+            <values>
+                <fullName>Carer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Person with Dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worried about memory</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_Status__c</picklist>
+            <values>
+                <fullName>Cancelled by Service User</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Society</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Third party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>No show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be reassigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worker Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Format__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Face to Face</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>In_Out__c</picklist>
+            <values>
+                <fullName>Incoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outgoing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_Provided__c</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Driving</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living well</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>The future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_sheets__c</picklist>
+            <values>
+                <fullName>AIDS related cognitive impairment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adaptations to home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advance decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>After a diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aluminium Alzheimer%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alzheimer%27s What is%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Am I at risk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assistive technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit rates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>more fields to be added later</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Location_Type_Event__c</picklist>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Home</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Other_publications__c</picklist>
+            <values>
+                <fullName>AS Annual Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a will</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Memory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pack</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sector__c</picklist>
+            <values>
+                <fullName>DFC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Care</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Care Home Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Case Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Full Assessment Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Client Contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subsequent Client Contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>NOT USED</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CRS_Group_Event</fullName>
+        <active>true</active>
+        <description>Use for all events related to services which are delivered to groups of Service Users e.g. Singing for the Brain, Support Groups.</description>
+        <label>CRS Group Event</label>
+        <picklistValues>
+            <picklist>Advice_sheets__c</picklist>
+            <values>
+                <fullName>Aggressive behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carers care for self</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dressing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Eating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Explain to child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeling of guilt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grief bereavement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hallucinations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inconitinence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keeping active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living alone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Availability_Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Outcome__c</picklist>
+            <values>
+                <fullName>Information provided by post%2Femail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provided verbally</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referred to Society Service</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Caller_type__c</picklist>
+            <values>
+                <fullName>Carer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Person with Dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worried about memory</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_Status__c</picklist>
+            <values>
+                <fullName>Cancelled by Society</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>To be reassigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worker Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Format__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Face to Face</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>In_Out__c</picklist>
+            <values>
+                <fullName>Incoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outgoing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_Provided__c</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Driving</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living well</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>The future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_sheets__c</picklist>
+            <values>
+                <fullName>AIDS related cognitive impairment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adaptations to home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advance decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>After a diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aluminium Alzheimer%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alzheimer%27s What is%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Am I at risk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assistive technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit rates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>more fields to be added later</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Location_Type_Event__c</picklist>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Home</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Other_publications__c</picklist>
+            <values>
+                <fullName>AS Annual Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a will</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Memory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pack</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sector__c</picklist>
+            <values>
+                <fullName>DFC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Care</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Full Assessment Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Client Contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subsequent Client Contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>NOT USED</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CRS_Home_Support_Event</fullName>
+        <active>true</active>
+        <description>Events for Home Based (Registered) Service Usage</description>
+        <label>CRS Home Support Event</label>
+        <picklistValues>
+            <picklist>Advice_sheets__c</picklist>
+            <values>
+                <fullName>Aggressive behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carers care for self</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dressing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Eating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Explain to child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeling of guilt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grief bereavement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hallucinations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inconitinence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keeping active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living alone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Availability_Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Outcome__c</picklist>
+            <values>
+                <fullName>Information provided by post%2Femail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provided verbally</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referred to Society Service</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Caller_type__c</picklist>
+            <values>
+                <fullName>Carer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Person with Dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worried about memory</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_Status__c</picklist>
+            <values>
+                <fullName>Cancelled by Service User</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Society</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Third party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>No show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be reassigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worker Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Format__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Face to Face</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>In_Out__c</picklist>
+            <values>
+                <fullName>Incoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outgoing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_Provided__c</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Driving</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living well</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>The future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_sheets__c</picklist>
+            <values>
+                <fullName>AIDS related cognitive impairment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adaptations to home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advance decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>After a diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aluminium Alzheimer%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alzheimer%27s What is%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Am I at risk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assistive technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit rates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>more fields to be added later</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Location_Type_Event__c</picklist>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Home</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Other_publications__c</picklist>
+            <values>
+                <fullName>AS Annual Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a will</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Memory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pack</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sector__c</picklist>
+            <values>
+                <fullName>DFC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Care</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Care Home Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Case Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Full Assessment Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home Support Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Client Contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prevention</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subsequent Client Contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NOT USED</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phonecall In</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phonecall Out</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>CRS_Individual_Event</fullName>
+        <active>true</active>
+        <description>Used for all Events which relate to an individual Service Usage (Service User).</description>
+        <label>CRS Individual Event</label>
+        <picklistValues>
+            <picklist>Advice_sheets__c</picklist>
+            <values>
+                <fullName>Aggressive behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carers care for self</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dressing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Eating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Explain to child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeling of guilt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grief bereavement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hallucinations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inconitinence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keeping active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living alone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Availability_Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Outcome__c</picklist>
+            <values>
+                <fullName>Information provided by post%2Femail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provided verbally</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referred to Society Service</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Caller_type__c</picklist>
+            <values>
+                <fullName>Carer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Person with Dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worried about memory</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_Status__c</picklist>
+            <values>
+                <fullName>Cancelled by Service User</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Society</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Third party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>No show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be reassigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worker Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Format__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Face to Face</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>In_Out__c</picklist>
+            <values>
+                <fullName>Incoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outgoing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_Provided__c</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Driving</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living well</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>The future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_sheets__c</picklist>
+            <values>
+                <fullName>AIDS related cognitive impairment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adaptations to home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advance decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>After a diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aluminium Alzheimer%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alzheimer%27s What is%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Am I at risk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assistive technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit rates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>more fields to be added later</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Location_Type_Event__c</picklist>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Home</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Other_publications__c</picklist>
+            <values>
+                <fullName>AS Annual Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a will</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Memory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pack</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sector__c</picklist>
+            <values>
+                <fullName>DFC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Care</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Care Home Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Case Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Full Assessment Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Client Contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subsequent Client Contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>NOT USED</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Non_CRS_Event</fullName>
+        <active>true</active>
+        <description>Events for Non-CRS users</description>
+        <label>Non-CRS Event</label>
+        <picklistValues>
+            <picklist>Advice_sheets__c</picklist>
+            <values>
+                <fullName>Aggressive behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carers care for self</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dressing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Eating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Explain to child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeling of guilt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grief bereavement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hallucinations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inconitinence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keeping active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living alone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Availability_Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Outcome__c</picklist>
+            <values>
+                <fullName>Information provided by post%2Femail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provided verbally</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referred to Society Service</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Caller_type__c</picklist>
+            <values>
+                <fullName>Carer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Person with Dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worried about memory</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_Status__c</picklist>
+            <values>
+                <fullName>Cancelled by Service User</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Society</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Third party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>No show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be reassigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worker Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Format__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Face to Face</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>In_Out__c</picklist>
+            <values>
+                <fullName>Incoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outgoing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_Provided__c</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Driving</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living well</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>The future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_sheets__c</picklist>
+            <values>
+                <fullName>AIDS related cognitive impairment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adaptations to home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advance decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>After a diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aluminium Alzheimer%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alzheimer%27s What is%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Am I at risk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assistive technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit rates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>more fields to be added later</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Location_Type_Event__c</picklist>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Home</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Other_publications__c</picklist>
+            <values>
+                <fullName>AS Annual Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a will</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Memory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pack</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sector__c</picklist>
+            <values>
+                <fullName>DFC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Care</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Care Home Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Case Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Full Assessment Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home Support Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Client Contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prevention</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subsequent Client Contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NOT USED</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phonecall In</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phonecall Out</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>UI_Event</fullName>
+        <active>true</active>
+        <description>User Involvement Event</description>
+        <label>User Involvement Event</label>
+        <picklistValues>
+            <picklist>Advice_sheets__c</picklist>
+            <values>
+                <fullName>Aggressive behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Carers care for self</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dressing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Eating</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Explain to child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feeling of guilt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grief bereavement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hallucinations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inconitinence</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keeping active</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living alone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Availability_Status__c</picklist>
+            <values>
+                <fullName>Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Call_Outcome__c</picklist>
+            <values>
+                <fullName>Information provided by post%2Femail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Information provided verbally</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Referred to Society Service</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Caller_type__c</picklist>
+            <values>
+                <fullName>Carer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family%2FFriend</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Person with Dementia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Student</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Voluntary Sector</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worried about memory</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Event_Status__c</picklist>
+            <values>
+                <fullName>Cancelled by Service User</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Society</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled by Third party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Confirmed</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>No show</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be reassigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Worker Availability to be confirmed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Format__c</picklist>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Face to Face</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Telephone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>In_Out__c</picklist>
+            <values>
+                <fullName>Incoming</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Outgoing</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_Provided__c</picklist>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Driving</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emotions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Living well</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Money</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Relationships</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Signpost to Services</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>The future</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Information_sheets__c</picklist>
+            <values>
+                <fullName>AIDS related cognitive impairment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Adaptations to home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Advance decisions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>After a diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Aluminium Alzheimer%27s</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Alzheimer%27s What is%3F</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Am I at risk</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Assistive technology</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefit rates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Benefits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Brain behaviour</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>more fields to be added later</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Location_Type_Event__c</picklist>
+            <values>
+                <fullName>Office</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Service User Home</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>No_of_Training_Days__c</picklist>
+            <values>
+                <fullName>0</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%2E5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Other_publications__c</picklist>
+            <values>
+                <fullName>AS Annual Report</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Gen</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>LWD 3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Making a will</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Memory</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pack</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sector__c</picklist>
+            <values>
+                <fullName>DFC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Social Care</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Care Home Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Case Conference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Diagnosis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>External Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Full Assessment Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Home Support Visit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Assessment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initial Client Contact</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prevention</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Letter%2FQuote</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Subsequent Client Contact</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Training_Allocated_to__c</picklist>
+            <values>
+                <fullName>Associate Trainer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Internal Trainer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Debate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Local Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NOT USED</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>National Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other Briefing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parliamentary Briefing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phonecall In</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phonecall Out</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Check_Location_for_Other_Location_Type</fullName>
+        <active>true</active>
+        <description>Address (street) field mandatory for Individual Events with Location Type = &apos;Other&apos;.</description>
+        <errorConditionFormula>(CASE ($RecordType.DeveloperName,
+	&quot;&quot;, 0,
+	&quot;Awareness_Raising_Event&quot;, 0,
+	&quot;CRS_Individual_Event&quot;, 1,
+	&quot;BDC&quot;, 0,
+	&quot;CRS_Group_Event&quot;, 0,
+	0) = 1)  &amp;&amp;
+TEXT(Location_Type_Event__c) == &apos;Other&apos; &amp;&amp;
+ISBLANK(  Street__c )</errorConditionFormula>
+        <errorDisplayField>Location_Type_Event__c</errorDisplayField>
+        <errorMessage>You must enter an address for meetings with &apos;other&apos; Location Type</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>In_Out_required_unless_Face_to_Face</fullName>
+        <active>true</active>
+        <description>In/Out is required unless Format = Face to Face</description>
+        <errorConditionFormula>$RecordType.DeveloperName = &quot;CRS_Individual_Event&quot; &amp;&amp;
+TEXT( In_Out__c )=&apos;&apos; &amp;&amp; 
+NOT(ISPICKVAL(Format__c,&apos;Face to Face&apos;))</errorConditionFormula>
+        <errorDisplayField>In_Out__c</errorDisplayField>
+        <errorMessage>Value for In/Out is required unless Format is Face to Face</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Location_Type_for_Meeting</fullName>
+        <active>false</active>
+        <description>User must select a Location Type if the event is of Type &apos;Meeting&apos;   TYPE is not used anymore</description>
+        <errorConditionFormula>TEXT(Type) == &apos;Meeting&apos; &amp;&amp; ISBLANK( TEXT(Location_Type_Event__c) )</errorConditionFormula>
+        <errorDisplayField>Location_Type_Event__c</errorDisplayField>
+        <errorMessage>You must select a Location Type for Meeting events.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Related_To_Object_should_not_be_changed</fullName>
+        <active>false</active>
+        <description>Related To Object should not be changed</description>
+        <errorConditionFormula>ISCHANGED(  WhatId )</errorConditionFormula>
+        <errorMessage>Related To Object should not be changed</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Activity_History</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Activity History PDF</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>window.location.href=&apos;/apex/ServiceUsageRelatedActivities?id={!Service_Usage__c.Id}&apos;;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Contact_Attendees</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Service User Attendances</masterLabel>
+        <openType>noSidebar</openType>
+        <page>EventContactAttendees</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Event_Register_PDF</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Event Register PDF</masterLabel>
+        <openType>newWindow</openType>
+        <page>printEventRegister</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+    <webLinks>
+        <fullName>New_Event_ServiceActivity</fullName>
+        <availability>online</availability>
+        <description>Changes to this list view button must be reproduced in Vf page ServiceActivityNewEventButtonOverride</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>New Event</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>try
+{
+//alert(&apos;{!Services__c.service_type__c}&apos;);
+//console.log(&quot;{!Services__c.service_type__c}&quot;);
+//console.log(typeof &quot;{!Services__c.service_type__c}&quot;);
+//console.log({!Services__c.service_type__c});
+//console.log(typeof {!Services__c.service_type__c});
+{!requireScript(&quot;/soap/ajax/24.0/connection.js&quot;)}
+if (&quot;{!Services__c.service_type__c}&quot;==&quot;Awareness Raising&quot;)
+  {
+ 
+  var result =sforce.connection.query(&quot;Select Id, Name from RecordType where IsActive=true and SobjectType=&apos;Event&apos; and DeveloperName =&apos;Awareness_Raising_Event&apos;&quot;);
+  var recs = result.getArray(&quot;records&quot; );
+  window.location.href=&apos;/00U/e?what_id={!Services__c.Id}&amp;retURL=%2F{!Services__c.Id}&amp;RecordType=&apos;+recs[0].Id+&apos;&amp;ent=Event&apos;;
+  //window.location.href=&apos;/00U/e?what_id={!Services__c.Id}&amp;retURL=%2F{!Services__c.Id}&amp;RecordType=&apos;+&apos;012S00000008lkTIAQ&apos;+&apos;&amp;ent=Event&apos;;
+  }
+else if (&quot;{!Services__c.service_type__c}&quot;==&quot;Activity group&quot; || 
+         &quot;{!Services__c.service_type__c}&quot;==&quot;Dementia cafe&quot; || 
+         &quot;{!Services__c.service_type__c}&quot;==&quot;Information programme&quot; ||
+         &quot;{!Services__c.service_type__c}&quot;==&quot;Peer support group&quot; ||
+         &quot;{!Services__c.service_type__c}&quot;==&quot;Singing for the Brain&quot; ||
+         &quot;{!Services__c.service_type__c}&quot;==&quot;Newsletter&quot; ||
+         &quot;{!Services__c.service_type__c}&quot;==&quot;Day care and support (establishment based)&quot; )
+  {
+  var result =sforce.connection.query(&quot;Select Id, Name from RecordType where IsActive=true and SobjectType=&apos;Event&apos; and DeveloperName =&apos;CRS_Group_Event&apos;&quot;);
+  var recs = result.getArray(&quot;records&quot; );
+  window.location.href=&apos;/00U/e?what_id={!Services__c.Id}&amp;retURL=%2F{!Services__c.Id}&amp;RecordType=&apos;+recs[0].Id+&apos;&amp;ent=Event&apos;;
+  //window.location.href=&apos;/00U/e?what_id={!Services__c.Id}&amp;retURL=%2F{!Services__c.Id}&amp;RecordType=&apos;+&apos;012S00000008l4hIAA&apos;+&apos;&amp;ent=Event&apos;;
+  }
+else
+  {
+  alert(&apos;Event cannot be created for this Service Type!&apos;);
+  //window.location.href=&apos;/{!Services__c.Id}&apos;;
+  }
+}catch(ex){alert(ex);}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>UI_Log_a_Call</fullName>
+        <availability>online</availability>
+        <description>User Involvement Log a Call Action</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Log a Call</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>/*
+   Query for the record type, and Contact__c 
+   re-direct to the create page with those values pre-set
+*/
+
+  // The sforce API
+  {!REQUIRESCRIPT(&quot;/soap/ajax/31.0/connection.js&quot;)}
+  
+  var thisUrl = parent.location.href;
+
+
+  // These calls return JSON objects. There is only one per call. 
+  var res1 = sforce.connection.query(&quot;Select Id, Name from RecordType where IsActive=true and SobjectType=&apos;Task&apos; and DeveloperName =&apos;UI_Task&apos; limit 1&quot;);  
+
+  var res2 = sforce.connection.query(&quot;Select Contact__c, Name from UI_Participant__c where id = &apos;&quot; + window.sfdcPage.getEntityId() + &quot;&apos; limit 1&quot;); 
+
+
+     var rType = res1.get(&apos;records&apos;).Id; 
+     var contactId = res2.get(&apos;records&apos;).Contact__c; 
+     var contactName = res2.get(&apos;records&apos;).Name;
+     
+     var sUrl = 
+           &apos;/00T/e?title=Call&amp;what_id=&apos; + 
+            window.sfdcPage.getEntityId() +  
+           &apos;&amp;followup=1&amp;retURL=&apos; + thisUrl + 
+           &apos;&amp;RecordType=&apos;+ rType + 
+           &apos;&amp;ent=Task&amp;tsk2=&apos; + contactName + 
+           &apos;&amp;tsk2_lkid=&apos; + contactId;
+
+
+     window.location.href=sUrl;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>UI_New_Task</fullName>
+        <availability>online</availability>
+        <description>A new Task for User Involvement</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>New Task</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>/*
+Query for the record type, and Contact__c
+re-direct to the create page with those values pre-set
+*/
+
+// The sforce API
+{!REQUIRESCRIPT(&quot;/soap/ajax/31.0/connection.js&quot;)}
+
+var thisUrl = parent.location.href;
+
+
+// These calls return JSON objects. There is only one per call.
+var res1 = sforce.connection.query(&quot;Select Id, Name from RecordType where IsActive=true and SobjectType=&apos;Task&apos; and DeveloperName =&apos;UI_Task&apos; limit 1&quot;);
+
+var res2 = sforce.connection.query(&quot;Select Contact__c, Name from UI_Participant__c where id = &apos;&quot; + window.sfdcPage.getEntityId() + &quot;&apos; limit 1&quot;);
+
+
+var rType = res1.get(&apos;records&apos;).Id;
+var contactId = res2.get(&apos;records&apos;).Contact__c;
+var contactName = res2.get(&apos;records&apos;).Name;
+
+var sUrl =
+&apos;/00T/e?what_id=&apos; +
+window.sfdcPage.getEntityId() +
+&apos;&amp;retURL=&apos; + thisUrl +
+&apos;&amp;RecordType=&apos;+ rType +
+&apos;&amp;ent=Task&amp;tsk2=&apos; + contactName +
+&apos;&amp;tsk2_lkid=&apos; + contactId;
+
+
+window.location.href=sUrl;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>User_Attendees</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Worker Attendances</masterLabel>
+        <openType>noSidebar</openType>
+        <page>EventUserAttendees</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

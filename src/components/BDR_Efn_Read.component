@@ -1,0 +1,36 @@
+<apex:component >
+        
+        <apex:attribute name="evidence" description="The contract Section."
+                    type="Evidence_for_Need__c" required="true"/>
+        
+         	<h2>Evidence for Needs</h2>    
+                    
+        <apex:outputPanel id="evidence_panel" layout="block">
+
+          <apex:pageBlockSection id="EfN" title="Evidence of Need" columns="1" collapsible="false" showHeader="false"> 
+
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Evidence Overview</apex:outputLabel>
+                <apex:outputField value="{!evidence.Evidence_Overview__c}" id="overview"  style="width:92%"  />   
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Exit Strategy</apex:outputLabel>
+                <apex:outputField value="{!evidence.Consequences_of_Closure__c}"  id="consequences" style="width:92%"  />              
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Service Data</apex:outputLabel>
+                <apex:outputField value="{!evidence.Usage_Profile__c}" id="capacity" style="width:92%"  />              
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel >Demography Comments</apex:outputLabel>
+                <apex:outputField value="{!evidence.Demography_Comments__c}" id="demography"   style="width:92%"  />              
+            </apex:pageBlockSectionItem>
+                                         
+       </apex:pageBlockSection> 
+       
+      </apex:outputPanel> 
+      
+</apex:component>

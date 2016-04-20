@@ -1,0 +1,80 @@
+<apex:page standardController="BDR__c" extensions="BDRThinControllerExtension">
+
+   <apex:pageBlock title="Services">
+    
+   <apex:repeat value="{!bdrWrapper.services.svcWrappers}" var="rep" id="svcRepeat">
+   <div style = "font-weight: bold; padding: 10px 0px 10px 0px; margin-top : 10px; text-align: center"> - - - - - - </div>
+      
+   <h2><apex:outputText value="{!rep.svc.name + ' (' + rep.svc.service_status__c + ')'}"/></h2> 
+    
+    <apex:pageBlockSection id="Services" columns="1">
+    
+    <apex:outputText value="{!rep.svc.service_type__c}"/>
+    <apex:outputField value="{!rep.svc.service_opendate__c}" />
+    <apex:outputField value="{!rep.svc.Locality__c}"/>
+    <apex:outputField value="{!rep.svc.Default_Location__c}"/>
+    <apex:outputText value="{!rep.svc.Internal_Evaluation_Methods__c}" />
+    <apex:outputText value="{!rep.svc.External_Evaluation__c}" /> 
+    <apex:outputField value="{!rep.svc.Services_Framework_Principle__c}" />       
+                                                 
+    <apex:outputText value="{!rep.svc.Property_Notes__c}" />
+     
+    <h2>Evidence for Needs</h2>
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Evidence Overview</apex:outputLabel>
+        <apex:outputField value="{!rep.evidence.Evidence_Overview__c}" id="overview"  style="width:92%"  />   
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Exit Strategy</apex:outputLabel>
+        <apex:outputField value="{!rep.evidence.Consequences_of_Closure__c}"  id="consequences" style="width:92%"  />              
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Service Data</apex:outputLabel>
+        <apex:outputField value="{!rep.evidence.Usage_Profile__c}" id="capacity" style="width:92%"  />              
+    </apex:pageBlockSectionItem>
+    
+    <apex:pageBlockSectionItem >
+        <apex:outputLabel >Demography Comments</apex:outputLabel>
+        <apex:outputField value="{!rep.evidence.Demography_Comments__c}" id="demography"   style="width:92%"  />              
+    </apex:pageBlockSectionItem>
+
+    <h2>Costs</h2>               
+    <apex:outputText value="{!rep.svc.Estimated_Break_Even__c}"/>
+                  
+    <apex:pageBlockTable value="{!rep.fundReqWrappers}" var="row" id="servicTable" title="Costs">
+    <apex:column >
+        <apex:facet name="header">Financial Year</apex:facet>
+        <apex:outputText id="year" value="{!row.freq.Fiscal_Year__c}" />      
+    </apex:column>
+    
+    <apex:column style="text-align:right" headerClass="header-right">
+        <apex:facet name="header">Total Cost</apex:facet>
+        <apex:outputText value="{0,number,#,###,###}">
+            <apex:param value="{!row.freq.Total_Amount__c}" />
+        </apex:outputText>
+    </apex:column>
+        
+    <apex:column >
+       <apex:facet name="header">In Budget</apex:facet>
+       <apex:outputField id="ib" value="{!row.freq.Funding_In_Budget__c}"/>
+    </apex:column>
+
+   <apex:column >
+       <apex:facet name="header">Comments</apex:facet>
+       <apex:outputText id="comm" value="{!row.freq.Comments__c}"/>
+   </apex:column>
+   
+  </apex:pageBlockTable>
+    
+  </apex:pageBlockSection>                           
+           
+  </apex:repeat> 
+  
+  </apex:pageBlock>
+  <apex:form >
+     <apex:inputHidden value="{!BDR__c.Fiscal_Years__c}"/>
+ </apex:form>        
+ 
+</apex:page>

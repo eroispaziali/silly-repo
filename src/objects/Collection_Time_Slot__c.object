@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A session for a collector</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Collection_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Collection Location</label>
+        <referenceTo>Collection_Location__c</referenceTo>
+        <relationshipLabel>Collection Time Slots</relationshipLabel>
+        <relationshipName>Collection_Time_Slots</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Count_of_Collectors__c</fullName>
+        <externalId>false</externalId>
+        <label>Count of Collectors</label>
+        <summaryForeignKey>Collector_Session__c.CollectionSession__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Duration_in_minutes__c</fullName>
+        <defaultValue>60</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Duration of collection session.</inlineHelpText>
+        <label>Duration in minutes</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>End_Date_Time__c</fullName>
+        <description>Calculate end time for session - from duration</description>
+        <externalId>false</externalId>
+        <formula>If (Duration_in_minutes__c &gt;0,Start_Date_Time__c +  (Duration_in_minutes__c /1440),Start_Date_Time__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>End Date Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Session_Available__c</fullName>
+        <externalId>false</externalId>
+        <formula>Count_of_Collectors__c &lt;   Collection_Location__r.Number_of_volunteers_per_session__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Session Available</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Date Time</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <label>Collection Time Slot</label>
+    <nameField>
+        <displayFormat>CT-{00000}</displayFormat>
+        <label>Collection Time Slots Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Collection Time Slots</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Collection_Location__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Start_Date_Time__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Duration_in_minutes__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Count_of_Collectors__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Session_Available__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>Collection_Location__c</searchFilterFields>
+        <searchFilterFields>Start_Date_Time__c</searchFilterFields>
+        <searchFilterFields>Session_Available__c</searchFilterFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

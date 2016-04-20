@@ -1,0 +1,154 @@
+<apex:component >
+
+    <apex:attribute name="contract" 
+                            description="The Contract" 
+                            type="BD_Contract__c" 
+                            required="true"/>
+                            
+    <apex:attribute name="hideAttachmentPanel" 
+                             description="Hides the attachment panel" 
+                             type="Boolean" 
+                             required="false"/>
+                             
+    <!--change 464-->
+    <apex:attribute name="FinanceActivityCodes" 
+                            description="Finance Activity Codes" 
+                            type="String" 
+                            required="false"/>
+                            
+    <!--change 464-->
+    <script type="text/javascript">
+
+    //Contract notes and attachments
+    var contractId = '{!contract.id}';    
+    var contractId15 = contractId.substr(0,15);
+    var contractName = '{!contract.name}';
+    
+    function doNewContractNote()
+    {        
+        var url = '/002/e?parent_id=' + contractId15 + '&retURL=%2Fapex%2FBDR_View_Tabbed%3Fid%3D' + currentId +'%26tab%3DtabContract';
+        navigateToUrl(url,null,'newNote');
+    }
+    
+    function doNewContractAttachment()
+    {    
+        var url = '/p/attach/NoteAttach?pid=' + contractId + '&parentname='+contractName + '&retURL=%2Fapex%2FBDR_View_Tabbed%3Fid%3D' + currentId +'%26tab%3DtabContract';
+        navigateToUrl(url,null,'attachFile');
+    }
+
+    function doViewAllContractFiles()
+    {    
+        var url = '/ui/content/ViewAllNotesPage?id=' + contractId + '&retURL=%2Fapex%2FBDR_View_Tabbed%3Fid%3D' + currentId +'%26tab%3DtabContract';
+        navigateToUrl(url,null,'viewAll');
+    }
+
+    </script>
+
+    <apex:pageBlock title="BDR Contract Details">
+
+    <apex:outputPanel layout="none" rendered="{!contract.name!=null}">
+
+               <apex:pageBlockSection columns="2">
+
+               <apex:outputField value="{!contract.Status__c}" />
+               <apex:outputField value="{!contract.name}" />
+
+               <apex:outputField value="{!contract.Income_Source__c}" />
+               <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+               
+               <apex:outputField value="{!contract.Funding_Conditions__c}" id="riskf"/>
+               <apex:outputField value="{!contract.Details_of_funding_conditions__c}" id="detFundConds"/>
+               
+               <apex:outputField value="{!contract.Funder_Code__c}" />
+               <apex:outputField value="{!contract.Cost_Centre__c}" />
+
+               <apex:outputField value="{!contract.Contract_Type__c}" />
+               <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>           
+  
+               <apex:outputField value="{!contract.Contract_administrator_internal__c}" />
+               <apex:outputField value="{!contract.Written_Confirmation_Received__c}" />    
+             
+        
+               <apex:outputField value="{!contract.Start_date__c}" id="cstartdate"/>
+               <apex:outputField value="{!contract.Term__c}" id="cterm"/>
+               <apex:outputField value="{!contract.End_date__c}" id="cenddate"/>
+               <apex:outputField value="{!contract.Review_date__c}" />
+               <apex:outputField value="{!contract.Option_to_extend_to__c}" id="optext"/>
+               <apex:outputField value="{!contract.Extension_Terms__c}" id="optexterm"/>
+               
+               <apex:outputField value="{!contract.Required_Signatures__c}"/>
+        </apex:pageBlockSection>
+        
+        </apex:outputPanel>
+        
+        </apex:pageBlock>
+
+        <apex:outputPanel layout="none" rendered="{!contract.name!=null}">
+        
+        <apex:pageBlock title="Legal Review and Information Governance" >
+
+           <apex:pageBlockSection columns="1">
+               <apex:outputField value="{!contract.Risk_Index_Detail__c}" id="criskdetail" style="width:82%"/>
+               <apex:outputField value="{!contract.Risk_Index_Applies__c}" id="criskapplies"/>
+              <apex:outputField value="{!contract.Highlighted_Contract_Items__c}" />
+           </apex:pageBlockSection>
+        
+        <!--  hidden May 2014  
+        <apex:pageBlockSection id="InvoicingInfo" title="Invoicing Information" columns="2" collapsible="false" showHeader="false">
+        <h2>Invoicing Information</h2>
+        <apex:pageblockSectionItem ></apex:pageblockSectionItem>
+               <apex:outputField value="{!contract.Billing_Frequency__c}" />
+               <apex:outputField value="{!contract.Billing_Amount__c}" />
+               <apex:outputField value="{!contract.Nominal_Code2__c}" />
+               <apex:outputField value="{!contract.Restriction_Code__c}" />
+               <apex:outputtext value="{!contract.Invoice_Address__c}" />
+               <apex:pageblockSectionItem helptext="Finance Activity Codes on attached services">
+                   <apex:outputLabel value="Finance Activity Codes"/>
+                   <apex:outputText label="Finance Activity Codes" value="{!FinanceActivityCodes}"/>
+               </apex:pageblockSectionItem> 
+               <apex:pageblockSectionItem ></apex:pageblockSectionItem> 
+        </apex:pageBlockSection>            
+        <apex:pageBlockSection columns="1" collapsible="false" showHeader="false">
+               <apex:outputField value="{!contract.Comments__c}" id="ccomments" style="width:82%"/>
+               <apex:outputField value="{!contract.Reporting_requirements__c}" id="crequirements" style="width:82%"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="2" collapsible="false" showHeader="false">    
+                <apex:outputField value="{!contract.Invoicing_information_complete__c}"/>                          
+        </apex:pageBlockSection>   
+         -->
+        </apex:pageBlock>
+        
+        <apex:pageBlock id="ContractMgtInfo" title="Contract Management Information"> 
+        
+        <apex:pageBlockSection columns="2" showHeader="false">
+        
+               <apex:outputField value="{!contract.Renewal_Risk__c}" />
+               <apex:outputField value="{!contract.Contract_Paperwork_Attached__c}" />
+               
+               <apex:outputField value="{!contract.Contract_paperwork_received__c}" />
+               <apex:outputField value="{!contract.Contract_paperwork_checked_by__c}"/>
+               
+               <apex:outputField value="{!contract.Location_of_Original_Signed_Contract__c}" />
+               <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+
+               <apex:outputField value="{!contract.Most_Senior_Signature_Job_Title__c}" />               
+               <apex:outputField value="{!contract.Most_Senior_Signature_Name__c}" />
+        
+        </apex:pageBlockSection>
+
+          <apex:pageBlock id="attachmentPanel" rendered="{!hideAttachmentPanel==false}" title="Contract Notes and Attachments">
+                <apex:pageBlockButtons location="top">
+                    <apex:commandButton action="{!clicked}" value="New Contract Note" onclick="doNewContractNote();return false;"/>
+                    <apex:commandButton action="{!clicked}" value="New Contract Attachment" onclick="doNewContractAttachment();return false;"/>
+                    <apex:commandButton action="{!clicked}" value="View All Contracts Notes/Attachments" onclick="doViewAllContractFiles();return false;"/>
+                </apex:pageBlockButtons>
+            
+                <apex:iframe frameborder="false" scrolling="true" src="{!'/apex/BDR_Contract_Attachments?id=' + contract.id}" height="200px"  /> 
+    
+          </apex:pageBlock>
+              
+    </apex:pageBlock>
+
+    </apex:outputPanel>              
+    
+</apex:component>

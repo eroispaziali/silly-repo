@@ -1,0 +1,209 @@
+<apex:page standardController="Contact" extensions="NewPersonController" showHeader="true">
+
+<apex:form id="F">
+<apex:actionFunction name="TogglePageFields" action="{!RecordTypeChanged}" />
+
+    <apex:outputPanel id="titlePerson" rendered="{!isParticipant==false}">
+        <img title="Contact" class="pageTitleIcon" alt="Contact" src="/s.gif"/>
+        <h1 style="font-size: 150%; font-weight: bold;">
+            New Person
+        </h1>
+    </apex:outputPanel>
+
+    <apex:outputPanel id="titleParticipant" rendered="{!isParticipant==true}">
+        <img title="Contact" class="pageTitleIcon" alt="Contact" src="/s.gif"/>
+        <h1 style="font-size: 150%; font-weight: bold;">
+            New User Involvement Participant
+        </h1>
+    </apex:outputPanel>
+
+<br/><br/><br/>
+
+<apex:pageBlock id="P" mode="edit">
+    <apex:pageblockButtons >
+        <apex:commandButton value=" Search " action="{!doSearch}" />
+        <apex:commandButton value=" Create Person " action="{!createPerson}" rendered="{!searchDone}" />
+        <apex:commandButton value=" Cancel " action="/003/o"/>
+    </apex:pageblockButtons>
+    <apex:pageblocksection columns="1">       
+        <apex:pageMessages />        
+    </apex:pageblocksection>
+
+    <!-- Dec 2014. New message for UI_Participant process -->        
+    <apex:outputPanel id="title" rendered="{!isParticipant==true}">
+        <div style="margin:10px 0px 25px 180px;width:50%;background-color: #FFFFE0;padding:10px;">
+            <h2>Creating a new User Involvement Participant</h2>
+            <p> You have chosen to add a new User Involvement Participant. First you must confirm the person is not already in the database. 
+            If not you will be able to create the Person record. If the Person already has a record in the database, select from the list at the bottom of the screen.
+            After selecting or creating a new Person, you will be directed to the Participant record, where you can add detail of the Participant status, consent and preferences. </p>
+        </div>
+    </apex:outputPanel>
+
+    <apex:pageBlockSection columns="2" id="RecordType">
+
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Person Record Type" for="recordType"/>
+            <apex:selectList size="1" value="{!recordTypeId}" onchange="TogglePageFields()" id="recordType">
+                <apex:selectOptions value="{!ContactRecordTypes}" id="selOpt"/>
+            </apex:selectList> 
+        </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    <br/>
+    
+    <!--br/-->
+    <apex:outputPanel id="fieldsPanel">
+        <apex:pageBlockSection columns="2" id="PersonSection" rendered="{!NOT(isProfessional)}">
+                <apex:pageBlockSection columns="1" id="PersonLeftSection">
+                    <!--apex:inputField value="{!relContact.Salutation}" /-->
+                    <apex:SelectList label="Title" id="salute" value="{!Salutation}" size="1" title="Title">
+                        <apex:selectOptions value="{!Titles}"></apex:selectOptions> 
+                    </apex:selectList>
+                    <apex:inputtext label="First Name" value="{!firstName}" />
+                    <apex:inputtext label="Last Name" value="{!lastName}"  />
+                    <apex:inputfield value="{!tempBirthdate.Birthdate}"/>
+                    
+                    <!--apex:inputfield value="{!relContact.Gender__c}" /-->
+                    <apex:SelectList label="Gender" id="gendr" value="{!gender}" size="1" title="Gender">
+                        <apex:selectOptions value="{!Genders}"></apex:selectOptions> 
+                    </apex:selectList>
+                    <!--apex:inputfield value="{!relContact.HomePhone}" id="phone" /-->
+                    <apex:pageblocksectionItem helptext="{!$ObjectType.Contact.fields.HomePhone.inlineHelpText}" >
+                        <apex:outputLabel value="Main Phone"></apex:outputLabel>
+                        <apex:inputtext label="Main Phone" value="{!mainphone}"/>
+                    </apex:pageblocksectionItem>
+                    <!--apex:inputfield value="{!relContact.MobilePhone}" id="mobilephone" /-->
+                    <apex:inputtext label="Mobile" value="{!mobilephone }"/>
+                    
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="1" id="PersonRightSection">
+                    <apex:inputfield value="{!tempBirthdate.MailingCountry}" id="mailingCountry"/>
+                    
+                    <apex:inputtext label="Postcode" value="{!PostalCode}" id="mailingPostcode"/>
+                    <apex:inputtextarea label="Street Address" value="{!Street}" rows="5" cols="25" id="mailingStreet"/>
+                    <apex:inputtext label="City" value="{!MailingCity}" id="mailingCity"/>
+                    <!--apex:inputfield value="{!relContact.MailingState}" id="mailingState"/--> 
+                    <apex:inputtext label="County" value="{!MailingState}" id="mailingState"/>
+                </apex:pageBlockSection>
+        </apex:pageBlockSection>    
+        <apex:pageBlockSection columns="2" id="ProfessionalSection" rendered="{!isProfessional}">
+            <apex:pageBlockSection id="ProfessionalLeftSection" columns="1">
+                    <!--apex:inputField value="{!relContact.Salutation}" /-->
+                    <apex:SelectList label="Title" id="salute" value="{!Salutation}" size="1" title="Title">
+                        <apex:selectOptions value="{!Titles}"></apex:selectOptions> 
+                    </apex:selectList>                    
+                    <apex:inputtext label="First Name" value="{!firstName}" />
+                    <apex:inputtext label="Last Name" value="{!lastName}"  />
+                    <!--apex:inputfield value="{!relContact.Gender__c}" /-->
+                    <apex:SelectList label="Gender" id="gendr" value="{!gender}" size="1" title="Gender">
+                        <apex:selectOptions value="{!Genders}"></apex:selectOptions> 
+                    </apex:selectList>
+                    <apex:inputfield value="{!tempBirthDate.Email}" />
+                    <!--apex:inputfield value="{!relContact.HomePhone}" id="phone" /-->
+                    <apex:pageblocksectionItem helptext="{!$ObjectType.Contact.fields.HomePhone.inlineHelpText}" >
+                        <apex:outputLabel value="Main Phone"></apex:outputLabel>
+                        <apex:inputtext label="Main Phone" value="{!mainphone}"/>
+                    </apex:pageblocksectionItem>
+                    <!--apex:inputfield value="{!relContact.MobilePhone}" id="mobilephone" /-->
+                    <apex:inputtext label="Mobile" value="{!mobilephone }"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="ProfessionalRightSection" columns="1">
+                    <apex:inputfield value="{!accountLink.Account__c}" />           
+                    <apex:inputfield value="{!tempBirthdate.MailingCountry}" id="mailingCountry"/>
+                    <apex:inputtext label="Postcode" value="{!PostalCode}" id="mailingPostcode"/>
+                    <apex:inputtextarea label="Street Address" value="{!Street}" rows="5" cols="25" id="mailingStreet"/>
+                    <!--apex:inputfield value="{!relContact.MailingCity}" id="mailingCity"/ -->
+                    <apex:inputtext label="City" value="{!MailingCity}" id="mailingCity"/>
+                    <!--apex:inputfield value="{!relContact.MailingState}" id="mailingState"/--> 
+                    <apex:inputtext label="County" value="{!MailingState}" id="mailingState"/> 
+            </apex:pageBlockSection>    
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="2">
+            <apex:pageBlockSection columns="1">
+                <!--br/--><!--br/-->
+                <apex:inputtext label="Constituency" value="{!Constituency}" id="Constituency"/>
+                <apex:inputtext label="LA" value="{!Local_authority}" id="LocalAuthority"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1">
+                <!--br/--><!--br/-->
+                <apex:inputtext label="PCT" value="{!Primary_care_trust}" id="PrimaryCareTrust"/>
+                <apex:inputtext label="CCG" value="{!Clinical_Commissioning_Group}" id="ClinicalCommissioningGroup"/>
+                <apex:inputtext label="Ward" value="{!Ward}" id="Ward"/>
+            </apex:pageBlockSection>
+        </apex:pageBlockSection>
+    </apex:outputPanel>  
+</apex:pageBlock>
+<apex:pageBlock rendered="{!lstMatchingContacts.size>0}">
+    <apex:inputHidden value="{!selectedRelContactId}" id="selectedRelContactId"/>
+    <apex:inputHidden value="{!selectedRelContactName}" id="selectedRelContactName"/>
+
+    <apex:pageblockButtons rendered="{!lstMatchingContacts.size>0}">
+
+        <!--  Dec 2014 If creating a Participant, go straight there, otherwise follow the normal path of creating a person -->
+        <apex:commandButton value="Select existing Person" id="btnNext" action="{!createPerson}" rendered="{!isParticipant==false}"/>
+        <apex:commandButton value="Select existing Person" id="btnParticipantNext" action="{!createParticipant}" rendered="{!isParticipant==true}"/>
+        
+        <apex:commandButton value="Ignore and Create New " rendered="{!ignoreAndCreate}" action="{!ignoreCreatePerson}" />
+    </apex:pageblockButtons>
+
+    <apex:pageBlockTable value="{!lstMatchingContacts}" var="rec">
+        <apex:column headerValue="Select" >
+            <apex:inputhidden id="conName" value="{!rec.Name}"/>    
+            <input type="radio" name ="rdSelected" id="{!rec.Id}" 
+                    onclick="document.getElementById('{!$Component.selectedRelContactId}').value=this.id;
+                            document.getElementById('{!$Component.selectedRelContactName}').value=
+                            document.getElementById('{!$Component.conName}').value;"/>
+        </apex:column>
+       <apex:column >
+          <apex:facet name="header">Person</apex:facet>
+            <a href="javascript:window.parent.location='/{!rec.Id}?retURL={!returnURL}'" 
+                onmouseover="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onmouseout="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" 
+                onfocus="LookupHoverDetail.getHover('lookup{!rec.Id}', '/{!rec.Id}/m?retURL=%2F{!rec.Id}&isAjaxRequest=1').show();" 
+                onblur="LookupHoverDetail.getHover('lookup{!rec.Id}').hide();" id="lookup{!rec.Id}">
+                    {!rec.Salutation} {!rec.Name} 
+            </a>  
+        </apex:column> 
+        <!-- <apex:column >
+          <apex:facet name="header">Person</apex:facet>
+          <apex:outputLink value="/{!rec.Id}" >
+            {!rec.Name}
+          </apex:outputLink>
+        </apex:column> -->
+        <apex:column >
+          <apex:facet name="header">Person record Type</apex:facet>
+          {!rec.Record_Type_Name__c}
+        </apex:column>
+       <!-- <apex:column >
+          <apex:facet name="header">Company</apex:facet>
+          {!rec.Name}
+        </apex:column> --> 
+        <apex:column >
+          <apex:facet name="header">Street</apex:facet>
+          {!rec.MailingStreet}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">City</apex:facet>
+          {!rec.MailingCity}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Postcode</apex:facet>
+          {!rec.MailingPostalCode}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">County</apex:facet>
+          {!rec.MailingState}
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">Phone</apex:facet>
+          {!rec.Phone}
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Birthdate</apex:facet>
+            <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                <apex:param value="{!rec.Birthdate}" /> 
+            </apex:outputText>
+        </apex:column>
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

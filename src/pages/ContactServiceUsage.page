@@ -1,0 +1,346 @@
+<apex:page standardController="Contact" extensions="ContactServiceUsageController">
+<script type="text/javascript">
+
+//function to apply same value to all datatable rows.
+function populateServType(cb)
+  {
+            var inputElem = document.getElementsByTagName("select"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("refServType")!=-1)                          
+                inputElem[i].selectedIndex = cb.selectedIndex;
+            }
+  }
+
+//function to apply same value to all datatable rows.
+function populateRefType(cb)
+  {
+            var inputElem = document.getElementsByTagName("select"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("refType")!=-1)                          
+                inputElem[i].selectedIndex = cb.selectedIndex;
+            }
+  }
+  
+//function to apply same value to all datatable rows.
+function populateRefOut(cb)
+  {
+            var inputElem = document.getElementsByTagName("select"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("refOut")!=-1 && document.getElementById(inputElem[i].id.replace('refOut','insertedServiceSelect')).checked) 
+                 {                         
+                    //alert(inputElem[i].id);
+                    inputElem[i].selectedIndex = cb.selectedIndex;
+                  }
+            }
+  }  
+
+  
+//function to apply same value to all datatable rows.
+function populateRefDate(cb)
+  {
+            var inputElem = document.getElementsByTagName("input"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("refDate")!=-1)                          
+                inputElem[i].value = cb.value;
+            }
+  }  
+
+//function to apply same value to all datatable rows.  
+function populateRefServ(cb)
+  {
+            var inputElem = document.getElementsByTagName("input"); 
+            //alert(document.getElementById(cb.id+'_lkid').value);
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                if(inputElem[i].id.indexOf("refServ")!=-1)
+                {
+                //alert(inputElem[i].id + ' // ' +inputElem[i].id.indexOf("refServ") + ' // ' + inputElem[i].id.length);
+                 if(inputElem[i].id.indexOf("refServ_lkid")!=-1)
+                     inputElem[i].value = document.getElementById(cb.id+'_lkid').value;
+                 else
+                 if(inputElem[i].id.indexOf("refServ")+7==inputElem[i].id.length)      
+                    inputElem[i].value = cb.value;
+                 }   
+            }
+  }   
+
+//function to select all datatable rows.
+function selectAll(cb)
+  {
+            var inputElem = document.getElementsByTagName("input"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("serviceSelect")!=-1)                          
+                inputElem[i].checked = cb.checked;
+            }
+  }    
+
+//function to select all Selected Section datatable rows.
+function selectInsertedAll(cb)
+{
+    //alert(this);
+            var inputElem = document.getElementsByTagName("input"); 
+            //alert(cb.options[cb.selectedIndex].text);          
+            for(var i=0; i<inputElem.length; i++)
+            {    
+                 if(inputElem[i].id.indexOf("insertedServiceSelect")!=-1)                          
+                inputElem[i].checked = cb.checked;
+            }
+}
+  
+//Functiont to handle Enter/Return key press from Keyword search field.
+    function noenter(ev)  {
+        if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+            doSearchAF();
+            return false;
+         }
+         
+     }
+
+
+function  validateBeforeSelect(RefDate,RefServ,RefType)
+{
+    if(document.getElementById(RefDate).value=='' ||
+        document.getElementById(RefServ).value=='' ||
+        document.getElementById(RefType).selectedIndex==0)
+        {
+            alert('Referral Date, Referring Service and Referral Type, fields cannot be blank');
+            return false;
+        }
+return true;
+}
+  
+</script>
+
+<apex:form >
+<apex:pageBlock >
+
+<img title="User" class="pageTitleIcon" alt="User" src="/s.gif"/>
+
+<h1 style="font-size: 100%; font-weight: bold;">
+    Service Referrals for :  
+</h1>
+<br/>
+<h1 style="font-size: 150%; font-weight: bold;">{!Contact.Name} [{!Contact.Client_reference_number__c}]</h1>
+
+<br/><br/>
+<apex:pageblocksection id="pgmessage" >
+  <apex:pageMessages />
+</apex:pageblocksection>
+</apex:pageblock>
+
+<apex:pageblock >
+<!-- ///////////////////////////////// Search Criteria block \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<table width='100%'>
+    <tr>
+        <td width='40%'>
+            Service Type:&nbsp;&nbsp; 
+            
+            <!--    <apex:inputField value="{!searchService.service_type__c}"/> -->
+                <apex:selectList id="statusSelectList" size="1" value="{!searchService.service_type__c}"> 
+                <apex:selectOptions value="{!lstServiceTypes}"/>
+                </apex:selectList>
+        </td>
+        <td>
+            Locality:&nbsp;&nbsp;<apex:inputField value="{!searchService.Locality__c}"/>
+        </td>
+        <td >
+            Search Keyword:&nbsp;&nbsp;<apex:inputText label="Search keyword:" value="{!strSearchKeyword}"  onkeypress="return noenter(event);"/>
+            &nbsp;&nbsp;&nbsp;
+            <apex:commandButton style="border: 10 ; color: #1797C0; font-size: 90%; font-weight: bold; height: 24px;"  value="  Search  " action="{!doSearch}" status="searchWait" rerender="pbtSearchResult,divPrevNextLinks,pgmessage"/>
+            
+            <apex:actionStatus id="searchWait">
+              <apex:facet name="start">
+              <img class="waitingImage" src="/img/loading.gif"/>
+              Searching...
+              </apex:facet>
+              <apex:facet name="stop"/>
+            </apex:actionStatus>     
+
+            <apex:commandButton style="border: 10 ; color: #1797C0; font-size: 90%; font-weight: bold; height: 24px;"  value="  Clear  " action="{!ClearResult}" status="searchWait" />            
+        </td>
+    </tr>
+</table>
+<br/>
+
+<apex:actionFunction name="doSearchAF" action="{!doSearch}" rerender="pbtSearchResult,divPrevNextLinks,pgmessage"/>
+
+<!-- ///////////////////////////////// PageBlock to show searched result \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<apex:pageBlockTable value="{!lstToShowSearchedServices}" id="pbtSearchResult" var="a"  > 
+    <apex:column width="3%">
+        <apex:facet name="header">
+             <apex:inputCheckbox onclick="selectAll(this)" value="{!bolUnSelect}"/>
+        </apex:facet>
+        <apex:inputCheckbox value="{!a.isSelected}" id="serviceSelect"/>
+    </apex:column>  
+    
+    <apex:column headerValue="Service">
+        <apex:facet name="header">
+            <apex:outputPanel >
+                <apex:commandLink action="{!sortNSearch}" status="sortWait" rerender="pbtSearchResult,divPrevNextLinks">
+                    Service
+                    <apex:image url="{!IF(sortDirection=='ASC','/img/sort_asc_arrow.gif','/img/sort_desc_arrow.gif')}"/>
+                </apex:commandLink>            
+                    <apex:actionStatus id="sortWait">
+                          <apex:facet name="start">
+                          <img class="waitingImage" src="/img/loading.gif"/>
+                          Sorting...
+                          </apex:facet>
+                          <apex:facet name="stop"/>     
+                    </apex:actionStatus>  
+            </apex:outputPanel>
+
+        </apex:facet>
+        <apex:outputField value="{!a.recSU.Service_Field__c}"/> 
+  
+    </apex:column>  
+
+    <apex:column headerValue="Record Type">
+        <apex:outputtext value="{!a.recServ.recordType.Name}" id="RecType"/>
+    </apex:column>
+
+    <apex:column headerValue="Service Type">
+        <apex:outputtext value="{!a.recServ.service_type__c}" id="servType"/>
+    </apex:column>
+
+    <apex:column headerValue="Who can use this service?">
+        <apex:outputtext value="{!a.recServ.Service_Criteria__c}" id="WhoUseServ"/>
+    </apex:column>
+
+    <apex:column headerValue="City">
+        <apex:outputtext value="{!a.recServ.service_city__c}" id="servCity"/>
+    </apex:column>
+
+    <apex:column headerValue="County">
+        <apex:outputtext value="{!a.recServ.service_county__c}" id="servCounty"/>
+    </apex:column> 
+    
+</apex:pageBlockTable>
+<br/>
+
+<apex:actionFunction action="{!PageReSized}" name="PageReSized" rerender="pbtSearchResult,divPrevNextLinks">   
+</apex:actionFunction>
+
+<!-- ///////////////////////////////// Records/Page and navigation links section \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<apex:outputPanel id="divPrevNextLinks">
+    <div class='prevNextLinks' align='right' >
+        Records: &nbsp;
+        <apex:selectList size="1"  onchange="document.getElementById('{!$Component.pageSize}').value=this.options[this.selectedIndex].value;PageReSized(this.options[this.selectedIndex].value);" >
+            <apex:selectOption itemLabel="10" itemValue="10" />
+            <apex:selectOption itemLabel="25" itemValue="25" />
+            <apex:selectOption itemLabel="50" itemValue="50" />
+            <apex:selectOption itemLabel="100" itemValue="100" />
+            <apex:selectOption itemLabel="200" itemValue="200" />            
+        </apex:selectList>
+        
+        &nbsp;Per Page.
+        <apex:inputHidden id="pageSize" value="{!PageSize}" />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        <apex:outputPanel style="align:right">
+            <apex:commandLink id="prevLnk1" styleClass="prevArrow" action="{!previous}" status="navigateWait" rendered="{!hasPrevious}" rerender="pbtSearchResult,divPrevNextLinks" > 
+                <apex:image styleClass="prevArrow" url="/img/search_prevarrow.gif"/>
+                Previous
+            </apex:commandLink>
+            
+            <apex:image styleClass="prevoff" url="/img/search_prevarrow_disabled.gif" rendered="{!NOT(hasPrevious)}"/> 
+            &nbsp;
+            
+            <apex:outputText id="prevLnk2" styleClass="prevArrow"  rendered="{!NOT(hasPrevious)}">
+                Previous
+            </apex:outputText>
+            
+            &nbsp;|&nbsp;
+            
+            <apex:commandLink id="nextLnk1" styleClass="nextArrow" action="{!next}" status="navigateWait" rendered="{!hasNext}" value="Next" rerender="pbtSearchResult,divPrevNextLinks">  
+                &nbsp;<apex:image styleClass="nextArrow" url="/img/search_nextarrow.gif"/>
+            </apex:commandLink>
+            
+            <apex:outputText id="nextLnk2" styleClass="nextArrow"  rendered="{!NOT(hasNext)}">
+                Next
+            </apex:outputText> 
+            &nbsp;
+            
+            <apex:image styleClass="nextArrow" url="/img/search_nextarrow_disabled.gif" rendered="{!NOT(hasNext)}"/>
+        </apex:outputPanel>
+        <apex:actionStatus id="navigateWait">
+              <apex:facet name="start">
+              <img class="waitingImage" src="/img/loading.gif"/>
+              Navigating...
+              </apex:facet>
+              <apex:facet name="stop"/>     
+        </apex:actionStatus>    
+    </div>
+</apex:outputPanel>
+
+<hr/>
+    <apex:outputLabel style="color:maroon" >Referral Date &nbsp;&nbsp;</apex:outputLabel>   
+    <apex:inputField value="{!searchServiceUsage.Referral_Date__c}" id="CommonRefDate"/> <!-- onchange="populateRefDate(this)" /> -->
+    &nbsp;&nbsp;
+    <apex:outputLabel style="color:maroon">Referring Service &nbsp;&nbsp;</apex:outputLabel>
+    <apex:inputField value="{!searchServiceUsage.Referring_Service__c}" id="CommonRefServ"/> <!-- onchange="populateRefServ(this)"/> -->
+    &nbsp;&nbsp;
+    <apex:outputLabel style="color:maroon">Referral Type &nbsp;&nbsp; </apex:outputLabel>
+    <apex:inputField value="{!searchServiceUsage.Referral_Type__c}" id="CommonRefType"/> <!-- onchange="populateRefType(this)"/> -->
+    &nbsp;&nbsp;
+
+<apex:commandButton value=" Insert Selected " action="{!InsertSelected}" onclick="if(!validateBeforeSelect('{!$Component.CommonRefDate}','{!$Component.CommonRefServ}','{!$Component.CommonRefType}')) return false;" rerender="pbtSearchResult,divPrevNextLinks,pbtAddedSUs,pgmessage"/>
+
+<br/>
+<!-- ///////////////////////////////// PageBlock of Selected/Added Services \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+</apex:pageBlock>
+<apex:pageBlock title="Selected Service(s)">
+    <apex:pageBlockButtons > 
+        <apex:commandButton value=" Cancel " action="/{!$CurrentPage.Parameters.id}"/> 
+        <apex:commandButton value=" Done " action="{!saveNReturn}"/> 
+    </apex:pageBlockButtons> 
+    <apex:pageBlockTable value="{!lstAddedServices}" id="pbtAddedSUs" var="a" rendered="true" > 
+    
+    <apex:column width="3%">
+        <apex:facet name="header">
+             <apex:inputCheckbox onclick="selectInsertedAll(this)" />
+        </apex:facet>
+        <apex:inputCheckbox id="insertedServiceSelect" rendered="{!a.recSU.RecordType.Name==SERVUSAGE_OUTGOING_RECTYPE || a.isSU_Rec_Outgoing}"/>
+    </apex:column>  
+    
+        <apex:column >
+            <apex:facet name="header">Service</apex:facet>
+            <apex:outputfield value="{!a.recSU.Service_Field__c}"/>
+        </apex:column> 
+
+        <apex:column headerValue="Referral Date" >
+            <apex:outputField value="{!a.recSU.Referral_Date__c}" />
+        </apex:column>
+
+        <apex:column headerValue="Referring Service" >
+            <apex:outputfield value="{!a.recSU.Referring_Service__c}" />
+        </apex:column>  
+
+        <apex:column headerValue="Referral Type" >
+             <apex:outputField value="{!a.recSU.Referral_Type__c}"  />   
+        </apex:column>    
+        
+        <apex:column >
+            <apex:facet name="header">
+                <apex:outputPanel >
+                    <apex:outputLabel >Referral Outcome &nbsp;&nbsp; </apex:outputLabel>  
+                    <br/>              
+                    <apex:inputField value="{!searchServiceUsage.Referral_Outcome__c}" onchange="populateRefOut(this)"/>
+                </apex:outputPanel> 
+            </apex:facet>                 
+            <apex:inputField value="{!a.recSU.Referral_Outcome__c}" id="refOut" rendered="{!a.recSU.RecordType.Name==SERVUSAGE_OUTGOING_RECTYPE || a.isSU_Rec_Outgoing}"/>
+        </apex:column>
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,20 @@
+<apex:component controller="DeDuperComponentController">
+<apex:attribute name="aLastName" type="String" description="Last Name" assignTo="{!LastName}" />
+<apex:attribute name="aPostCode" type="String" description="Post Code" assignTo="{!PostCode}" />
+<apex:attribute name="aDoB" type="String" description="Date Of Birth" assignTo="{!DoB}" />
+<apex:outputPanel id="display" rendered="{!ShowResults}">
+<apex:pageBlock id="searchBlock" title="Duplicates" mode="edit" rendered="{!ShowResults}">
+	<apex:pageBlockTable id="searchResultsId" value="{!searchResults}" var="srItem" >
+		<apex:column value="{!srItem.name}">
+				<apex:facet name="header">Name</apex:facet>
+		</apex:column>
+		<apex:column value="{!srItem.dob}">
+			<apex:facet name="header">Date Of Birth</apex:facet>
+		</apex:column>
+		<apex:column value="{!srItem.postcode}" >
+			<apex:facet name="header">Post Code</apex:facet>
+		</apex:column>
+	</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:outputPanel>
+</apex:component>

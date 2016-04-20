@@ -1,0 +1,35 @@
+<apex:component controller="ServiceOpeningTimes" access="global">
+    <apex:attribute name="styleClass" type="string" description="Table CSS class" default=""/>
+    <apex:attribute name="rowClasses" type="string" description="Row CSS classes" default=""/>
+    <apex:attribute name="border" type="string" description="Table border width" default=""/>
+    <apex:attribute name="width" type="string" description="Table width" default="600px"/>
+    <!-- <apex:attribute name="Service" type="Services__c" assignTo="{!service}" description="The service"/> -->
+    <apex:attribute name="OpHours" type="string" assignTo="{!opHours}" description="Operation hours string"/>
+
+    <apex:dataTable value="{!DaysOpen}" var="linef" id="the2Table" rowClasses="{!rowClasses}" styleClass="{!styleClass}" border="{!border}" width="{!width}">
+      <apex:column >
+        <apex:facet name="header">Day \ Session</apex:facet>
+        <apex:outputText value="{!linef.DayOfWeek}"/>
+      </apex:column>
+          
+      <apex:column >
+        <apex:facet name="header">One</apex:facet>
+        <apex:outputText value="{!linef.VFsession1}"/>
+      </apex:column>
+              
+      <apex:column >
+        <apex:facet name="header">Two</apex:facet>
+        <apex:outputText value="{!linef.VFsession2}"/>
+      </apex:column>
+              
+      <apex:column >
+        <apex:facet name="header">Three</apex:facet>
+        <apex:outputText value="{!linef.VFsession3}"/>
+      </apex:column>
+              
+      <apex:column >
+        <apex:facet name="header">Four</apex:facet>
+        <apex:outputText value="{!linef.VFsession4}"/>
+      </apex:column>
+    </apex:dataTable>
+</apex:component>

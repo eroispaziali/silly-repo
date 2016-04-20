@@ -1,0 +1,550 @@
+<apex:page tabStyle="Assessment__c" standardController="Assessment__c" extensions="AssessmentController">
+<script>
+
+//Hide components if question type is freetext.
+function hideComponents(cb)
+{
+    //extract rowId for combo
+    var rowId= cb.id.substr(0,cb.id.lastIndexOf(':'));
+
+//////////////Hide New Question Popup components.
+    document.getElementById(rowId+':SubQuestions').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':Choices').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':NoteDescription').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':SubQuestionsTitle').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':ChoicesTitle').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':NoteDescriptionTitle').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';    
+
+////////////Hide Edit Question Popup components.
+    document.getElementById(rowId+':editSubQuestions').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':editChoices').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':editNoteDescription').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':editSubQuestionsTitle').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':editChoicesTitle').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';
+    document.getElementById(rowId+':editNoteDescriptionTitle').style.display=(cb.options[cb.selectedIndex].text!='Combo')?'none':'block';        
+}
+
+
+//Before editing question, check and hide components.
+function hideComponentsBeforeEdit(cb)
+{
+    //extract rowId for combo
+    var rowId = cb.substr(0,cb.lastIndexOf(':'));
+        
+    var pickVal=document.getElementById(cb).options[document.getElementById(cb).selectedIndex].text;
+
+    document.getElementById(rowId+':editSubQuestions').style.display=(pickVal!='Combo')?'none':'block';
+    document.getElementById(rowId+':editChoices').style.display=(pickVal!='Combo')?'none':'block';
+    document.getElementById(rowId+':editNoteDescription').style.display=(pickVal!='Combo')?'none':'block';
+    document.getElementById(rowId+':editSubQuestionsTitle').style.display=(pickVal!='Combo')?'none':'block';
+    document.getElementById(rowId+':editChoicesTitle').style.display=(pickVal!='Combo')?'none':'block';
+    document.getElementById(rowId+':editNoteDescriptionTitle').style.display=(pickVal!='Combo')?'none':'block';        
+}
+
+//Validating all mandatory fields are filled for NewQuestion.
+function validateNewQuesForm(cb)
+{
+
+    var rowId = cb.substr(0,cb.lastIndexOf(':'));
+    
+    //Question is mandatory for Freetext and Combo
+    if(document.getElementById(rowId+':Question').value==null ||
+        trim(document.getElementById(rowId+':Question').value) =="")
+        {
+           alert('Fields marked \'*\' cannot be blank.');
+            return false;
+        
+        }
+
+    //SubQuestion and Choices are mandatory if Combo.
+    if(document.getElementById(rowId+':Type').options[document.getElementById(rowId+':Type').selectedIndex].text=='Combo' || 
+        document.getElementById(rowId+':Type').options[document.getElementById(rowId+':Type').selectedIndex].text=='combo')
+    {
+        if(document.getElementById(rowId+':SubQuestions').value ==null ||
+        trim(document.getElementById(rowId+':SubQuestions').value) =="" ||
+        document.getElementById(rowId+':Choices').value ==null ||
+        trim(document.getElementById(rowId+':Choices').value) =="")
+        {
+           alert('Fields marked \'*\' cannot be blank.');
+            return false;
+
+        }
+    }
+    
+    var validationFailure=false;
+    
+    document.getElementById(rowId+':QuestionErrorMsg').style.display='none';
+    document.getElementById(rowId+':SubQuestionsErrorMsg').style.display='none';
+    document.getElementById(rowId+':ChoicesErrorMsg').style.display='none';
+    document.getElementById(rowId+':NoteDescriptionErrorMsg').style.display='none';
+    document.getElementById(rowId+':AssessorNotesErrorMsg').style.display='none';
+    
+    if(document.getElementById(rowId+':Question').value.length>32700)
+    {
+        document.getElementById(rowId+':QuestionErrorMsg').style.display='block';
+        validationFailure=true;
+    }
+
+    if(document.getElementById(rowId+':SubQuestions').value.length>32700)
+    {
+        document.getElementById(rowId+':SubQuestionsErrorMsg').style.display='block';
+        validationFailure=true;
+    }
+    
+    if(document.getElementById(rowId+':Choices').value.length>32700)
+    {
+        document.getElementById(rowId+':ChoicesErrorMsg').style.display='block';
+        validationFailure=true;
+    } 
+
+    if(document.getElementById(rowId+':NoteDescription').value.length>32700)
+    {
+        document.getElementById(rowId+':NoteDescriptionErrorMsg').style.display='block';
+        validationFailure=true;
+    }           
+    
+    if(document.getElementById(rowId+':AssessorNotes').value.length>32700)
+    {
+        document.getElementById(rowId+':AssessorNotesErrorMsg').style.display='block';
+        validationFailure=true;
+    }
+    
+    if(validationFailure) return false;
+    
+//If all validations pass, return true;
+return true;
+}
+
+//Validating all mandatory fields are filled while EditingQuestion.
+function validateEditQuesForm(cb)
+{
+    //Extract rowId of control.
+    var rowId = cb.substr(0,cb.lastIndexOf(':'));
+
+    //Question is mandatory for Freetext and Combo
+    if(document.getElementById(rowId+':editQuestion').value==null ||
+        trim(document.getElementById(rowId+':editQuestion').value) =="" )
+        {
+           alert('Fields marked \'*\' cannot be blank.');
+            return false;
+        }    
+
+    //SubQuestion and Choices are mandatory if Combo.
+    if(document.getElementById(rowId+':editType').options[document.getElementById(rowId+':editType').selectedIndex].text=='Combo' || 
+        document.getElementById(rowId+':editType').options[document.getElementById(rowId+':editType').selectedIndex].text=='combo')
+    {
+        if(document.getElementById(rowId+':editSubQuestions').value ==null ||
+        trim(document.getElementById(rowId+':editSubQuestions').value) =="" ||
+        document.getElementById(rowId+':editChoices').value ==null ||
+        trim(document.getElementById(rowId+':editChoices').value) =="")
+        {
+           alert('Fields marked \'*\' cannot be blank.');
+            return false;
+
+        }
+    }
+    
+    var validationFailure=false;
+    
+    document.getElementById(rowId+':editQuestionErrorMsg').style.display='none';
+    document.getElementById(rowId+':editSubQuestionsErrorMsg').style.display='none';
+    document.getElementById(rowId+':editChoicesErrorMsg').style.display='none';
+    document.getElementById(rowId+':editNoteDescriptionErrorMsg').style.display='none';
+    document.getElementById(rowId+':editAssessorNotesErrorMsg').style.display='none';
+    
+    if(document.getElementById(rowId+':editQuestion').value.length>32700)
+    {
+        document.getElementById(rowId+':editQuestionErrorMsg').style.display='block';
+        validationFailure=true;
+    }
+
+    if(document.getElementById(rowId+':editSubQuestions').value.length>32700)
+    {
+        document.getElementById(rowId+':editSubQuestionsErrorMsg').style.display='block';
+        validationFailure=true;
+    }
+    
+    if(document.getElementById(rowId+':editChoices').value.length>32700)
+    {
+        document.getElementById(rowId+':editChoicesErrorMsg').style.display='block';
+        validationFailure=true;
+    } 
+
+    if(document.getElementById(rowId+':editNoteDescription').value.length>32700)
+    {
+        document.getElementById(rowId+':NoteDescriptionErrorMsg').style.display='block';
+        validationFailure=true;
+    }           
+    
+    if(document.getElementById(rowId+':editAssessorNotes').value.length>32700)
+    {
+        document.getElementById(rowId+':editAssessorNotesErrorMsg').style.display='block';
+        validationFailure=true;
+    }
+    
+    if(validationFailure) return false;
+    
+//If all validations pass, return true;
+return true;
+}
+
+//Validating, New SectionName cannot be blank.
+function getNewSectionName(paramReason,errorLabel)
+{
+    var txtVal=document.getElementById(paramReason);
+    document.getElementById(errorLabel).style.display='none';
+    if (txtVal.value==null || trim(txtVal.value)=="")
+    {
+        alert('New Section Name cannot be blank.');
+        txtVal.focus();
+        return false;
+    }
+    if(txtVal.value.length>32700)
+    {
+        document.getElementById(errorLabel).style.display='block';
+        return false;
+    }
+//If all validations pass, return true;
+return true;
+}
+
+
+//function validate and avoid users setting section order number to more than one section.
+function validateSectionOrderNumber()
+  {
+    //Read all select type controls on form.
+    var inputElem = document.getElementsByTagName("select"); 
+    var sectNum='';
+    for(var i=0; i<inputElem.length; i++)
+    {    
+         //If Section picklist found
+         if(inputElem[i].id.indexOf("SectionOrder")!=-1)
+         { 
+            var pickVal = inputElem[i].options[inputElem[i].selectedIndex].value;
+
+             //If SectionOrderNumber Not found then add to variable, otherwise raise alert.
+             if(sectNum.indexOf(pickVal+' ')==-1)                          
+             {
+                sectNum+=pickVal + ' ';
+             }   
+             else
+             {
+                 //alert('Error: Number \"'+pickVal+'\" is set to more than one section.');
+                 alert('Error: Section number \"'+pickVal+'\" has been used more than once.');
+                 return false;
+             }
+         }   
+    }
+  //If all validations pass, return true;        
+  return true;
+  }
+
+</script>
+<apex:form >
+<apex:pageBlock >
+    <apex:pageblockSection columns="2" >
+    <apex:inputField value="{!AssessmentRec.Assessment_Header__c}" style="width: 462px; height: 47px;"/>
+    <apex:inputField value="{!AssessmentRec.Status__c}" id="assessmentStatus"/>
+    <script>
+        //Remove None option from picklist.
+        document.getElementById('{!$Component.assessmentStatus}').options[0]=null;    
+    </script>
+    <!--change 166 default service type-->
+    <apex:pageblocksectionitem ></apex:pageblocksectionitem>
+    <apex:pageblocksectionitem >
+    <apex:outputLabel value="Default Service Type"/>
+    <apex:inputField value="{!AssessmentRec.Default_Service_Type__c}" id="Default_Service_Type"/>
+    </apex:pageblocksectionitem>
+    </apex:pageblockSection>
+    <apex:pageblockSection columns="1">
+    <apex:inputTextArea value="{!AssessmentRec.Assessment_Notes__c}" Label="Notes" style="width:100%" rows="5"  id="assessmentNotes" />
+    </apex:pageblockSection>
+    
+</apex:pageBlock>
+
+<!-----------------------New Section Name Popup------------------------------------>
+<apex:outputPanel id="mitstpopup" style="display:none;"  >
+<center>
+    <apex:outputPanel styleClass="popupBackground" layout="block;" />
+
+        <apex:outputPanel styleClass="custPopup" layout="block;" onkeydown="if(event.keyCode==27)document.getElementById('{!$Component.mitstpopup}').style.display='none';" >
+        <br/><br/>
+            <b>Enter New Section Name:</b> <br/>
+            <apex:outputLabel styleclass="errorMsg" id="NewSectionErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel> 
+            <br/>
+            <br/>
+        <apex:inputTextarea value="{!strNewSectionName}" id="NewSectionName" cols="50" rows="4" />
+        <br/><br/><br/>
+
+        <apex:commandButton value=" Create Section " action="{!AddNewSection}" onclick="return getNewSectionName('{!$Component.NewSectionName}','{!$Component.NewSectionErrorMsg}')"/>
+        <input class="btn" type="button" value= " Cancel " onclick="document.getElementById('{!$Component.mitstpopup}').style.display='none';" />
+        <br/><br/><br/>
+    </apex:outputPanel>
+</center>
+</apex:outputPanel>   
+<!-----------------------(End) New Section Name Popup------------------------------->
+
+<!------------------------------------New Question Popup ---------------------------->
+<apex:outputPanel id="newquespopup" style="display:none;"  >
+<center>
+    <apex:outputPanel styleClass="popupBackground" layout="block;" />
+
+        <apex:outputPanel styleClass="custQuestPopup" layout="block;" onkeydown="if(event.keyCode==27)document.getElementById('{!$Component.newquespopup}').style.display='none';">
+            Type:
+                <apex:inputfield value="{!newQuesRec.Type__c}" id="Type" onchange="hideComponents(this)" />
+                <script>
+                    //Remove None option from picklist.
+                    document.getElementById('{!$Component.Type}').options[0]=null;
+                </script>
+                <br/>        
+          <table width="100%">
+          <tr>
+          <td>
+              Question*
+              <br/>
+              <apex:outputLabel styleclass="errorMsg" id="QuestionErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+          </td>
+          <td width='80%'><apex:inputfield value="{!newQuesRec.Question__c}" style="width: 100%;" id="Question"/></td>
+          </tr>
+          <tr>
+          <td><apex:outputtext id="SubQuestionsTitle" value="Sub-Questions*"/>
+              <apex:outputLabel styleclass="errorMsg" id="SubQuestionsErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+          </td>
+          <td><apex:inputfield value="{!newQuesRec.Sub_Question__c}" id="SubQuestions" style="width: 100%;"/></td>
+          </tr>
+          <tr>
+          <td><apex:outputtext id="ChoicesTitle" value="Choices*"/>
+              <apex:outputLabel styleclass="errorMsg" id="ChoicesErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+            </td>
+          <td><apex:inputfield value="{!newQuesRec.Choices__c}" id="Choices" style="width: 100%;"/></td>
+          </tr>
+          <tr>
+          <td><apex:outputtext id="NoteDescriptionTitle" value="Note Description"/>
+              <apex:outputLabel styleclass="errorMsg" id="NoteDescriptionErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+          </td>
+          <td><apex:inputfield value="{!newQuesRec.Note_Description__c}" id="NoteDescription" style="width: 100%;"/></td>
+          </tr>
+          <tr>
+          <td>
+              Assessor Notes
+              <br/>
+              <apex:outputLabel styleclass="errorMsg" id="AssessorNotesErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+          </td>
+          <td><apex:inputfield value="{!newQuesRec.Assessor_Notes__c}" id="AssessorNotes" style="width: 100%;"/></td>
+          </tr>
+          </table>
+        <br/><br/>
+
+        <input class="btn" type="button" value=" Add Question " onclick="if(validateNewQuesForm('{!$Component.Question}'))SaveNewQuestion();" />
+        <apex:actionfunction action="{!SaveNewQuestion}" id="SaveNewQuestion" name="SaveNewQuestion" oncomplete="document.getElementById('{!$Component.newquespopup}').style.display='none';" rerender="pbQuestions"/>
+        <input class="btn" type="button" value= " Cancel " onclick="document.getElementById('{!$Component.newquespopup}').style.display='none';" />
+        <br/><br/>
+       </apex:outputPanel>
+</center>
+</apex:outputPanel> 
+<!--------------------(End) New Question Popup-------------------------------------->  
+
+<!------------------------------------Edit Question Popup ---------------------------->
+<apex:outputPanel id="editquespopup" style="display:none;"  >
+<center>
+    <apex:outputPanel styleClass="popupBackground" layout="block;" />
+
+        <apex:outputPanel styleClass="custQuestPopup" layout="block;"  onkeydown="if(event.keyCode==27)document.getElementById('{!$Component.editquespopup}').style.display='none';">
+            Type:
+                <apex:inputfield value="{!editQuesRec.quesRec.Type__c}" id="editType" onchange="hideComponents(this)" />
+                <script>
+                    //Remove None option from picklist.
+                    document.getElementById('{!$Component.editType}').options[0]=null;
+
+                </script>
+                <br/>        
+          <table width="100%">
+          <tr>
+          <td>
+              Question*
+              <br/>
+              <apex:outputLabel styleclass="errorMsg" id="editQuestionErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+          </td>
+          <td width='80%'><apex:inputfield value="{!editQuesRec.quesRec.Question__c}" style="width: 100%;" id="editQuestion"/></td>
+          </tr>
+          <tr>
+          <td><apex:outputtext id="editSubQuestionsTitle" value="Sub-Questions*"/>
+              <apex:outputLabel styleclass="errorMsg" id="editSubQuestionsErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+          </td>
+          <td><apex:inputfield value="{!editQuesRec.quesRec.Sub_Question__c}" id="editSubQuestions" style="width: 100%;"/></td>
+          </tr>
+          <tr>
+          <td><apex:outputtext id="editChoicesTitle" value="Choices*"/>
+              <apex:outputLabel styleclass="errorMsg" id="editChoicesErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+          </td>
+          <td><apex:inputfield value="{!editQuesRec.quesRec.Choices__c}" id="editChoices" style="width: 100%;"/></td>
+          </tr>
+          <tr>
+          <td><apex:outputtext id="editNoteDescriptionTitle" value="Note Description"/>
+              <apex:outputLabel styleclass="errorMsg" id="editNoteDescriptionErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+          </td>
+          <td><apex:inputfield value="{!editQuesRec.quesRec.Note_Description__c}" id="editNoteDescription" style="width: 100%;"/></td>
+          </tr>
+          <tr>
+          <td>Assessor Notes
+          <br/>
+          <apex:outputLabel styleclass="errorMsg" id="editAssessorNotesErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+          </td>
+          <td><apex:inputfield value="{!editQuesRec.quesRec.Assessor_Notes__c}" id="editAssessorNotes" style="width: 100%;"/></td>
+          </tr>
+          </table>
+        <br/><br/>
+
+        <input class="btn" type="button" value=" Save Question " onclick="if(validateEditQuesForm('{!$Component.editQuestion}'))SaveEditedQuestion();" />
+        <apex:actionfunction action="{!SaveQuestion}" id="SaveEditedQuestion" name="SaveEditedQuestion" reRender="pbQuestions" oncomplete="document.getElementById('{!$Component.editquespopup}').style.display='none';"/>        
+        <input class="btn" type="button" value= " Cancel " onclick="document.getElementById('{!$Component.editquespopup}').style.display='none';" />
+        <br/><br/>
+       </apex:outputPanel>
+</center>
+</apex:outputPanel> 
+<!--------------------(Edit) Edit Question Popup-------------------------------------->  
+
+<!-----------------------Questions Block------------------------------------------------>
+<apex:pageBlock title="Question(s)" id="pbQuestions">
+    <apex:pageBlockButtons >
+    <apex:commandButton action="{!SaveAssessment}" value="   Save   " onclick="return validateSectionOrderNumber();"/>    
+    <apex:commandButton action="/{!IF($CurrentPage.parameters.retURL==null,LEFT($CurrentPage.parameters.Id,3)+'/o',$CurrentPage.parameters.retURL)}" value="  Cancel  "/>
+    <apex:commandButton value=" Add Section "  onclick="document.getElementById('{!$Component.NewSectionName}').value='';document.getElementById('{!$Component.mitstpopup}').style.display='block';document.getElementById('{!$Component.NewSectionName}').focus();return false;"/>
+
+    
+    </apex:pageBlockButtons>
+    
+    <apex:repeat value="{!lstSections}" var="rec">
+        
+        <div class="pbSubheader first tertiaryPalette" >
+        <table border="0">
+            <tr>
+                <td>
+                    Section :&nbsp; 
+                    <apex:SelectList size="1" value="{!rec.sectionOrderNum}" id="SectionOrder"  >
+                    <apex:selectOptions value="{!rec.lstSectOrder}" />
+                    </apex:SelectList>
+                     &nbsp; &nbsp; [{!rec.strSectionName}]
+
+                    <apex:commandlink value="[Edit]" onclick="document.getElementById('{!$Component.EditSectionName}').value='{!rec.strSectionName}';document.getElementById('{!$Component.editSectionTitle}').style.display='block';document.getElementById('{!$Component.EditSectionName}').focus();return false;"/>
+                    <!-----------------------Edit Section Popup--------------------------------------->
+                    <apex:outputPanel id="editSectionTitle" style="display:none;"  >
+                    <center>
+                        <apex:outputPanel styleClass="popupBackground" layout="block;" />
+                    
+                            <apex:outputPanel styleClass="custPopup" layout="block;" onkeydown="if(event.keyCode==27)document.getElementById('{!$Component.editSectionTitle}').style.display='none';">
+                            <br/><br/>
+                                <b>Edit Section Name:</b>
+                                <apex:outputLabel styleclass="errorMsg" id="EditSectionErrorMsg" style="display:none;"><strong>Error:</strong> You can't use more than 32,768 characters.</apex:outputLabel>
+                                 <br/><br/>
+                            <apex:inputTextarea value="{!rec.strSectionName}" id="EditSectionName" cols="50" rows="4"/>
+                            <br/><br/><br/>
+                    
+                            <apex:commandButton value=" Update Section " action="{!UpdateSectionTitle}" onclick="return getNewSectionName('{!$Component.EditSectionName}','{!$Component.EditSectionErrorMsg}')"/>
+                            <input class="btn" type="button" value= " Cancel " onclick="document.getElementById('{!$Component.editSectionTitle}').style.display='none';" />
+                            <br/><br/><br/>
+                        </apex:outputPanel>
+                    </center>
+                    </apex:outputPanel>
+                    <!-----------------------(End) Edit Section Popup--------------------------------------->
+                </td>
+                <td width="1%">
+                    <apex:commandButton value=" Add Question "  action="{!AddNewQuestion}" onclick="javascript:document.getElementById('{!$Component.NewQuestion}').value='{!rec.sectionNum}';" oncomplete="document.getElementById('{!$Component.newquespopup}').style.display='block';document.getElementById('{!$Component.Question}').focus();" reRender="newquespopup" /> 
+                </td>
+            </tr>
+        </table>
+        </div>
+
+        <!-----------------------Iterate through Questions--------------------------------------->
+        <apex:pageblockTable value="{!rec.lstQuestions}" var="qRec">
+            <apex:column headerValue="Q. No.">
+                <apex:SelectList size="1" value="{!qRec.quesRec.QuestionNumber__c}" id="QuestionOrder"  >
+                    <apex:selectOptions value="{!rec.lstQuesOrder}" />
+                </apex:SelectList>
+            </apex:column>
+                    
+            <apex:column headerValue="Action">
+                <apex:commandLink value="Del" action="{!RemoveQuestion}" rendered="{!!qRec.hasFoundCompletedAssessment}" onclick="return confirm('Are you sure!!');">
+                    <apex:param value="{!rec.sectionNum}:{!qRec.questionNum}" name="removeQues"/>
+                </apex:commandLink>
+
+                <apex:outputText rendered="{!!qRec.hasFoundCompletedAssessment}">&nbsp;|&nbsp;</apex:outputText>
+                <apex:commandLink value="Edit" action="{!EditQuestion}"  oncomplete="document.getElementById('{!$Component.editquespopup}').style.display='block';hideComponentsBeforeEdit('{!$Component.editType}');document.getElementById('{!$Component.editQuestion}').focus();" rerender="editquespopup">
+                    <apex:param value="{!rec.sectionNum}:{!qRec.questionNum}" name="editQues"/>
+                </apex:commandLink>
+            </apex:column>
+            
+            <apex:column headerValue="Question" ><apex:outputfield value="{!qRec.quesRec.Question__c}" style="width: 100%;"/></apex:column>
+            
+            <apex:column headerValue="Sub-Questions" >
+                <apex:dataTable value="{!qRec.SubQuestions}" var="dtRow">
+                <apex:column value="{!dtRow}"/>
+                </apex:dataTable>
+            </apex:column>
+            
+            <apex:column headerValue="Choices">
+                <apex:dataTable value="{!qRec.Choices}" var="dtRow">
+                <apex:column value="{!dtRow}"/>
+                </apex:dataTable>                
+            </apex:column>
+    
+            <apex:column headerValue="Note Description"><apex:outputfield value="{!qRec.quesRec.Note_Description__c}"  style="width: 100%;"/></apex:column>
+
+            <apex:column headerValue="Assessor Notes"><apex:outputfield value="{!qRec.quesRec.Assessor_Notes__c}"  style="width: 100%;"/></apex:column>            
+           
+            <apex:column headerValue="Type">
+                <apex:outputfield value="{!qRec.quesRec.Type__c}" />
+            </apex:column>
+        </apex:pageblockTable>
+        <!-----------------------(End) Iterate through Questions--------------------------------------->
+        <br/>
+    
+    </apex:repeat>
+    <apex:inputHidden value="{!numSectionNumber}" id="NewQuestion"  />
+
+</apex:pageBlock>
+<!-----------------------(End) Questions Block------------------------------------------------>
+</apex:form>
+
+<!--Style class for showing Rich format reasonText input Modal Dialague, which grey the background. -->
+  <style type="text/css">
+.custPopup{
+            background-color: white;
+            border-width: 1px;
+            border-style: solid;
+            z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            width: 450px;
+            margin-left: -250px;
+            top:20px;
+        }
+.custQuestPopup{
+            background-color: white;
+            border-width: 1px;
+            border-style: solid;
+            z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            width: 700px;
+            margin-left: -350px;
+            top:10px;
+        }
+                
+        .popupBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+
+    </style>
+
+</apex:page>

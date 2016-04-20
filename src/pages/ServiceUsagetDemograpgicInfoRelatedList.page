@@ -1,0 +1,19 @@
+<apex:page standardController="Service_Usage__c" extensions="ServiceUsageDemographicInfoRLController">
+    <apex:form id="frm">
+        <apex:outputpanel >
+            <center>
+               <apex:commandButton rendered="{!!isNewButtonDisabled}" disabled="{!isNewButtonDisabled}" value="New Demographic Information" action="{!create}" rerender="frm" onclick="window.parent.location.href='/apex/DemographicInformationEdit?id={!Service_Usage__c.Id}'"/>
+               <apex:commandButton rendered="{!isNewButtonDisabled}" value="Edit Demographic Information" action="{!EditDemographic}"  rerender="frm" onclick="window.parent.location.href='/apex/DemographicInformationEdit?id={!Service_Usage__c.Id}'"/>
+                
+                <!--<input type="button" value="New Demographic Info" class="btn" onclick="window.parent.location.href='/apex/DemographicInformation?id={!Service_Usage__c.Id}'"/>-->
+            </center>
+            <left>
+            </left>
+
+        </apex:outputpanel> 
+       <apex:outputPanel >
+        <c:Demographic_Infomation_Read DemographicRec="{!demographicRec}" title="{!DemographicStatus}"/>
+        
+        </apex:outputPanel>     
+    </apex:form>
+</apex:page>

@@ -1,0 +1,54 @@
+<apex:page standardController="Completed_Assessment_Answer__c" extensions="AssessmentCompletedAuditController" tabStyle="Completed_Assessment__c" renderAs="PDF">
+
+<apex:pageBlock >
+    <table width="100%">
+    <tr>
+    <td>Assessment : {!strAssessment}</td>
+    <td align="right" widht="50%">{!updatedByUser}, Dated: {!updatedDateTime} </td> 
+    </tr>
+    </table>
+</apex:pageBlock>
+
+<!---------------Question and Answers block----------------------------->
+<apex:pageBlock title="Question(s)">
+
+    <apex:repeat value="{!lstSections}" var="rec">
+        <div class="pbSubheader first tertiaryPalette" >
+            Section :&nbsp;
+            <apex:outputText value="{!rec.sectionOrderNum}" id="SectionOrder" style="width: 100%; height: 150px;" />
+            &nbsp;  [{!rec.strSectionName}]
+        </div>
+        
+        <apex:repeat value="{!rec.lstAssessmentQuestions}" var="qRec">
+            [{!qRec.questionNum}] &nbsp;
+            <apex:outputtext value="{!qRec.question}" /><br/>
+
+            <!------------------SubQuestions List-------------------------->
+            <apex:pageblockTable border="1" value="{!qRec.lstRespAnsRecs}" var="sqRec" rendered="{!qRec.lstRespAnsRecs.size>0}">
+                 
+                <apex:column headerValue="Question" >
+                    <apex:outputText value="{!sqRec.Sub_Question__c}"/>
+                </apex:column>
+
+                <apex:column headerValue="Answer">
+                    <apex:outputText value="{!sqRec.Choice__c}" />
+                </apex:column>
+
+            </apex:pageblockTable>
+            <!-----------------(End) SubQuestions List--------------------------->
+
+            <apex:variable value="{!qRec.questionType!='Combo' || (qRec.questionType=='Combo' && qRec.AllowNote)}" var="showNotes"/>
+            <br/>
+            <apex:outputText value="{!qRec.NoteDescription}" rendered="{!showNotes}"/>
+            <apex:outputPanel rendered="{!showNotes}">
+            <br/>
+            </apex:outputPanel>
+            <apex:outputField value="{!qRec.respAnsRec.Response_Note__c}"/>
+            <hr/>
+
+        </apex:repeat>
+    </apex:repeat>
+    
+</apex:pageBlock>
+<!-----------------Question and Answers Block--------------------------->
+</apex:page>

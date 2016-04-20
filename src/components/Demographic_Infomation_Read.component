@@ -1,0 +1,85 @@
+<apex:component >
+   <apex:attribute name="DemographicRec" description="Demographic Information" type="Demographic_Information__c" required="true"/>
+   <apex:attribute name="Title" description="Title to Display on Page" type="String" default="Demographic Information"/>
+   <apex:pageBlock title="{!Title}"> 
+
+     <apex:pageBlockSection columns="1"  id="DemographicInfomation1" >
+     
+       <apex:pagemessage rendered="{!Title='No information'}" severity="info" 
+                          summary="Please enter the Demographics for this service user. These details are very useful for the Society as a whole and should be collected wherever possible."
+                          title="Complete Demographic Information."
+                          strength="3" /> 
+       <apex:pagemessage rendered="{!demographicRec.Information_Completed__c='RED'}" severity="info" 
+                          summary="Please enter the Demographics for this service user. These details are very useful for the Society as a whole and should be collected wherever possible."
+                          title="Complete Demographic Information."
+                          strength="2" />  
+        <apex:pagemessage rendered="{!demographicRec.Information_Completed__c='AMBER'}" severity="info" 
+                          summary="Please enter the Demographics for this service user. These details are very useful for the Society as a whole and should be collected wherever possible."
+                          title="Complete Demographic Information."
+                          strength="1" />  
+
+        <apex:pageBlockSectionItem rendered="{!demographicRec.Information_Completed__c='GREEN'}">
+        <apex:outputText > <i>Demographics are only held once for a service user, no matter how many services they use.<br/>These details are very useful for the Society as a whole and should be collected wherever possible.</i></apex:outputText>
+        </apex:pageBlockSectionItem> 
+
+     </apex:pageBlockSection>    
+     <apex:pageBlockSection columns="2"  id="DemographicInfomation2" >
+
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.NHS_Number__c.inlineHelpText}">       
+            <apex:outputLabel >NHS Number</apex:outputLabel>     <apex:outputField value="{!demographicRec.NHS_Number__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Ethnic_Group__c.inlineHelpText}">       
+            <apex:outputLabel >Ethnic Group</apex:outputLabel>     <apex:outputField value="{!demographicRec.Ethnic_Group__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Ethnicitiy__c.inlineHelpText}">       
+            <apex:outputLabel >Ethnicitiy</apex:outputLabel>     <apex:outputField value="{!demographicRec.Ethnicitiy__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Faith_Culture__c.inlineHelpText}"
+                                    rendered="{!$ObjectType.Demographic_Information__c.fields.Faith_Culture__c.Accessible}">       
+            <apex:outputLabel >Faith/Culture</apex:outputLabel>     <apex:outputField value="{!demographicRec.Faith_Culture__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Employment_Status__c.inlineHelpText}">       
+            <apex:outputLabel >Employment Status</apex:outputLabel>     <apex:outputField value="{!demographicRec.Employment_Status__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Partnership_status__c.inlineHelpText}">       
+            <apex:outputLabel >Partnership status</apex:outputLabel>     <apex:outputField value="{!demographicRec.Partnership_status__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Number_of_dependent_children__c.inlineHelpText}">       
+            <apex:outputLabel >Number of dependent children</apex:outputLabel>     <apex:outputField value="{!demographicRec.Number_of_dependent_children__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Sexual_Status__c.inlineHelpText}">       
+            <apex:outputLabel >Sexual Orientation</apex:outputLabel>     <apex:outputField value="{!demographicRec.Sexual_Status__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Registered_with_Social_Services__c.inlineHelpText}">       
+            <apex:outputLabel >Registered with Social Services?</apex:outputLabel>     <apex:outputField value="{!demographicRec.Registered_with_Social_Services__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.People_in_household__c.inlineHelpText}">       
+            <apex:outputLabel >People in household</apex:outputLabel>     <apex:outputField value="{!demographicRec.People_in_household__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Veteran__c.inlineHelpText}"
+                                   rendered="{!$ObjectType.Demographic_Information__c.fields.Veteran__c.Accessible}">       
+            <apex:outputLabel >Veteran?</apex:outputLabel>     <apex:outputField value="{!demographicRec.Veteran__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Living_arrangements__c.inlineHelpText}">       
+            <apex:outputLabel >Living Arrangements</apex:outputLabel>     <apex:outputField value="{!demographicRec.Living_arrangements__c}"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.NI_Trust_Area__c.inlineHelpText}"
+                                    rendered="{!$ObjectType.Demographic_Information__c.fields.NI_Trust_Area__c.Accessible}"   >       
+            <apex:outputLabel >NI Trust Area</apex:outputLabel>     <apex:outputField value="{!demographicRec.NI_Trust_Area__c}"/>
+        </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>   
+    <apex:pageBlockSection columns="1"  id="DemographicInfomation3" >
+        
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Date_of_Change_of_Living_Arrangements__c.inlineHelpText}">       
+            <apex:outputLabel >Date of Change of Living Arrangements</apex:outputLabel>     <apex:outputField value="{!demographicRec.Date_of_Change_of_Living_Arrangements__c}"/>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem helptext="{!$ObjectType.Demographic_Information__c.fields.Other_Demographic_Details__c.inlineHelpText}">       
+            <apex:outputLabel >Other Demographic Details</apex:outputLabel>     <apex:outputField value="{!demographicRec.Other_Demographic_Details__c}"/>
+        </apex:pageBlockSectionItem>
+ 
+    </apex:pageBlockSection>             
+  </apex:pageBlock> 
+
+
+</apex:component>

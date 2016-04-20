@@ -1,0 +1,27 @@
+<apex:page StandardController="BDR__c" 
+           docType="html-5.0"           
+           sidebar="false" 
+           showHeader="false"
+           standardStylesheets="false"
+           applyHtmlTag="false"
+           applyBodyTag="false"
+           title="BDR:{!BDR__c.BDR_Name__c}"
+           renderAs="pdf"	
+          >
+         <!--   renderAs="pdf"  -->
+  
+<html lang="en">      
+
+<head>
+    <style type="text/css">
+    <c:BDR_PDF_Stylesheet />
+    </style>
+</head>
+
+<body>
+    <c:BDR_Notification_PDF_Print BDRObjectId="{!BDR__c.id}"/>
+</body>
+
+</html>
+
+</apex:page>

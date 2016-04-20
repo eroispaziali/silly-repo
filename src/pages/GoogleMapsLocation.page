@@ -1,0 +1,8 @@
+<apex:page standardController="Location__c">
+
+<c:GoogleMapsInternational iconColour="#00655a"
+    address="{!Location__c.Street__c}, {!Location__c.Postcode__c} "
+    googleMapURL="http://maps.google.co.uk"
+ />
+ 
+</apex:page>

@@ -1,0 +1,28 @@
+<apex:component >
+    <!--change 415 change name to Tender Details from Bid Overview-->
+    <apex:attribute name="bdr" description="The BDR" type="BDR__c" required="true"/>
+
+
+	<apex:pageBlock title="BDR Bid / Tender Details">
+
+	   <apex:pageBlockSection id="Bid_Summary" title="Tender Details" columns="1" rendered="{!bdr.Bid_Status__c!='None' && bdr.Bid_Status__c!=null}" showHeader="false">    
+
+       <apex:outputField value="{!bdr.Bid_Status__c}"/>   
+       <apex:outputField value="{!bdr.Clarification_Questions_Deadline__c}"/>   
+       <apex:outputField value="{!bdr.Bid_Sign_Off_Deadline__c}"/>   
+       <apex:outputField value="{!bdr.Bid_Submission_Deadline__c}"/>   
+
+       <apex:outputField value="{!bdr.Fixed_Tender_Amount__c}"/>   
+
+       <apex:pageBlockSectionItem >
+           <apex:outputLabel >TUPE Status</apex:outputLabel>
+           <apex:outputField label="TUPE Status" value="{!BDR.Tupe__c}"/>
+       </apex:pageBlockSectionItem>
+       
+       <apex:outputText label="Comments about TUPE" value="{!BDR.Tupe_Detail__c}" style="width:82%" />
+
+     </apex:pageBlockSection>
+    
+	</apex:pageBlock>   
+
+</apex:component>

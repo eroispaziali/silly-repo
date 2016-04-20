@@ -1,0 +1,107 @@
+<apex:page standardController="Site_Survey__c" extensions="SiteSurveyController">
+<apex:sectionHeader title="New Site Survey" subtitle="Section Nine: Building Structure"/>
+    <apex:messages />
+    <apex:form >
+        <apex:pageBlock title="Building Structure" id="structure">
+            <apex:pageBlockSection title="Pavement (Roadways and Parking Lots)">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="pave"/>
+                  <apex:inputField id="pave" value="{!survey.i_Pavement__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Exterior Doors">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="dor"/>
+                  <apex:inputField id="dor" value="{!survey.Overall_condition_of_Exterior_door_unit__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Exterior Steps, Stairs and Ramps">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="step"/>
+                  <apex:inputField id="step" value="{!survey.Exterior_steps__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Windws">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="win1"/>
+                  <apex:inputField id="win1" value="{!survey.i_Windows__c}"/>
+                  <apex:outputLabel value="All rescue windows are operable?" for="win2"/>
+                  <apex:inputField id="win2" value="{!survey.i_Windows_All_rescue_windows_openable__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Interior Decoration">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="int"/>
+                  <apex:inputField id="int" value="{!survey.i_Interior_Decoration__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Ceilings">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="ceil"/>
+                  <apex:inputField id="ceil" value="{!survey.i_Ceilings__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Interior Doors">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="intdor"/>
+                  <apex:inputField id="intdor" value="{!survey.i_Interior_Doors__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Interior Stairs">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="sta"/>
+                  <apex:inputField id="sta" value="{!survey.i_Interior_Stairs__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Elevators, Lifts and Escalators">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="ele"/>
+                  <apex:inputField id="ele" value="{!survey.i_Elevators__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Lighting Fixtures">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="li"/>
+                  <apex:inputField id="li" value="{!survey.i_Lighting_Fixtures__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Communications Systems">
+              <apex:panelGrid columns="2">
+                  <apex:outputLabel value="Overall condition" for="com"/>
+                  <apex:inputField id="com" value="{!survey.i_Communications_Systems__c}"/>
+              </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="Overall Rating" id="rating">
+            <apex:facet name="footer">
+                <apex:outputPanel >
+                    <apex:commandButton action="{!save}" value="Save" styleClass="btn"/>
+                    <apex:commandButton action="{!cancel}" value="Cancel" styleClass="btn"/>
+                </apex:outputPanel>
+            </apex:facet>
+            
+            <apex:outputLabel value="Overall building rating (to be answered after the building inspection is complete)" for="rat"/>
+            <apex:inputField id="rat" value="{!survey.Overall_building_rating__c}"/>
+            <p/>
+            <apex:outputLabel value="Action Points" for="act"/>
+            <apex:inputField id="act" value="{!survey.Action_Points__c}"/>
+            <p/>
+            <apex:outputLabel value="Urgent Action Required?" for="ur"/>
+            <apex:inputField id="ur" value="{!survey.Urgent_Action_Required_tick__c}"/>
+            <br/>
+            <apex:outputLabel value="Urgent Action Required" for="urg"/>
+            <apex:inputField id="urg" value="{!survey.Urgent_Action_Required__c}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

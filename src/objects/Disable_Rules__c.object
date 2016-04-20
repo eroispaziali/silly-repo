@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <customSettingsVisibility>Protected</customSettingsVisibility>
+    <description>A collection of vars that can be included in code to disable action in certain instances.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Disable_Triggers__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Use this value in a Trigger to disable the code.</description>
+        <externalId>false</externalId>
+        <label>Disable Triggers</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Disable Rules</label>
+</CustomObject>

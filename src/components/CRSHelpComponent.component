@@ -1,0 +1,24 @@
+<apex:component controller="CRSHelpController">
+    <apex:attribute name="componentValue" description="Attribute on the component."
+                  type="String" required="required" assignTo="{!controllerValue}"/>
+    <apex:attribute name="Type" assignTo="{!HelpType}" required="true" type="String" description="Type of Help (FAQ or Tip)"/>
+    <apex:attribute name="ShowQuestions" assignTo="{!ShowQuestion}" type="Boolean" default="true" description="Show Question (left field)"/>
+    <h2>{!HelpType}</h2>
+            <apex:dataTable value="{!lstHelp}" 
+                                var="conType" 
+                                title="!HelpType" 
+                                id="FQTip"
+                                rules="all"
+                                cellpadding="10"
+                                cellspacing="2"
+                                >
+           <apex:column width="20%" rendered="{!ShowQuestion}">
+           
+               <b>{!conType.Lookup_Value__c}</b>
+           </apex:column>
+           <apex:column width="80%">
+           
+             {!conType.Lookup_Description__c}
+           </apex:column>
+           </apex:dataTable>
+</apex:component>

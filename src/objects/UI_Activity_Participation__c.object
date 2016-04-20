@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>A description of how the Participant was involved, what happened, any other information that may be of interest</inlineHelpText>
+        <label>Comments</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>The Person Profile for this Participant. You may have limited access to the Person profile.</inlineHelpText>
+        <label>Person</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Involvement Participation</relationshipLabel>
+        <relationshipName>UI_Participation</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the Involvement ended (may be the same date as Start Date)</inlineHelpText>
+        <label>End Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Outcome__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Were there any positive Outcomes for the Participant ? Select the primary Outcome only. If there were Outcomes of other types, comment that in the Detail.</inlineHelpText>
+        <label>Outcome</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Community participation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social networks</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physical health</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mental well being</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Independent living</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Personalisation and choice</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Results_Notes__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Note information here that may help in deciding whether to ask this Participant’s assistance with similar Activities in the future and information about any changes in participant’s support needs.</inlineHelpText>
+        <label>Results Notes</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Specific_Consent_Detail__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Provide detail on the Specific Consent given, if relevant. You can also attach a scan of a paper form.</inlineHelpText>
+        <label>Specific Consent Detail</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Specific_Consent__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>What type of specific Consent was given for this Participation?</inlineHelpText>
+        <label>Specific Consent</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Verbal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Written</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The date the Activity took place for the Participant.</inlineHelpText>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The Status of this Participation</inlineHelpText>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Planned</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>UI_Activity__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The Activity with which the Participant was Involved</inlineHelpText>
+        <label>Involvement Activity</label>
+        <referenceTo>UI_Activity__c</referenceTo>
+        <relationshipLabel>Involvement Participation</relationshipLabel>
+        <relationshipName>UI_Participation</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>true</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>UI_Participant_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(UI_Participant__r.Status__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The current status of the Participant&apos;s Involvement Consent</inlineHelpText>
+        <label>Participant Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UI_Participant__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>The Participant</inlineHelpText>
+        <label>Participant</label>
+        <referenceTo>UI_Participant__c</referenceTo>
+        <relationshipLabel>Involvement Participation</relationshipLabel>
+        <relationshipName>Participation</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>true</writeRequiresMasterRead>
+    </fields>
+    <label>User Involvement Participation</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>UI_Participant__c</columns>
+        <columns>UI_Activity__c</columns>
+        <columns>UI_Participant_Status__c</columns>
+        <columns>Start_Date__c</columns>
+        <columns>Outcome__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>APA-{0000}</displayFormat>
+        <label>Reference</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Involvement Participation</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>UI_Participant__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>UI_Activity__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>UI_Participant_Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Outcome__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>End_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>UI_Participant__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>UI_Activity__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>UI_Participant_Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Outcome__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>End_Date__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>Contact__c</searchFilterFields>
+        <searchFilterFields>Outcome__c</searchFilterFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchFilterFields>UI_Participant__c</searchFilterFields>
+        <searchResultsAdditionalFields>UI_Participant__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UI_Activity__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UI_Participant_Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Outcome__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>End_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>UI_Participation_Requires_Consent</fullName>
+        <active>true</active>
+        <description>Ensure there is consent on all Participation records</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) &amp;&amp; Text(Specific_Consent__c)=&apos;&apos;</errorConditionFormula>
+        <errorMessage>Some form of consent is required for all Participation</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>UI_Prevent_Participation_For_Not_Active</fullName>
+        <active>true</active>
+        <description>Prevent creation of new participation records for Participants that are not currently Active as regards participation.</description>
+        <errorConditionFormula>NOT( $User.IgnoreValidationRules__c ) &amp;&amp; UI_Participant_Status__c != &apos;Active&apos;</errorConditionFormula>
+        <errorMessage>Participants must be Status: Active with valid consent to Participate in an activity</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>UI_New_Activity_Participation</fullName>
+        <availability>online</availability>
+        <description>Creates a new Activity Participation Record</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>New Activity Participation</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/apex.js&quot;)} 
+
+var sUrl = &quot;&quot; + sforce.apex.execute(
+    &quot;UIRestUtils&quot;,
+    &quot;getActivityParticpationUrl&quot;,
+    {activityId:window.sfdcPage.entityId}); 
+
+if (sUrl.length &gt; 0) { 
+    window.location.href=sUrl;
+} 
+else { 
+    alert(&apos;Non-Fatal System Error : Error getting the create URL&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>UI_New_Participant_Participation</fullName>
+        <availability>online</availability>
+        <description>Create new Activity Participation, checking status is valid first</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>New Activity Participation</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/apex.js&quot;)}
+
+var sUrl = &quot;&quot; + sforce.apex.execute(
+&quot;UIRestUtils&quot;,
+&quot;getParticipantParticipationUrl&quot;,
+{participantId:window.sfdcPage.entityId});
+
+
+if ( sUrl.indexOf(&apos;Error&apos;) &gt; -1 ) {
+   alert(sUrl);  
+}
+
+else if ( sUrl.length &gt; 0 ) {
+  window.location.href=sUrl;
+}
+
+else {
+  alert( &apos;Non-Fatal System Error : Error getting the create URL&apos; );
+}</url>
+    </webLinks>
+</CustomObject>

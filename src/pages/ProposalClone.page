@@ -1,0 +1,4 @@
+<apex:page standardController="Proposal__c" extensions="ProposalClone" action="{!cloneProposal}" tabStyle="Proposal__c">
+    <apex:pageBlock title="Proposal Cloned">
+    </apex:pageBlock>
+</apex:page>
