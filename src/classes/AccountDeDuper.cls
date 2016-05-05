@@ -4,6 +4,11 @@ public with sharing class AccountDeDuper {
 Public AccountDeDuper () {
 
 }
+public void badStuff() {}
+public void badStuff2() {}
+public void BADSTUFF3() {}
+public void BADSTUFF__4() {}
+
 Public List<Account> SearchAccount (Account pCurrentRecord, String pAccountName, String pPostCode, String pCity, id pRecordTypeId, Boolean pShowAllRecordTypes, Integer pSearchLimit) {
         Boolean postCodeValid = false;
         String AccountLikeName;
