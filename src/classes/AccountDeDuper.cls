@@ -1,4 +1,4 @@
-public with sharing class AccountDeDuper {
+public with sharing class Account_De_Duper {
 
   // Constructor.
 Public AccountDeDuper () {
@@ -41,7 +41,7 @@ Public List<Account> SearchAccount (Account pCurrentRecord, String pAccountName,
                     ListOfAdditionalMatches = [select id, Name, BillingStreet, BillingCity, BillingPostalCode, BillingState, Phone, Category__c, Owner.Alias, Record_Type_Name__c from Account where Name LIKE :AccountLikeName and BillingPostalCode=:pPostCode order by Name LIMIT :currentLimit ];
                 }
                 else {
-                    ListOfAdditionalMatches = [select id, Name, BillingStreet, BillingCity, BillingPostalCode, BillingState, Phone, Category__c, Owner.Alias, Record_Type_Name__c from Account where Name LIKE :AccountLikeName and BillingPostalCode=:pPostCode AND RecordTypeId =:pRecordTypeId order by Name LIMIT :currentLimit ];
+                    ListOfAdditionalMatches = [select id, Name, BillingStreet, BillingCity, BillingPostalCode, BillingState, Phone, Category__c, Owner.Alias, Record_Type_Name__c from Account where Name LIKE :AccountLikeName and BillingPostalCode=:pPostCode AND RecordTypeId =:pRecordTypeId order by Name ];
                 }
                 System.Debug ('##################Search2: ' + ListOfAdditionalMatches.size());
                 currentLimit = currentLimit - ListOfAdditionalMatches.size();
