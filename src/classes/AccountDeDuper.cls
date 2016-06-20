@@ -1,4 +1,6 @@
 public with sharing class Account_De_Duper {
+  // new stuff
+  // more stuff
 
   // Constructor.
 Public AccountDeDuper () {
