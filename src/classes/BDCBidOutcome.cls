@@ -1,4 +1,4 @@
-public class BDCBidOutcome {
+public class BDC_BidOutcome {
     public Bid__c bid;
     private final ApexPages.StandardController cnt;
     
