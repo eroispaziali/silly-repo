@@ -31,7 +31,7 @@ Public List<Account> SearchAccount (Account pCurrentRecord, String pAccountName,
             else {
                 ListOfMatches = [select id, Name, BillingStreet, BillingCity, BillingPostalCode, BillingState, Phone, Category__c, Owner.Alias, Record_Type_Name__c from Account where Name=:pAccountName and BillingPostalCode=:pPostCode AND RecordTypeId =:pRecordTypeId order by Name LIMIT :currentLimit ];
             }
-            System.Debug ('##################Search1: ' + ListOfMatches.size());
+            System.Debug ('##################Search1: '  + ListOfMatches.size());
             currentLimit = currentLimit - ListOfMatches.size();
             }
         //search # 2 match on wildcard name and postcode
