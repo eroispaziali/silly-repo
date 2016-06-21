@@ -1,6 +1,4 @@
-public with sharing class Account_De_Duper {
-  // new stuff
-  // more stuff
+public with sharing class ffTestStud {
 
   // Constructor.
 Public AccountDeDuper () {
@@ -33,7 +31,7 @@ Public List<Account> SearchAccount (Account pCurrentRecord, String pAccountName,
             else {
                 ListOfMatches = [select id, Name, BillingStreet, BillingCity, BillingPostalCode, BillingState, Phone, Category__c, Owner.Alias, Record_Type_Name__c from Account where Name=:pAccountName and BillingPostalCode=:pPostCode AND RecordTypeId =:pRecordTypeId order by Name LIMIT :currentLimit ];
             }
-            System.Debug ('##################Search1: '  + ListOfMatches.size());
+            System.Debug ('##################Search1: ' + ListOfMatches.size());
             currentLimit = currentLimit - ListOfMatches.size();
             }
         //search # 2 match on wildcard name and postcode
@@ -43,7 +41,7 @@ Public List<Account> SearchAccount (Account pCurrentRecord, String pAccountName,
                     ListOfAdditionalMatches = [select id, Name, BillingStreet, BillingCity, BillingPostalCode, BillingState, Phone, Category__c, Owner.Alias, Record_Type_Name__c from Account where Name LIKE :AccountLikeName and BillingPostalCode=:pPostCode order by Name LIMIT :currentLimit ];
                 }
                 else {
-                    ListOfAdditionalMatches = [select id, Name, BillingStreet, BillingCity, BillingPostalCode, BillingState, Phone, Category__c, Owner.Alias, Record_Type_Name__c from Account where Name LIKE :AccountLikeName and BillingPostalCode=:pPostCode AND RecordTypeId =:pRecordTypeId order by Name ];
+                    ListOfAdditionalMatches = [select id, Name, BillingStreet, BillingCity, BillingPostalCode, BillingState, Phone, Category__c, Owner.Alias, Record_Type_Name__c from Account where Name LIKE :AccountLikeName and BillingPostalCode=:pPostCode AND RecordTypeId =:pRecordTypeId order by Name LIMIT :currentLimit ];
                 }
                 System.Debug ('##################Search2: ' + ListOfAdditionalMatches.size());
                 currentLimit = currentLimit - ListOfAdditionalMatches.size();
