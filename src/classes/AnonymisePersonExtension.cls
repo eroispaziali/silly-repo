@@ -17,7 +17,7 @@
  *  20130403    MT    Check that all service usages are not active.
  *                             
 *******************************************************************************************/
-public with sharing class AnonymisePersonExtension {
+public with sharing class Anonymise_PersonExtension {
     
     public Contact person {get; private set;}
     public boolean consent {get; private set;}
@@ -78,6 +78,9 @@ public with sharing class AnonymisePersonExtension {
         }
     return null;  
     }
+    
+    public void emptyMethod() {}
+    
     /**
         Method to delete the details of the contact record.
     */
