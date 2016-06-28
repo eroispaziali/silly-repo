@@ -46,7 +46,7 @@ public with sharing class Anonymise_PersonExtension {
             System.debug('111111111111111111111111111111111 person.Consent_Status__c: '+person.Consent_Status__c);
             isError=false;
     }
-    public PageReference AutoRunAnonymisePerson(){            
+    public PageReference AutoRun_AnonymisePerson(){            
             //for page rendering
             if ((person==null || person.Consent_Status__c=='Awaiting Consent' || person.Consent_Status__c=='None' || 
                         person.Consent_Status__c=='' || person.Consent_Status__c==null)==false){
