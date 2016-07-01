@@ -17,7 +17,7 @@
  *  20130403    MT    Check that all service usages are not active.
  *                             
 *******************************************************************************************/
-public with sharing class AnonymisePersonExtension {
+public with sharing class Anonymise_PersonExtension {
     
     public Contact person {get; private set;}
     public boolean consent {get; private set;}
@@ -46,7 +46,7 @@ public with sharing class AnonymisePersonExtension {
             System.debug('111111111111111111111111111111111 person.Consent_Status__c: '+person.Consent_Status__c);
             isError=false;
     }
-    public PageReference AutoRunAnonymisePerson(){            
+    public PageReference AutoRun_AnonymisePerson(){            
             //for page rendering
             if ((person==null || person.Consent_Status__c=='Awaiting Consent' || person.Consent_Status__c=='None' || 
                         person.Consent_Status__c=='' || person.Consent_Status__c==null)==false){
@@ -78,6 +78,9 @@ public with sharing class AnonymisePersonExtension {
         }
     return null;  
     }
+    
+    public void emptyMethod() {}
+    
     /**
         Method to delete the details of the contact record.
     */
