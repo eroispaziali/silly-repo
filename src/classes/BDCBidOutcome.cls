@@ -12,6 +12,7 @@ public class BDC_BidOutcome {
     public BDCBidOutcome(ApexPages.StandardController controller) {
         bid = (Bid__c)controller.getRecord();
         cnt = controller;
+        // some changes
     }
     
     public string getOwnerId() {
