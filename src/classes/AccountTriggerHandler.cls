@@ -35,7 +35,7 @@ public with sharing class AccountTriggerHandler {
     
     public void OnAfterUpdate(Account[] oldAccounts, Account[] updatedAccounts, Map<ID, Account> AccountsMap){
         System.debug('****** AccountsTriggerHandler.OnAfterUpdate  ******');
-        
+        //adding a comment
         UpdateLastTransactionDate(updatedAccounts);
     }
 
