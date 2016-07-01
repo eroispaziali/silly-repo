@@ -14,6 +14,7 @@ Public List<Account> SearchAccount (Account pCurrentRecord, String pAccountName,
         String AccountLikeName;
         List<String> AccountNameParts;
         String FirstName;
+        // adding a comment somewhere
         List <Account> lstMatchingAccounts= new List<Account>();
         List <Account> ListOfMatches = new List<Account>(); 
         List <Account> ListOfAdditionalMatches = new List<Account>();
