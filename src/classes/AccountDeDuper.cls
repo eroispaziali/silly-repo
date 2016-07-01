@@ -1,7 +1,7 @@
-public with sharing class AccountDeDuper {
+public with sharing class Account_DeDuper {
 
   // Constructor.
-Public AccountDeDuper () {
+Public AccountDe_Duper () {
 
 }
 Public List<Account> SearchAccount (Account pCurrentRecord, String pAccountName, String pPostCode, String pCity, id pRecordTypeId, Boolean pShowAllRecordTypes, Integer pSearchLimit) {
