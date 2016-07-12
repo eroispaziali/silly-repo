@@ -35,7 +35,7 @@ public with sharing class AccountTriggerHandler {
     
     public void OnAfterUpdate(Account[] oldAccounts, Account[] updatedAccounts, Map<ID, Account> AccountsMap){
         System.debug('****** AccountsTriggerHandler.OnAfterUpdate  ******');
-        
+        //adding a comment
         UpdateLastTransactionDate(updatedAccounts);
     }
 
@@ -47,6 +47,10 @@ public with sharing class AccountTriggerHandler {
         
         UpdateLastTransactionDate(oldAccounts);
     }
+     
+    public void emptyMethod() {}
+    public void abstract emptyAbstract();
+    public void virtual emptyVirtual(){}
      
     Public void OnBeforeUpdate(Account[]  updatedAccounts){
     
