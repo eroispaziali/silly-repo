@@ -48,6 +48,10 @@ public with sharing class AccountTriggerHandler {
         UpdateLastTransactionDate(oldAccounts);
     }
      
+    public void emptyMethod() {}
+    public void abstract emptyAbstract();
+    public void virtual emptyVirtual(){}
+     
     Public void OnBeforeUpdate(Account[]  updatedAccounts){
     
     Id InternalAccount;
