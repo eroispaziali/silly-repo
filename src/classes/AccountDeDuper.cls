@@ -4,11 +4,17 @@ public with sharing class Account_DeDuper {
 Public AccountDe_Duper () {
 
 }
+public void badStuff() {}
+public void badStuff2() {}
+public void BADSTUFF3() {}
+public void BADSTUFF__4() {}
+
 Public List<Account> SearchAccount (Account pCurrentRecord, String pAccountName, String pPostCode, String pCity, id pRecordTypeId, Boolean pShowAllRecordTypes, Integer pSearchLimit) {
         Boolean postCodeValid = false;
         String AccountLikeName;
         List<String> AccountNameParts;
         String FirstName;
+        // adding a comment somewhere
         List <Account> lstMatchingAccounts= new List<Account>();
         List <Account> ListOfMatches = new List<Account>(); 
         List <Account> ListOfAdditionalMatches = new List<Account>();
