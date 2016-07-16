@@ -69,6 +69,11 @@ public List<SelectOption> lstServiceTypes {
             return lstOptions;
         }
 }
+
+public void emptyMethod() {
+        
+}
+
     // Standard controller constructor.
     public ContactServiceUsageController(ApexPages.StandardController pController) {
         stdController = pController;
